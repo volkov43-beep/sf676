@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" id="vp" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>СФ676 — прототип посадочной страницы (черновик)</title>
+<style>
+:root{--red:#B03A2E;--steel:#34495E;--graphite:#2C3E50;--light:#F5F5F5;--ink:#1A1A1A;--mute:#6B6B6B;--line:#D9D9D9;--q:#FFF1B8;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"PT Sans","Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);line-height:1.5;font-size:17px;background:#fff}
+h1,h2,h3{margin:0 0 .5em;line-height:1.15;color:var(--steel)}
+h1{font-size:2.4rem;font-weight:700}
+h2{font-size:1.9rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700;color:var(--ink)}
+p{margin:0 0 1em}
+a{color:var(--steel)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+section.dark{background:var(--graphite);color:#fff}
+section.dark h2,section.dark h3,section.dark a{color:#fff}
+section.grey{background:var(--light)}
+.btn{display:inline-block;padding:14px 26px;border-radius:4px;font-weight:700;text-decoration:none;font-size:1rem;cursor:pointer;border:2px solid transparent;line-height:1.2}
+.btn.red{background:var(--red);color:#fff;border-color:var(--red)}
+.btn.out{background:transparent;color:var(--steel);border-color:var(--steel)}
+.dark .btn.out{color:#fff;border-color:#fff}
+.btn:focus-visible{outline:3px solid #ffbf47;outline-offset:2px}
+.ph{background:#DADADA;color:#6a6a6a;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.95rem;padding:16px;position:relative;overflow:hidden;border-radius:3px}
+.ph::before,.ph::after{content:"";position:absolute;left:-10%;right:-10%;top:50%;height:1px;background:#bdbdbd}
+.ph::before{transform:rotate(18deg)}.ph::after{transform:rotate(-18deg)}
+.ph span{position:relative;background:#DADADA;padding:4px 8px}
+.q{background:var(--q);color:#5a4a00;border-bottom:2px dotted #c9a800;padding:0 3px;border-radius:2px}
+body:not(.showq) .q{background:transparent;color:inherit;border-bottom:0;padding:0}
+.dark .q{color:#ffe98a}
+.showq .dark .q{color:#3a2f00}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#E9EDF1;color:var(--steel)}
+.dark th{background:rgba(255,255,255,.12);color:#fff}
+.dark td,.dark th{border-color:rgba(255,255,255,.25)}
+.lead{font-size:1.15rem;max-width:760px}
+.mute{color:var(--mute);font-size:.9rem}
+.dark .mute{color:#c9d1d9}
+.grid{display:grid;gap:24px}
+.grid > *{min-width:0}
+table{table-layout:fixed;word-wrap:break-word}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+/* questions */
+.q sup{font-size:.7em;color:#8a6d00;font-weight:700;margin-left:2px;text-decoration:none}
+body:not(.showq) .q sup{display:none}
+#qlist{display:none;background:#FFF8DC;border-top:3px solid #c9a800;padding:48px 0}
+body.showq #qlist{display:block}
+#qlist h2{color:var(--graphite)}
+#qlist ol{padding-left:26px;margin:0;max-width:900px}
+#qlist li{margin:0 0 14px;line-height:1.45}
+#qlist li b{color:#5a4a00}
+#qlist li a{font-size:.85rem;color:var(--mute)}
+.q:target{outline:3px solid #c9a800}
+/* draft banner + toggle */
+.draft{position:sticky;top:0;z-index:50;background:#2C3E50;color:#fff;font-size:.9rem;padding:8px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.draft label{cursor:pointer;display:flex;gap:8px;align-items:center;white-space:nowrap}
+#vplabel{display:none}
+@media (max-width:900px),(pointer:coarse){#vplabel{display:flex}}
+.draft input{width:18px;height:18px}
+/* sticky header */
+.sticky{position:sticky;top:38px;z-index:40;background:#fff;border-bottom:1px solid var(--line);padding:10px 0;display:none}
+.sticky .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.sticky .logo{font-weight:800;color:var(--red);font-size:1.3rem;letter-spacing:.02em}
+.sticky .tel{font-weight:700;color:var(--ink);text-decoration:none}
+body.scrolled .sticky{display:block}
+/* hero */
+.hero{padding:0;min-height:88vh;display:grid;grid-template-columns:42% 58%}
+.hero .txt{padding:64px 40px 48px 24px;display:flex;flex-direction:column;justify-content:center;max-width:620px;margin-left:auto}
+.hero .over{color:var(--mute);font-size:.9rem;margin-bottom:14px}
+.hero .sub{font-size:1.15rem;margin:14px 0 26px;max-width:560px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 28px}
+.nums b{display:block;font-size:1.45rem;color:var(--ink);line-height:1.1}
+.nums small{color:var(--mute);font-size:.85rem}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero .cta .tel{color:var(--mute);font-size:.95rem;margin-left:8px}
+.trust{margin-top:auto;padding-top:36px;font-size:.85rem;color:var(--mute);display:flex;gap:18px;flex-wrap:wrap}
+.trust > span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--steel);border-radius:50%;margin-right:6px;vertical-align:-1px}
+.hero .ph{border-radius:0;min-height:520px}
+/* specs */
+.specs{grid-template-columns:40% 1fr}
+.specs table td:first-child{color:var(--mute);width:52%}
+.links a{margin-right:22px;white-space:nowrap}
+/* price */
+.narrow{max-width:800px;margin:0 auto}
+.cond{list-style:none;padding:0;margin:0 0 20px}
+.cond li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cond i{display:block;width:26px;height:26px;background:#cfd6dd;border-radius:3px}
+details{margin:0 0 24px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;background:#fff}
+summary{cursor:pointer;font-weight:700;color:var(--steel)}
+/* accept */
+.norms td:last-child{font-size:1.25rem;font-weight:700;color:var(--ink);white-space:nowrap}
+.ticks{list-style:none;padding:0;margin:18px 0 26px}
+.ticks li{padding:6px 0 6px 28px;position:relative}
+.ticks li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:700}
+/* design tiles */
+.tile .ph{aspect-ratio:1/1;margin-bottom:12px}
+.tile h3{margin-bottom:6px}
+/* compare */
+.cmp td:first-child{color:#c9d1d9;width:20%}
+.calc{border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:22px 24px;display:grid;grid-template-columns:52px 1fr auto;gap:18px;align-items:center;margin-top:28px}
+.calc .ico{width:44px;height:52px;border:2px solid #fff;border-radius:3px;position:relative}
+.calc .ico::after{content:"";position:absolute;right:-2px;top:-2px;width:14px;height:14px;background:var(--graphite);border-left:2px solid #fff;border-bottom:2px solid #fff}
+/* config */
+.cfg{grid-template-columns:44% 1fr}
+.cfg table td:first-child{font-weight:700;width:22%}
+.levels article{border:1px solid var(--line);border-radius:4px;padding:18px}
+.levels h3{margin-bottom:8px}
+/* steps */
+.steps{list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.steps li{position:relative;padding-left:40px}
+.steps li b{display:block;margin-bottom:4px}
+.steps li i{position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--steel);color:#fff;font-style:normal;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.steps li p{font-size:.92rem;color:var(--mute);margin:0}
+/* gov */
+.docs article{border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:18px}
+.docs .ico{width:30px;height:38px;border:2px solid #fff;border-radius:2px;margin-bottom:12px}
+/* faq */
+.faq details{padding:0}
+.faq summary{padding:14px 16px;font-size:1.05rem}
+.faq div{padding:0 16px 14px}
+/* form */
+.form{grid-template-columns:1fr 1fr;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:28px}
+.field{width:100%;padding:14px;border:1px solid #B9C0C7;border-radius:4px;font-size:1rem;margin:0 0 12px;font-family:inherit}
+.chk{font-size:.9rem;color:var(--mute);display:flex;gap:8px;align-items:flex-start;margin:0 0 16px}
+.form .btn{width:100%;text-align:center;display:block;margin-bottom:10px}
+.contacts{padding:8px 0 0 12px}
+.contacts .big{font-size:2rem;font-weight:800;color:var(--ink);line-height:1.1}
+.rop{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin:26px 0}
+.rop .ph{width:96px;height:96px;border-radius:50%}
+footer{background:#2C3E50;color:#c9d1d9;font-size:.85rem;padding:22px 0}
+footer a{color:#fff}
+/* mobile */
+@media (max-width:900px){
+ .hero{grid-template-columns:1fr;min-height:0}
+ .hero .ph{min-height:34vh;order:-1}
+ .hero .txt{padding:28px 24px}
+ h1{font-size:1.7rem}h2{font-size:1.45rem}
+ .nums{grid-template-columns:1fr 1fr}
+ .g2,.g3,.g4,.specs,.cfg,.form{grid-template-columns:1fr}
+ .steps{grid-template-columns:1fr}
+ .calc{grid-template-columns:1fr}
+ section{padding:48px 0}
+ .draft{font-size:.8rem}
+ /* tables to cards */
+ table.stack thead{display:none}
+ table.stack tr{display:block;border:1px solid var(--line);margin-bottom:12px}
+ .dark table.stack tr{border-color:rgba(255,255,255,.3)}
+ table.stack td{display:block;border:0;border-top:1px solid var(--line)}
+ table.stack td:first-child{font-weight:700;border-top:0}
+ table.stack td::before{content:attr(data-h);display:block;font-size:.8rem;color:var(--mute);margin-bottom:2px}
+ .dark table.stack td::before{color:#c9d1d9}
+ table.stack td:first-child::before{display:none}
+ .cmp td:first-child{width:auto;color:#fff}
+ .contacts{padding:0}
+ .sticky .btn{padding:10px 14px;font-size:.9rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="showq">
+
+<div class="draft">
+  <div>Черновик страницы для согласования · серые поля — места фотографий · тексты — версия 5 от 07.09.2026</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap"><label><input type="checkbox" id="qtoggle"> Показать вопросы к заводу</label><label id="vplabel"><input type="checkbox" id="vptoggle"> Как на компьютере</label></div>
+</div>
+
+<div class="sticky">
+  <div class="wrap">
+    <div class="logo">ВСЗ</div>
+    <a class="tel" href="tel:88007072676">8 (800) 707-26-76</a>
+    <a class="btn red" href="#order">Получить цену</a>
+  </div>
+</div>
+
+<!-- 1 -->
+<section class="hero" id="top">
+  <div class="txt">
+    <div class="over">Вятский станкостроительный завод · Киров · изготовитель</div>
+    <h1>Широкоуниверсальный фрезерный станок СФ676 — новый, с завода, для ремонтных и инструментальных участков</h1>
+    <p class="sub">Для ремонтных служб, инструментальных участков, мелкосерийного производства и учебных мастерских. Два шпинделя, поворот вертикальной головки ±90°, акт приёмки с фактическими замерами в комплекте поставки. Изготавливается под заказ в Кирове.</p>
+    <div class="nums">
+      <div><b>250 × 800 мм</b><small>рабочий стол</small></div>
+      <div><b>450 / 300 / 380</b><small>перемещения X / Y / Z, мм</small></div>
+      <div><b>1050 кг</b><small>литая чугунная станина</small></div>
+      <div><b><span class="q" data-q="srok">от 20 дней</span></b><small>изготовление базовой комплектации</small></div>
+    </div>
+    <div class="cta">
+      <a class="btn red" href="#order">Получить цену с доставкой</a>
+      <a class="btn out" href="#specs">Скачать характеристики (PDF)</a>
+      <span class="tel">8 (800) 707-26-76 — бесплатно по России</span>
+    </div>
+    <div class="trust">
+      <span>В реестре промышленной продукции Минпромторга</span>
+      <span>ТУ 3816-001-67559892-2016</span>
+      <span>Выпускается с <span class="q" data-q="god">[год]</span></span>
+    </div>
+  </div>
+  <div class="ph"><span>Фото: станок в цеху, широкий план</span></div>
+</section>
+
+<!-- 2 -->
+<section id="specs">
+  <div class="wrap">
+    <h2>Основные характеристики</h2>
+    <div class="grid specs">
+      <div class="ph" style="min-height:420px"><span>Фото: фронтальный вид с выносками к столу, шпинделям, пульту</span></div>
+      <div>
+        <table>
+          <tr><td>Габариты (Д × Ш × В)</td><td>1200 × 1240 × 1780 мм</td></tr>
+          <tr><td>Масса в стандартной комплектации</td><td>1050 кг</td></tr>
+          <tr><td>Рабочая поверхность углового горизонтального стола</td><td>250 × 800 мм, 4 паза (серийно); 3 паза — по запросу; увеличенный 300 × 800 мм, 5 пазов</td></tr>
+          <tr><td>Рабочая поверхность вертикального стола</td><td>250 × 630 мм</td></tr>
+          <tr><td>Перемещения по осям X / Y / Z</td><td>450 / 300 / 380 мм</td></tr>
+          <tr><td>Конус шпинделей</td><td>7:24 № 40 или Морзе 4</td></tr>
+          <tr><td>Частота вращения шпинделя горизонтального / вертикального</td><td>50–1630 / 63–2040 об/мин, 16 ступеней</td></tr>
+          <tr><td>Рабочие подачи / ускоренная</td><td>13–395 / 935 мм/мин, 16 ступеней</td></tr>
+          <tr><td>Поворот вертикального шпинделя</td><td>±90°</td></tr>
+          <tr><td>Ход пиноли вертикального шпинделя</td><td>80 мм</td></tr>
+          <tr><td>Наибольшее усилие резания</td><td>550 кгс (предельное 600)</td></tr>
+          <tr><td>Мощность главного привода / насоса СОЖ</td><td>3,0 / 0,12 кВт</td></tr>
+          <tr><td>Питание</td><td>380 В, 3 фазы, 50 Гц</td></tr>
+          <tr><td>Класс точности по ГОСТ 8-82</td><td>Н</td></tr>
+          <tr><td>Масса обрабатываемой детали, не более</td><td><span class="q" data-q="massa">75 кг (стол 250 × 800), 50 кг (стол 300 × 800)</span></td></tr>
+        </table>
+        <p class="mute" style="margin-top:14px">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка<br>
+        Концевые фрезы Ø 3–50 мм · торцевые со сменными пластинами до Ø 100 мм · дисковые до Ø 200 мм · свёрла Ø 2–40 мм</p>
+        <p class="links"><a href="#">Полные характеристики — 61 параметр (PDF)</a><a href="#">Эскизы столов и шпинделей (PDF)</a><a href="#">Руководство по эксплуатации (PDF)</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="grey" id="price">
+  <div class="wrap narrow">
+    <h2>Цена комплектации — за один шаг. Срок — в договоре. Комплект — в спецификации</h2>
+    <p class="lead">Станков на складе у нас нет — и это не оговорка. Каждый СФ676 собирается под спецификацию заказчика: ваш стол, ваш конус, ваша измерительная система. Выберите комплектацию, и коммерческое предложение с ценой и сроком придёт на почту в течение <span class="q" data-q="otvet">одного</span> рабочего дня. Без звонков, если вы их не просили.</p>
+    <ul class="cond">
+      <li><i></i><div><b>Срок изготовления.</b> От 20 рабочих дней с момента предоплаты. Дата отгрузки фиксируется в договоре.</div></li>
+      <li><i></i><div><b>Доставка.</b> По России любым транспортом, от 3 дней. Груз застрахован, упакован в деревянный ящик, законсервирован на 1 год.</div></li>
+      <li><i></i><div><b>Оплата.</b> <span class="q" data-q="oplata">[условия оплаты: предоплата / поэтапно / отсрочка для госзаказчиков]</span></div></li>
+      <li><i></i><div><b>Льготный лизинг.</b> Станок можно приобрести в льготный лизинг по программе постановления Правительства № 811 — условия по запросу.</div></li>
+    </ul>
+    <details>
+      <summary>Что входит в стандартную комплектацию</summary>
+      <p style="margin-top:10px">Станок в сборе с вертикальной головкой и угловым столом · горизонтальный хобот и серьга · оправка с набором колец · цанговый патрон NT40/ER32 с 6 цангами · комплект прижимных приспособлений (<span class="q" data-q="prizhim">58</span> наименований) · индикатор ИЧ-10 · система охлаждения · комплект ключей и отвёрток · запасные сухари · руководство по эксплуатации с чертежами · акт приёмки</p>
+    </details>
+    <a class="btn red" href="#order">Получить цену с доставкой до вашего цеха</a>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="acceptance">
+  <div class="wrap">
+    <div class="grid g2">
+      <div>
+        <h2>Каждый станок проверяется перед отгрузкой — вы получаете акт с замерами</h2>
+        <p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами. Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p>
+        <table class="norms">
+          <tr><td>Осевое биение шпинделей, горизонтального / вертикального</td><td>15 / 10 мкм</td></tr>
+          <tr><td>Радиальное биение конической поверхности шпинделей</td><td>10 / 10 мкм</td></tr>
+          <tr><td>Плоскостность рабочих поверхностей столов на длине 500 мм</td><td>20 мкм</td></tr>
+          <tr><td>Взаимная перпендикулярность осей X, Y, Z</td><td>20 мкм</td></tr>
+          <tr><td>Класс точности по ГОСТ 8-82</td><td>Н</td></tr>
+        </table>
+        <ul class="ticks">
+          <li>Обкатка на холостом ходу и под нагрузкой перед отгрузкой</li>
+          <li>Приёмка на заводе в Кирове с участием вашего представителя — до отгрузки <span class="q" data-q="priemka">[условия]</span></li>
+          <li>Консервация на 1 год и упаковка в деревянный ящик для перевозки любым транспортом</li>
+        </ul>
+        <a class="btn out" href="#">Посмотреть пример акта приёмки</a>
+      </div>
+      <div>
+        <div class="ph" style="height:380px;margin-bottom:16px"><span>Фото: контроль ОТК — индикатор на шпинделе</span></div>
+        <div class="ph" style="height:170px"><span>Фото: паспорт, акт приёмки, комплект документации</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="grey" id="design">
+  <div class="wrap">
+    <h2 style="text-align:center;margin-bottom:36px">Что в конструкции решает ваши задачи</h2>
+    <div class="grid g3">
+      <div class="tile"><div class="ph"><span>Фото: вертикальная головка крупно · значок видео</span></div><h3>Головка поворачивается на ±90° и не теряет жёсткости</h3><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></div>
+      <div class="tile"><div class="ph"><span>Фото: оба шпинделя, вид сверху</span></div><h3>Два шпинделя — один станок вместо двух</h3><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Дополнительно — долбёжные операции.</p></div>
+      <div class="tile"><div class="ph"><span>Фото: станина, литьё, гофрокожух</span></div><h3>Литая станина 1050 кг гасит вибрации</h3><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></div>
+      <div class="tile"><div class="ph"><span>Фото: рукоятки и диски набора скоростей</span></div><h3>16 скоростей и 16 подач — режим под любой материал</h3><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></div>
+      <div class="tile"><div class="ph"><span>Фото: пульт УЦИ</span></div><h3>УЦИ прямого отсчёта — люфт винта не попадает в размер</h3><p>Линейки на осях показывают фактическое положение стола. Дискретность 0,001 мм, три координаты. На выбор: магнитная система (Италия) или оптическая (Санкт-Петербург). Можно установить позже, УЦИ любого производителя.</p></div>
+      <div class="tile"><div class="ph"><span>Фото: стол, подача СОЖ</span></div><h3>СОЖ, смазка и свет — меньше обслуживания</h3><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="dark" id="compare">
+  <div class="wrap" style="max-width:1100px">
+    <h2>Оставить, восстановить или заменить? Посчитаем все три варианта</h2>
+    <p class="lead">Если у вас уже стоит 676, 676П или ФУ-251 — вы знаете, что это хорошие станки; СФ676 продолжает ту же конструкцию. Вопрос не в том, какой станок лучше. Вопрос — во что обойдутся следующие два-три года: с тем, что есть, с восстановленным или с новым.</p>
+    <table class="cmp stack">
+      <colgroup><col style="width:19%"><col style="width:23%"><col style="width:31%"><col style="width:27%"></colgroup>
+      <thead><tr><th></th><th>Оставить как есть</th><th>Капитально отремонтировать свой</th><th>Купить новый СФ676</th></tr></thead>
+      <tr><td>Затраты сейчас</td><td data-h="Оставить как есть">Нет</td><td data-h="Отремонтировать свой">Выездная диагностика — от 25 000 ₽. Сам ремонт — по дефектной ведомости: разборка, шабрение направляющих, шпиндельный узел, коробки, электрика. Ориентир по станкам соседнего класса — 650–770 тыс. ₽; по отраслевой оценке ремонт доходит до половины цены нового</td><td data-h="Новый СФ676">Цена комплектации по КП</td></tr>
+      <tr><td>Затраты в ближайшие годы</td><td data-h="Оставить как есть">Неизвестны: ремонт по факту поломки, поиск деталей, простой</td><td data-h="Отремонтировать свой">Ниже, но ресурс узлов, которые не трогали, остаётся прежним. Гарантия на ремонт — обычно от 6 месяцев</td><td data-h="Новый СФ676">Плановое обслуживание по РЭ; гарантия <span class="q" data-q="garant">[срок]</span></td></tr>
+      <tr><td>Время до рабочего станка</td><td data-h="Оставить как есть">Работает — пока работает</td><td data-h="Отремонтировать свой">Капитальный ремонт 676 у сервисных компаний — около 70 дней, плюс ожидание узлов</td><td data-h="Новый СФ676">Изготовление от 20 рабочих дней + доставка + пусконаладка</td></tr>
+      <tr><td>Что известно о состоянии</td><td data-h="Оставить как есть">Только то, что видно снаружи</td><td data-h="Отремонтировать свой">Известно после разборки — и смета может вырасти</td><td data-h="Новый СФ676">Акт приёмки по заводскому номеру: 28 параметров геометрии</td></tr>
+      <tr><td>Комплектность</td><td data-h="Оставить как есть">Как есть</td><td data-h="Отремонтировать свой">Недостающие узлы (головка, хобот, серьга) — искать отдельно</td><td data-h="Новый СФ676">Зафиксирована в спецификации договора</td></tr>
+      <tr><td>Запасные части</td><td data-h="Оставить как есть">Продаются, в том числе крупные узлы, — но цена по запросу, часть позиций б/у, редкие приходится искать или изготавливать</td><td data-h="Отремонтировать свой">То же</td><td data-h="Новый СФ676">Завод-изготовитель; чертежи быстроизнашивающихся деталей в РЭ</td></tr>
+      <tr><td>Простой при поломке</td><td data-h="Оставить как есть">Полный, на неопределённый срок</td><td data-h="Отремонтировать свой">Меньше вероятность, но тот же поиск деталей</td><td data-h="Новый СФ676">Гарантия и сервис изготовителя</td></tr>
+      <tr><td>Закупка по 44-ФЗ / 223-ФЗ</td><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Российское происхождение подтверждено реестром</td></tr>
+    </table>
+    <p class="mute" style="margin-top:12px">Ориентиры по ремонту и б/у — из открытых предложений российских сервисных компаний и продавцов на сентябрь 2026 года: рабочие 676П — 165–220 тыс. ₽, ФУ-251 — 280–450 тыс. ₽, СФ676 1979 года — 200 тыс. ₽. Стоимость вашего ремонта считается только по дефектной ведомости.</p>
+    <p style="margin-top:20px">Если у вас есть полгода, свой ремонтник с опытом по 676 и комплектный станок — восстановление может оказаться выгодным. Если деталь нужна в этом квартале, а сколько ещё проживёт старый шпиндель — никто не скажет, считайте новый.</p>
+    <div class="calc">
+      <div class="ico"></div>
+      <div><span class="q" data-q="raschet">Пришлите фото станка, короткое видео шпинделя на оборотах и данные по люфтам — дадим два расчёта: во что обойдётся восстановление вашего и сколько стоит новый в нужной комплектации.</span></div>
+      <a class="btn red" href="#order">Посчитать для моего станка</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="config">
+  <div class="wrap">
+    <h2>Пять решений, из которых складывается ваш СФ676</h2>
+    <p class="lead">Обозначение станка выглядит как <code>СФ676-250/3-40АТ5-О-Ф3-ШВП</code>. За каждой частью — один практический вопрос. Ответьте на пять — и у вас готовая спецификация для договора. Или оставьте это нашему технологу: подберём по вашей маршрутной карте.</p>
+    <div class="grid cfg">
+      <div>
+        <table class="stack">
+          <colgroup><col style="width:20%"><col style="width:30%"><col style="width:50%"></colgroup>
+          <thead><tr><th>Решение</th><th>Варианты</th><th>Как выбрать</th></tr></thead>
+          <tr><td>А. Стол</td><td data-h="Варианты">250 × 800, 3 паза — основная модель<br>250 × 800, 4 паза<br>300 × 800, 5 пазов — увеличенный</td><td data-h="Как выбрать">Исходите из массы и габарита детали. Чем тяжелее деталь, тем уже стол: 250 × 800 — до <span class="q" data-q="massa">75 кг</span>; 300 × 800 — только для деталей из лёгких сплавов, до <span class="q" data-q="massa">50 кг</span>.</td></tr>
+          <tr><td>B. Конус</td><td data-h="Варианты">40АТ5 — конус 7:24 № 40<br>КМ4 — конус Морзе 4</td><td data-h="Как выбрать">По оснастке, которая у вас уже есть. Основная оснастка на Морзе 4 — КМ4. Инструмент на КМ1–КМ3 или держатели SK40, NT40, BT40 — 40АТ5: под него переходники есть на всё.</td></tr>
+          <tr><td>C. УЦИ</td><td data-h="Варианты">0 — без УЦИ<br>М — магнитная (Италия)<br>О — оптическая (Санкт-Петербург)</td><td data-h="Как выбрать">Нужен, если много расточной и точной работы. Для чернового фрезерования и ремонта — лимбы (цена деления 0,05 мм), УЦИ можно поставить позже. Магнитная неприхотлива, но замена комплектующих долгая. Оптическая чувствительнее к стружке, зато замена быстрая.</td></tr>
+          <tr><td>D. Координаты</td><td data-h="Варианты">Ф3 — X, Y, Z<br>Ф2 — X, Y</td><td data-h="Как выбрать">Ф3 — основная рекомендация: видна и вертикальная координата. Ф2 — только при ограниченном бюджете.</td></tr>
+          <tr><td>E. Винты</td><td data-h="Варианты">ШВП — шариковые винтовые пары<br>ТР — трапецеидальные передачи</td><td data-h="Как выбрать">ШВП — в большинстве случаев: станок плавнее в управлении. ТР — если станок едет в удалённый регион и ремонт будет своими силами: трапецеидальную пару ваш механик изготовит сам, ШВП — нет.</td></tr>
+        </table>
+      </div>
+      <div class="ph" style="min-height:420px"><span>Фото: ракурс 3/4 с выносками A–E к столу, шпинделям, пульту, винтам</span></div>
+    </div>
+    <div class="grid g3 levels" style="margin-top:32px">
+      <article><h3>Базовый</h3><p>Станок в выбранной модификации со стандартной комплектацией, упаковка, приёмка на заводе, документация.</p><p class="mute">Предприятиям со своей ремонтной службой и оснасткой</p></article>
+      <article><h3>Готов к работе</h3><p>Базовый + УЦИ на три координаты + тиски + <span class="q" data-q="osnastka">[оснастка и инструмент, которые поставляет завод]</span>. Всё, что нужно, чтобы начать работать в день запуска.</p><p class="mute">Тем, у кого оснастки под этот станок ещё нет</p></article>
+      <article><h3>Под ключ</h3><p>Готов к работе + доставка до цеха + разгрузка + монтаж и выверка + пусконаладка + <span class="q" data-q="obuch">инструктаж оператора</span>.</p><p class="mute">Тем, кому нужен станок, сданный в работу, а не ящик на площадке</p></article>
+    </div>
+    <p class="mute" style="margin-top:20px">Дополнительная оснастка: глобусный стол — установка детали в трёх плоскостях · универсальная делительная головка — шестерни, фланцы, деление на градусы · круглый поворотный стол · тиски до 125 мм · дополнительное освещение</p>
+    <a class="btn red" href="#order">Подобрать комплектацию с технологом</a>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="grey" id="delivery">
+  <div class="wrap">
+    <h2><span class="q" data-q="glagoly">Привезём, разгрузим, установим, выверим и запустим</span></h2>
+    <p class="lead">Десять шагов от заявки до первой детали — и кто отвечает за каждый.</p>
+    <ol class="steps">
+      <li><i>1</i><b>Заявка и КП</b><p>Вы описываете задачу, мы присылаем КП с обозначением модификации в течение <span class="q" data-q="otvet">одного</span> рабочего дня.</p></li>
+      <li><i>2</i><b>Договор и спецификация</b><p>Фиксируем обозначение, комплект, срок и условия. Что написано в спецификации — то и придёт.</p></li>
+      <li><i>3</i><b>Изготовление</b><p>Сборка на заводе в Кирове. Срок — от 20 рабочих дней.</p></li>
+      <li><i>4</i><b>Приёмка на заводе</b><p>28 параметров геометрии, обкатка, акт приёмки. Можете приехать и принять станок лично.</p></li>
+      <li><i>5</i><b>Упаковка</b><p>Консервация на 1 год, деревянный ящик, крепление на салазках.</p></li>
+      <li><i>6</i><b>Доставка</b><p>По России любым транспортом, от 3 дней. Груз застрахован.</p></li>
+      <li><i>7</i><b>Подготовка места</b><p>Бетонный пол достаточной толщины (на резиновых подкладках) или фундамент по чертежу из РЭ; 380 В, 3 фазы; кран или погрузчик от 3 т для ящика; для точных работ — помещение +20 ± 2 °C, не рядом с абразивными станками.</p></li>
+      <li><i>8</i><b>Монтаж и пусконаладка</b><p>Установка, выверка по уровню 0,04 мм на 1000 мм, расконсервация, заправка смазкой, обкатка, проверка паспортных данных. <span class="q" data-q="pnr">[в цене или отдельно; выезд по всей России]</span></p></li>
+      <li><i>9</i><b>Обучение</b><p>Инструктаж оператора и механика по органам управления, смазке, обслуживанию. <span class="q" data-q="obuch">[есть ли как услуга]</span></p></li>
+      <li><i>10</i><b>Гарантия и после</b><p>Гарантия <span class="q" data-q="garant">[срок]</span>. После — постгарантийное обслуживание, запасные части с завода, чертежи быстроизнашивающихся деталей в РЭ.</p></li>
+    </ol>
+    <h3>Что входит в цену</h3>
+    <table class="stack" style="margin-bottom:18px">
+      <colgroup><col style="width:34%"><col style="width:16%"><col style="width:14%"><col style="width:36%"></colgroup>
+      <thead><tr><th>Услуга</th><th>В цене станка</th><th>Отдельно</th><th>Как считается</th></tr></thead>
+      <tr><td>Приёмка на заводе с вашим участием</td><td data-h="В цене"><span class="q" data-q="priemka">?</span></td><td data-h="Отдельно"></td><td data-h="Как считается">Дата согласуется за неделю</td></tr>
+      <tr><td>Упаковка, консервация на 1 год</td><td data-h="В цене">Да</td><td data-h="Отдельно"></td><td data-h="Как считается">—</td></tr>
+      <tr><td>Страхование груза</td><td data-h="В цене"><span class="q" data-q="strah">?</span></td><td data-h="Отдельно"></td><td data-h="Как считается">—</td></tr>
+      <tr><td>Доставка до площадки</td><td data-h="В цене"></td><td data-h="Отдельно">Да</td><td data-h="Как считается">Расчёт по городу — в КП</td></tr>
+      <tr><td>Разгрузка на площадке</td><td data-h="В цене"></td><td data-h="Отдельно"><span class="q" data-q="pnr">?</span></td><td data-h="Как считается">Кран или погрузчик от 3 т — заказчика или наш</td></tr>
+      <tr><td>Монтаж, выверка, обкатка</td><td data-h="В цене"><span class="q" data-q="pnr">?</span></td><td data-h="Отдельно"></td><td data-h="Как считается">Выезд специалиста</td></tr>
+      <tr><td>Пусконаладка и проверка паспортных данных</td><td data-h="В цене"><span class="q" data-q="pnr">?</span></td><td data-h="Отдельно"></td><td data-h="Как считается">—</td></tr>
+      <tr><td>Инструктаж оператора и механика</td><td data-h="В цене"><span class="q" data-q="obuch">?</span></td><td data-h="Отдельно"></td><td data-h="Как считается">—</td></tr>
+      <tr><td>Гарантийное обслуживание</td><td data-h="В цене">Да</td><td data-h="Отдельно"></td><td data-h="Как считается"><span class="q" data-q="garant">[срок гарантии]</span></td></tr>
+    </table>
+    <p><a href="#">Памятка по подготовке места установки (PDF)</a></p>
+    <div class="ph" style="height:260px"><span>Фото: упаковка в ящик, отгрузка</span></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="dark" id="gov">
+  <div class="wrap">
+    <h2>Для закупки по 44-ФЗ и 223-ФЗ — документы, а не обещания</h2>
+    <p class="lead">Металлорежущие фрезерные станки входят в перечень товаров, для которых при государственных и корпоративных закупках действует национальный режим с запретом иностранной продукции. Подтверждённое российское происхождение — не преимущество, а допуск к участию. У СФ676 оно подтверждено.</p>
+    <div class="grid g4 docs">
+      <article><div class="ico"></div><h3>Реестр промышленной продукции</h3><p>Включён в реестр Минпромторга по постановлению Правительства № 719. <span class="q" data-q="reestr">[номер и срок записи — после подтверждения]</span></p></article>
+      <article><div class="ico"></div><h3>Коды</h3><p>ОКПД2 28.41.22.130 · КТРУ 28.41.22.130-00000002 — станок фрезерный металлорежущий, ручное управление</p></article>
+      <article><div class="ico"></div><h3>Технические условия</h3><p>ТУ 3816-001-67559892-2016. Станок сертифицирован на соответствие ТУ.</p></article>
+      <article><div class="ico"></div><h3>Соответствие</h3><p><span class="q" data-q="deklar">[декларация соответствия ТР ТС 010/2011 — номер, срок]</span></p></article>
+      <article><div class="ico"></div><h3>Документация</h3><p>Паспорт, руководство по эксплуатации, акт приёмки, чертежи — на русском языке.</p></article>
+      <article><div class="ico"></div><h3>Для описания объекта закупки</h3><p>Типовое описание характеристик по КТРУ и спецификация стандартной комплектации.</p></article>
+      <article><div class="ico"></div><h3>Изготовитель</h3><p>ООО «Вятский станкостроительный завод», ОГРН 1164350074900, Киров</p></article>
+    </div>
+    <p style="margin-top:28px"><a class="btn red" href="#">Скачать пакет документов для закупки</a> &nbsp; <a class="btn out" href="#order">Запросить КП для обоснования НМЦК</a></p>
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="plant">
+  <div class="wrap">
+    <div class="grid g2">
+      <div class="ph" style="min-height:320px"><span>Видео: обзор станка (RuTube)</span></div>
+      <div>
+        <h2>Вятский станкостроительный завод — выпускает СФ676 с <span class="q" data-q="god">[год]</span> года</h2>
+        <p>Завод в Кирове: <span class="q" data-q="sami">[что делаем сами — механообработка, сборка, ОТК; литьё]</span>. Кроме СФ676 выпускаем настольно-сверлильный станок 2М112, точильно-шлифовальные станки ТШ и гидравлический пресс ПГП-50; оказываем услуги лазерной резки и электролаборатории.</p>
+        <div class="nums" style="grid-template-columns:repeat(3,1fr)">
+          <div><b><span class="q" data-q="postav">[N]</span></b><small>станков СФ676 поставлено</small></div>
+          <div><b><span class="q" data-q="god">[год]</span></b><small>первый станок</small></div>
+          <div><b><span class="q" data-q="region">[N]</span></b><small>регионов</small></div>
+        </div>
+        <p>Кому поставляли: машиностроительные и оборонные предприятия, предприятия атомной отрасли, инструментальные производства, учреждения среднего профессионального образования, ремонтные службы энергетики и нефтегаза. <span class="q" data-q="logo">[логотипы — после разрешения]</span></p>
+        <p class="mute">Отзывы — блок скрыт до появления двух-трёх отзывов.</p>
+      </div>
+    </div>
+    <div class="ph" style="height:280px;margin-top:32px"><span>Фото: ряд станков на участке сборки</span></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="grey faq" id="faq">
+  <div class="wrap narrow">
+    <h2>Вопросы, которые задают перед покупкой</h2>
+    <details open><summary>Нужен ли фундамент?</summary><div>Не обязательно. При бетонном полу достаточной толщины станок ставится на подкладки из упругой маслостойкой резины под опорные пятки. Фундамент по чертежу из руководства нужен, если требуется максимальная точность и спокойная работа, — глубина заложения от 300 мм. Чертёж и требования пришлём вместе с КП.</div></details>
+    <details open><summary>Как разгрузить и переместить станок?</summary><div>Ящик со станком поднимается краном грузоподъёмностью от 3 т за места, указанные на ящике. Распакованный станок — за транспортировочные болты в станине или синтетическими стропами за шпиндельную бабку; трос рассчитывается на 1600 кг. По цеху удобнее перемещать на катках.</div></details>
+    <details><summary>Какое питание нужно?</summary><div>Сеть 380 В, три фазы, 50 Гц. Суммарная мощность электродвигателей 3,12 кВт в базовом исполнении (8,64 кВт с СПУУ/ЧПУ). Номинальный ток 7 А, автомат 10 А. Освещение — 24 В.</div></details>
+    <details><summary>Что делать после установки?</summary><div>Выдержать станок три дня в сухом помещении, снять консервационную смазку, залить масло И-30 (4,5 л) по разделу «Смазка» РЭ, проверить заземление и лёгкость хода всех узлов, затем обкатать: час на холостом ходу, потом под нагрузкой с минимальных режимов. Если заказана пусконаладка — всё это делает наш специалист.</div></details>
+    <details><summary>Какой инструмент подходит?</summary><div>Концевые фрезы Ø 3–50 мм, торцевые со сменными пластинами до Ø 100, дисковые до Ø 200, свёрла Ø 2–40. Конус шпинделей — 7:24 № 40 или Морзе 4 на выбор при заказе. В комплекте — цанговый патрон ER32 с шестью цангами и оправка для горизонтального фрезерования.</div></details>
+    <details><summary>Нужен ли УЦИ?</summary><div>Если много расточной и точной работы — да, лучше сразу на три координаты. Для ремонта и чернового фрезерования можно работать по лимбам (цена деления 0,05 мм) и поставить УЦИ позже: станок допускает установку системы любого производителя.</div></details>
+    <details><summary>Какая гарантия?</summary><div><span class="q" data-q="garant">[срок гарантии]</span>. Что входит и что не является гарантийным случаем — в договоре и РЭ. Поломки из-за неправильного подключения к сети или небрежной установки под гарантию не попадают.</div></details>
+    <details><summary>Что с запчастями через пять лет?</summary><div>Запасные части поставляет завод-изготовитель; в руководстве по эксплуатации есть чертежи быстроизнашивающихся деталей, спецификации подшипников и покупных изделий — часть можно изготовить или купить на месте. Конструкция серийная, узлы взаимозаменяемы в пределах исполнения.</div></details>
+    <details><summary>Можно ли посмотреть станок до покупки?</summary><div>Видеообзор — на этой странице. <span class="q" data-q="vizit">Приехать на завод в Киров и посмотреть станок в работе можно по договорённости.</span> При отгрузке — приёмка с вашим участием.</div></details>
+    <details><summary>Насколько станок шумный и где его нельзя ставить?</summary><div>Предельный уровень шума — 93 дБА. Станок нельзя устанавливать в одном помещении с оборудованием, работающим абразивным инструментом: абразивная пыль попадает на направляющие.</div></details>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="grey" id="order" style="padding-top:56px">
+  <div class="wrap">
+    <h2>Получите цену комплектации с доставкой до вашего цеха</h2>
+    <p class="lead">Оставьте телефон или почту — ответим в течение <span class="q" data-q="otvet">одного</span> рабочего дня. Пришлём КП с обозначением модификации, ценой, сроком изготовления и стоимостью доставки в ваш город.</p>
+    <div class="grid form">
+      <div class="card">
+        <input class="field" type="text" placeholder="Телефон или e-mail" aria-label="Телефон или e-mail">
+        <label class="chk"><input type="checkbox"> Даю согласие на обработку персональных данных</label>
+        <a class="btn red" href="#">Получить расчёт с доставкой до цеха</a>
+        <p class="mute" style="margin:8px 0 12px"><a href="#">Прикрепить ТЗ, чертёж или фото станка</a></p>
+        <a class="btn out" href="#">Отправить ТЗ или чертёж</a>
+        <p class="mute" style="margin:6px 0 0">Ответим в течение <span class="q" data-q="otvet">одного</span> рабочего дня</p>
+      </div>
+      <div class="contacts">
+        <div class="big">8 (800) 707-26-76</div>
+        <p class="mute">бесплатно по России</p>
+        <p><a href="mailto:sale@vsp-kirov.ru">sale@vsp-kirov.ru</a></p>
+        <div class="rop"><div class="ph"><span>фото</span></div><div><b><span class="q" data-q="rop">Юлия Румянцева</span></b><br><span class="mute">руководитель отдела продаж</span></div></div>
+        <p>Приезжайте на завод: Киров, ул. Техническая, <span class="q" data-q="adres">[20 / 22]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="qlist"><div class="wrap"><h2>Вопросы к заводу — что стоит за жёлтыми отметками</h2><p class="mute">Номер сноски совпадает с номером в списке. Нажатие на сноску ведёт сюда, нажатие на «где» — обратно к месту на странице. Цена и реестр в списке отсутствуют: по ним решение принимается отдельно.</p><ol id="qol"></ol></div></section>
+<footer>
+  <div class="wrap">ООО «Вятский станкостроительный завод», ОГРН 1164350074900 · <a href="#">Политика конфиденциальности</a> · <a href="#">Согласие на обработку персональных данных</a> · Предложение не является публичной офертой · <a href="#">vsp-kirov.ru</a></div>
+</footer>
+
+<script>
+var QUESTIONS = {
+ srok:{t:'Срок изготовления «от 20 рабочих дней»: актуален ли и к каким исполнениям относится — в приказе № 73 часть позиций отмечена «по ТЗ заказчика».',w:'Румянцева'},
+ god:{t:'С какого года завод выпускает СФ676.',w:'Мосягин'},
+ massa:{t:'Предельная масса детали 75 кг (стол 250) и 50 кг (стол 300) — цифра из внутреннего документа «Выбор модификации»; подтвердить как публичную.',w:'технолог'},
+ otvet:{t:'Срок ответа на заявку: выдерживаем ли один рабочий день.',w:'Румянцева'},
+ oplata:{t:'Условия оплаты: предоплата, поэтапно, отсрочка для госзаказчиков.',w:'Румянцева'},
+ prizhim:{t:'В комплекте 58 или 50 наименований прижимных приспособлений — в презентации указано «58 или 50».',w:'Румянцева / технолог'},
+ priemka:{t:'Приёмка на заводе с участием заказчика: принимаем ли, бесплатно или по договору.',w:'Мосягин / Румянцева'},
+ garant:{t:'Гарантийный срок в месяцах и что в него входит. Рынок пишет 12 или 24 месяца; дилер нашего станка — «12 от пуска, электроузлы 2 года».',w:'Румянцева'},
+ raschet:{t:'Расчёт «ремонт или новый» по фото и видео старого станка заказчика: кто на заводе будет делать, в какой срок, бесплатно ли. Если ресурса нет — блок убираем.',w:'Мосягин / технолог'},
+ osnastka:{t:'Состав уровня «Готов к работе»: какую оснастку и инструмент завод поставляет и по каким ценам.',w:'Румянцева'},
+ obuch:{t:'Инструктаж оператора и механика — есть ли как услуга, входит ли в цену.',w:'Румянцева'},
+ glagoly:{t:'Заголовок обещает пять действий. За какие из них отвечает завод: разгрузка, монтаж, выверка, пусконаладка? Лишние глаголы уберём.',w:'Мосягин'},
+ pnr:{t:'Монтаж, выверка, пусконаладка и разгрузка: входят в цену станка или считаются отдельно; выезжаем ли по всей России.',w:'Румянцева'},
+ strah:{t:'Страхование груза: входит в цену или отдельно.',w:'Румянцева'},
+ reestr:{t:'Номер и срок новой реестровой записи Минпромторга — после выхода приказа о включении (заявка принята и одобрена).',w:'Мосягин'},
+ deklar:{t:'Декларация соответствия ТР ТС 010/2011: номер и срок действия.',w:'Румянцева'},
+ sami:{t:'Что делаем сами: литьё, механообработка, сборка, контроль — формулировка о производстве.',w:'Мосягин'},
+ postav:{t:'Сколько станков СФ676 поставлено всего или за последние годы. Если точной цифры нет — «более N».',w:'Мосягин'},
+ region:{t:'Число регионов или предприятий-покупателей.',w:'Румянцева'},
+ logo:{t:'Можно ли называть покупателей и использовать логотипы: РусГидро, Лукойл, Гидроприбор с текущего сайта; НПО машиностроения и атомная отрасль из открытых закупок.',w:'Мосягин'},
+ vizit:{t:'Визит на завод для осмотра станка до покупки — принимаем ли.',w:'Мосягин'},
+ rop:{t:'Фото и имя руководителя отдела продаж на странице — согласие на публикацию.',w:'Румянцева'},
+ adres:{t:'Адрес завода: Техническая, 20 (презентация) или 22 (сайт).',w:'Румянцева'}
+};
+
+(function(){
+  var order=[], seen={}, spans=document.querySelectorAll('.q[data-q]');
+  spans.forEach(function(sp){var k=sp.getAttribute('data-q'); if(!seen[k]){seen[k]=order.length+1; order.push(k);} var n=seen[k]; if(!sp.id) sp.id='q-'+k; var sup=document.createElement('sup'); sup.innerHTML='<a href="#ql-'+k+'" style="color:inherit;text-decoration:none">'+n+'</a>'; sp.appendChild(sup);});
+  var ol=document.getElementById('qol');
+  order.forEach(function(k,i){var q=QUESTIONS[k]||{t:k,w:''}; var li=document.createElement('li'); li.id='ql-'+k; li.innerHTML='<b>'+q.t+'</b> <span class="mute">— '+q.w+'</span> &nbsp;<a href="#q-'+k+'">где на странице ↑</a>'; ol.appendChild(li);});
+  document.getElementById('qcount').textContent='('+order.length+')';
+  var t=document.getElementById('qtoggle');
+  t.addEventListener('change',function(){document.body.classList.toggle('showq',t.checked)});
+  var vp=document.getElementById('vptoggle'), meta=document.getElementById('vp');
+  vp.addEventListener('change',function(){meta.setAttribute('content', vp.checked ? 'width=1366, initial-scale=0.28, minimum-scale=0.2, maximum-scale=3' : 'width=device-width, initial-scale=1'); window.scrollTo(0,0);});
+  var hero=document.getElementById('top');
+  function onScroll(){document.body.classList.toggle('scrolled',window.scrollY>hero.offsetHeight-60)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
