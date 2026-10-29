@@ -433,6 +433,22 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
  .v1.faq summary,.v1.faq .faq-answer{padding:var(--ui-space-2)}
 }
 
+/* Iteration 04: actual photographs keep their content; unavailable media stays compact. */
+.site-photo .media-frame{--media-ratio:3/2;--media-fit:contain}
+.site-photo.media-tall .media-frame{--media-ratio:1/1;max-height:280px}
+.site-photo.media-square .media-frame{--media-ratio:1/1}
+.adv-card{align-self:start}
+.adv-card .prototype-media{margin-bottom:var(--ui-space-3)}
+.v1 .media-pending-note{padding:12px 16px;border:1px solid var(--line);border-radius:var(--ui-radius);font-size:var(--ui-small);line-height:1.5;color:var(--mute);background:#eef0f2;margin:0 0 var(--ui-space-3)}
+.v1 .media-pending .media-frame{aspect-ratio:auto;max-width:none;min-height:56px}
+.acceptance-media{align-items:start}
+.acceptance-media .media-pending figcaption{text-align:left}
+.v1 .specs-visual{flex:0 0 320px;aspect-ratio:auto}
+.v1 .config-photo{max-width:280px;margin-top:var(--ui-space-2)}
+.plant-media{display:block;max-width:920px;margin-inline:auto;margin-bottom:var(--ui-space-3)}
+.order-person{grid-template-columns:1fr}
+@media (max-width:600px){.v1 .specs-visual{flex:none;width:100%;max-width:320px}}
+
 </style>
 </head>
 <body>
@@ -484,23 +500,23 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     <h2 class="section-heading">Ключевые преимущества СФ676</h2>
     <div class="adv-grid">
       <article class="ui-card adv-card">
-        <div class="media-placeholder"><span>Фото шпиндельного узла<br>будет добавлено</span></div>
+        <p class="media-pending-note">Фото шпиндельного узла пока не добавлено.</p>
         <h3>Два шпинделя</h3><p>Горизонтальный и вертикальный — для разных фрезерных операций.</p>
       </article>
       <article class="ui-card adv-card">
-        <div class="media-placeholder"><span>Фото рабочих столов<br>будет добавлено</span></div>
+        <p class="media-pending-note">Фото рабочих столов пока не добавлено.</p>
         <h3>Два рабочих стола</h3><p>Вертикальный и угловой горизонтальный — для разных технологических задач.</p>
       </article>
       <article class="ui-card adv-card">
-        <div class="media-placeholder"><span>Фото глобусного стола<br>будет добавлено</span></div>
+        <p class="media-pending-note">Фото глобусного стола пока не добавлено.</p>
         <h3>Глобусный стол</h3><p>Дополнительная опция: универсальный угловой стол устанавливается вместо штатного горизонтального.</p>
       </article>
       <article class="ui-card adv-card">
-        <div class="media-placeholder"><span>Фото поворотной головки<br>будет добавлено</span></div>
+        <figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-head-side-960.webp" srcset="assets/images/sf676-head-side-480.webp 480w, assets/images/sf676-head-side-960.webp 960w" sizes="(max-width:600px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления" loading="lazy" decoding="async"></div><figcaption>Вертикальная головка в рабочем положении</figcaption></figure>
         <h3>Поворот головки ±90°</h3><p>Обработка деталей при различных углах положения вертикального шпинделя.</p>
       </article>
       <article class="ui-card adv-card">
-        <div class="media-placeholder"><span>Фото долбёжной головки<br>будет добавлено</span></div>
+        <p class="media-pending-note">Фото долбёжной головки пока не добавлено.</p>
         <h3>Долбёжные операции</h3><p>Выполняются с помощью дополнительной долбёжной головки.</p>
       </article>
     </div>
@@ -512,7 +528,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
   <div class="wrap">
     <div class="specs-heading">
       <h2>Основные характеристики</h2>
-      <div class="media-placeholder specs-visual" title="Фронтальный вид с выносками к столу, шпинделям и пульту"><span>Фото с выносками<br>будет добавлено</span></div>
+      <figure class="prototype-media site-photo specs-visual"><div class="media-frame"><img src="assets/images/sf676-work-area-960.webp" srcset="assets/images/sf676-work-area-480.webp 480w, assets/images/sf676-work-area-960.webp 960w" sizes="(max-width:368px) calc(100vw - 48px), 320px" width="960" height="640" alt="Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих" loading="lazy" decoding="async"></div><figcaption>Рабочая зона СФ676</figcaption></figure>
     </div>
     <div class="spec-groups">
       <table class="spec-table">
@@ -609,8 +625,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     </div>
     <p class="ui-note acceptance-docs"><span class="q" data-q="acts">Образцы документов заводской приёмки и пусконаладочных работ пока не добавлены; точные наименования будут уточнены после получения файлов.</span></p>
     <div class="acceptance-media">
-      <figure class="prototype-media media-inspection"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Контроль ОТК — проверка станка специалистом</figcaption></figure>
-      <figure class="prototype-media media-document"><div class="media-frame"><span>Документ пока не добавлен</span></div><figcaption>Действительный акт приёмки</figcaption></figure>
+      <figure class="prototype-media media-inspection media-pending"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Контроль ОТК — проверка станка специалистом</figcaption></figure>
+      <figure class="prototype-media media-document media-pending"><div class="media-frame"><span>Документ пока не добавлен</span></div><figcaption>Действительный акт приёмки</figcaption></figure>
     </div>
   </div>
 </section>
@@ -620,12 +636,12 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
   <div class="wrap">
     <h2 class="section-heading">Что в конструкции решает ваши задачи</h2>
     <div class="construction-grid">
-      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>вертикальная головка крупно</figcaption></figure><h3>Поворотная вертикальная головка ±90°</h3><p class="feature-benefit">Головка поворачивается на ±90° и не теряет жёсткости</p><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></article>
-      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>оба шпинделя, вид сверху</figcaption></figure><h3>Горизонтальный и вертикальный шпиндели</h3><p class="feature-benefit">Два шпинделя — один станок вместо двух</p><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></article>
-      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>станина, литьё, гофрокожух</figcaption></figure><h3>Литая станина</h3><p class="feature-benefit">Литая станина 1050 кг гасит вибрации</p><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></article>
-      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>рукоятки и диски набора скоростей</figcaption></figure><h3>Скорости вращения и рабочие подачи</h3><p class="feature-benefit">16 скоростей и 16 подач — режим под любой материал</p><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></article>
-      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>пульт УЦИ</figcaption></figure><h3>УЦИ</h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><p>Линейки на осях показывают фактическое положение стола. Дискретность 0,001 мм, три координаты. На выбор: магнитная система (Италия) или оптическая (Санкт-Петербург). Можно установить позже, УЦИ любого производителя.</p></article>
-      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>стол, подача СОЖ</figcaption></figure><h3>СОЖ, смазка и освещение</h3><p class="feature-benefit">СОЖ, смазка и свет — меньше обслуживания</p><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-head-front-640.webp" srcset="assets/images/sf676-head-front-320.webp 320w, assets/images/sf676-head-front-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="960" alt="Вертикальная головка СФ676 с пинолью, инструментом и рукоятками" loading="lazy" decoding="async"></div><figcaption>Вертикальная головка — вид спереди</figcaption></figure><h3>Поворотная вертикальная головка ±90°</h3><p class="feature-benefit">Головка поворачивается на ±90° и не теряет жёсткости</p><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media media-node media-pending"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>оба шпинделя, вид сверху</figcaption></figure><h3>Горизонтальный и вертикальный шпиндели</h3><p class="feature-benefit">Два шпинделя — один станок вместо двух</p><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-bed-640.webp" srcset="assets/images/sf676-bed-320.webp 320w, assets/images/sf676-bed-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="779" alt="Нижняя часть станины СФ676, основание на виброопорах и опорные узлы" loading="lazy" decoding="async"></div><figcaption>Станина и основание СФ676</figcaption></figure><h3>Литая станина</h3><p class="feature-benefit">Литая станина 1050 кг гасит вибрации</p><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-controls-640.webp" srcset="assets/images/sf676-controls-320.webp 320w, assets/images/sf676-controls-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="853" alt="Рукоятки управления и градуированный диск выбора режимов на СФ676" loading="lazy" decoding="async"></div><figcaption>Рукоятки и диск выбора режимов</figcaption></figure><h3>Скорости вращения и рабочие подачи</h3><p class="feature-benefit">16 скоростей и 16 подач — режим под любой материал</p><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Пульт УЦИ СФ676 с тремя строками координат X, Y и Z" loading="lazy" decoding="async"></div><figcaption>Пульт УЦИ с индикацией X, Y и Z</figcaption></figure><h3>УЦИ</h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><p>Линейки на осях показывают фактическое положение стола. Дискретность 0,001 мм, три координаты. На выбор: магнитная система (Италия) или оптическая (Санкт-Петербург). Можно установить позже, УЦИ любого производителя.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-square"><div class="media-frame"><img src="assets/images/sf676-coolant-light-960.webp" srcset="assets/images/sf676-coolant-light-480.webp 480w, assets/images/sf676-coolant-light-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="960" alt="Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676" loading="lazy" decoding="async"></div><figcaption>Трубка СОЖ и местное освещение</figcaption></figure><h3>СОЖ, смазка и освещение</h3><p class="feature-benefit">СОЖ, смазка и свет — меньше обслуживания</p><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></article>
     </div>
   </div>
 </section>
@@ -698,7 +714,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <li class="ui-card config-option">
         <h3><span class="option-letter" aria-hidden="true">D</span>Количество координат</h3>
         <div class="config-columns">
-          <div><h4>Доступные варианты</h4><ul><li>Ф3 — X, Y, Z</li><li>Ф2 — X, Y</li></ul></div>
+          <div><h4>Доступные варианты</h4><ul><li>Ф3 — X, Y, Z</li><li>Ф2 — X, Y</li></ul><figure class="prototype-media site-photo config-photo"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:378px) calc(100vw - 98px), 280px" width="960" height="640" alt="Три строки координат X, Y и Z на пульте УЦИ СФ676" loading="lazy" decoding="async"></div><figcaption>Пример индикации трёх координат: X, Y, Z</figcaption></figure></div>
           <div><h4>Как выбрать</h4><p>Ф3 — основная рекомендация: видна и вертикальная координата. Ф2 — только при ограниченном бюджете.</p></div>
         </div>
       </li>
@@ -779,7 +795,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       </article>
     </div>
     <p class="mute"><span class="q" data-q="docs">Памятка по подготовке места установки (PDF) — файл пока не добавлен.</span></p>
-    <div class="ph" style="height:260px"><span>Фото: упаковка в ящик, отгрузка</span></div>
+    <p class="media-pending-note">Фотографии упаковки и отгрузки пока не добавлены.</p>
   </div>
 </section>
 
@@ -814,11 +830,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     <ul class="industry-list"><li>Машиностроение</li><li>Оборонная промышленность</li><li>Атомная отрасль</li><li>Инструментальные производства</li><li>Учреждения среднего профессионального образования</li><li>Ремонтные службы энергетики</li><li>Ремонтные службы нефтегазовой промышленности</li><li>Пищевая промышленность</li></ul>
     <p class="ui-note"><span class="q" data-q="logo">Логотипы заказчиков — после получения разрешения.</span></p>
     <p class="ui-note">Отзывы — блок скрыт до появления двух-трёх отзывов.</p>
-    <div class="plant-media">
-      <figure class="prototype-media media-production"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Производственный цех</figcaption></figure>
-      <figure class="prototype-media media-production"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Сборочный участок, ряд станков СФ676</figcaption></figure>
-      <figure class="prototype-media media-video"><div class="media-frame"><span>Видео пока не добавлено</span></div><figcaption>Видеообзор станка (RuTube)</figcaption></figure>
-    </div>
+    <div class="plant-media"><figure class="prototype-media site-photo media-production"><div class="media-frame"><img src="assets/images/sf676-production-1600.webp" srcset="assets/images/sf676-production-800.webp 800w, assets/images/sf676-production-1600.webp 1600w" sizes="(max-width:968px) calc(100vw - 48px), 920px" width="1600" height="1067" alt="СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ" loading="lazy" decoding="async"></div><figcaption>Работа на СФ676 на производственном участке ВСЗ</figcaption></figure></div>
+    <p class="media-pending-note">Видеообзор станка пока не добавлен.</p>
   </div>
 </section>
 
@@ -863,7 +876,6 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         <p><a class="order-email" href="mailto:sale@vsp-kirov.ru">sale@vsp-kirov.ru</a></p>
         <p>Ответим в течение одного рабочего дня.</p>
         <div class="order-person">
-          <figure class="prototype-media media-portrait"><div class="media-frame"><span>Фото</span></div></figure>
           <p><b><span class="q" data-q="rop">Багина</span></b><br><span class="ui-note">Отдел продаж</span></p>
         </div>
         <p class="order-address">Киров, ул. Техническая. <span class="q" data-q="adres">Номер здания требует подтверждения: 20 или 22.</span></p>
@@ -874,7 +886,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 
 <section id="qlist"><div class="wrap"><h2>Вопросы к заводу — что стоит за жёлтыми отметками</h2><p class="mute">Номер сноски совпадает с номером в списке. Нажатие на сноску ведёт сюда, нажатие на «где» — обратно к месту на странице.</p><ol id="qol"></ol></div></section>
 <footer>
-  <div class="wrap">ООО «Вятский станкостроительный завод», ОГРН 1164350074900 · <a href="#">Политика конфиденциальности</a> · <a href="#">Согласие на обработку персональных данных</a> · Предложение не является публичной офертой · <a href="#">vsp-kirov.ru</a></div>
+  <div class="wrap">ООО «Вятский станкостроительный завод», ОГРН 1164350074900 · <span>Политика конфиденциальности</span> · <span>Согласие на обработку персональных данных</span> · Предложение не является публичной офертой · <span>vsp-kirov.ru</span></div>
 </footer>
 
 <script>
