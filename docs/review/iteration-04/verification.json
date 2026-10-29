@@ -1,0 +1,831 @@
+{
+  "browser": "153.0.8010.0",
+  "unchangedSourceSections": [
+    "top",
+    "price",
+    "compare",
+    "gov",
+    "faq"
+  ],
+  "unchangedJS": true,
+  "widths": [
+    {
+      "width": 320,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 320,
+              "scrollWidth": 320,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 320,
+              "scrollWidth": 320,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 320,
+              "scrollWidth": 320,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 320,
+              "scrollWidth": 320,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 320,
+        "scrollWidth": 320,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 375,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 375,
+              "scrollWidth": 375,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 375,
+              "scrollWidth": 375,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 375,
+              "scrollWidth": 375,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 375,
+              "scrollWidth": 375,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 375,
+        "scrollWidth": 375,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 390,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 390,
+              "scrollWidth": 390,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 390,
+              "scrollWidth": 390,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 390,
+              "scrollWidth": 390,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 390,
+              "scrollWidth": 390,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 390,
+        "scrollWidth": 390,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 768,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 768,
+              "scrollWidth": 768,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 768,
+              "scrollWidth": 768,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 768,
+              "scrollWidth": 768,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 768,
+              "scrollWidth": 768,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 768,
+        "scrollWidth": 768,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 1024,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1024,
+              "scrollWidth": 1024,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1024,
+              "scrollWidth": 1024,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1024,
+              "scrollWidth": 1024,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1024,
+              "scrollWidth": 1024,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 1366,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1366,
+              "scrollWidth": 1366,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1366,
+              "scrollWidth": 1366,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1366,
+              "scrollWidth": 1366,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1366,
+              "scrollWidth": 1366,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 1366,
+        "scrollWidth": 1366,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 1440,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1440,
+              "scrollWidth": 1440,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1440,
+              "scrollWidth": 1440,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1440,
+              "scrollWidth": 1440,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1440,
+              "scrollWidth": 1440,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": [],
+        "clipped": []
+      }
+    },
+    {
+      "width": 1920,
+      "modes": [
+        {
+          "review": false,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1920,
+              "scrollWidth": 1920,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1920,
+              "scrollWidth": 1920,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        },
+        {
+          "review": true,
+          "initial": {
+            "sections": [
+              "top",
+              "advantages",
+              "specs",
+              "price",
+              "acceptance",
+              "design",
+              "compare",
+              "config",
+              "delivery",
+              "gov",
+              "plant",
+              "faq",
+              "order"
+            ],
+            "questions": 13,
+            "footnotes": 15,
+            "duplicates": [],
+            "brokenLinks": [],
+            "robots": "noindex, nofollow",
+            "top": 0,
+            "media": 12,
+            "images": true
+          },
+          "states": [
+            {
+              "name": "closed",
+              "width": 1920,
+              "scrollWidth": 1920,
+              "overflow": [],
+              "clipped": []
+            },
+            {
+              "name": "all-details-open",
+              "width": 1920,
+              "scrollWidth": 1920,
+              "overflow": [],
+              "clipped": []
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "text200": {
+        "width": 1920,
+        "scrollWidth": 1920,
+        "overflow": [],
+        "clipped": []
+      }
+    }
+  ],
+  "visual": [
+    {
+      "width": 390,
+      "unchangedDimensions": true
+    },
+    {
+      "width": 1366,
+      "unchangedDimensions": true
+    }
+  ]
+}

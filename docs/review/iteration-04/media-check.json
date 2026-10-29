@@ -1,0 +1,1802 @@
+{
+  "browser": "153.0.8010.0",
+  "responsive": [
+    {
+      "width": 320,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-square-480.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 272,
+          "height": 272,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 220,
+          "height": 146,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 270,
+          "height": 179.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 220,
+          "height": 146,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 220,
+          "height": 146,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 270,
+          "height": 179.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-480.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 320,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-square-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 272,
+          "height": 272,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 220,
+          "height": 146,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 270,
+          "height": 179.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 220,
+          "height": 146,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 220,
+          "height": 220,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 220,
+          "height": 146,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 270,
+          "height": 179.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-800.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 375,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-square-480.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 327,
+          "height": 327,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 275,
+          "height": 182.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 275,
+          "height": 182.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 275,
+          "height": 182.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 325,
+          "height": 216,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-480.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 375,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-square-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 327,
+          "height": 327,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 275,
+          "height": 182.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 275,
+          "height": 182.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 275,
+          "height": 275,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 275,
+          "height": 182.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 325,
+          "height": 216,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-800.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 390,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-square-480.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 342,
+          "height": 342,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 290,
+          "height": 192.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 290,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 290,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 290,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 290,
+          "height": 192.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 290,
+          "height": 290,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 340,
+          "height": 226,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-480.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 390,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-square-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 342,
+          "height": 342,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 290,
+          "height": 192.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 290,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 290,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 290,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 290,
+          "height": 192.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 290,
+          "height": 290,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 340,
+          "height": 226,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-800.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 768,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-square-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 520,
+          "height": 520,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 296,
+          "height": 196.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 296,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 296,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 296,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 296,
+          "height": 196.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 296,
+          "height": 296,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 253.1875,
+          "height": 168.125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-800.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 718,
+          "height": 478,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-800.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-800.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 768,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-square-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 520,
+          "height": 520,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 296,
+          "height": 196.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 296,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 296,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 296,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 296,
+          "height": 196.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 296,
+          "height": 296,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 253.1875,
+          "height": 168.125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 718,
+          "height": 478,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-square-800.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1024,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-480.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 472,
+          "height": 590,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 424,
+          "height": 282,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 424,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 424,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 424,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 424,
+          "height": 282,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 424,
+          "height": 424,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-480.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1024,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-1092.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 472,
+          "height": 590,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 424,
+          "height": 282,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 424,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 424,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 424,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 424,
+          "height": 282,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 424,
+          "height": 424,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-1092.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1366,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 552,
+          "height": 690,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 316,
+          "height": 316,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-800.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1366,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-1092.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 552,
+          "height": 690,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 316,
+          "height": 316,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-1092.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1440,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 552,
+          "height": 690,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 316,
+          "height": 316,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-800.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1440,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-1092.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 552,
+          "height": 690,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 316,
+          "height": 316,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-1092.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1920,
+      "dpr": 1,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-800.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 552,
+          "height": 690,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-480.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-480.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-320.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-320.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-320.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-480.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 316,
+          "height": 316,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-480.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-800.webp",
+        "sf676-head-side-480.webp",
+        "sf676-work-area-480.webp",
+        "sf676-head-front-320.webp",
+        "sf676-bed-320.webp",
+        "sf676-controls-320.webp",
+        "sf676-dro-480.webp",
+        "sf676-coolant-light-480.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    },
+    {
+      "width": 1920,
+      "dpr": 2,
+      "images": [
+        {
+          "src": "sf676-hero-portrait-1092.webp",
+          "alt": "СФ676 на переднем плане производственного участка Вятского станкостроительного завода",
+          "width": 552,
+          "height": 690,
+          "loaded": true,
+          "loading": "auto",
+          "fit": "cover"
+        },
+        {
+          "src": "sf676-head-side-960.webp",
+          "alt": "Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-work-area-960.webp",
+          "alt": "Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих",
+          "width": 318,
+          "height": 211.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-head-front-640.webp",
+          "alt": "Вертикальная головка СФ676 с пинолью, инструментом и рукоятками",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-bed-640.webp",
+          "alt": "Нижняя часть станины СФ676, основание на виброопорах и опорные узлы",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-controls-640.webp",
+          "alt": "Рукоятки управления и градуированный диск выбора режимов на СФ676",
+          "width": 316,
+          "height": 278,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Пульт УЦИ СФ676 с тремя строками координат X, Y и Z",
+          "width": 316,
+          "height": 210,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-coolant-light-960.webp",
+          "alt": "Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676",
+          "width": 316,
+          "height": 316,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-dro-960.webp",
+          "alt": "Три строки координат X, Y и Z на пульте УЦИ СФ676",
+          "width": 278,
+          "height": 184.65625,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        },
+        {
+          "src": "sf676-production-1600.webp",
+          "alt": "СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ",
+          "width": 918,
+          "height": 611.328125,
+          "loaded": true,
+          "loading": "lazy",
+          "fit": "contain"
+        }
+      ],
+      "requests": [
+        "sf676-hero-portrait-1092.webp",
+        "sf676-head-side-960.webp",
+        "sf676-work-area-960.webp",
+        "sf676-head-front-640.webp",
+        "sf676-bed-640.webp",
+        "sf676-controls-640.webp",
+        "sf676-dro-960.webp",
+        "sf676-coolant-light-960.webp",
+        "sf676-production-1600.webp"
+      ],
+      "failures": []
+    }
+  ],
+  "reservation": [
+    {
+      "width": 390,
+      "geometryUnchanged": true,
+      "cls": 0
+    },
+    {
+      "width": 1366,
+      "geometryUnchanged": true,
+      "cls": 0
+    }
+  ],
+  "lab": [
+    {
+      "width": 390,
+      "coldCache": true,
+      "latencyMs": 150,
+      "downloadBytesPerSecond": 200000,
+      "cpuSlowdown": 4,
+      "metrics": {
+        "lcp": 400,
+        "cls": 0,
+        "longTasks": [],
+        "domContentLoaded": 789.5,
+        "load": 1139.8999999985099,
+        "resourceBytes": 96238,
+        "resources": [
+          {
+            "name": "sf676-hero-square-800.webp",
+            "bytes": 96238
+          }
+        ],
+        "hero": "sf676-hero-square-800.webp"
+      }
+    },
+    {
+      "width": 1366,
+      "coldCache": true,
+      "latencyMs": 150,
+      "downloadBytesPerSecond": 200000,
+      "cpuSlowdown": 4,
+      "metrics": {
+        "lcp": 1584,
+        "cls": 0,
+        "longTasks": [
+          70
+        ],
+        "domContentLoaded": 914.8999999985099,
+        "load": 1556.7000000029802,
+        "resourceBytes": 180600,
+        "resources": [
+          {
+            "name": "sf676-hero-portrait-800.webp",
+            "bytes": 113210
+          },
+          {
+            "name": "sf676-head-side-480.webp",
+            "bytes": 28682
+          },
+          {
+            "name": "sf676-work-area-480.webp",
+            "bytes": 38708
+          }
+        ],
+        "hero": "sf676-hero-portrait-800.webp"
+      }
+    }
+  ],
+  "directVariants": 16
+}
