@@ -606,6 +606,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ux-icon,.ux-details,.principle-figure{animation:none;transition:none}}
 
 </style>
+<link rel="stylesheet" href="assets/css/request-forms.css">
+<script src="assets/js/request-forms.js" defer></script>
 </head>
 <body>
 
@@ -613,7 +615,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
   <div class="wrap">
     <a class="logo" href="#top" aria-label="ВСЗ — в начало страницы">ВСЗ</a>
     <a class="tel" href="tel:88007072676" aria-label="Позвонить: 8 (800) 707-26-76"><span class="tel-long">8 (800) 707-26-76</span><span class="tel-short">Позвонить</span></a>
-    <a class="btn red" href="#order">Получить цену</a>
+    <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="sticky" data-source-cta="sticky-price">Получить цену</a>
   </div>
 </header>
 
@@ -625,7 +627,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <h1>Станок фрезерный СФ676</h1>
       <p class="hero-description">Широкоуниверсальный фрезерный станок с двумя шпинделями — горизонтальным и вертикальным — и двумя рабочими столами: вертикальным и угловым горизонтальным. Для серийного производства деталей, инструментальных, экспериментальных, вспомогательных и ремонтных подразделений предприятий.</p>
       <div class="hero-actions">
-        <a class="btn red" href="#order">Получить цену с доставкой</a>
+        <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="top" data-source-cta="hero-price">Получить цену с доставкой</a>
         <a class="text-link" href="#specs">Технические характеристики</a>
       </div>
       <p class="hero-contact"><a href="tel:88007072676">8 (800) 707-26-76</a> — бесплатно по России</p>
@@ -752,7 +754,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <div><dt>Упаковка и консервация</dt><dd>Упаковка в деревянный ящик и консервация на 1 год входят в стоимость станка.</dd></div>
       <div><dt>Льготный лизинг</dt><dd>Станок можно приобрести в льготный лизинг. Условия по запросу.</dd></div>
     </dl>
-    <a class="btn red" href="#order">Получить цену с доставкой до вашего цеха</a>
+    <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="price" data-source-cta="terms-price">Получить цену с доставкой до вашего цеха</a>
   </div>
 </section>
 
@@ -832,7 +834,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     <p class="comparison-context">Если у вас есть полгода, свой ремонтник с опытом по 676 и комплектный станок — восстановление может оказаться выгодным. Если деталь нужна в этом квартале, а сколько ещё проживёт старый шпиндель — никто не скажет, считайте новый.</p>
     <div class="comparison-request">
       <p><span class="q" data-q="raschet">Пришлите фото станка, короткое видео шпинделя на оборотах и данные по люфтам для сравнения стоимости восстановления и нового СФ676 в нужной комплектации. Условия подготовки расчёта уточняются.</span></p>
-      <a class="btn red" href="#order">Посчитать для моего станка</a>
+      <a class="btn red" href="#order" data-request-form="repair_comparison" data-source-section="compare" data-source-cta="compare-request">Посчитать для моего станка</a>
     </div>
   </div>
 </section>
@@ -881,7 +883,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     </ol>
     <p class="config-note">Комплектация определяется по техническому заданию заказчика. Состав оборудования и дополнительных принадлежностей фиксируется в коммерческом предложении и договоре. Монтаж и пусконаладка входят в стоимость станка; командировочные расходы специалистов, доставка, разгрузка и страхование оплачиваются отдельно. Условия сопутствующих услуг прописываются в договоре.</p>
     <p class="mute config-accessories">Дополнительная оснастка: глобусный стол — установка детали в трёх плоскостях · универсальная делительная головка — шестерни, фланцы, деление на градусы · круглый поворотный стол · тиски до 125 мм · дополнительное освещение</p>
-    <a class="btn red" href="#order">Подобрать комплектацию с технологом</a>
+    <a class="btn red" href="#order" data-request-form="configuration_help" data-source-section="config" data-source-cta="config-request">Подобрать комплектацию с технологом</a>
   </div>
 </section>
 
@@ -963,7 +965,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <div class="ui-card procurement-help">
       <h3 class="procurement-help-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#document"></use></svg><span>Помощь в подготовке технического задания</span></h3>
       <p><b>Поможем подготовить техническое задание на закупку СФ676, в том числе по 44-ФЗ.</b></p>
-      <div class="procurement-actions"><a class="btn red" href="#order">Запросить документы для закупки</a> <a class="btn out" href="#order">Запросить КП для обоснования НМЦК</a></div>
+      <div class="procurement-actions"><a class="btn red" href="#order" data-request-form="procurement_documents" data-source-section="gov" data-source-cta="gov-documents">Запросить документы для закупки</a> <a class="btn out" href="#order" data-request-form="procurement_nmck" data-source-section="gov" data-source-cta="gov-nmck">Запросить КП для обоснования НМЦК</a></div>
       </div>
     </div>
   </div>
@@ -1014,13 +1016,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <div class="ui-card order-prototype" role="group" aria-labelledby="order-form-title" aria-describedby="order-demo">
         <h3 id="order-form-title">Запрос коммерческого предложения</h3>
         <p>Пришлём КП с обозначением модификации, ценой, сроком изготовления и стоимостью доставки в ваш город.</p>
-        <fieldset class="order-fields" disabled aria-label="Демонстрационные поля заявки">
-          <label class="contact-label" for="order-contact">Телефон или e-mail</label>
-          <input id="order-contact" type="text" autocomplete="off" disabled>
-          <label class="order-consent"><input type="checkbox" disabled><span>Даю согласие на обработку персональных данных</span></label>
-        </fieldset>
-        <button class="btn red" type="button" disabled aria-describedby="order-demo">Получить расчёт с доставкой</button>
-        <p class="demo-notice" id="order-demo"><b>Демонстрационная версия.</b> Отправка заявки через форму пока не подключена.</p>
+        <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="order" data-source-cta="order-price" aria-describedby="order-demo">Получить расчёт с доставкой</a>
+        <p class="demo-notice" id="order-demo"><b>Демонстрационная версия.</b> Отправка заявки пока не подключена. Для обращения позвоните или напишите в отдел продаж.</p>
       </div>
       <div class="ui-card order-contacts">
         <h3>Отдел продаж</h3>
@@ -1041,6 +1038,41 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 <footer>
   <div class="wrap">ООО «Вятский станкостроительный завод», ОГРН 1164350074900 · <span>Политика конфиденциальности</span> · <span>Согласие на обработку персональных данных</span> · Предложение не является публичной офертой · <span>vsp-kirov.ru</span></div>
 </footer>
+
+<!-- One progressively enhanced request dialog; method=dialog is a no-network fallback. -->
+<dialog class="request-dialog" id="request-dialog" aria-labelledby="request-title" aria-describedby="request-description request-demo">
+  <div class="request-shell">
+    <header class="request-header">
+      <span class="request-eyebrow">СФ676 · Отдел продаж</span>
+      <button class="request-close" type="button" aria-label="Закрыть форму">×</button>
+    </header>
+    <div class="request-content">
+      <h2 id="request-title" tabindex="-1"></h2>
+      <p id="request-description"></p>
+      <p class="request-demo" id="request-demo"><b>Демонстрационная версия. Отправка заявки пока не подключена.</b> Используйте тестовые данные. При закрытии окна введённые значения очищаются.</p>
+      <form id="request-form" method="dialog" autocomplete="off" novalidate>
+        <p class="request-hint">Обязательно только поле «Телефон или e-mail». Остальные поля можно пропустить.</p>
+        <div class="request-fields" id="request-fields"></div>
+        <fieldset class="request-legal" disabled>
+          <legend>Согласие на обработку данных</legend>
+          <label><input type="checkbox" disabled><span>Место для согласия на обработку персональных данных.</span></label>
+          <p>Юридические документы ещё готовятся. Согласие в демонстрационной версии не запрашивается.</p>
+        </fieldset>
+        <div class="request-actions">
+          <button class="btn out" id="request-check" type="button">Проверить заполнение</button>
+          <p class="request-status" id="request-status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button class="btn red" id="request-submit" type="button" disabled aria-describedby="request-send-note">Отправить запрос</button>
+          <p class="request-hint" id="request-send-note">Демонстрационная версия. Отправка заявки пока не подключена.</p>
+        </div>
+      </form>
+      <div class="request-alternatives">
+        <p>Связаться с отделом продаж:</p>
+        <a href="tel:+78007072676">8 (800) 707-26-76</a>
+        <a href="mailto:sale@vsp-kirov.ru">sale@vsp-kirov.ru</a>
+      </div>
+    </div>
+  </div>
+</dialog>
 
 <script>
 var QUESTIONS = {
