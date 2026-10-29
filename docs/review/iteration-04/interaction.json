@@ -1,0 +1,71 @@
+{
+  "browser": "153.0.8010.0",
+  "widths": [
+    {
+      "width": 390,
+      "keyboardFAQ": 9,
+      "summaryStableOnOpen": true,
+      "visibleFocus": true,
+      "smoothAnchors": true,
+      "disabledFormInert": true,
+      "reservedMediaGeometry": true,
+      "noJS": true,
+      "errors": []
+    },
+    {
+      "width": 1366,
+      "keyboardFAQ": 9,
+      "summaryStableOnOpen": true,
+      "visibleFocus": true,
+      "smoothAnchors": true,
+      "disabledFormInert": true,
+      "reservedMediaGeometry": true,
+      "noJS": true,
+      "errors": []
+    }
+  ],
+  "directAnchors": [
+    "q-stol",
+    "q-docs",
+    "q-oplata",
+    "q-acts",
+    "q-raschet",
+    "q-stol-2",
+    "q-docs-2",
+    "q-reestr",
+    "q-deklar",
+    "q-sami",
+    "q-region",
+    "q-logo",
+    "q-vizit",
+    "q-rop",
+    "q-adres",
+    "ql-stol",
+    "ql-docs",
+    "ql-oplata",
+    "ql-acts",
+    "ql-raschet",
+    "ql-reestr",
+    "ql-deklar",
+    "ql-sami",
+    "ql-region",
+    "ql-logo",
+    "ql-vizit",
+    "ql-rop",
+    "ql-adres"
+  ],
+  "http": [
+    {
+      "width": 390,
+      "loaded": true,
+      "formRequests": 0,
+      "storageEntries": 0
+    },
+    {
+      "width": 1366,
+      "loaded": true,
+      "formRequests": 0,
+      "storageEntries": 0
+    }
+  ]
+}

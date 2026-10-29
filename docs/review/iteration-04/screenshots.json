@@ -1,0 +1,226 @@
+[
+  {
+    "file": "screens/acceptance-1366.webp",
+    "width": 1366,
+    "height": 1333,
+    "bytes": 74446,
+    "sha256": "dc9a45c32cc8191de994bff353bbfeba96043cf1f3decf88e3e9be302205ade4",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/acceptance-390.webp",
+    "width": 390,
+    "height": 2490,
+    "bytes": 73106,
+    "sha256": "5c2fd3b4019499db35e9cafa1384505acbbb35d9675ce7eb676d516791650227",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/advantages-1366.webp",
+    "width": 1366,
+    "height": 1070,
+    "bytes": 150848,
+    "sha256": "f8ebad009dd31313407cb0c8b7ff5e59235bc04d3d1a979f63af2b0fcc10a420",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/advantages-390.webp",
+    "width": 390,
+    "height": 1869,
+    "bytes": 136420,
+    "sha256": "8f104d591517eab48266948999caaaf35692412586549fd16ec7275a85cf30e4",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/before-advantages-1366.webp",
+    "width": 1366,
+    "height": 1058,
+    "bytes": 33776,
+    "sha256": "2b837a315258502a1cb512872e7146653cb8244663311caa9f0fdafb45f34737",
+    "source_commit": "7384e08b50f96dd02d1a5ae0d07c5cb69a723f69"
+  },
+  {
+    "file": "screens/before-advantages-390.webp",
+    "width": 390,
+    "height": 2083,
+    "bytes": 31770,
+    "sha256": "c76ea95c029c61d2f663deafa548b60fd0bfbbd20f3d989fa179eaeca114ca56",
+    "source_commit": "7384e08b50f96dd02d1a5ae0d07c5cb69a723f69"
+  },
+  {
+    "file": "screens/before-design-1366.webp",
+    "width": 1366,
+    "height": 1670,
+    "bytes": 71980,
+    "sha256": "3d92e021c6b1fa00bb90faa82d0abe81d44055f7b2c7b8b0be250c4a4bf62990",
+    "source_commit": "7384e08b50f96dd02d1a5ae0d07c5cb69a723f69"
+  },
+  {
+    "file": "screens/before-design-390.webp",
+    "width": 390,
+    "height": 4249,
+    "bytes": 69710,
+    "sha256": "874a9eb2abcd3d760854597f96d6850a5e3ae9b76c6558ed25a66321e9243ead",
+    "source_commit": "7384e08b50f96dd02d1a5ae0d07c5cb69a723f69"
+  },
+  {
+    "file": "screens/before-plant-1366.webp",
+    "width": 1366,
+    "height": 1142,
+    "bytes": 53434,
+    "sha256": "8ef70535a3b1e048c6f6258eb7f19713dd1c38b91b23865f46c44472b7e42d42",
+    "source_commit": "7384e08b50f96dd02d1a5ae0d07c5cb69a723f69"
+  },
+  {
+    "file": "screens/before-plant-390.webp",
+    "width": 390,
+    "height": 2301,
+    "bytes": 50286,
+    "sha256": "f755d7e5a510fc5094126a6afbd4799ee1a91a77f69ebf6898a4487e17eb9203",
+    "source_commit": "7384e08b50f96dd02d1a5ae0d07c5cb69a723f69"
+  },
+  {
+    "file": "screens/config-1366.webp",
+    "width": 1366,
+    "height": 2067,
+    "bytes": 181550,
+    "sha256": "d21c9d85c363c151130e9251233e12e8f0c49eb8cb98227601c0e8d1e1c17a3c",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/config-390.webp",
+    "width": 390,
+    "height": 3537,
+    "bytes": 176940,
+    "sha256": "99778b3a8724bf20ba0cb764cc62f96403c56eaf6fe1a9670d114776dfc3bf76",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/design-1366.webp",
+    "width": 1366,
+    "height": 1691,
+    "bytes": 541442,
+    "sha256": "c6538334f883ca2fe85ae9bcf9df4e59b28384a1513bf2ea85e5b5985e66ccae",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/design-390.webp",
+    "width": 390,
+    "height": 4318,
+    "bytes": 509786,
+    "sha256": "4bb43795ee7d105260bf2515ba8ac3721989da7031e18215e5cd57f9db9907a8",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/first-viewport-1366.webp",
+    "width": 1366,
+    "height": 900,
+    "bytes": 439150,
+    "sha256": "488ad972ec24930b65f9bd3901c15286a25099cbd81a583870291a5a0860feaf",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/first-viewport-390.webp",
+    "width": 390,
+    "height": 900,
+    "bytes": 141288,
+    "sha256": "88b9b2df5a7ee39f4ebbdd2df1956a7abbfbfffa58a3f538807cc3d3af327ba3",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/full-1366.jpg",
+    "width": 1366,
+    "height": 17230,
+    "bytes": 3151526,
+    "sha256": "feadf4213f274726a3dfffb37ccac1b726a1cce3d7fd6a632798c134e83b1ca2",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/full-390.jpg",
+    "width": 390,
+    "height": 30638,
+    "bytes": 2595539,
+    "sha256": "0cb13c11bde9a66c4a4502304edc15f8469fcb7e5dff3f8f41520b595247de85",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/order-1366.webp",
+    "width": 1366,
+    "height": 804,
+    "bytes": 39498,
+    "sha256": "2fcee7f2155b93ca2f242541052ddbb4c472c5e8b73871e7a0b158f45dab73d9",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/order-390.webp",
+    "width": 390,
+    "height": 1409,
+    "bytes": 39366,
+    "sha256": "3577346036e589d10891e22b32897a4a5369555555d9645f6973be3383be03c1",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/plant-1366.webp",
+    "width": 1366,
+    "height": 1620,
+    "bytes": 664118,
+    "sha256": "64b04b08390a9624c7656ea41391017280ce09c18d47184644b10a1eb1243b86",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/plant-390.webp",
+    "width": 390,
+    "height": 1938,
+    "bytes": 195874,
+    "sha256": "0a545b0b54f3f8efdca08f55f65531e357ea20be3f5cf6d4d55cfb146d6253f7",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/review-1366.webp",
+    "width": 1366,
+    "height": 900,
+    "bytes": 55544,
+    "sha256": "3455f7b6db731a13096fcd3734b70ea65591d8dfcaf3a58ace925b27a69a70a2",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/review-390.webp",
+    "width": 390,
+    "height": 900,
+    "bytes": 32304,
+    "sha256": "dcc0f59e1830fe65b411eb67008928f75fc71692789522f6c273f921bd31b4aa",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/specs-1366.webp",
+    "width": 1366,
+    "height": 2020,
+    "bytes": 221370,
+    "sha256": "3458fb51b509e1327714c06b367234654d681d686d3b38541883fb184a08503a",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/specs-390.webp",
+    "width": 390,
+    "height": 2767,
+    "bytes": 206218,
+    "sha256": "892dbe8d40bf3a773a5ebc7840fb167cc01ca4db9f0e38b954cf267190a0f390",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/top-1366.webp",
+    "width": 1366,
+    "height": 985,
+    "bytes": 449530,
+    "sha256": "88327116263f77542395907669940453013a966e7476c9874fdc2c25ae78f7b9",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  },
+  {
+    "file": "screens/top-390.webp",
+    "width": 390,
+    "height": 1723,
+    "bytes": 213606,
+    "sha256": "3354482ab2f682538269a7bed4b091ce3444ae9e51ecf9c9c0eb0446991c31d0",
+    "source_commit": "d6f9364d7b427cdbd717b053a05669c03d2a2fca"
+  }
+]
