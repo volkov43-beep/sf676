@@ -89,14 +89,6 @@ body.scrolled .sticky{display:block}
 .cond i{display:block;width:26px;height:26px;background:#cfd6dd;border-radius:3px}
 details{margin:0 0 24px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;background:#fff}
 summary{cursor:pointer;font-weight:700;color:var(--steel)}
-/* accept */
-.norms td:last-child{font-size:1.25rem;font-weight:700;color:var(--ink);white-space:nowrap}
-.ticks{list-style:none;padding:0;margin:18px 0 26px}
-.ticks li{padding:6px 0 6px 28px;position:relative}
-.ticks li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:700}
-/* design tiles */
-.tile .ph{aspect-ratio:1/1;margin-bottom:12px}
-.tile h3{margin-bottom:6px}
 /* compare */
 .cmp td:first-child{color:#c9d1d9;width:20%}
 .calc{border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:22px 24px;display:grid;grid-template-columns:52px 1fr auto;gap:18px;align-items:center;margin-top:28px}
@@ -118,23 +110,6 @@ summary{cursor:pointer;font-weight:700;color:var(--steel)}
 .steps li b{display:block;margin-bottom:4px}
 .steps li i{position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--steel);color:#fff;font-style:normal;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
 .steps li p{font-size:.92rem;color:var(--mute);margin:0}
-/* gov */
-.docs article{border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:18px}
-.docs .ico{width:30px;height:38px;border:2px solid #fff;border-radius:2px;margin-bottom:12px}
-/* faq */
-.faq details{padding:0}
-.faq summary{padding:14px 16px;font-size:1.05rem}
-.faq div{padding:0 16px 14px}
-/* form */
-.form{grid-template-columns:1fr 1fr;align-items:start}
-.card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:28px}
-.field{width:100%;padding:14px;border:1px solid #B9C0C7;border-radius:4px;font-size:1rem;margin:0 0 12px;font-family:inherit}
-.chk{font-size:.9rem;color:var(--mute);display:flex;gap:8px;align-items:flex-start;margin:0 0 16px}
-.form .btn{width:100%;text-align:center;display:block;margin-bottom:10px}
-.contacts{padding:8px 0 0 12px}
-.contacts .big{font-size:2rem;font-weight:800;color:var(--ink);line-height:1.1}
-.rop{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin:26px 0}
-.rop .ph{width:96px;height:96px;border-radius:50%}
 footer{background:#2C3E50;color:#c9d1d9;font-size:.85rem;padding:22px 0}
 footer a{color:#fff}
 /* mobile */
@@ -144,11 +119,10 @@ footer a{color:#fff}
  .hero .txt{padding:28px 24px}
  h1{font-size:1.7rem}h2{font-size:1.45rem}
  .nums{grid-template-columns:1fr 1fr}
- .g2,.g3,.g4,.specs,.cfg,.form{grid-template-columns:1fr}
+ .g2,.g3,.g4,.specs,.cfg{grid-template-columns:1fr}
  .advantages{grid-template-columns:repeat(2,minmax(0,1fr))}
  .steps{grid-template-columns:1fr}
  .calc{grid-template-columns:1fr}
- .norms td:last-child{white-space:normal}
  section{padding:48px 0}
  /* tables to cards */
  table.stack,table.stack tbody{display:block}
@@ -162,7 +136,6 @@ footer a{color:#fff}
  .dark table.stack td::before{color:#c9d1d9}
  table.stack td:first-child::before{display:none}
  .cmp td:first-child{width:auto;color:#fff}
- .contacts{padding:0}
  .sticky .btn{padding:10px 14px;font-size:.9rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -171,7 +144,6 @@ footer a{color:#fff}
 /* Intrinsic wrapping also keeps the existing sections usable with enlarged text. */
 body{overflow-wrap:anywhere}
 .btn{max-width:100%}
-.norms td:last-child{white-space:normal}
 /* Iteration 01: opt-in design tokens and components. Other content sections keep their styles. */
 :root{
  --ui-space-1:8px;--ui-space-2:16px;--ui-space-3:24px;--ui-space-4:32px;
@@ -365,6 +337,102 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
  .config-columns{gap:var(--ui-space-2)}
 }
 
+
+/* Iteration 03: shared .v1 components for evidence, documentation and contact. */
+.trust-section .section-heading{max-width:1050px}
+.trust-section .section-intro{max-width:900px;margin-bottom:var(--ui-space-4)}
+/* Replace the span in .media-frame with an image; its geometry stays reserved.
+   --media-fit and --media-position can be adjusted for the actual photograph. */
+.v1 .prototype-media{margin:0;min-width:0}
+.prototype-media .media-frame{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:var(--media-ratio,4/3);background:#eef0f2;border:1px solid var(--line);border-radius:var(--ui-radius);color:#52616d;overflow:hidden}
+.prototype-media .media-frame > span{padding:var(--ui-space-2);font-size:var(--ui-small);line-height:1.4;text-align:center;max-width:100%;min-width:0}
+.prototype-media .media-frame > img,.prototype-media .media-frame > video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:var(--media-fit,cover);object-position:var(--media-position,50% 50%)}
+.prototype-media figcaption{margin-top:var(--ui-space-1);font-size:var(--ui-small);line-height:1.5;color:var(--mute)}
+.media-node,.media-inspection{--media-ratio:4/3;--media-fit:contain}
+.media-document{--media-ratio:210/297;--media-fit:contain}
+.media-production,.media-video{--media-ratio:16/9}
+.media-portrait{--media-ratio:1/1;--media-fit:contain}
+.acceptance-intro{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:var(--ui-space-4);align-items:center;margin-bottom:var(--ui-space-4)}
+.acceptance-metric{border-left:3px solid var(--red);padding-left:var(--ui-space-3)}
+.acceptance-metric b{display:block;font-size:clamp(2.5rem,4vw,3.5rem);line-height:1.1;color:var(--red);font-variant-numeric:tabular-nums}
+.acceptance-metric span{display:block;margin-top:var(--ui-space-1);font-size:1rem;color:var(--steel)}
+.acceptance-intro p{margin:0}
+.v1 .acceptance-table thead th:first-child{width:72%}
+.v1 .acceptance-table td{font-variant-numeric:tabular-nums}
+.acceptance-processes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-gap);margin-top:var(--ui-space-4)}
+.acceptance-processes p,.acceptance-processes li{font-size:1rem}
+.acceptance-processes ul{margin:0;padding-left:20px;display:grid;gap:12px}
+.acceptance-docs{margin:var(--ui-space-3) 0 0}
+.acceptance-media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-gap);margin-top:var(--ui-space-4)}
+.acceptance-media .media-frame{max-width:380px;margin-inline:auto}
+.acceptance-media .media-document .media-frame{max-width:200px}
+.acceptance-media figcaption{text-align:center}
+.construction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap);align-items:start}
+.construction-card .prototype-media{margin-bottom:var(--ui-space-3)}
+.construction-card .feature-benefit{font-weight:700;color:var(--steel);margin-bottom:var(--ui-space-2)}
+.construction-card p{font-size:1rem}
+.procurement-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-areas:"origin documents" "help documents";gap:var(--ui-gap);align-items:start;margin:var(--ui-space-4) 0 0}
+.procurement-origin{grid-area:origin}
+.procurement-documents{grid-area:documents}
+.procurement-items{margin:var(--ui-space-3) 0 0;display:grid;gap:var(--ui-space-3)}
+.procurement-items > div{min-width:0;border-top:1px solid rgba(255,255,255,.35);padding-top:var(--ui-space-2)}
+.procurement-items dt{font-size:1rem;font-weight:700;margin-bottom:var(--ui-space-1)}
+.procurement-items dd{font-size:1rem;margin:0;color:#e4e9ee}
+.procurement-help{grid-area:help}
+.procurement-help p{font-size:1rem}
+.procurement-actions{display:flex;align-items:stretch;flex-direction:column;gap:var(--ui-space-2)}
+.plant-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap);margin:var(--ui-space-4) 0}
+.plant-facts > div{min-width:0;border-top:2px solid var(--line);padding-top:var(--ui-space-3)}
+.plant-facts dt{font-size:clamp(1.5rem,2.2vw,1.75rem);font-weight:700;color:var(--steel);line-height:1.3;font-variant-numeric:tabular-nums}
+.plant-facts dd{margin:var(--ui-space-1) 0 0;font-size:1rem}
+.plant-facts .preliminary{font-size:var(--ui-small);font-weight:600;color:var(--steel)}
+.industry-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px var(--ui-space-4);margin:var(--ui-space-2) 0 var(--ui-space-3);padding-left:20px;font-size:1rem}
+.plant-media{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap);margin-top:var(--ui-space-4)}
+.v1 .faq-list{max-width:960px}
+.v1.faq details{padding:0;margin-bottom:var(--ui-space-2);border-radius:var(--ui-radius)}
+.v1.faq details:last-child{margin-bottom:0}
+.v1.faq summary{padding:20px var(--ui-space-3);font-size:1.125rem;line-height:1.4;min-height:56px}
+.v1.faq summary::marker{color:var(--red)}
+.v1.faq summary:focus-visible{outline:3px solid #8a6d00;outline-offset:4px}
+.v1.faq details[open] summary{border-bottom:1px solid var(--line)}
+.v1.faq .faq-answer{padding:var(--ui-space-3);font-size:1rem;line-height:1.6}
+.order-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-space-4);align-items:start}
+.order-layout > *{min-width:0}
+.order-prototype p,.order-contacts p{font-size:1rem}
+.order-fields{border:0;padding:0;margin:var(--ui-space-3) 0 var(--ui-space-2);min-width:0}
+.order-fields .contact-label{display:block;font-weight:700;font-size:1rem;margin-bottom:var(--ui-space-1)}
+.order-fields input[type="text"]{display:block;width:100%;min-width:0;border:1px solid #B9C0C7;border-radius:var(--ui-radius);padding:14px;font:inherit;font-size:1rem;background:var(--light);color:var(--mute);opacity:1;cursor:not-allowed}
+.order-fields input::placeholder{color:var(--mute);opacity:1}
+.order-consent{display:flex;align-items:flex-start;gap:12px;font-size:var(--ui-small);color:var(--mute);margin:var(--ui-space-2) 0 0}
+.order-consent input{flex:none;margin:4px 0 0;width:18px;height:18px}
+.order-prototype .btn{width:100%;font-family:inherit;margin:var(--ui-space-2) 0 0}
+.order-prototype .btn:disabled{background:#e3e7eb;border-color:#b9c0c7;color:var(--steel);opacity:1;cursor:not-allowed}
+.order-prototype .demo-notice{padding:var(--ui-space-2);margin:var(--ui-space-2) 0 0;border-left:3px solid var(--red);background:var(--light);color:var(--ink);font-size:var(--ui-small)}
+.order-phone{display:inline-block;font-size:clamp(1.25rem,2.2vw,1.75rem);font-weight:700;line-height:1.4;color:var(--steel);text-decoration:none}
+.order-contacts .contact-note{font-size:var(--ui-small);color:var(--mute);margin:4px 0 var(--ui-space-3)}
+.order-email{font-size:1.125rem;text-underline-offset:3px}
+.order-person{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:var(--ui-space-2);margin:var(--ui-space-3) 0}
+.order-person .media-frame > span{padding:6px}
+.order-person p{margin:0}
+.order-address{border-top:1px solid var(--line);padding-top:var(--ui-space-3)}
+@media (max-width:1100px){.construction-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .acceptance-intro,.acceptance-processes,.procurement-grid,.order-layout{grid-template-columns:1fr}
+ .acceptance-intro{align-items:start}
+ .procurement-grid{grid-template-areas:"origin" "documents" "help"}
+ .plant-media{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px){
+ .construction-grid,.acceptance-media,.plant-facts,.industry-list,.plant-media{grid-template-columns:1fr}
+ .procurement-actions{align-items:stretch;flex-direction:column}
+ .acceptance-media .media-frame{max-width:320px}
+ .plant-facts{gap:var(--ui-space-3)}
+}
+@media (max-width:600px){
+ .v1 .acceptance-table thead{display:table-header-group;position:absolute;width:1px;height:1px;padding:0;border:0;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+ .v1.faq summary,.v1.faq .faq-answer{padding:var(--ui-space-2)}
+}
+
 </style>
 </head>
 <body>
@@ -515,46 +583,49 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 </section>
 
 <!-- 5 -->
-<section id="acceptance">
+<section class="v1 trust-section" id="acceptance">
   <div class="wrap">
-    <div class="grid g2">
-      <div>
-        <h2>Каждый станок проверяется перед отгрузкой — вы получаете акт с замерами</h2>
-        <p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами. Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p>
-        <table class="norms">
-          <tr><td>Осевое биение шпинделей, горизонтального / вертикального</td><td>15 / 10 мкм</td></tr>
-          <tr><td>Радиальное биение конической поверхности шпинделей</td><td>10 / 10 мкм</td></tr>
-          <tr><td>Плоскостность рабочих поверхностей столов на длине 500 мм</td><td>20 мкм</td></tr>
-          <tr><td>Взаимная перпендикулярность осей X, Y, Z</td><td>20 мкм</td></tr>
-          <tr><td>Класс точности по ГОСТ 8-82</td><td>Н</td></tr>
-        </table>
-        <ul class="ticks">
-          <li>Обкатка на холостом ходу и под нагрузкой перед отгрузкой</li>
+    <h2 class="section-heading">Каждый станок проверяется перед отгрузкой — вы получаете акт с замерами</h2>
+    <div class="acceptance-intro">
+      <div class="acceptance-metric"><b>28</b><span>параметров геометрической точности на каждом станке</span></div>
+      <p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами. Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p>
+    </div>
+    <table class="spec-table acceptance-table">
+      <caption>Основные контролируемые показатели</caption>
+      <thead><tr><th scope="col">Контролируемый параметр</th><th scope="col">Значение</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Осевое биение шпинделей, горизонтального / вертикального</th><td>15 / 10 мкм</td></tr>
+        <tr><th scope="row">Радиальное биение конической поверхности шпинделей</th><td>10 / 10 мкм</td></tr>
+        <tr><th scope="row">Плоскостность рабочих поверхностей столов на длине 500 мм</th><td>20 мкм</td></tr>
+        <tr><th scope="row">Взаимная перпендикулярность осей X, Y, Z</th><td>20 мкм</td></tr>
+        <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н</td></tr>
+      </tbody>
+    </table>
+    <div class="acceptance-processes">
+      <article class="ui-card"><h3>Заводская приёмка</h3><ul><li>Обкатка на холостом ходу и под нагрузкой перед отгрузкой</li>
           <li>Приёмка на заводе в Кирове с участием вашего представителя — до отгрузки; входит в стоимость станка</li>
-          <li>Консервация на 1 год и упаковка в деревянный ящик для перевозки любым транспортом</li>
-        </ul>
-        <p><b>Пусконаладочные работы у заказчика входят в стоимость станка.</b> Объём проверок при ПНР меньше, чем при заводской приёмке: это отдельный этап, а не повторение всех 28 измерений. Командировочные расходы специалистов оплачиваются отдельно.</p>
-        <p class="mute"><span class="q" data-q="acts">Образцы документов заводской приёмки и пусконаладочных работ пока не добавлены; точные наименования будут уточнены после получения файлов.</span></p>
-      </div>
-      <div>
-        <div class="ph" style="height:380px;margin-bottom:16px"><span>Фото: контроль ОТК — индикатор на шпинделе</span></div>
-        <div class="ph" style="height:170px"><span>Фото: паспорт, акт приёмки, комплект документации</span></div>
-      </div>
+          <li>Консервация на 1 год и упаковка в деревянный ящик для перевозки любым транспортом</li></ul></article>
+      <article class="ui-card"><h3>Пусконаладочные работы у заказчика</h3><p>Установка, выверка, обкатка и проверка паспортных данных после доставки.</p><p><b>Пусконаладочные работы у заказчика входят в стоимость станка.</b> Объём проверок при ПНР меньше, чем при заводской приёмке: это отдельный этап, а не повторение всех 28 измерений. Командировочные расходы специалистов оплачиваются отдельно.</p></article>
+    </div>
+    <p class="ui-note acceptance-docs"><span class="q" data-q="acts">Образцы документов заводской приёмки и пусконаладочных работ пока не добавлены; точные наименования будут уточнены после получения файлов.</span></p>
+    <div class="acceptance-media">
+      <figure class="prototype-media media-inspection"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Контроль ОТК — проверка станка специалистом</figcaption></figure>
+      <figure class="prototype-media media-document"><div class="media-frame"><span>Документ пока не добавлен</span></div><figcaption>Действительный акт приёмки</figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- 6 -->
-<section class="grey" id="design">
+<section class="grey v1 trust-section" id="design">
   <div class="wrap">
-    <h2 style="text-align:center;margin-bottom:36px">Что в конструкции решает ваши задачи</h2>
-    <div class="grid g3">
-      <div class="tile"><div class="ph"><span>Фото: вертикальная головка крупно · значок видео</span></div><h3>Головка поворачивается на ±90° и не теряет жёсткости</h3><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></div>
-      <div class="tile"><div class="ph"><span>Фото: оба шпинделя, вид сверху</span></div><h3>Два шпинделя — один станок вместо двух</h3><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></div>
-      <div class="tile"><div class="ph"><span>Фото: станина, литьё, гофрокожух</span></div><h3>Литая станина 1050 кг гасит вибрации</h3><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></div>
-      <div class="tile"><div class="ph"><span>Фото: рукоятки и диски набора скоростей</span></div><h3>16 скоростей и 16 подач — режим под любой материал</h3><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></div>
-      <div class="tile"><div class="ph"><span>Фото: пульт УЦИ</span></div><h3>УЦИ прямого отсчёта — люфт винта не попадает в размер</h3><p>Линейки на осях показывают фактическое положение стола. Дискретность 0,001 мм, три координаты. На выбор: магнитная система (Италия) или оптическая (Санкт-Петербург). Можно установить позже, УЦИ любого производителя.</p></div>
-      <div class="tile"><div class="ph"><span>Фото: стол, подача СОЖ</span></div><h3>СОЖ, смазка и свет — меньше обслуживания</h3><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></div>
+    <h2 class="section-heading">Что в конструкции решает ваши задачи</h2>
+    <div class="construction-grid">
+      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>вертикальная головка крупно</figcaption></figure><h3>Поворотная вертикальная головка ±90°</h3><p class="feature-benefit">Головка поворачивается на ±90° и не теряет жёсткости</p><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>оба шпинделя, вид сверху</figcaption></figure><h3>Горизонтальный и вертикальный шпиндели</h3><p class="feature-benefit">Два шпинделя — один станок вместо двух</p><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>станина, литьё, гофрокожух</figcaption></figure><h3>Литая станина</h3><p class="feature-benefit">Литая станина 1050 кг гасит вибрации</p><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>рукоятки и диски набора скоростей</figcaption></figure><h3>Скорости вращения и рабочие подачи</h3><p class="feature-benefit">16 скоростей и 16 подач — режим под любой материал</p><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>пульт УЦИ</figcaption></figure><h3>УЦИ</h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><p>Линейки на осях показывают фактическое положение стола. Дискретность 0,001 мм, три координаты. На выбор: магнитная система (Италия) или оптическая (Санкт-Петербург). Можно установить позже, УЦИ любого производителя.</p></article>
+      <article class="ui-card construction-card"><figure class="prototype-media media-node"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>стол, подача СОЖ</figcaption></figure><h3>СОЖ, смазка и освещение</h3><p class="feature-benefit">СОЖ, смазка и свет — меньше обслуживания</p><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></article>
     </div>
   </div>
 </section>
@@ -713,81 +784,89 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 </section>
 
 <!-- 10 -->
-<section class="dark" id="gov">
+<section class="dark v1 trust-section" id="gov">
   <div class="wrap">
-    <h2>Для закупки по 44-ФЗ и 223-ФЗ — документы, а не обещания</h2>
-    <p class="lead">Металлорежущие фрезерные станки входят в перечень товаров, для которых при государственных и корпоративных закупках действует национальный режим с запретом иностранной продукции. Подтверждённое российское происхождение — не преимущество, а допуск к участию. У СФ676 оно подтверждено.</p>
-    <p class="lead"><b>Поможем подготовить техническое задание на закупку СФ676, в том числе по 44-ФЗ.</b></p>
-    <div class="grid g4 docs">
-      <article><div class="ico"></div><h3>Реестр промышленной продукции</h3><p>Включён в реестр Минпромторга по постановлению Правительства № 719. <span class="q" data-q="reestr">Конкретные документы и реквизиты предоставляются после определения исполнения станка.</span></p></article>
-      <article><div class="ico"></div><h3>Коды</h3><p>ОКПД2 28.41.22.130 · КТРУ 28.41.22.130-00000002 — станок фрезерный металлорежущий, ручное управление</p></article>
-      <article><div class="ico"></div><h3>Технические условия</h3><p>ТУ 3816-001-67559892-2016. Станок сертифицирован на соответствие ТУ.</p></article>
-      <article><div class="ico"></div><h3>Соответствие</h3><p><span class="q" data-q="deklar">[декларация соответствия ТР ТС 010/2011 — номер, срок]</span></p></article>
-      <article><div class="ico"></div><h3>Документация</h3><p>Паспорт, руководство по эксплуатации, акт приёмки, чертежи — на русском языке.</p></article>
-      <article><div class="ico"></div><h3>Для описания объекта закупки</h3><p>Типовое описание характеристик по КТРУ и спецификация стандартной комплектации.</p></article>
-      <article><div class="ico"></div><h3>Производитель</h3><p>ООО «Вятский станкостроительный завод», ОГРН 1164350074900, Киров</p></article>
+    <h2 class="section-heading">Для закупки по 44-ФЗ и 223-ФЗ — документы, а не обещания</h2>
+    <p class="lead section-intro">Металлорежущие фрезерные станки входят в перечень товаров, для которых при государственных и корпоративных закупках действует национальный режим с запретом иностранной продукции. Подтверждённое российское происхождение — не преимущество, а допуск к участию. У СФ676 оно подтверждено.</p>
+    <div class="procurement-grid">
+      <article class="ui-card procurement-origin"><h3>Российское происхождение и подтверждение</h3><dl class="procurement-items"><div><dt>Реестр промышленной продукции</dt><dd>Включён в реестр Минпромторга по постановлению Правительства № 719. <span class="q" data-q="reestr">Конкретные документы и реквизиты предоставляются после определения исполнения станка.</span></dd></div><div><dt>Производитель</dt><dd>ООО «Вятский станкостроительный завод», ОГРН 1164350074900, Киров</dd></div></dl></article>
+      <article class="ui-card procurement-documents"><h3>Техническая и закупочная документация</h3><dl class="procurement-items"><div><dt>Коды</dt><dd>ОКПД2 28.41.22.130 · КТРУ 28.41.22.130-00000002 — станок фрезерный металлорежущий, ручное управление</dd></div><div><dt>Технические условия</dt><dd>ТУ 3816-001-67559892-2016. Станок сертифицирован на соответствие ТУ.</dd></div><div><dt>Соответствие</dt><dd><span class="q" data-q="deklar">Номер и срок действия декларации соответствия ТР ТС 010/2011 требуют подтверждения.</span></dd></div><div><dt>Документация</dt><dd>Паспорт, руководство по эксплуатации, акт приёмки, чертежи — на русском языке.</dd></div><div><dt>Для описания объекта закупки</dt><dd>Типовое описание характеристик по КТРУ и спецификация стандартной комплектации.</dd></div></dl></article>
+      <div class="ui-card procurement-help">
+      <h3>Помощь в подготовке технического задания</h3>
+      <p><b>Поможем подготовить техническое задание на закупку СФ676, в том числе по 44-ФЗ.</b></p>
+      <div class="procurement-actions"><a class="btn red" href="#order">Запросить документы для закупки</a> <a class="btn out" href="#order">Запросить КП для обоснования НМЦК</a></div>
+      </div>
     </div>
-    <p style="margin-top:28px"><a class="btn red" href="#order">Запросить документы для закупки</a> &nbsp; <a class="btn out" href="#order">Запросить КП для обоснования НМЦК</a></p>
   </div>
 </section>
 
 <!-- 11 -->
-<section id="plant">
+<section class="v1 trust-section" id="plant">
   <div class="wrap">
-    <div class="grid g2">
-      <div class="ph" style="min-height:320px"><span>Видео: обзор станка (RuTube)</span></div>
-      <div>
-        <h2>Вятский станкостроительный завод — выпускает СФ676 с 2016 года</h2>
-        <p>Завод в Кирове: <span class="q" data-q="sami">[что делаем сами — механообработка, сборка, ОТК; литьё]</span>. Кроме СФ676 выпускаем настольно-сверлильный станок 2М112, точильно-шлифовальные станки ТШ и гидравлический пресс ПГП-50; оказываем услуги лазерной резки и электролаборатории.</p>
-        <div class="nums" style="grid-template-columns:repeat(3,1fr)">
-          <div><b>Более 1 000</b><small>станков поставлено</small></div>
-          <div><b>2016 год</b><small>начало выпуска современного исполнения СФ676</small></div>
-          <div><b><span class="q" data-q="region">75</span></b><small>регионов поставок — предварительно</small></div>
-        </div>
-        <p>Кому поставляли: машиностроительные и оборонные предприятия, предприятия атомной отрасли, инструментальные производства, учреждения среднего профессионального образования, ремонтные службы энергетики и нефтегаза, предприятия пищевой промышленности. <span class="q" data-q="logo">[логотипы — после разрешения]</span></p>
-        <p class="mute">Отзывы — блок скрыт до появления двух-трёх отзывов.</p>
-      </div>
+    <h2 class="section-heading">Вятский станкостроительный завод</h2>
+    <p class="section-intro">Выпускает СФ676 с 2016 года. Завод расположен в Кирове. <span class="q" data-q="sami">Состав собственного производства — механообработка, сборка, ОТК и литьё — требует уточнения</span>. Кроме СФ676 выпускаем настольно-сверлильный станок 2М112, точильно-шлифовальные станки ТШ и гидравлический пресс ПГП-50; оказываем услуги лазерной резки и электролаборатории.</p>
+    <dl class="plant-facts">
+      <div><dt>Более 1 000</dt><dd>станков поставлено</dd></div>
+      <div><dt>2016 год</dt><dd>начало выпуска современного исполнения СФ676</dd></div>
+      <div><dt><span class="q" data-q="region">75</span> регионов</dt><dd>география поставок</dd><dd class="preliminary">Предварительные данные — требуют подтверждения.</dd></div>
+    </dl>
+    <h3>Кому поставляли оборудование</h3>
+    <ul class="industry-list"><li>Машиностроение</li><li>Оборонная промышленность</li><li>Атомная отрасль</li><li>Инструментальные производства</li><li>Учреждения среднего профессионального образования</li><li>Ремонтные службы энергетики</li><li>Ремонтные службы нефтегазовой промышленности</li><li>Пищевая промышленность</li></ul>
+    <p class="ui-note"><span class="q" data-q="logo">Логотипы заказчиков — после получения разрешения.</span></p>
+    <p class="ui-note">Отзывы — блок скрыт до появления двух-трёх отзывов.</p>
+    <div class="plant-media">
+      <figure class="prototype-media media-production"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Производственный цех</figcaption></figure>
+      <figure class="prototype-media media-production"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Сборочный участок, ряд станков СФ676</figcaption></figure>
+      <figure class="prototype-media media-video"><div class="media-frame"><span>Видео пока не добавлено</span></div><figcaption>Видеообзор станка (RuTube)</figcaption></figure>
     </div>
-    <div class="ph" style="height:280px;margin-top:32px"><span>Фото: ряд станков на участке сборки</span></div>
   </div>
 </section>
 
 <!-- 12 -->
-<section class="grey faq" id="faq">
-  <div class="wrap narrow">
-    <h2>Вопросы, которые задают перед покупкой</h2>
-    <details open><summary>Нужен ли фундамент?</summary><div>Не обязательно. Станок может устанавливаться на виброопоры при соблюдении требований к основанию. Требования к месту установки и чертёж фундамента приведены в руководстве по эксплуатации — пришлём их вместе с КП.</div></details>
-    <details open><summary>Как разгрузить и переместить станок?</summary><div>Ящик со станком поднимается краном грузоподъёмностью от 3 т за места, указанные на ящике. Распакованный станок — за транспортировочные болты в станине или синтетическими стропами за шпиндельную бабку; трос рассчитывается на 1600 кг. По цеху удобнее перемещать на катках.</div></details>
-    <details><summary>Какое питание нужно?</summary><div>Сеть 380 В, три фазы, 50 Гц. Суммарная мощность электродвигателей 3,12 кВт в базовом исполнении (8,64 кВт с СПУУ/ЧПУ). Номинальный ток 7 А, автомат 10 А. Освещение — 24 В.</div></details>
-    <details><summary>Что делать после установки?</summary><div>Монтаж, выверка, обкатка и пусконаладочные работы специалистами завода входят в стоимость станка; командировочные расходы оплачиваются отдельно. При подготовке к запуску станок выдерживают три дня в сухом помещении, снимают консервационную смазку, заливают масло И-30 (4,5 л) по разделу «Смазка» РЭ, проверяют заземление и лёгкость хода всех узлов, затем обкатывают: час на холостом ходу, потом под нагрузкой с минимальных режимов.</div></details>
-    <details><summary>Какой инструмент подходит?</summary><div>Концевые фрезы Ø 3–50 мм, торцевые со сменными пластинами до Ø 100, дисковые до Ø 200, свёрла Ø 2–40. Конус шпинделей — 7:24 № 40 или Морзе 4 на выбор при заказе. В комплекте — цанговый патрон ER32 с шестью цангами и оправка для горизонтального фрезерования.</div></details>
-    <details><summary>Нужен ли УЦИ?</summary><div>Если много расточной и точной работы — да, лучше сразу на три координаты. Для ремонта и чернового фрезерования можно работать по лимбам (цена деления 0,05 мм) и поставить УЦИ позже: станок допускает установку системы любого производителя.</div></details>
-    <details><summary>Какая гарантия?</summary><div>Гарантия 12 месяцев. Что входит и что не является гарантийным случаем — в договоре и РЭ. Поломки из-за неправильного подключения к сети или небрежной установки под гарантию не попадают.</div></details>
-    <details><summary>Что с запчастями через пять лет?</summary><div>Запасные части поставляет завод-производитель; в руководстве по эксплуатации есть чертежи быстроизнашивающихся деталей, спецификации подшипников и покупных изделий — часть можно изготовить или купить на месте. Конструкция серийная, узлы взаимозаменяемы в пределах исполнения.</div></details>
-    <details><summary>Можно ли посмотреть станок до покупки?</summary><div>Видеообзор пока не добавлен. <span class="q" data-q="vizit">Возможность визита на завод в Киров для осмотра станка в работе уточняется.</span> При отгрузке — приёмка с вашим участием.</div></details>
+<section class="grey faq v1 trust-section" id="faq">
+  <div class="wrap">
+    <h2 class="section-heading">Вопросы, которые задают перед покупкой</h2>
+    <div class="faq-list">
+      <details><summary>Нужен ли фундамент?</summary><div class="faq-answer">Не обязательно. Станок может устанавливаться на виброопоры при соблюдении требований к основанию. Требования к месту установки и чертёж фундамента приведены в руководстве по эксплуатации — пришлём их вместе с КП.</div></details>
+      <details><summary>Как разгрузить и переместить станок?</summary><div class="faq-answer">Ящик со станком поднимается краном грузоподъёмностью от 3 т за места, указанные на ящике. Распакованный станок — за транспортировочные болты в станине или синтетическими стропами за шпиндельную бабку; трос рассчитывается на 1600 кг. По цеху удобнее перемещать на катках.</div></details>
+      <details><summary>Какое питание нужно?</summary><div class="faq-answer">Сеть 380 В, три фазы, 50 Гц. Суммарная мощность электродвигателей 3,12 кВт в базовом исполнении (8,64 кВт с СПУУ/ЧПУ). Номинальный ток 7 А, автомат 10 А. Освещение — 24 В.</div></details>
+      <details><summary>Что делать после установки?</summary><div class="faq-answer">Монтаж, выверка, обкатка и пусконаладочные работы специалистами завода входят в стоимость станка; командировочные расходы оплачиваются отдельно. При подготовке к запуску станок выдерживают три дня в сухом помещении, снимают консервационную смазку, заливают масло И-30 (4,5 л) по разделу «Смазка» РЭ, проверяют заземление и лёгкость хода всех узлов, затем обкатывают: час на холостом ходу, потом под нагрузкой с минимальных режимов.</div></details>
+      <details><summary>Какой инструмент подходит?</summary><div class="faq-answer">Концевые фрезы Ø 3–50 мм, торцевые со сменными пластинами до Ø 100, дисковые до Ø 200, свёрла Ø 2–40. Конус шпинделей — 7:24 № 40 или Морзе 4 на выбор при заказе. В комплекте — цанговый патрон ER32 с шестью цангами и оправка для горизонтального фрезерования.</div></details>
+      <details><summary>Нужен ли УЦИ?</summary><div class="faq-answer">Если много расточной и точной работы — да, лучше сразу на три координаты. Для ремонта и чернового фрезерования можно работать по лимбам (цена деления 0,05 мм) и поставить УЦИ позже: станок допускает установку системы любого производителя.</div></details>
+      <details><summary>Какая гарантия?</summary><div class="faq-answer">Гарантия 12 месяцев. Что входит и что не является гарантийным случаем — в договоре и РЭ. Поломки из-за неправильного подключения к сети или небрежной установки под гарантию не попадают.</div></details>
+      <details><summary>Что с запчастями через пять лет?</summary><div class="faq-answer">Запасные части поставляет завод-производитель; в руководстве по эксплуатации есть чертежи быстроизнашивающихся деталей, спецификации подшипников и покупных изделий — часть можно изготовить или купить на месте. Конструкция серийная, узлы взаимозаменяемы в пределах исполнения.</div></details>
+      <details><summary>Можно ли посмотреть станок до покупки?</summary><div class="faq-answer">Видеообзор пока не добавлен. <span class="q" data-q="vizit">Возможность визита на завод в Киров для осмотра станка в работе уточняется.</span> При отгрузке — приёмка с вашим участием.</div></details>
+    </div>
   </div>
 </section>
 
 <!-- 13 -->
-<section class="grey" id="order" style="padding-top:56px">
+<section class="grey v1 trust-section" id="order">
   <div class="wrap">
-    <h2>Получите цену комплектации с доставкой до вашего цеха</h2>
-    <p class="lead">Оставьте телефон или почту — ответим в течение одного рабочего дня. Пришлём КП с обозначением модификации, ценой, сроком изготовления и стоимостью доставки в ваш город.</p>
-    <div class="grid form">
-      <div class="card">
-        <input class="field" type="text" placeholder="Телефон или e-mail" aria-label="Телефон или e-mail">
-        <label class="chk"><input type="checkbox"> Даю согласие на обработку персональных данных</label>
-        <a class="btn red" href="#">Получить расчёт с доставкой до цеха</a>
-        <p class="mute" style="margin:8px 0 12px"><a href="#">Прикрепить ТЗ, чертёж или фото станка</a></p>
-        <a class="btn out" href="#">Отправить ТЗ или чертёж</a>
-        <p class="mute" style="margin:6px 0 0">Ответим в течение одного рабочего дня</p>
+    <h2 class="section-heading">Получите цену комплектации с доставкой до вашего цеха</h2>
+    <div class="order-layout">
+      <div class="ui-card order-prototype" role="group" aria-labelledby="order-form-title" aria-describedby="order-demo">
+        <h3 id="order-form-title">Запрос коммерческого предложения</h3>
+        <p>Пришлём КП с обозначением модификации, ценой, сроком изготовления и стоимостью доставки в ваш город.</p>
+        <fieldset class="order-fields" disabled aria-label="Демонстрационные поля заявки">
+          <label class="contact-label" for="order-contact">Телефон или e-mail</label>
+          <input id="order-contact" type="text" autocomplete="off" disabled>
+          <label class="order-consent"><input type="checkbox" disabled><span>Даю согласие на обработку персональных данных</span></label>
+        </fieldset>
+        <button class="btn red" type="button" disabled aria-describedby="order-demo">Получить расчёт с доставкой</button>
+        <p class="demo-notice" id="order-demo"><b>Демонстрационная версия.</b> Отправка заявки через форму пока не подключена.</p>
       </div>
-      <div class="contacts">
-        <div class="big">8 (800) 707-26-76</div>
-        <p class="mute">бесплатно по России</p>
-        <p><a href="mailto:sale@vsp-kirov.ru">sale@vsp-kirov.ru</a></p>
-        <div class="rop"><div class="ph"><span>фото</span></div><div><b><span class="q" data-q="rop">Багина</span></b><br><span class="mute">Отдел продаж</span></div></div>
-        <p>Приезжайте на завод: Киров, ул. Техническая, <span class="q" data-q="adres">[20 / 22]</span></p>
+      <div class="ui-card order-contacts">
+        <h3>Отдел продаж</h3>
+        <a class="order-phone" href="tel:+78007072676">8 (800) 707-26-76</a>
+        <p class="contact-note">бесплатно по России</p>
+        <p><a class="order-email" href="mailto:sale@vsp-kirov.ru">sale@vsp-kirov.ru</a></p>
+        <p>Ответим в течение одного рабочего дня.</p>
+        <div class="order-person">
+          <figure class="prototype-media media-portrait"><div class="media-frame"><span>Фото</span></div></figure>
+          <p><b><span class="q" data-q="rop">Багина</span></b><br><span class="ui-note">Отдел продаж</span></p>
+        </div>
+        <p class="order-address">Киров, ул. Техническая. <span class="q" data-q="adres">Номер здания требует подтверждения: 20 или 22.</span></p>
       </div>
     </div>
   </div>
