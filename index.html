@@ -2,14 +2,14 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" id="vp" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>СФ676 — прототип посадочной страницы (черновик)</title>
 <style>
 :root{--red:#B03A2E;--steel:#34495E;--graphite:#2C3E50;--light:#F5F5F5;--ink:#1A1A1A;--mute:#6B6B6B;--line:#D9D9D9;--q:#FFF1B8;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-section[id],.q[id],#qol li{scroll-margin-top:calc(var(--draft-height,38px) + var(--sticky-height,0px) + 12px)}
+section[id],.q[id],#qol li{scroll-margin-top:calc(var(--sticky-height,64px) + 12px)}
 body{margin:0;font-family:"PT Sans","Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);line-height:1.5;font-size:17px;background:#fff}
 h1,h2,h3{margin:0 0 .5em;line-height:1.15;color:var(--steel)}
 h1{font-size:2.4rem;font-weight:700}
@@ -58,14 +58,8 @@ body.showq #qlist{display:block}
 #qlist li b{color:#5a4a00}
 #qlist li a{font-size:.85rem;color:var(--mute)}
 .q:target{outline:3px solid #c9a800}
-/* draft banner + toggle */
-.draft{position:sticky;top:0;z-index:50;background:#2C3E50;color:#fff;font-size:.9rem;padding:8px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.draft label{cursor:pointer;display:flex;gap:8px;align-items:center;white-space:nowrap}
-#vplabel{display:none}
-@media (max-width:900px),(pointer:coarse){#vplabel{display:flex}}
-.draft input{width:18px;height:18px}
 /* sticky header */
-.sticky{position:sticky;top:var(--draft-height,38px);z-index:40;background:#fff;border-bottom:1px solid var(--line);padding:10px 0;display:none}
+.sticky{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--line);padding:10px 0;display:none}
 .sticky .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .sticky .logo{font-weight:800;color:var(--red);font-size:1.3rem;letter-spacing:.02em}
 .sticky .tel{font-weight:700;color:var(--ink);text-decoration:none}
@@ -156,7 +150,6 @@ footer a{color:#fff}
  .calc{grid-template-columns:1fr}
  .norms td:last-child{white-space:normal}
  section{padding:48px 0}
- .draft{font-size:.8rem}
  /* tables to cards */
  table.stack,table.stack tbody{display:block}
  table.stack colgroup{display:none}
@@ -198,8 +191,7 @@ body{overflow-wrap:anywhere}
 .v1 .ui-note{font-size:var(--ui-small);color:var(--mute)}
 .v1 .btn{min-height:48px;padding:14px 22px;text-align:center;max-width:100%;white-space:normal}
 .v1 .btn.red:hover,.sticky .btn.red:hover{background:#963127;border-color:#963127}
-.v1 a:focus-visible,.draft input:focus-visible,.sticky a:focus-visible{outline:3px solid #8a6d00;outline-offset:4px}
-.draft input:focus-visible{outline-color:#ffbf47}
+.v1 a:focus-visible,.sticky a:focus-visible{outline:3px solid #8a6d00;outline-offset:4px}
 .q sup{color:#795f00}
 .v1 .text-link{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:4px;font-size:1rem;font-weight:700}
 .v1 .text-link:hover{text-decoration-thickness:2px}
@@ -249,14 +241,8 @@ body{overflow-wrap:anywhere}
 .doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap)}
 .doc-grid .ui-card h3{font-size:1.125rem}
 .spec-docs .doc-extra{margin-top:var(--ui-space-2)}
-/* Compact review bar and fixed header: neither changes layout while scrolling. */
-.draft{overflow-wrap:anywhere;min-height:44px;padding:4px 16px;gap:8px;font-size:.8125rem;line-height:1.3;justify-content:center}
-.draft[hidden]{display:none}
-.draft-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.draft label{min-height:36px;gap:5px;white-space:normal}
-.draft input{flex:none;margin:0;width:18px;height:18px}
-.draft-status{font-weight:700}
-.sticky{overflow-wrap:anywhere;position:fixed;inset-inline:0;top:var(--draft-height,0px);display:block;visibility:hidden;pointer-events:none;padding:6px 0}
+/* Fixed contact header: no layout shift while scrolling. */
+.sticky{overflow-wrap:anywhere;position:fixed;inset-inline:0;top:0;display:block;visibility:hidden;pointer-events:none;padding:6px 0}
 body.scrolled .sticky{visibility:visible;pointer-events:auto}
 .sticky .wrap{gap:12px;flex-wrap:nowrap}
 .sticky .logo{font-size:1.2rem;text-decoration:none}
@@ -303,17 +289,85 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 }
 @media (max-width:479px){.hero-facts{grid-template-columns:1fr}}
 
+
+/* Iteration 02: the existing .v1 tokens and components extend to four content sections. */
+.commercial .section-heading{max-width:1050px}
+.commercial .lead{margin-bottom:var(--ui-space-4)}
+.payment-plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;padding:0;margin:var(--ui-space-4) 0;background:#fff;border:1px solid var(--line);border-radius:var(--ui-radius)}
+.payment-plan li{position:relative;min-width:0;padding:var(--ui-space-3);border-right:1px solid var(--line)}
+.payment-plan li:last-child{border-right:0}
+.payment-plan .percentage{display:block;font-size:clamp(2rem,3.5vw,2.75rem);line-height:1.15;color:var(--red);margin:0 0 var(--ui-space-2);font-variant-numeric:tabular-nums}
+.payment-plan h3{font-size:1.125rem;margin:0 0 var(--ui-space-1)}
+.payment-plan p{font-size:1rem;margin:0}
+.payment-arrow{position:absolute;left:-14px;top:32px;display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:#fff;color:var(--steel);font-size:1.25rem;line-height:1}
+.purchase-conditions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-space-3) var(--ui-space-4);margin:0 0 var(--ui-space-4)}
+.purchase-conditions > div{min-width:0;border-top:1px solid var(--line);padding-top:var(--ui-space-2)}
+.purchase-conditions dt{font-weight:700;font-size:1.125rem;color:var(--steel);margin-bottom:var(--ui-space-1)}
+.purchase-conditions dd{margin:0;font-size:1rem}
+/* Objective summary and native detailed comparison. */
+.compare-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap);margin:var(--ui-space-4) 0}
+.v1.dark .ui-card{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+.compare-options p{font-size:1rem}
+.compare-details{padding:0;margin:0;background:transparent;color:inherit;border-color:rgba(255,255,255,.35);border-radius:var(--ui-radius)}
+.compare-details summary{padding:20px var(--ui-space-3);color:inherit;font-size:1.125rem;line-height:1.4;min-height:48px}
+.v1.dark a:focus-visible{outline-color:#ffbf47}
+.compare-details summary:focus-visible{outline:3px solid #ffbf47;outline-offset:4px}
+.compare-details[open] summary{border-bottom:1px solid rgba(255,255,255,.35)}
+.compare-details .comparison-body{padding:var(--ui-space-3)}
+.compare-table{font-size:1rem;line-height:1.5}
+.compare-table th,.compare-table td{padding:14px 16px}
+.compare-table tbody th{font-weight:600;color:#c9d1d9;background:transparent}
+.comparison-source{margin:var(--ui-space-2) 0 0}
+.comparison-context{margin:var(--ui-space-3) 0}
+.comparison-request{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--ui-space-3);border:1px solid rgba(255,255,255,.35);border-radius:var(--ui-radius);padding:var(--ui-space-3)}
+.comparison-request p{margin:0;font-size:1rem}
+/* Five informational choices, without form controls or a price calculator. */
+.config-options{list-style:none;display:grid;gap:var(--ui-space-3);padding:0;margin:var(--ui-space-4) 0}
+.config-option h3{display:flex;align-items:baseline;gap:var(--ui-space-2)}
+.option-letter,.step-number{display:inline-flex;justify-content:center;align-items:center;flex:none;min-width:32px;min-height:32px;border:1px solid var(--line);border-radius:var(--ui-radius);color:var(--steel);font-size:1rem;line-height:1.2}
+.config-columns{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:var(--ui-space-4)}
+.config-columns > div{min-width:0}
+.config-columns h4{margin:0 0 var(--ui-space-1);font-size:1rem;color:var(--steel);line-height:1.4}
+.config-columns ul{padding-left:20px;margin:0;display:grid;gap:6px}
+.config-columns p,.config-columns li{font-size:1rem}
+.config-note{margin:var(--ui-space-4) 0 var(--ui-space-3)}
+.config-accessories{margin:0 0 var(--ui-space-3)}
+/* Four groups retain all ten numbered stages and their original explanations. */
+.delivery-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-gap);margin:var(--ui-space-4) 0 var(--ui-space-5)}
+.delivery-steps{list-style:none;padding:0;margin:var(--ui-space-3) 0 0;display:grid;gap:var(--ui-space-3)}
+.delivery-step-heading{display:flex;align-items:center;gap:12px}
+.delivery-step-heading h4{margin:0;font-size:1rem;line-height:1.4;color:var(--ink)}
+.delivery-steps p{margin:var(--ui-space-1) 0 0;font-size:1rem}
+.service-note{padding:var(--ui-space-3);margin:var(--ui-space-2) 0 var(--ui-space-3);background:#fff;border-left:3px solid var(--red);font-size:1rem}
+.services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-gap);margin-bottom:var(--ui-space-3)}
+.services-grid ul{padding-left:20px;margin:0;display:grid;gap:12px;font-size:1rem}
+.services-grid .service-detail{margin:var(--ui-space-2) 0 0;font-size:1rem}
+@media (max-width:900px){
+ .compare-options,.comparison-request,.delivery-groups{grid-template-columns:1fr}
+ .comparison-request .btn{justify-self:start}
+ .compare-details .comparison-body{padding:var(--ui-space-2)}
+ .compare-table,.compare-table tbody{display:block}
+ .compare-table colgroup{display:none}
+ .compare-table thead{position:absolute;width:1px;height:1px;padding:0;border:0;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+ .compare-table tbody tr{display:block;border:1px solid rgba(255,255,255,.35);margin-bottom:var(--ui-space-2)}
+ .compare-table tbody tr:last-child{margin-bottom:0}
+ .compare-table tbody th,.compare-table tbody td{display:block;border:0;width:auto;padding:12px 16px}
+ .compare-table tbody th{color:#fff;background:rgba(255,255,255,.08)}
+ .compare-table tbody td{border-top:1px solid rgba(255,255,255,.25)}
+ .compare-table tbody td::before{content:attr(data-h);display:block;font-size:.875rem;font-weight:700;color:#c9d1d9;margin-bottom:6px}
+}
+@media (max-width:700px){
+ .payment-plan,.purchase-conditions,.config-columns,.services-grid{grid-template-columns:1fr}
+ .payment-plan li{border-right:0;border-bottom:1px solid var(--line);padding:var(--ui-space-2) var(--ui-space-3)}
+ .payment-plan li:last-child{border-bottom:0}
+ .payment-plan .percentage{margin-bottom:var(--ui-space-1)}
+ .payment-arrow{left:auto;right:24px;top:-14px;transform:rotate(90deg)}
+ .config-columns{gap:var(--ui-space-2)}
+}
+
 </style>
 </head>
 <body>
-
-<aside class="draft" aria-label="Режим согласования" hidden>
-  <span class="draft-status" title="Черновик для согласования. Редакция по встрече 08.10.2026">Согласование</span>
-  <div class="draft-controls">
-    <label><input type="checkbox" id="qtoggle" aria-label="Показать вопросы к заводу"> Вопросы</label>
-    <label id="vplabel"><input type="checkbox" id="vptoggle" aria-label="Как на компьютере"> ПК-вид</label>
-  </div>
-</aside>
 
 <header class="sticky" aria-label="Быстрые контакты">
   <div class="wrap">
@@ -441,16 +495,21 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 </section>
 
 <!-- 4 -->
-<section class="grey" id="price">
-  <div class="wrap narrow">
-    <h2>Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
+<section class="grey v1 commercial" id="price">
+  <div class="wrap">
+    <h2 class="section-heading">Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
     <p class="lead">Каждый СФ676 собирается под спецификацию заказчика. Согласуем пять параметров: стол, конус шпинделя, УЦИ, количество отображаемых координат и тип винтовой передачи. Коммерческое предложение с ценой и сроком пришлём на почту в течение одного рабочего дня. Без звонков, если вы их не просили.</p>
-    <ul class="cond">
-      <li><i></i><div><b>Срок изготовления.</b> От 20 рабочих дней с момента предоплаты для любой модификации. Конкретная комплектация, срок изготовления и условия поставки фиксируются в договоре.</div></li>
-      <li><i></i><div><b>Доставка.</b> По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно. Упаковка в деревянный ящик и консервация на 1 год входят в стоимость станка.</div></li>
-      <li><i></i><div><b>Оплата.</b> 50% — предоплата; 45% — после готовности станка; 5% — окончательный платёж. <span class="q" data-q="oplata">Срок окончательного платежа согласовывается в договоре.</span></div></li>
-      <li><i></i><div><b>Льготный лизинг.</b> Станок можно приобрести в льготный лизинг. Условия по запросу.</div></li>
-    </ul>
+    <ol class="payment-plan" aria-label="Этапы оплаты">
+      <li><b class="percentage">50%</b><h3>Предоплата</h3></li>
+      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">45%</b><h3>После готовности станка</h3></li>
+      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">5%</b><h3>Окончательный платёж</h3><p><span class="q" data-q="oplata">Условия фиксируются в договоре.</span></p></li>
+    </ol>
+    <dl class="purchase-conditions">
+      <div><dt>Срок изготовления</dt><dd>От 20 рабочих дней с момента предоплаты для любой модификации. Конкретная комплектация, срок изготовления и условия поставки фиксируются в договоре.</dd></div>
+      <div><dt>Доставка</dt><dd>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</dd></div>
+      <div><dt>Упаковка и консервация</dt><dd>Упаковка в деревянный ящик и консервация на 1 год входят в стоимость станка.</dd></div>
+      <div><dt>Льготный лизинг</dt><dd>Станок можно приобрести в льготный лизинг. Условия по запросу.</dd></div>
+    </dl>
     <a class="btn red" href="#order">Получить цену с доставкой до вашего цеха</a>
   </div>
 </section>
@@ -501,89 +560,153 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 </section>
 
 <!-- 7 -->
-<section class="dark" id="compare">
-  <div class="wrap" style="max-width:1100px">
-    <h2>Оставить, восстановить или заменить? Посчитаем все три варианта</h2>
+<section class="dark v1 commercial" id="compare">
+  <div class="wrap">
+    <h2 class="section-heading">Оставить, восстановить или заменить? Посчитаем все три варианта</h2>
     <p class="lead">Если у вас уже стоит 676, 676П или ФУ-251 — вы знаете, что это хорошие станки; СФ676 продолжает ту же конструкцию. Вопрос не в том, какой станок лучше. Вопрос — во что обойдутся следующие два-три года: с тем, что есть, с восстановленным или с новым.</p>
-    <table class="cmp stack">
+    <div class="compare-options">
+      <article class="ui-card"><h3>Оставить существующий станок</h3><p>Без первоначальных затрат. Риски простоя, ремонта и поиска запасных частей сохраняются.</p></article>
+      <article class="ui-card"><h3>Капитально отремонтировать</h3><p>Восстановление при наличии подходящей ремонтной базы. Стоимость — после диагностики, по дефектной ведомости.</p></article>
+      <article class="ui-card"><h3>Купить новый СФ676</h3><p>Новый станок по спецификации договора. Заводская приёмка и гарантия 12 месяцев.</p></article>
+    </div>
+    <details class="compare-details">
+      <summary>Посмотреть подробное сравнение</summary>
+      <div class="comparison-body">
+        <table class="compare-table">
       <colgroup><col style="width:19%"><col style="width:23%"><col style="width:31%"><col style="width:27%"></colgroup>
-      <thead><tr><th></th><th>Оставить как есть</th><th>Капитально отремонтировать свой</th><th>Купить новый СФ676</th></tr></thead>
-      <tr><td>Затраты сейчас</td><td data-h="Оставить как есть">Нет</td><td data-h="Отремонтировать свой">Выездная диагностика — от 25 000 ₽. Сам ремонт — по дефектной ведомости: разборка, шабрение направляющих, шпиндельный узел, коробки, электрика. Ориентир по станкам соседнего класса — 650–770 тыс. ₽. Капитальный ремонт — до 75% стоимости нового станка: оценочный ориентир; стоимость конкретного ремонта определяется после диагностики</td><td data-h="Новый СФ676">Цена комплектации по КП</td></tr>
-      <tr><td>Затраты в ближайшие годы</td><td data-h="Оставить как есть">Неизвестны: ремонт по факту поломки, поиск деталей, простой</td><td data-h="Отремонтировать свой">Ниже, но ресурс узлов, которые не трогали, остаётся прежним. Гарантия на ремонт — обычно от 6 месяцев</td><td data-h="Новый СФ676">Плановое обслуживание по РЭ; гарантия 12 месяцев</td></tr>
-      <tr><td>Время до рабочего станка</td><td data-h="Оставить как есть">Работает — пока работает</td><td data-h="Отремонтировать свой">Капитальный ремонт 676 у сервисных компаний — около 70 дней, плюс ожидание узлов</td><td data-h="Новый СФ676">Изготовление от 20 рабочих дней + доставка + пусконаладка</td></tr>
-      <tr><td>Что известно о состоянии</td><td data-h="Оставить как есть">Только то, что видно снаружи</td><td data-h="Отремонтировать свой">Известно после разборки — и смета может вырасти</td><td data-h="Новый СФ676">Акт приёмки по заводскому номеру: 28 параметров геометрии</td></tr>
-      <tr><td>Комплектность</td><td data-h="Оставить как есть">Как есть</td><td data-h="Отремонтировать свой">Недостающие узлы (головка, хобот, серьга) — искать отдельно</td><td data-h="Новый СФ676">Зафиксирована в спецификации договора</td></tr>
-      <tr><td>Запасные части</td><td data-h="Оставить как есть">Продаются, в том числе крупные узлы, — но цена по запросу, часть позиций б/у, редкие приходится искать или изготавливать</td><td data-h="Отремонтировать свой">То же</td><td data-h="Новый СФ676">Завод-производитель; чертежи быстроизнашивающихся деталей в РЭ</td></tr>
-      <tr><td>Простой при поломке</td><td data-h="Оставить как есть">Полный, на неопределённый срок</td><td data-h="Отремонтировать свой">Меньше вероятность, но тот же поиск деталей</td><td data-h="Новый СФ676">Гарантия и сервис производителя</td></tr>
-      <tr><td>Закупка по 44-ФЗ / 223-ФЗ</td><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Российское происхождение подтверждено реестром</td></tr>
+      <thead><tr><th scope="col">Критерий</th><th scope="col">Оставить как есть</th><th scope="col">Капитально отремонтировать свой</th><th scope="col">Купить новый СФ676</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Затраты сейчас</th><td data-h="Оставить как есть">Нет</td><td data-h="Отремонтировать свой">Выездная диагностика — от 25 000 ₽. Сам ремонт — по дефектной ведомости: разборка, шабрение направляющих, шпиндельный узел, коробки, электрика. Ориентир по станкам соседнего класса — 650–770 тыс. ₽. Капитальный ремонт — до 75% стоимости нового станка: оценочный ориентир; стоимость конкретного ремонта определяется после диагностики</td><td data-h="Новый СФ676">Цена комплектации по КП</td></tr>
+      <tr><th scope="row">Затраты в ближайшие годы</th><td data-h="Оставить как есть">Неизвестны: ремонт по факту поломки, поиск деталей, простой</td><td data-h="Отремонтировать свой">Ниже, но ресурс узлов, которые не трогали, остаётся прежним. Гарантия на ремонт — обычно от 6 месяцев</td><td data-h="Новый СФ676">Плановое обслуживание по РЭ; гарантия 12 месяцев</td></tr>
+      <tr><th scope="row">Время до рабочего станка</th><td data-h="Оставить как есть">Работает — пока работает</td><td data-h="Отремонтировать свой">Капитальный ремонт 676 у сервисных компаний — около 70 дней, плюс ожидание узлов</td><td data-h="Новый СФ676">Изготовление от 20 рабочих дней + доставка + пусконаладка</td></tr>
+      <tr><th scope="row">Что известно о состоянии</th><td data-h="Оставить как есть">Только то, что видно снаружи</td><td data-h="Отремонтировать свой">Известно после разборки — и смета может вырасти</td><td data-h="Новый СФ676">Акт приёмки по заводскому номеру: 28 параметров геометрии</td></tr>
+      <tr><th scope="row">Комплектность</th><td data-h="Оставить как есть">Как есть</td><td data-h="Отремонтировать свой">Недостающие узлы (головка, хобот, серьга) — искать отдельно</td><td data-h="Новый СФ676">Зафиксирована в спецификации договора</td></tr>
+      <tr><th scope="row">Запасные части</th><td data-h="Оставить как есть">Продаются, в том числе крупные узлы, — но цена по запросу, часть позиций б/у, редкие приходится искать или изготавливать</td><td data-h="Отремонтировать свой">То же</td><td data-h="Новый СФ676">Завод-производитель; чертежи быстроизнашивающихся деталей в РЭ</td></tr>
+      <tr><th scope="row">Простой при поломке</th><td data-h="Оставить как есть">Полный, на неопределённый срок</td><td data-h="Отремонтировать свой">Меньше вероятность, но тот же поиск деталей</td><td data-h="Новый СФ676">Гарантия и сервис производителя</td></tr>
+      <tr><th scope="row">Закупка по 44-ФЗ / 223-ФЗ</th><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Российское происхождение подтверждено реестром</td></tr>
+    </tbody>
     </table>
-    <p class="mute" style="margin-top:12px">Ориентиры по ремонту и б/у — из открытых предложений российских сервисных компаний и продавцов на сентябрь 2026 года: рабочие 676П — 165–220 тыс. ₽, ФУ-251 — 280–450 тыс. ₽, СФ676 1979 года — 200 тыс. ₽. Стоимость вашего ремонта считается только по дефектной ведомости.</p>
-    <p style="margin-top:20px">Если у вас есть полгода, свой ремонтник с опытом по 676 и комплектный станок — восстановление может оказаться выгодным. Если деталь нужна в этом квартале, а сколько ещё проживёт старый шпиндель — никто не скажет, считайте новый.</p>
-    <div class="calc">
-      <div class="ico"></div>
-      <div><span class="q" data-q="raschet">Пришлите фото станка, короткое видео шпинделя на оборотах и данные по люфтам для сравнения стоимости восстановления и нового СФ676 в нужной комплектации. Условия подготовки расчёта уточняются.</span></div>
+        <p class="mute comparison-source">Ориентиры по ремонту и б/у — из открытых предложений российских сервисных компаний и продавцов на сентябрь 2026 года: рабочие 676П — 165–220 тыс. ₽, ФУ-251 — 280–450 тыс. ₽, СФ676 1979 года — 200 тыс. ₽. Стоимость вашего ремонта считается только по дефектной ведомости.</p>
+      </div>
+    </details>
+    <p class="comparison-context">Если у вас есть полгода, свой ремонтник с опытом по 676 и комплектный станок — восстановление может оказаться выгодным. Если деталь нужна в этом квартале, а сколько ещё проживёт старый шпиндель — никто не скажет, считайте новый.</p>
+    <div class="comparison-request">
+      <p><span class="q" data-q="raschet">Пришлите фото станка, короткое видео шпинделя на оборотах и данные по люфтам для сравнения стоимости восстановления и нового СФ676 в нужной комплектации. Условия подготовки расчёта уточняются.</span></p>
       <a class="btn red" href="#order">Посчитать для моего станка</a>
     </div>
   </div>
 </section>
 
 <!-- 8 -->
-<section id="config">
+<section class="v1 commercial" id="config">
   <div class="wrap">
-    <h2>Пять решений, из которых складывается ваш СФ676</h2>
+    <h2 class="section-heading">Пять решений, из которых складывается ваш СФ676</h2>
     <p class="lead">Обозначение модификации СФ676 определяется выбранной комплектацией. Согласуйте пять параметров для спецификации к договору. Или оставьте это нашему технологу: подберём по вашей маршрутной карте.</p>
-    <div class="grid cfg">
-      <div>
-        <table class="stack">
-          <colgroup><col style="width:20%"><col style="width:30%"><col style="width:50%"></colgroup>
-          <thead><tr><th>Решение</th><th>Варианты</th><th>Как выбрать</th></tr></thead>
-          <tr><td>А. Стол</td><td data-h="Варианты">250 × 800 мм<br>300 × 800 мм — увеличенный</td><td data-h="Как выбрать">Выберите размер углового горизонтального стола под габариты детали и технологическую задачу. <span class="q" data-q="stol">Точное исполнение стола и количество пазов требуют подтверждения.</span></td></tr>
-          <tr><td>B. Конус</td><td data-h="Варианты">40АТ5 — конус 7:24 № 40<br>КМ4 — конус Морзе 4</td><td data-h="Как выбрать">По оснастке, которая у вас уже есть. Основная оснастка на Морзе 4 — КМ4. Инструмент на КМ1–КМ3 или держатели SK40, NT40, BT40 — 40АТ5: под него переходники есть на всё.</td></tr>
-          <tr><td>C. УЦИ</td><td data-h="Варианты">0 — без УЦИ<br>М — магнитная (Италия)<br>О — оптическая (Санкт-Петербург)</td><td data-h="Как выбрать">Нужен, если много расточной и точной работы. Для чернового фрезерования и ремонта — лимбы (цена деления 0,05 мм), УЦИ можно поставить позже. Магнитная неприхотлива, но замена комплектующих долгая. Оптическая чувствительнее к стружке, зато замена быстрая.</td></tr>
-          <tr><td>D. Координаты</td><td data-h="Варианты">Ф3 — X, Y, Z<br>Ф2 — X, Y</td><td data-h="Как выбрать">Ф3 — основная рекомендация: видна и вертикальная координата. Ф2 — только при ограниченном бюджете.</td></tr>
-          <tr><td>E. Винты</td><td data-h="Варианты">ШВП — шариковые винтовые пары<br>ТР — трапецеидальные передачи</td><td data-h="Как выбрать">ШВП — в большинстве случаев: станок плавнее в управлении. ТР — если станок едет в удалённый регион и ремонт будет своими силами: трапецеидальную пару ваш механик изготовит сам, ШВП — нет.</td></tr>
-        </table>
-      </div>
-      <div class="ph" style="min-height:420px"><span>Фото: ракурс 3/4 с выносками A–E к столу, шпинделям, пульту, винтам</span></div>
-    </div>
-    <p style="margin-top:32px">Комплектация определяется по техническому заданию заказчика. Состав оборудования и дополнительных принадлежностей фиксируется в коммерческом предложении и договоре. Монтаж и пусконаладка входят в стоимость станка; командировочные расходы специалистов, доставка, разгрузка и страхование оплачиваются отдельно. Условия сопутствующих услуг прописываются в договоре.</p>
-    <p class="mute" style="margin-top:20px">Дополнительная оснастка: глобусный стол — установка детали в трёх плоскостях · универсальная делительная головка — шестерни, фланцы, деление на градусы · круглый поворотный стол · тиски до 125 мм · дополнительное освещение</p>
+    <ol class="config-options" aria-label="Пять параметров комплектации">
+      <li class="ui-card config-option">
+        <h3><span class="option-letter" aria-hidden="true">A</span>Рабочий стол</h3>
+        <div class="config-columns">
+          <div><h4>Доступные варианты</h4><ul><li>250 × 800 мм</li><li>300 × 800 мм — увеличенный</li></ul></div>
+          <div><h4>Как выбрать</h4><p>Выберите размер углового горизонтального стола под габариты детали и технологическую задачу. <span class="q" data-q="stol">Точное исполнение стола и количество пазов требуют подтверждения.</span></p></div>
+        </div>
+      </li>
+      <li class="ui-card config-option">
+        <h3><span class="option-letter" aria-hidden="true">B</span>Конус шпинделя</h3>
+        <div class="config-columns">
+          <div><h4>Доступные варианты</h4><ul><li>40АТ5 — конус 7:24 № 40</li><li>КМ4 — конус Морзе 4</li></ul></div>
+          <div><h4>Как выбрать</h4><p>По оснастке, которая у вас уже есть. Основная оснастка на Морзе 4 — КМ4. Инструмент на КМ1–КМ3 или держатели SK40, NT40, BT40 — 40АТ5: под него переходники есть на всё.</p></div>
+        </div>
+      </li>
+      <li class="ui-card config-option">
+        <h3><span class="option-letter" aria-hidden="true">C</span>УЦИ</h3>
+        <div class="config-columns">
+          <div><h4>Доступные варианты</h4><ul><li>0 — без УЦИ</li><li>М — магнитная (Италия)</li><li>О — оптическая (Санкт-Петербург)</li></ul></div>
+          <div><h4>Как выбрать</h4><p>Нужен, если много расточной и точной работы. Для чернового фрезерования и ремонта — лимбы (цена деления 0,05 мм), УЦИ можно поставить позже. Магнитная неприхотлива, но замена комплектующих долгая. Оптическая чувствительнее к стружке, зато замена быстрая.</p></div>
+        </div>
+      </li>
+      <li class="ui-card config-option">
+        <h3><span class="option-letter" aria-hidden="true">D</span>Количество координат</h3>
+        <div class="config-columns">
+          <div><h4>Доступные варианты</h4><ul><li>Ф3 — X, Y, Z</li><li>Ф2 — X, Y</li></ul></div>
+          <div><h4>Как выбрать</h4><p>Ф3 — основная рекомендация: видна и вертикальная координата. Ф2 — только при ограниченном бюджете.</p></div>
+        </div>
+      </li>
+      <li class="ui-card config-option">
+        <h3><span class="option-letter" aria-hidden="true">E</span>Винтовая передача</h3>
+        <div class="config-columns">
+          <div><h4>Доступные варианты</h4><ul><li>ШВП — шариковые винтовые пары</li><li>ТР — трапецеидальные передачи</li></ul></div>
+          <div><h4>Как выбрать</h4><p>ШВП — в большинстве случаев: станок плавнее в управлении. ТР — если станок едет в удалённый регион и ремонт будет своими силами: трапецеидальную пару ваш механик изготовит сам, ШВП — нет.</p></div>
+        </div>
+      </li>
+    </ol>
+    <p class="config-note">Комплектация определяется по техническому заданию заказчика. Состав оборудования и дополнительных принадлежностей фиксируется в коммерческом предложении и договоре. Монтаж и пусконаладка входят в стоимость станка; командировочные расходы специалистов, доставка, разгрузка и страхование оплачиваются отдельно. Условия сопутствующих услуг прописываются в договоре.</p>
+    <p class="mute config-accessories">Дополнительная оснастка: глобусный стол — установка детали в трёх плоскостях · универсальная делительная головка — шестерни, фланцы, деление на градусы · круглый поворотный стол · тиски до 125 мм · дополнительное освещение</p>
     <a class="btn red" href="#order">Подобрать комплектацию с технологом</a>
   </div>
 </section>
 
 <!-- 9 -->
-<section class="grey" id="delivery">
+<section class="grey v1 commercial" id="delivery">
   <div class="wrap">
-    <h2>От заявки до запуска станка: изготовление, доставка, монтаж и пусконаладка</h2>
+    <h2 class="section-heading">От заявки до запуска станка: изготовление, доставка, монтаж и пусконаладка</h2>
     <p class="lead">Десять шагов от заявки до первой детали — и кто отвечает за каждый.</p>
-    <ol class="steps">
-      <li><i>1</i><b>Заявка и КП</b><p>Вы описываете задачу, мы присылаем КП с обозначением модификации в течение одного рабочего дня.</p></li>
-      <li><i>2</i><b>Договор и спецификация</b><p>Фиксируем обозначение, комплект, срок и условия. Что написано в спецификации — то и придёт.</p></li>
-      <li><i>3</i><b>Изготовление</b><p>Сборка на заводе в Кирове. Срок — от 20 рабочих дней.</p></li>
-      <li><i>4</i><b>Приёмка на заводе</b><p>28 параметров геометрии, обкатка, акт приёмки. Можете приехать и принять станок лично. Входит в стоимость станка.</p></li>
-      <li><i>5</i><b>Упаковка</b><p>Консервация на 1 год, деревянный ящик, крепление на салазках.</p></li>
-      <li><i>6</i><b>Доставка</b><p>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</p></li>
-      <li><i>7</i><b>Подготовка места</b><p>Установка на виброопоры при соблюдении требований к основанию или на фундамент по чертежу из РЭ; 380 В, 3 фазы; кран или погрузчик от 3 т для ящика; для точных работ — помещение +20 ± 2 °C, не рядом с абразивными станками.</p></li>
-      <li><i>8</i><b>Монтаж и пусконаладка</b><p>Установка, выверка по уровню 0,04 мм на 1000 мм, расконсервация, заправка смазкой, обкатка, проверка паспортных данных. Монтаж, выверка, обкатка и пусконаладочные работы входят в стоимость станка.</p></li>
-      <li><i>9</i><b>Обучение</b><p>Инструктаж и обучение оператора и механика по органам управления, смазке и обслуживанию входят в стоимость станка.</p></li>
-      <li><i>10</i><b>Гарантия и после</b><p>Гарантия 12 месяцев. После — постгарантийное обслуживание, запасные части с завода, чертежи быстроизнашивающихся деталей в РЭ.</p></li>
-    </ol>
+    <div class="delivery-groups">
+      <article class="ui-card delivery-group">
+        <h3>Оформление заказа</h3>
+        <ol class="delivery-steps" start="1">
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">1</span><h4>Заявка и КП</h4></div><p>Вы описываете задачу, мы присылаем КП с обозначением модификации в течение одного рабочего дня.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">2</span><h4>Договор и спецификация</h4></div><p>Фиксируем обозначение, комплект, срок и условия. Что написано в спецификации — то и придёт.</p></li>
+        </ol>
+      </article>
+      <article class="ui-card delivery-group">
+        <h3>Изготовление и подготовка</h3>
+        <ol class="delivery-steps" start="3">
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">3</span><h4>Изготовление</h4></div><p>Сборка на заводе в Кирове. Срок — от 20 рабочих дней.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">4</span><h4>Приёмка на заводе</h4></div><p>28 параметров геометрии, обкатка, акт приёмки. Можете приехать и принять станок лично. Входит в стоимость станка.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">5</span><h4>Упаковка</h4></div><p>Консервация на 1 год, деревянный ящик, крепление на салазках.</p></li>
+        </ol>
+      </article>
+      <article class="ui-card delivery-group">
+        <h3>Доставка и подготовка площадки</h3>
+        <ol class="delivery-steps" start="6">
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">6</span><h4>Доставка</h4></div><p>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">7</span><h4>Подготовка места</h4></div><p>Установка на виброопоры при соблюдении требований к основанию или на фундамент по чертежу из РЭ; 380 В, 3 фазы; кран или погрузчик от 3 т для ящика; для точных работ — помещение +20 ± 2 °C, не рядом с абразивными станками.</p></li>
+        </ol>
+      </article>
+      <article class="ui-card delivery-group">
+        <h3>Запуск и сопровождение</h3>
+        <ol class="delivery-steps" start="8">
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">8</span><h4>Монтаж и пусконаладка</h4></div><p>Установка, выверка по уровню 0,04 мм на 1000 мм, расконсервация, заправка смазкой, обкатка, проверка паспортных данных. Монтаж, выверка, обкатка и пусконаладочные работы входят в стоимость станка.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">9</span><h4>Обучение</h4></div><p>Инструктаж и обучение оператора и механика по органам управления, смазке и обслуживанию входят в стоимость станка.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">10</span><h4>Гарантия и после</h4></div><p>Гарантия 12 месяцев. После — постгарантийное обслуживание, запасные части с завода, чертежи быстроизнашивающихся деталей в РЭ.</p></li>
+        </ol>
+      </article>
+    </div>
     <h3>Что входит в цену</h3>
-    <table class="stack" style="margin-bottom:18px">
-      <colgroup><col style="width:34%"><col style="width:16%"><col style="width:14%"><col style="width:36%"></colgroup>
-      <thead><tr><th>Услуга</th><th>В цене станка</th><th>Отдельно</th><th>Как считается</th></tr></thead>
-      <tr><td>Заводская приёмка</td><td data-h="В цене">Да</td><td data-h="Отдельно">—</td><td data-h="Как считается">Приёмка с вашим участием; дата согласуется за неделю</td></tr>
-      <tr><td>Упаковка, консервация на 1 год</td><td data-h="В цене">Да</td><td data-h="Отдельно"></td><td data-h="Как считается">—</td></tr>
-      <tr><td>Страхование груза</td><td data-h="В цене">—</td><td data-h="Отдельно">Да</td><td data-h="Как считается">Оплачивается отдельно</td></tr>
-      <tr><td>Доставка до площадки</td><td data-h="В цене"></td><td data-h="Отдельно">Да</td><td data-h="Как считается">Расчёт по городу — в КП</td></tr>
-      <tr><td>Разгрузка на площадке</td><td data-h="В цене">—</td><td data-h="Отдельно">Да</td><td data-h="Как считается">Завод может организовать разгрузку с привлечением техники за отдельную плату</td></tr>
-      <tr><td>Монтаж, выверка, обкатка</td><td data-h="В цене">Да</td><td data-h="Отдельно">—</td><td data-h="Как считается">Командировочные расходы специалистов — отдельно</td></tr>
-      <tr><td>Пусконаладочные работы</td><td data-h="В цене">Да</td><td data-h="Отдельно">—</td><td data-h="Как считается">Командировочные расходы специалистов — отдельно</td></tr>
-      <tr><td>Инструктаж и обучение</td><td data-h="В цене">Да</td><td data-h="Отдельно">—</td><td data-h="Как считается">Командировочные расходы специалистов — отдельно</td></tr>
-      <tr><td>Гарантийное обслуживание</td><td data-h="В цене">Да</td><td data-h="Отдельно">—</td><td data-h="Как считается">12 месяцев</td></tr>
-    </table>
-    <p><b>Командировочные расходы специалистов оплачиваются заказчиком отдельно.</b></p>
+    <p class="service-note"><b>Монтаж, пусконаладка и инструктаж входят в стоимость станка.</b> Командировочные расходы специалистов оплачиваются заказчиком <b>отдельно</b>.</p>
+    <div class="services-grid">
+      <article class="ui-card">
+        <h3>Входит в стоимость станка</h3>
+        <ul>
+          <li>Заводская приёмка.</li>
+          <li>Упаковка и консервация на 1 год.</li>
+          <li>Монтаж, выверка и обкатка.</li>
+          <li>Пусконаладочные работы.</li>
+          <li>Инструктаж и обучение.</li>
+          <li>Гарантийное обслуживание — 12 месяцев.</li>
+        </ul>
+        <p class="service-detail">Приёмка с вашим участием; дата согласуется за неделю.</p>
+      </article>
+      <article class="ui-card">
+        <h3>Оплачивается отдельно</h3>
+        <ul>
+          <li>Страхование груза.</li>
+          <li>Доставка до площадки — расчёт по городу в КП.</li>
+          <li>Разгрузка на площадке. Завод может организовать разгрузку с привлечением техники за отдельную плату.</li>
+          <li>Командировочные расходы специалистов завода.</li>
+        </ul>
+      </article>
+    </div>
     <p class="mute"><span class="q" data-q="docs">Памятка по подготовке места установки (PDF) — файл пока не добавлен.</span></p>
     <div class="ph" style="height:260px"><span>Фото: упаковка в ящик, отгрузка</span></div>
   </div>
@@ -697,27 +820,18 @@ var QUESTIONS = {
   spans.forEach(function(sp){var k=sp.getAttribute('data-q'); if(!seen[k]){seen[k]=order.length+1; order.push(k);} var n=seen[k]; occurrences[k]=(occurrences[k]||0)+1; if(!sp.id) sp.id='q-'+k+(occurrences[k]>1 ? '-'+occurrences[k] : ''); var sup=document.createElement('sup'); sup.innerHTML='<a href="#ql-'+k+'" style="color:inherit;text-decoration:none">'+n+'</a>'; sp.appendChild(sup);});
   var ol=document.getElementById('qol');
   order.forEach(function(k,i){var q=QUESTIONS[k]||{t:k,w:''}; var li=document.createElement('li'); li.id='ql-'+k; li.innerHTML='<b>'+q.t+'</b> <span class="mute">— '+q.w+'</span> &nbsp;<a href="#q-'+k+'">где на странице ↑</a>'; ol.appendChild(li);});
-  var t=document.getElementById('qtoggle');
-  var draft=document.querySelector('.draft'), sticky=document.querySelector('.sticky');
-  var review=new URLSearchParams(location.search).get('review')==='1';
-  function enableReview(){
-    review=true;draft.hidden=false;document.body.classList.add('review-mode','showq');t.checked=true;
-  }
-  if(review) enableReview();
-  t.checked=document.body.classList.contains('showq');
-  t.addEventListener('change',function(){document.body.classList.toggle('showq',t.checked)});
-  var vp=document.getElementById('vptoggle'), meta=document.getElementById('vp');
-  vp.addEventListener('change',function(){meta.setAttribute('content', vp.checked ? 'width=1366, minimum-scale=0.2, maximum-scale=3' : 'width=device-width, initial-scale=1'); window.scrollTo(0,0);});
+  var sticky=document.querySelector('.sticky');
+  function enableReview(){document.body.classList.add('review-mode','showq')}
+  if(new URLSearchParams(location.search).get('review')==='1') enableReview();
   var hero=document.getElementById('top');
-  function onScroll(){document.body.classList.toggle('scrolled',window.scrollY>hero.offsetTop+hero.offsetHeight-draft.getBoundingClientRect().height-sticky.getBoundingClientRect().height-24)}
+  function onScroll(){document.body.classList.toggle('scrolled',window.scrollY>hero.offsetTop+hero.offsetHeight-sticky.getBoundingClientRect().height-24)}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-  function updateHeaderHeights(){
-    document.documentElement.style.setProperty('--draft-height',draft.getBoundingClientRect().height+'px');
+  function updateHeaderHeight(){
     document.documentElement.style.setProperty('--sticky-height',sticky.getBoundingClientRect().height+'px');
   }
-  var headerObserver=new ResizeObserver(updateHeaderHeights);
-  headerObserver.observe(draft);headerObserver.observe(sticky);updateHeaderHeights();
-  window.addEventListener('resize',function(){onScroll();updateHeaderHeights();});
+  var headerObserver=new ResizeObserver(updateHeaderHeight);
+  headerObserver.observe(sticky);updateHeaderHeight();
+  window.addEventListener('resize',function(){onScroll();updateHeaderHeight();});
   function revealAnchor(){
     var id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}
     var target=document.getElementById(id);if(!target) return;
@@ -726,7 +840,7 @@ var QUESTIONS = {
       var details=target.closest('details');if(details) details.open=true;
     }
     requestAnimationFrame(function(){
-      updateHeaderHeights();
+      updateHeaderHeight();
       requestAnimationFrame(function(){target.scrollIntoView({block:'start'});onScroll();});
     });
   }
