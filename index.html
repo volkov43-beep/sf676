@@ -174,96 +174,269 @@ footer a{color:#fff}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media (max-width:540px){.advantages{grid-template-columns:1fr}}
+
+/* Intrinsic wrapping also keeps the existing sections usable with enlarged text. */
+body{overflow-wrap:anywhere}
+.btn{max-width:100%}
+.norms td:last-child{white-space:normal}
+/* Iteration 01: opt-in design tokens and components. Other content sections keep their styles. */
+:root{
+ --ui-space-1:8px;--ui-space-2:16px;--ui-space-3:24px;--ui-space-4:32px;
+ --ui-space-5:48px;--ui-space-6:64px;--ui-radius:4px;
+ --ui-h1:clamp(1.75rem,3.5vw,3rem);--ui-h2:clamp(1.5rem,2.5vw,2rem);
+ --ui-h3:1.25rem;--ui-body:1.0625rem;--ui-small:.875rem;
+ --ui-section:clamp(48px,6vw,80px);--ui-gap:24px;
+}
+.v1{overflow-wrap:anywhere;padding:var(--ui-section) 0;font-size:var(--ui-body);line-height:1.55}
+.v1 h1{font-size:var(--ui-h1);line-height:1.1}
+.v1 h2{font-size:var(--ui-h2);line-height:1.2}
+.v1 h3,.v1 caption{font-size:var(--ui-h3);line-height:1.3}
+.v1 p:last-child{margin-bottom:0}
+.v1 .section-heading{margin:0 0 var(--ui-space-4)}
+.v1 .ui-card{min-width:0;border:1px solid var(--line);border-radius:var(--ui-radius);padding:var(--ui-space-3);background:#fff}
+.v1 .ui-card h3{margin:0 0 var(--ui-space-2)}
+.v1 .ui-note{font-size:var(--ui-small);color:var(--mute)}
+.v1 .btn{min-height:48px;padding:14px 22px;text-align:center;max-width:100%;white-space:normal}
+.v1 .btn.red:hover,.sticky .btn.red:hover{background:#963127;border-color:#963127}
+.v1 a:focus-visible,.draft input:focus-visible,.sticky a:focus-visible{outline:3px solid #8a6d00;outline-offset:4px}
+.draft input:focus-visible{outline-color:#ffbf47}
+.q sup{color:#795f00}
+.v1 .text-link{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:4px;font-size:1rem;font-weight:700}
+.v1 .text-link:hover{text-decoration-thickness:2px}
+.v1 .media-placeholder{display:flex;align-items:center;justify-content:center;aspect-ratio:2/1;padding:var(--ui-space-2);border:1px solid var(--line);border-radius:var(--ui-radius);background:#eef0f2;color:#52616d;text-align:center;font-size:var(--ui-small);line-height:1.4}
+/* Hero: one image in the DOM; CSS grid moves it after the CTA on mobile. */
+.hero.v1{display:block;min-height:0;padding:var(--ui-space-5) 0 var(--ui-space-6)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy media" "facts media" "trust trust";gap:var(--ui-space-4) var(--ui-space-5);align-items:start}
+.hero-grid > *{min-width:0}
+.hero-copy{grid-area:copy}
+.hero-eyebrow{font-size:var(--ui-small);color:var(--steel);margin:0 0 var(--ui-space-2)}
+.hero-copy h1{max-width:12em;margin:0 0 var(--ui-space-3)}
+.hero-description{margin:0 0 var(--ui-space-3);max-width:36em}
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:var(--ui-space-1) var(--ui-space-3)}
+.hero-contact{margin:var(--ui-space-2) 0 0;font-size:var(--ui-small);color:var(--mute)}
+.hero-contact a{color:var(--steel);text-underline-offset:3px}
+.hero-media{grid-area:media;margin:0;border-radius:var(--ui-radius);overflow:hidden;background:var(--light)}
+.hero-media picture{display:block}
+.hero-media img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center}
+.hero-media figcaption{padding:12px var(--ui-space-2);font-size:var(--ui-small);color:var(--steel);border:1px solid var(--line);border-top:0}
+.hero-facts{grid-area:facts;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-space-3);margin:0}
+.hero-fact{min-width:0;border-top:2px solid var(--line);padding-top:var(--ui-space-2)}
+.hero-fact b{display:block;font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.3;color:var(--steel);margin-bottom:var(--ui-space-1);font-variant-numeric:tabular-nums}
+.hero-fact small{display:block;font-size:var(--ui-small);color:var(--mute);line-height:1.5}
+.hero-trust{grid-area:trust;display:flex;gap:var(--ui-space-2) var(--ui-space-4);flex-wrap:wrap;border-top:1px solid var(--line);padding-top:var(--ui-space-3);font-size:var(--ui-small);color:var(--steel)}
+/* Five cards: three above and two centred below, then two / one columns. */
+.adv-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--ui-gap)}
+.adv-card{grid-column:span 2}
+.adv-card:nth-child(4){grid-column:2 / span 2}
+.adv-card:nth-child(5){grid-column:4 / span 2}
+.adv-card .media-placeholder{margin-bottom:var(--ui-space-3)}
+.adv-card p{margin:0}
+/* Full-width grouped specification tables. */
+.specs-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--ui-space-4);margin-bottom:var(--ui-space-4)}
+.specs-heading h2{margin:0}
+.v1 .specs-visual{flex:0 0 216px;aspect-ratio:3/2}
+.spec-groups{display:grid;gap:var(--ui-space-4)}
+.spec-groups > *,.specs-heading > *,.media-placeholder > span{min-width:0;max-width:100%}
+.v1 .spec-table{font-size:1rem;line-height:1.5;table-layout:fixed;overflow-wrap:anywhere}
+.v1 .spec-table caption{padding:0 0 var(--ui-space-2);text-align:left;font-weight:700;color:var(--steel)}
+.v1 .spec-table th,.v1 .spec-table td{padding:14px 20px;width:auto;vertical-align:top}
+.v1 .spec-table thead th:first-child{width:55%}
+.v1 .spec-table th[scope="row"]{background:#fff;font-weight:400;color:var(--ink)}
+.v1 .spec-table td{font-weight:600;color:var(--ink)}
+.v1 .spec-table .q{font-weight:400}
+.spec-operations{margin:var(--ui-space-3) 0 0;color:var(--steel);font-size:1rem}
+.spec-docs{margin-top:var(--ui-space-5);padding-top:var(--ui-space-4);border-top:1px solid var(--line)}
+.doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap)}
+.doc-grid .ui-card h3{font-size:1.125rem}
+.spec-docs .doc-extra{margin-top:var(--ui-space-2)}
+/* Compact review bar and fixed header: neither changes layout while scrolling. */
+.draft{overflow-wrap:anywhere;min-height:44px;padding:4px 16px;gap:8px;font-size:.8125rem;line-height:1.3;justify-content:center}
+.draft[hidden]{display:none}
+.draft-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.draft label{min-height:36px;gap:5px;white-space:normal}
+.draft input{flex:none;margin:0;width:18px;height:18px}
+.draft-status{font-weight:700}
+.sticky{overflow-wrap:anywhere;position:fixed;inset-inline:0;top:var(--draft-height,0px);display:block;visibility:hidden;pointer-events:none;padding:6px 0}
+body.scrolled .sticky{visibility:visible;pointer-events:auto}
+.sticky .wrap{gap:12px;flex-wrap:nowrap}
+.sticky .logo{font-size:1.2rem;text-decoration:none}
+.sticky .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:10px 16px;font-size:.9375rem}
+.sticky .tel{font-size:1rem}
+.sticky .tel-short{display:none}
+@media (max-width:1100px){
+ .hero-grid{gap:var(--ui-space-4)}
+ .adv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .adv-card,.adv-card:nth-child(4),.adv-card:nth-child(5){grid-column:auto}
+}
+@media (max-width:900px){
+ .hero.v1{padding:var(--ui-space-4) 0 var(--ui-space-5)}
+ .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "media" "facts" "trust";gap:var(--ui-space-4)}
+ .hero-copy h1{max-width:none}
+ .hero-description{max-width:none}
+ .hero-media{width:100%;max-width:520px;justify-self:center}
+ .hero-media img{aspect-ratio:1}
+ .hero-fact b{font-size:1.375rem}
+ .doc-grid{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+ .v1 .wrap{padding-inline:24px}
+ .hero.v1{padding-top:var(--ui-space-3)}
+ .hero-actions{align-items:stretch;flex-direction:column;gap:var(--ui-space-1)}
+ .hero-actions .text-link{align-self:flex-start}
+ .adv-grid{grid-template-columns:1fr}
+ .specs-heading{align-items:flex-start;flex-direction:column;gap:var(--ui-space-3)}
+ .v1 .specs-visual{flex:none;width:168px}
+ .v1 .spec-table,.v1 .spec-table tbody{display:block}
+ .v1 .spec-table thead{display:none}
+ .v1 .spec-table caption{display:block}
+ .v1 .spec-table tr{display:block;border:1px solid var(--line);border-bottom:0}
+ .v1 .spec-table tr:last-child{border-bottom:1px solid var(--line)}
+ .v1 .spec-table th[scope="row"],.v1 .spec-table td{display:block;border:0;padding:12px 16px;width:auto}
+ .v1 .spec-table th[scope="row"]{padding-bottom:4px;color:var(--mute);font-size:.9375rem}
+ .v1 .spec-table td{padding-top:0}
+ .sticky .wrap{padding-inline:16px;gap:8px;flex-wrap:wrap}
+ .sticky .logo{font-size:1.125rem}
+ .sticky .tel{font-size:.875rem}
+ .sticky .tel-long{display:none}
+ .sticky .tel-short{display:inline}
+ .sticky .btn{font-size:.875rem;padding-inline:12px}
+}
+@media (max-width:479px){.hero-facts{grid-template-columns:1fr}}
+
 </style>
 </head>
-<body class="showq">
+<body>
 
-<div class="draft">
-  <div>Черновик страницы для согласования · серые поля — места фотографий · тексты — редакция по встрече 08.10.2026</div>
-  <div style="display:flex;gap:18px;flex-wrap:wrap"><label><input type="checkbox" id="qtoggle"> Показать вопросы к заводу</label><label id="vplabel"><input type="checkbox" id="vptoggle"> Как на компьютере</label></div>
-</div>
+<aside class="draft" aria-label="Режим согласования" hidden>
+  <span class="draft-status" title="Черновик для согласования. Редакция по встрече 08.10.2026">Согласование</span>
+  <div class="draft-controls">
+    <label><input type="checkbox" id="qtoggle" aria-label="Показать вопросы к заводу"> Вопросы</label>
+    <label id="vplabel"><input type="checkbox" id="vptoggle" aria-label="Как на компьютере"> ПК-вид</label>
+  </div>
+</aside>
 
-<div class="sticky">
+<header class="sticky" aria-label="Быстрые контакты">
   <div class="wrap">
-    <div class="logo">ВСЗ</div>
-    <a class="tel" href="tel:88007072676">8 (800) 707-26-76</a>
+    <a class="logo" href="#top" aria-label="ВСЗ — в начало страницы">ВСЗ</a>
+    <a class="tel" href="tel:88007072676" aria-label="Позвонить: 8 (800) 707-26-76"><span class="tel-long">8 (800) 707-26-76</span><span class="tel-short">Позвонить</span></a>
     <a class="btn red" href="#order">Получить цену</a>
   </div>
-</div>
+</header>
 
 <!-- 1 -->
-<section class="hero" id="top">
-  <div class="txt">
-    <div class="over">Вятский станкостроительный завод · Киров · производитель</div>
-    <h1>Станок фрезерный СФ676</h1>
-    <p class="sub">Широкоуниверсальный фрезерный станок с двумя шпинделями — горизонтальным и вертикальным — и двумя рабочими столами: вертикальным и угловым горизонтальным. Для серийного производства деталей, инструментальных, экспериментальных, вспомогательных и ремонтных подразделений предприятий.</p>
-    <div class="nums">
-      <div><b>250 × 630 мм</b><small>рабочая поверхность вертикального стола</small></div>
-      <div><b>250 × 800 мм</b><small>рабочая поверхность углового горизонтального стола; исполнение 300 × 800 мм</small></div>
-      <div><b>450 / 300 / 380 мм</b><small>перемещения X / Y / Z</small></div>
-      <div><b>От 20 рабочих дней</b><small>изготовление станка в любой модификации</small></div>
+<section class="hero v1" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Вятский станкостроительный завод · Киров · производитель</p>
+      <h1>Станок фрезерный СФ676</h1>
+      <p class="hero-description">Широкоуниверсальный фрезерный станок с двумя шпинделями — горизонтальным и вертикальным — и двумя рабочими столами: вертикальным и угловым горизонтальным. Для серийного производства деталей, инструментальных, экспериментальных, вспомогательных и ремонтных подразделений предприятий.</p>
+      <div class="hero-actions">
+        <a class="btn red" href="#order">Получить цену с доставкой</a>
+        <a class="text-link" href="#specs">Технические характеристики</a>
+      </div>
+      <p class="hero-contact"><a href="tel:88007072676">8 (800) 707-26-76</a> — бесплатно по России</p>
     </div>
-    <div class="cta">
-      <a class="btn red" href="#order">Получить цену с доставкой</a>
-      <a class="btn out" href="#specs">Технические характеристики</a>
-      <span class="tel">8 (800) 707-26-76 — бесплатно по России</span>
+    <figure class="hero-media">
+      <picture>
+        <source media="(max-width:900px)" srcset="assets/images/sf676-hero-square-480.webp 480w, assets/images/sf676-hero-square-800.webp 800w" sizes="(max-width:568px) calc(100vw - 48px), 520px" width="800" height="800">
+        <img src="assets/images/sf676-hero-portrait-800.webp" srcset="assets/images/sf676-hero-portrait-480.webp 480w, assets/images/sf676-hero-portrait-800.webp 800w, assets/images/sf676-hero-portrait-1092.webp 1092w" sizes="(max-width:1100px) calc((100vw - 80px) / 2), (max-width:1200px) calc((100vw - 96px) / 2), 552px" width="1092" height="1365" alt="СФ676 на переднем плане производственного участка Вятского станкостроительного завода" fetchpriority="high">
+      </picture>
+      <figcaption>СФ676 на производственном участке ВСЗ</figcaption>
+    </figure>
+    <div class="hero-facts">
+      <div class="hero-fact"><b>250 × 630 мм</b><small>рабочая поверхность вертикального стола</small></div>
+      <div class="hero-fact"><b>250 × 800 мм</b><small>рабочая поверхность углового горизонтального стола; исполнение 300 × 800 мм</small></div>
+      <div class="hero-fact"><b>450 / 300 / 380 мм</b><small>перемещения X / Y / Z</small></div>
+      <div class="hero-fact"><b>От 20 рабочих дней</b><small>изготовление станка в любой модификации</small></div>
     </div>
-    <div class="trust">
+    <div class="hero-trust">
       <span>В реестре промышленной продукции Минпромторга</span>
       <span>Современное исполнение выпускается с 2016 года</span>
     </div>
   </div>
-  <div class="ph"><span>Фото: станок в цеху, широкий план</span></div>
 </section>
 
 <!-- 2 -->
-<section class="grey" id="advantages">
+<section class="grey v1" id="advantages">
   <div class="wrap">
-    <h2>Ключевые преимущества СФ676</h2>
-    <div class="grid advantages levels" style="margin-top:28px">
-      <article><span class="mark" aria-hidden="true">2</span><h3>Два шпинделя</h3><p>Горизонтальный и вертикальный — для разных фрезерных операций.</p></article>
-      <article><span class="mark" aria-hidden="true">2</span><h3>Два рабочих стола</h3><p>Вертикальный и угловой горизонтальный — для разных технологических задач.</p></article>
-      <article><span class="mark" aria-hidden="true">+</span><h3>Глобусный стол</h3><p>Дополнительная опция: универсальный угловой стол устанавливается вместо штатного горизонтального.</p></article>
-      <article><span class="mark">±90°</span><h3>Поворот головки</h3><p>Обработка деталей при различных углах положения вертикального шпинделя.</p></article>
-      <article><span class="mark" aria-hidden="true">+</span><h3>Долбёжные операции</h3><p>Выполняются с помощью дополнительной долбёжной головки.</p></article>
+    <h2 class="section-heading">Ключевые преимущества СФ676</h2>
+    <div class="adv-grid">
+      <article class="ui-card adv-card">
+        <div class="media-placeholder"><span>Фото шпиндельного узла<br>будет добавлено</span></div>
+        <h3>Два шпинделя</h3><p>Горизонтальный и вертикальный — для разных фрезерных операций.</p>
+      </article>
+      <article class="ui-card adv-card">
+        <div class="media-placeholder"><span>Фото рабочих столов<br>будет добавлено</span></div>
+        <h3>Два рабочих стола</h3><p>Вертикальный и угловой горизонтальный — для разных технологических задач.</p>
+      </article>
+      <article class="ui-card adv-card">
+        <div class="media-placeholder"><span>Фото глобусного стола<br>будет добавлено</span></div>
+        <h3>Глобусный стол</h3><p>Дополнительная опция: универсальный угловой стол устанавливается вместо штатного горизонтального.</p>
+      </article>
+      <article class="ui-card adv-card">
+        <div class="media-placeholder"><span>Фото поворотной головки<br>будет добавлено</span></div>
+        <h3>Поворот головки ±90°</h3><p>Обработка деталей при различных углах положения вертикального шпинделя.</p>
+      </article>
+      <article class="ui-card adv-card">
+        <div class="media-placeholder"><span>Фото долбёжной головки<br>будет добавлено</span></div>
+        <h3>Долбёжные операции</h3><p>Выполняются с помощью дополнительной долбёжной головки.</p>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- 3 -->
-<section id="specs">
+<section class="v1" id="specs">
   <div class="wrap">
-    <h2>Основные характеристики</h2>
-    <div class="grid specs">
-      <div class="ph" style="min-height:420px"><span>Фото: фронтальный вид с выносками к столу, шпинделям, пульту</span></div>
-      <div>
-        <table>
-          <tr><td>Габариты (Д × Ш × В)</td><td>1200 × 1240 × 1780 мм</td></tr>
-          <tr><td>Масса в стандартной комплектации</td><td>1050 кг</td></tr>
-          <tr><td>Рабочая поверхность углового горизонтального стола</td><td>250 × 800 мм; исполнение 300 × 800 мм. <span class="q" data-q="stol">Количество пазов уточняется</span></td></tr>
-          <tr><td>Рабочая поверхность вертикального стола</td><td>250 × 630 мм</td></tr>
-          <tr><td>Перемещения по осям X / Y / Z</td><td>450 / 300 / 380 мм</td></tr>
-          <tr><td>Конус шпинделей</td><td>7:24 № 40 или Морзе 4</td></tr>
-          <tr><td>Частота вращения шпинделя горизонтального / вертикального</td><td>50–1630 / 63–2040 об/мин, 16 ступеней</td></tr>
-          <tr><td>Рабочие подачи / ускоренная</td><td>13–395 / 935 мм/мин, 16 ступеней</td></tr>
-          <tr><td>Поворот вертикального шпинделя</td><td>±90°</td></tr>
-          <tr><td>Ход пиноли вертикального шпинделя</td><td>80 мм</td></tr>
-          <tr><td>Наибольшее усилие резания</td><td>550 кгс</td></tr>
-          <tr><td>Мощность главного привода / насоса СОЖ</td><td>3,0 / 0,12 кВт</td></tr>
-          <tr><td>Питание</td><td>380 В, 3 фазы, 50 Гц</td></tr>
-          <tr><td>Класс точности по ГОСТ 8-82</td><td>Н</td></tr>
-        </table>
-        <p class="mute" style="margin-top:14px">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка</p>
+    <div class="specs-heading">
+      <h2>Основные характеристики</h2>
+      <div class="media-placeholder specs-visual" title="Фронтальный вид с выносками к столу, шпинделям и пульту"><span>Фото с выносками<br>будет добавлено</span></div>
+    </div>
+    <div class="spec-groups">
+      <table class="spec-table">
+        <caption>Рабочая зона и конструкция</caption>
+        <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Габариты (Д × Ш × В)</th><td>1200 × 1240 × 1780 мм</td></tr>
+          <tr><th scope="row">Масса в стандартной комплектации</th><td>1050 кг</td></tr>
+          <tr><th scope="row">Рабочая поверхность углового горизонтального стола</th><td>250 × 800 мм; исполнение 300 × 800 мм. <span class="q" data-q="stol">Количество пазов уточняется</span></td></tr>
+          <tr><th scope="row">Рабочая поверхность вертикального стола</th><td>250 × 630 мм</td></tr>
+          <tr><th scope="row">Перемещения по осям X / Y / Z</th><td>450 / 300 / 380 мм</td></tr>
+          <tr><th scope="row">Ход пиноли вертикального шпинделя</th><td>80 мм</td></tr>
+        </tbody>
+      </table>
+      <table class="spec-table">
+        <caption>Шпиндели и обработка</caption>
+        <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Конус шпинделей</th><td>7:24 № 40 или Морзе 4</td></tr>
+          <tr><th scope="row">Частота вращения шпинделя горизонтального / вертикального</th><td>50–1630 / 63–2040 об/мин, 16 ступеней</td></tr>
+          <tr><th scope="row">Рабочие подачи / ускоренная</th><td>13–395 / 935 мм/мин, 16 ступеней</td></tr>
+          <tr><th scope="row">Поворот вертикального шпинделя</th><td>±90°</td></tr>
+          <tr><th scope="row">Наибольшее усилие резания</th><td>550 кгс</td></tr>
+        </tbody>
+      </table>
+      <table class="spec-table">
+        <caption>Электрика и точность</caption>
+        <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Мощность главного привода / насоса СОЖ</th><td>3,0 / 0,12 кВт</td></tr>
+          <tr><th scope="row">Питание</th><td>380 В, 3 фазы, 50 Гц</td></tr>
+          <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="spec-operations">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка</p>
+    <div class="spec-docs">
+      <h3>Техническая документация</h3>
+      <p class="ui-note"><span class="q" data-q="docs">PDF-файлы пока не добавлены.</span></p>
+      <div class="doc-grid" id="technical-documents">
+        <article class="ui-card"><h3>Полные технические характеристики</h3><p class="ui-note">Файл пока не добавлен</p></article>
+        <article class="ui-card"><h3>Стандартная комплектация</h3><p class="ui-note">Файл пока не добавлен</p></article>
+        <article class="ui-card"><h3>Дополнительная комплектация</h3><p class="ui-note">Файл пока не добавлен</p></article>
       </div>
+      <p class="ui-note doc-extra">Дополнительные материалы: эскизы столов и шпинделей, руководство по эксплуатации. Файлы пока не добавлены.</p>
     </div>
-    <h3 style="margin-top:32px">Техническая документация</h3>
-    <p class="mute"><span class="q" data-q="docs">PDF-файлы пока не добавлены.</span></p>
-    <div class="grid g3 levels" id="technical-documents">
-      <article><h3>Полные технические характеристики</h3><p class="mute">Файл пока не добавлен</p></article>
-      <article><h3>Стандартная комплектация</h3><p class="mute">Файл пока не добавлен</p></article>
-      <article><h3>Дополнительная комплектация</h3><p class="mute">Файл пока не добавлен</p></article>
-    </div>
-    <p class="mute" style="margin-top:16px">Дополнительные материалы: эскизы столов и шпинделей, руководство по эксплуатации. Файлы пока не добавлены.</p>
   </div>
 </section>
 
@@ -525,14 +698,19 @@ var QUESTIONS = {
   var ol=document.getElementById('qol');
   order.forEach(function(k,i){var q=QUESTIONS[k]||{t:k,w:''}; var li=document.createElement('li'); li.id='ql-'+k; li.innerHTML='<b>'+q.t+'</b> <span class="mute">— '+q.w+'</span> &nbsp;<a href="#q-'+k+'">где на странице ↑</a>'; ol.appendChild(li);});
   var t=document.getElementById('qtoggle');
+  var draft=document.querySelector('.draft'), sticky=document.querySelector('.sticky');
+  var review=new URLSearchParams(location.search).get('review')==='1';
+  function enableReview(){
+    review=true;draft.hidden=false;document.body.classList.add('review-mode','showq');t.checked=true;
+  }
+  if(review) enableReview();
   t.checked=document.body.classList.contains('showq');
   t.addEventListener('change',function(){document.body.classList.toggle('showq',t.checked)});
   var vp=document.getElementById('vptoggle'), meta=document.getElementById('vp');
   vp.addEventListener('change',function(){meta.setAttribute('content', vp.checked ? 'width=1366, minimum-scale=0.2, maximum-scale=3' : 'width=device-width, initial-scale=1'); window.scrollTo(0,0);});
   var hero=document.getElementById('top');
-  function onScroll(){document.body.classList.toggle('scrolled',window.scrollY>hero.offsetHeight-60)}
+  function onScroll(){document.body.classList.toggle('scrolled',window.scrollY>hero.offsetTop+hero.offsetHeight-draft.getBoundingClientRect().height-sticky.getBoundingClientRect().height-24)}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-  var draft=document.querySelector('.draft'), sticky=document.querySelector('.sticky');
   function updateHeaderHeights(){
     document.documentElement.style.setProperty('--draft-height',draft.getBoundingClientRect().height+'px');
     document.documentElement.style.setProperty('--sticky-height',sticky.getBoundingClientRect().height+'px');
@@ -540,15 +718,26 @@ var QUESTIONS = {
   var headerObserver=new ResizeObserver(updateHeaderHeights);
   headerObserver.observe(draft);headerObserver.observe(sticky);updateHeaderHeights();
   window.addEventListener('resize',function(){onScroll();updateHeaderHeights();});
-  function revealQuestion(){
-    var target=document.getElementById(location.hash.slice(1));
-    if(!target || !target.matches('.q,#qol li')) return;
-    t.checked=true;document.body.classList.add('showq');
-    var details=target.closest('details');if(details) details.open=true;
-    requestAnimationFrame(function(){onScroll();updateHeaderHeights();target.scrollIntoView();});
+  function revealAnchor(){
+    var id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}
+    var target=document.getElementById(id);if(!target) return;
+    if(target.matches('.q,#qol li')){
+      enableReview();
+      var details=target.closest('details');if(details) details.open=true;
+    }
+    requestAnimationFrame(function(){
+      updateHeaderHeights();
+      requestAnimationFrame(function(){target.scrollIntoView({block:'start'});onScroll();});
+    });
   }
-  window.addEventListener('hashchange',revealQuestion);revealQuestion();
+  window.addEventListener('hashchange',revealAnchor);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(a && a.hash && a.hash===location.hash && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey){e.preventDefault();revealAnchor();}
+  });
+  revealAnchor();
 })();
 </script>
 </body>
 </html>
+
