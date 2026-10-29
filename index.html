@@ -113,6 +113,10 @@ summary{cursor:pointer;font-weight:700;color:var(--steel)}
 .cfg table td:first-child{font-weight:700;width:22%}
 .levels article{border:1px solid var(--line);border-radius:4px;padding:18px}
 .levels h3{margin-bottom:8px}
+.advantages{grid-template-columns:repeat(5,minmax(0,1fr))}
+.advantages .mark{display:block;color:var(--red);font-size:2rem;font-weight:700;line-height:1.15;margin-bottom:16px}
+.advantages p{margin-bottom:0}
+@media (min-width:901px) and (max-width:1100px){.advantages{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* steps */
 .steps{list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .steps li{position:relative;padding-left:40px}
@@ -146,6 +150,7 @@ footer a{color:#fff}
  h1{font-size:1.7rem}h2{font-size:1.45rem}
  .nums{grid-template-columns:1fr 1fr}
  .g2,.g3,.g4,.specs,.cfg,.form{grid-template-columns:1fr}
+ .advantages{grid-template-columns:repeat(2,minmax(0,1fr))}
  .steps{grid-template-columns:1fr}
  .calc{grid-template-columns:1fr}
  .norms td:last-child{white-space:normal}
@@ -167,6 +172,7 @@ footer a{color:#fff}
  .sticky .btn{padding:10px 14px;font-size:.9rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:540px){.advantages{grid-template-columns:1fr}}
 </style>
 </head>
 <body class="showq">
@@ -187,30 +193,43 @@ footer a{color:#fff}
 <!-- 1 -->
 <section class="hero" id="top">
   <div class="txt">
-    <div class="over">Вятский станкостроительный завод · Киров · изготовитель</div>
-    <h1>Широкоуниверсальный фрезерный станок СФ676 — новый, с завода, для ремонтных и инструментальных участков</h1>
-    <p class="sub">Для ремонтных служб, инструментальных участков, мелкосерийного производства и учебных мастерских. Два шпинделя, поворот вертикальной головки ±90°, акт приёмки с фактическими замерами в комплекте поставки. Изготавливается под заказ в Кирове.</p>
+    <div class="over">Вятский станкостроительный завод · Киров · производитель</div>
+    <h1>Станок фрезерный СФ676</h1>
+    <p class="sub">Широкоуниверсальный фрезерный станок с двумя шпинделями — горизонтальным и вертикальным — и двумя рабочими столами: вертикальным и угловым горизонтальным. Для серийного производства деталей, инструментальных, экспериментальных, вспомогательных и ремонтных подразделений предприятий.</p>
     <div class="nums">
-      <div><b>250 × 800 мм</b><small>рабочий стол</small></div>
-      <div><b>450 / 300 / 380</b><small>перемещения X / Y / Z, мм</small></div>
-      <div><b>1050 кг</b><small>литая чугунная станина</small></div>
-      <div><b><span class="q" data-q="srok">от 20 дней</span></b><small>изготовление базовой комплектации</small></div>
+      <div><b>250 × 630 мм</b><small>рабочая поверхность вертикального стола</small></div>
+      <div><b>250 × 800 мм</b><small>рабочая поверхность углового горизонтального стола; исполнение 300 × 800 мм</small></div>
+      <div><b>450 / 300 / 380 мм</b><small>перемещения X / Y / Z</small></div>
+      <div><b>От 20 рабочих дней</b><small>изготовление станка в любой модификации</small></div>
     </div>
     <div class="cta">
       <a class="btn red" href="#order">Получить цену с доставкой</a>
-      <a class="btn out" href="#specs">Скачать характеристики (PDF)</a>
+      <a class="btn out" href="#specs">Технические характеристики</a>
       <span class="tel">8 (800) 707-26-76 — бесплатно по России</span>
     </div>
     <div class="trust">
       <span>В реестре промышленной продукции Минпромторга</span>
-      <span>ТУ 3816-001-67559892-2016</span>
-      <span>Выпускается с <span class="q" data-q="god">[год]</span></span>
+      <span>Современное исполнение выпускается с 2016 года</span>
     </div>
   </div>
   <div class="ph"><span>Фото: станок в цеху, широкий план</span></div>
 </section>
 
 <!-- 2 -->
+<section class="grey" id="advantages">
+  <div class="wrap">
+    <h2>Ключевые преимущества СФ676</h2>
+    <div class="grid advantages levels" style="margin-top:28px">
+      <article><span class="mark" aria-hidden="true">2</span><h3>Два шпинделя</h3><p>Горизонтальный и вертикальный — для разных фрезерных операций.</p></article>
+      <article><span class="mark" aria-hidden="true">2</span><h3>Два рабочих стола</h3><p>Вертикальный и угловой горизонтальный — для разных технологических задач.</p></article>
+      <article><span class="mark" aria-hidden="true">+</span><h3>Глобусный стол</h3><p>Дополнительная опция: универсальный угловой стол устанавливается вместо штатного горизонтального.</p></article>
+      <article><span class="mark">±90°</span><h3>Поворот головки</h3><p>Обработка деталей при различных углах положения вертикального шпинделя.</p></article>
+      <article><span class="mark" aria-hidden="true">+</span><h3>Долбёжные операции</h3><p>Выполняются с помощью дополнительной долбёжной головки.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
 <section id="specs">
   <div class="wrap">
     <h2>Основные характеристики</h2>
