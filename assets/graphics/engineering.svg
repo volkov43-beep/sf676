@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept diagrams show directions and principles, never machine geometry. -->
+  <symbol id="spindles" viewBox="0 0 240 140">
+    <g fill="none" stroke="#34495E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M25 66h36v22H25zM61 72h24v10H61M154 20h22v36h-22zM160 56v24h10V56"/>
+      <path d="M116 88h76v30h-76z" fill="#fff"/><path d="M125 101h58M125 109h58"/>
+      <path d="M86 77h25m-7-6 7 6-7 6M165 81v16m-6-7 6 7 6-7" stroke="#B03A2E"/>
+      <path d="M37 60a16 16 0 0 1 20-5m-1-7 1 7-7 1M184 33a16 16 0 0 1 5 20m7-1-7 1-1-7"/>
+    </g>
+  </symbol>
+  <symbol id="tables" viewBox="0 0 240 140">
+    <g fill="none" stroke="#34495E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M31 25h58v90H31zM42 40v60M54 40v60M66 40v60M78 40v60"/>
+      <path d="m121 82 28-34h67l-28 34zm0 0v13h67V82m0 13 28-34V48M137 77l20-23m-4 23 20-23m-4 23 20-23"/>
+      <path d="M23 115h74M122 104h66" stroke="#B03A2E"/>
+    </g>
+  </symbol>
+  <symbol id="tilt-table" viewBox="0 0 240 140">
+    <g fill="none" stroke="#34495E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M72 114h96m-78 0 16-29h28l16 29"/>
+      <circle cx="120" cy="85" r="7"/>
+      <path d="m66 62 83-29 12 15-83 29zM109 47l-8-20 27-9 7 20" fill="#fff"/>
+      <path d="M55 91a64 64 0 0 1 31-67m-8 0h8v8M178 45a64 64 0 0 1 5 46m-6-6 6 6 6-6" stroke="#B03A2E"/>
+    </g>
+  </symbol>
+  <symbol id="head-turn" viewBox="0 0 240 140">
+    <g fill="none" stroke="#34495E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="120" cy="43" r="8"/><path d="M109 53v45h22V53M115 98v22h10V98"/>
+      <path d="M58 43h37m50 0h37" stroke-dasharray="4 5"/>
+      <path d="M57 43a63 63 0 0 0 126 0m-5 8 5-8 5 8M52 51l5-8 5 8" stroke="#B03A2E"/>
+    </g>
+    <text x="120" y="24" text-anchor="middle" fill="#B03A2E" font-family="Arial,sans-serif" font-size="18" font-weight="700">±90°</text>
+  </symbol>
+  <symbol id="slotting" viewBox="0 0 240 140">
+    <g fill="none" stroke="#34495E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M90 20h24v28H90zM98 48v45h8V48M82 103h50v16H82zM82 103V80h14m12 0h24v23"/>
+      <path d="M160 30v68m-6-60 6-8 6 8m-12 52 6 8 6-8" stroke="#B03A2E"/>
+      <path d="M69 123h76"/>
+    </g>
+  </symbol>
+  <symbol id="axes" viewBox="0 0 220 150">
+    <g fill="none" stroke="#34495E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M80 98h110m-8-6 8 6-8 6M80 98 34 132m1-9-1 9 9-1M80 98V24m-6 8 6-8 6 8"/>
+      <circle cx="80" cy="98" r="4" fill="#B03A2E" stroke="#B03A2E"/>
+    </g>
+    <g fill="#2C3E50" font-family="Arial,sans-serif" font-size="17" font-weight="700"><text x="196" y="104">X</text><text x="14" y="142">Y</text><text x="74" y="17">Z</text></g>
+  </symbol>
+  <!-- Reusable 48px icons: 2px strokes; text labels always remain in HTML. -->
+  <symbol id="document" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5h17l8 8v30H12zM29 5v8h8M18 22h13M18 29h13M18 36h8"/></g></symbol>
+  <symbol id="registry" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6h25v36H12zM7 13h9M7 24h9M7 35h9M22 14h8M22 24h8M22 34h8"/></g></symbol>
+  <symbol id="code" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h28v36H10zM16 16h16M20 22l-4 5 4 5m8-10 4 5-4 5M25 21l-2 13"/></g></symbol>
+  <symbol id="book" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12c-5-4-11-4-18-3v29c7-1 13-1 18 3 5-4 11-4 18-3V9c-7-1-13-1-18 3v29M12 17h6m-6 7h6m12-7h6m-6 7h6"/></g></symbol>
+  <symbol id="ruler" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v24h24v10H7zM12 13h5m-5 8h5m6 10v5m8-5v5"/></g></symbol>
+  <symbol id="rotation" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a17 17 0 1 1-1 19M10 6v8h8"/><circle cx="25" cy="24" r="4"/><path d="M25 28v11"/></g></symbol>
+  <symbol id="directions" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 24h31m-7-6 7 6-7 6M24 40V9m-6 7 6-7 6 7"/></g></symbol>
+  <symbol id="bed" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9h16l5 29H11zM8 38h32v5H8zM20 16h8M19 24h10M18 32h12"/></g></symbol>
+  <symbol id="controls" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8v32M24 8v32M38 8v32"/><path d="M6 17h8v7H6zM20 28h8v7h-8zM34 12h8v7h-8z" fill="var(--icon-surface,white)"/></g></symbol>
+  <symbol id="dro" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="29" rx="2"/><path d="M12 15h4m5 0h14M12 22h4m5 0h14M12 29h4m5 0h14M19 37v5h10v-5"/></g></symbol>
+  <symbol id="coolant" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 6c-2 6-7 10-7 15a7 7 0 0 0 14 0c0-5-5-9-7-15zM35 6v6m-10-2 4 4m15-4-4 4M29 24a7 7 0 1 1 12 0l-3 5h-6zM32 34h6M32 39h6"/></g></symbol>
+  <symbol id="machine" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6h14v12H11zM18 18v7M11 27h27v7H11zM11 34v8h27v-8M31 9h8v13h-8zM7 42h35"/></g></symbol>
+  <symbol id="repair" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M29 7a11 11 0 0 0-12 14L6 33a6 6 0 0 0 9 9l12-12A11 11 0 0 0 41 17l-8 8-9-9z"/><circle cx="11" cy="37" r="1"/></g></symbol>
+  <symbol id="inspected" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h15v13H7zM14 21v6M6 29h19v8H6zM11 37v5h11M31 7h10v18H30M35 13h3M35 19h3"/><circle cx="34" cy="35" r="8"/><path d="m30 35 3 3 5-6"/></g></symbol>
+  <symbol id="table" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 25 10-12h26L32 25zm0 0v7h26v-7m0 7 10-12v-7M15 23l6-8m2 8 6-8m-18 17v8m17-8v8"/></g></symbol>
+  <symbol id="taper" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16h6l24 6v4l-24 6H7zM13 16v16M37 22h6v4h-6M3 24h40" stroke-dasharray="0"/></g></symbol>
+  <symbol id="coordinates" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 31h26m-6-5 6 5-6 5M17 31V5m-5 6 5-6 5 6M17 31 5 43m0-7v7h7"/></g></symbol>
+  <symbol id="screw" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h38v8H5zM10 20l4 8m4-8 4 8m4-8 4 8m4-8 4 8M14 12h20m-5-4 5 4-5 4"/></g></symbol>
+  <symbol id="truck" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h25v23H5zM30 19h8l6 9v5H30M33 22v6h10"/><circle cx="13" cy="36" r="5"/><circle cx="36" cy="36" r="5"/></g></symbol>
+  <symbol id="start" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5v18M14 11a17 17 0 1 0 20 0"/></g></symbol>
+  <symbol id="calendar" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="34" height="32" rx="2"/><path d="M7 20h34M16 6v8M32 6v8M14 27h5m7 0h7M14 34h5m7 0h7"/></g></symbol>
+  <symbol id="geography" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><ellipse cx="24" cy="24" rx="8" ry="18"/><path d="M6 24h36M10 14h28M10 34h28"/></g></symbol>
+  <symbol id="factory" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 41V22l12-8v10l12-8v10h12v15zM34 26V7h6v19M12 32h4m8 0h4m7 0h3"/></g></symbol>
+  <symbol id="shield" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m24 5 16 6v13c0 8-9 15-16 19-7-4-16-11-16-19V11zM24 13v18M16 22h16"/></g></symbol>
+  <symbol id="energy" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M29 4 10 28h13l-4 16 19-25H25z"/></g></symbol>
+  <symbol id="atom" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="24" cy="24" rx="19" ry="8"/><ellipse cx="24" cy="24" rx="19" ry="8" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="19" ry="8" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="2"/></g></symbol>
+</svg>
