@@ -607,7 +607,10 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 
 </style>
 <link rel="stylesheet" href="assets/css/request-forms.css">
+<link rel="stylesheet" href="assets/css/sf676-selector.css">
+<script src="assets/js/sf676-selector-model.js" defer></script>
 <script src="assets/js/request-forms.js" defer></script>
+<script src="assets/js/sf676-selector.js" defer></script>
 </head>
 <body>
 
@@ -843,6 +846,19 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 <section class="v1 commercial" id="config">
   <div class="wrap">
     <h2 class="section-heading">Пять решений, из которых складывается ваш СФ676</h2>
+    <div id="sf676-selector" class="selector" hidden aria-labelledby="selector-title">
+      <h3 id="selector-title">Подберите комплектацию СФ676</h3>
+      <p>Выберите параметры самостоятельно или расскажите о производственной задаче — поможем подготовить требования к станку.</p>
+      <div class="selector-modes" role="group" aria-label="Способ подбора">
+        <button type="button" data-selector-mode="exact" aria-pressed="false"><b>Я знаю нужную комплектацию</b><span>Выберу стол, конус, УЦИ, координаты и винтовую передачу.</span></button>
+        <button type="button" data-selector-mode="quiz" aria-pressed="false"><b>Помогите определиться</b><span>Отвечу на вопросы о производственных задачах.</span></button>
+      </div>
+      <div id="selector-stage"></div>
+    </div>
+    <noscript><p>Изучите пять параметров ниже. Для консультации доступны телефон и электронная почта в <a href="#order">контактном разделе</a>.</p></noscript>
+    <details id="config-reference" class="config-reference">
+      <summary>Подробно о пяти параметрах комплектации</summary>
+      <div class="config-reference-body">
     <p class="lead">Обозначение модификации СФ676 определяется выбранной комплектацией. Согласуйте пять параметров для спецификации к договору. Или оставьте это нашему технологу: подберём по вашей маршрутной карте.</p>
     <ol class="config-options" aria-label="Пять параметров комплектации">
       <li class="ui-card config-option">
@@ -881,6 +897,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         </div>
       </li>
     </ol>
+      </div>
+    </details>
     <p class="config-note">Комплектация определяется по техническому заданию заказчика. Состав оборудования и дополнительных принадлежностей фиксируется в коммерческом предложении и договоре. Монтаж и пусконаладка входят в стоимость станка; командировочные расходы специалистов, доставка, разгрузка и страхование оплачиваются отдельно. Условия сопутствующих услуг прописываются в договоре.</p>
     <p class="mute config-accessories">Дополнительная оснастка: глобусный стол — установка детали в трёх плоскостях · универсальная делительная головка — шестерни, фланцы, деление на градусы · круглый поворотный стол · тиски до 125 мм · дополнительное освещение</p>
     <a class="btn red" href="#order" data-request-form="configuration_help" data-source-section="config" data-source-cta="config-request">Подобрать комплектацию с технологом</a>

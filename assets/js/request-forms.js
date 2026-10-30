@@ -149,6 +149,8 @@
   function cleanContext(value) {
     const result = {};
     if (!value || Object.getPrototypeOf(value) !== Object.prototype) return result;
+    const selected = window.SF676SelectorModel?.validateResult(value.selector);
+    if (selected) result.selector = selected;
     const groups = {
       configuration: ['workTable', 'spindleTaper', 'droType', 'coordinates', 'screwDrive'],
       calculation: null
@@ -166,6 +168,16 @@
       if (Object.keys(target).length) result[group] = target;
     }
     return result;
+  }
+  function renderSelection(result) {
+    const summary = window.SF676SelectorModel.summarize(result);
+    const box = el('div', 'request-selection request-field-wide');
+    box.appendChild(el('h3', '', summary.title));
+    const list = el('dl');
+    summary.rows.forEach(row => {
+      const item = el('div'); item.append(el('dt', '', row.label), el('dd', '', row.value)); list.appendChild(item);
+    });
+    box.append(list, el('p', '', summary.notice)); fields.appendChild(box);
   }
   function identifier(value, fallback) { return typeof value === 'string' && /^[a-zA-Z0-9_-]{1,80}$/.test(value) ? value : fallback; }
   function lockPage() {
@@ -200,15 +212,22 @@
   function open(options) {
     if (!options || !Object.hasOwn(scenarios, options.formId)) return false;
     if (dialog.open) return false; // No nested windows; caller can close explicitly first.
+    const context = cleanContext(options.context);
+    if (options.context && Object.hasOwn(options.context, 'selector') && (options.formId !== 'configuration_help' || !context.selector)) return false;
     cleanup();
     const scenario = scenarios[options.formId];
     fields.replaceChildren(); form.reset(); status.textContent = ''; delete status.dataset.state;
     title.textContent = scenario.title; description.textContent = scenario.description;
     sendButton.textContent = scenario.action;
-    scenario.fields.forEach(renderField);
+    const fieldKeys = scenario.fields.filter(key => !(context.selector?.mode === 'quiz' && key === 'task'));
+    if (context.selector) {
+      description.textContent = 'Ваша сводка добавлена ниже. Укажите контакт для обсуждения с технологом. Это демонстрационная форма без отправки.';
+      renderSelection(context.selector);
+    }
+    fieldKeys.forEach(renderField);
     if (scenario.note) fields.appendChild(el('p', 'request-hint request-field-wide', scenario.note));
     const trigger = options.trigger instanceof HTMLElement ? options.trigger : document.activeElement;
-    active = {formId: options.formId, sourceSection: identifier(options.sourceSection, 'unknown'), sourceCta: identifier(options.sourceCta, 'programmatic'), context: cleanContext(options.context), trigger, page: lockPage()};
+    active = {formId: options.formId, sourceSection: identifier(options.sourceSection, 'unknown'), sourceCta: identifier(options.sourceCta, 'programmatic'), context, fieldKeys, trigger, page: lockPage()};
     try { dialog.showModal(); title.focus({preventScroll: true}); dialog.querySelector('.request-content').scrollTop = 0; }
     catch (_) { cleanup(); return false; }
     return true;
@@ -218,7 +237,7 @@
     if (!active || !dialog.open) return null;
     if (Array.from(fields.querySelectorAll('input:not([type="checkbox"]),textarea,select')).some(input => fieldError(input))) return null;
     const contact = {}, context = cleanContext(active.context);
-    for (const key of scenarios[active.formId].fields) {
+    for (const key of active.fieldKeys) {
       const spec = definitions[key];
       const value = spec.type === 'checkboxes'
         ? Array.from(fields.querySelectorAll('input[name="' + key + '"]:checked')).map(input => input.value).filter(value => spec.options.some(option => option[0] === value))
