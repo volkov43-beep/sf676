@@ -1,0 +1,58 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>СФ676 — проверка платежей</title>
+<style>body{font:16px Arial;margin:16px}button,select{font:inherit;padding:8px;margin:6px}iframe{display:block;border:1px solid #aaa;height:800px;background:#fff}#stage{max-width:100%;overflow:auto}pre{white-space:pre-wrap;max-height:180px;overflow:auto}</style>
+<h1>Проверка калькулятора платежей</h1><label>Ширина <select id="width"><option>320</option><option>375</option><option selected>390</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label><label>Режим <select id="mode"><option value="normal">Обычный</option><option value="zoom">Текст 200%</option><option value="review">Review</option><option value="nojs">Без JavaScript</option><option value="noforms">Без скрипта форм</option><option value="nocalc">Без скрипта калькулятора</option></select></label><button id="show">Открыть</button><button id="run">Проверить платежи</button><button id="regressions">Проверить CTA и fallback</button><pre id="results">Готово к проверке.</pre><div id="stage"><iframe id="page" title="Проверяемая страница"></iframe></div>
+<script>
+const frame=document.getElementById('page'),output=document.getElementById('results');let results=[];
+const tick=()=>new Promise(r=>{requestAnimationFrame(()=>requestAnimationFrame(r));setTimeout(r,90)});
+const record=(name,pass,details={})=>results.push({name,pass:!!pass,...details});
+function report(){output.textContent=JSON.stringify({count:results.length,failed:results.filter(r=>!r.pass)},null,2)}
+async function load(width=390,mode='normal'){
+ frame.style.width=width+'px';if(mode==='nojs')frame.setAttribute('sandbox','allow-same-origin');else frame.removeAttribute('sandbox');
+ if(mode==='noforms'||mode==='nocalc'){
+  const source=await (await fetch('../index.html')).text(),file=mode==='noforms'?'request-forms.js':'payment-calculator.js';
+  await new Promise(r=>{frame.onload=r;frame.srcdoc=source.replace('<head>','<head><base href="'+new URL('../index.html',location.href).href+'">').replace('<script src="assets/js/'+file+'" defer></'+'script>','')});
+ }else{await new Promise(r=>{frame.onload=r;frame.removeAttribute('srcdoc');frame.src='../index.html'+(mode==='review'?'?review=1':'')})}
+ const w=frame.contentWindow,d=w.document;
+ w.__errors=[];w.__sinks=[];w.addEventListener('error',e=>w.__errors.push(e.message));w.addEventListener('unhandledrejection',e=>w.__errors.push(String(e.reason)));
+ for(const key of ['fetch','XMLHttpRequest','WebSocket'])w[key]=function(){w.__sinks.push(key);throw Error('Unexpected transport')};w.navigator.sendBeacon=()=>{w.__sinks.push('beacon');return false};w.Storage.prototype.setItem=function(){w.__sinks.push('storage');throw Error('Unexpected storage')};
+ d.documentElement.style.scrollBehavior='auto';if(mode==='zoom')d.documentElement.style.fontSize='200%';await tick();return{w,d};
+}
+function input(w,d,value){const e=d.querySelector('#payment-total');e.value=value;e.dispatchEvent(new w.Event('input',{bubbles:true}))}
+function geometry(d,selector){const box=d.querySelector(selector),r=box.getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&box.scrollWidth<=box.clientWidth+1&&Array.from(box.querySelectorAll('input,h3,p,strong,.btn,dt,dd')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||e.classList.contains('sr-only')||(b.left>=r.left-1&&b.right<=r.right+1&&(e.tagName==='INPUT'||e.scrollWidth<=e.clientWidth+1))});}
+const read=d=>Array.from(d.querySelectorAll('[data-payment-value]')).map(e=>e.textContent.replace(/\u00a0/g,' '));
+async function run(){results=[];try{
+ for(const mode of ['normal','zoom'])for(const width of [320,375,390,768,1024,1366,1920]){
+  const name=width+'/'+mode;output.textContent='Проверка '+name;const {w,d}=await load(width,mode),field=d.querySelector('#payment-total'),cta=d.querySelector('[data-payment-calculator]');
+  record(name+'/initial',w.SF676Payments&&field.value===''&&!field.closest('[hidden]')&&!d.querySelector('#payment-error').textContent&&w.SF676Payments.getCalculation()===null);
+  cta.click();record(name+'/empty-price-form',d.querySelector('dialog').open&&!d.querySelector('.request-payment'));d.querySelector('#request-contact').value='qa@example.com';record(name+'/empty-context',!w.SF676Requests.getDraft().context.calculation);w.SF676Requests.close();
+  for(const [value,expected]of [['4 000 000',['2 000 000 ₽','1 800 000 ₽','200 000 ₽','4 000 000 ₽']],['1234567,89',['617 283,95 ₽','555 555,55 ₽','61 728,39 ₽','1 234 567,89 ₽']],['1,01',['0,51 ₽','0,45 ₽','0,05 ₽','1,01 ₽']]]){
+   input(w,d,value);record(name+'/amount/'+value,JSON.stringify(read(d))===JSON.stringify(expected)&&field.value===value&&!field.hasAttribute('aria-invalid')&&geometry(d,'#payment-calculator'));
+  }
+  for(const value of ['0','-1','abc','1,2,3','1e6','1 23','1,234','1000000000,01']){input(w,d,value);record(name+'/invalid/'+value,field.getAttribute('aria-invalid')==='true'&&!!d.querySelector('#payment-error').textContent&&read(d).every(t=>t==='Сумма появится после ввода стоимости')&&w.SF676Payments.getCalculation()===null&&geometry(d,'#payment-calculator'))}
+  cta.click();record(name+'/invalid-context',d.querySelector('dialog').open&&!d.querySelector('.request-payment'));w.SF676Requests.close();
+  input(w,d,'1 000 000 000');record(name+'/maximum',w.SF676Payments.getCalculation().totalKopeks===100000000000&&geometry(d,'#payment-calculator'));
+  const result=w.SF676Payments.getCalculation();cta.scrollIntoView();cta.focus();await tick();const y=w.scrollY;cta.click();await tick();
+  record(name+'/summary',d.querySelector('dialog').open&&geometry(d,'dialog')&&d.querySelector('.request-payment').textContent.includes('не подтверждена заводом'));
+  d.querySelector('#request-contact').value='qa@example.com';const draft=w.SF676Requests.getDraft();record(name+'/context',JSON.stringify(draft.context.calculation)===JSON.stringify(result)&&draft.formId==='price_quote'&&draft.sourceSection==='price'&&draft.sourceCta==='payment-calculator'&&draft.context.calculation.source==='user_input');
+  w.SF676Requests.close();await tick();record(name+'/return-focus',d.activeElement===cta&&Math.abs(w.scrollY-y)<2&&field.value==='1 000 000 000'&&w.SF676Requests.getDraft()===null);
+  input(w,d,'1');input(w,d,'0');input(w,d,'1000000.50');record(name+'/rapid-change',read(d)[3]==='1 000 000,50 ₽'&&!d.querySelector('#payment-error').textContent);
+  input(w,d,'');field.dispatchEvent(new w.Event('blur'));record(name+'/clear',w.SF676Payments.getCalculation()===null&&!d.querySelector('#payment-error').textContent&&read(d).every(t=>t==='Сумма появится после ввода стоимости')&&d.querySelector('#payment-live').textContent==='Укажите стоимость для расчёта платежей.');
+  record(name+'/clean',!w.__errors.length&&!w.__sinks.length,{errors:w.__errors,sinks:w.__sinks});
+ }
+ }catch(e){record('exception',false,{message:String(e)})}report()}
+async function regressions(){results=[];try{
+ let {w,d}=await load();const api=w.SF676Requests,cta=d.querySelector('[data-payment-calculator]');
+ for(const link of d.querySelectorAll('[data-request-form]')){link.click();record('existing-cta/'+link.dataset.sourceCta,d.querySelector('dialog').open);api.close()}
+ input(w,d,'4000000');for(let i=0;i<20;i++){cta.click();api.close()}record('repeated-open',d.querySelectorAll('dialog').length===1&&!d.querySelector('dialog').open);
+ let calculation=w.SF676Payments.getCalculation();calculation.finalKopeks++;record('tampered-context-rejected',api.open({formId:'price_quote',context:{calculation}})===false);
+ calculation=w.SF676Payments.getCalculation();record('wrong-form-rejected',api.open({formId:'configuration_help',context:{calculation}})===false);
+ calculation.currency='USD';record('currency-rejected',api.open({formId:'price_quote',context:{calculation}})===false);
+ input(w,d,'1000000');record('snapshot-independent',w.SF676Payments.getCalculation().currency==='RUB');
+ ({w,d}=await load(390,'nocalc'));record('missing-calculator-script',!w.SF676Payments&&d.querySelector('#payment-total').closest('[hidden]'));d.querySelector('[data-payment-calculator]').click();record('missing-calc-standard-form',d.querySelector('dialog').open&&!d.querySelector('.request-payment'));w.SF676Requests.close();
+ ({w,d}=await load(390,'noforms'));input(w,d,'4000000');record('missing-form-script',!w.SF676Requests&&w.SF676Payments.getCalculation().totalKopeks===400000000);d.querySelector('[data-payment-calculator]').click();await tick();record('fallback-order',frame.contentWindow.location.hash==='#order');
+ ({w,d}=await load(390,'review'));record('review',d.querySelectorAll('#qol li').length===12&&d.querySelector('[data-q="oplata"]').textContent.includes('Условия фиксируются в договоре'));
+ ({w,d}=await load(390,'nojs'));record('nojs',d.querySelector('#payment-total').closest('[hidden]')&&!w.SF676Payments&&d.querySelector('.payment-plan').getBoundingClientRect().height>0&&d.querySelectorAll('#price .purchase-conditions div').length===4&&d.querySelector('[data-payment-calculator]').getAttribute('href')==='#order');
+ record('static-regression',d.querySelectorAll('section[id]:not(#qlist)').length===13&&d.querySelectorAll('#faq details').length===9&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
+ }catch(e){record('exception',false,{message:String(e)})}report()}
+document.querySelector('#show').onclick=()=>load(+document.querySelector('#width').value,document.querySelector('#mode').value);document.querySelector('#run').onclick=run;document.querySelector('#regressions').onclick=regressions;
+</script></html>

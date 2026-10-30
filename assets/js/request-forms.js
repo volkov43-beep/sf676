@@ -151,9 +151,10 @@
     if (!value || Object.getPrototypeOf(value) !== Object.prototype) return result;
     const selected = window.SF676SelectorModel?.validateResult(value.selector);
     if (selected) result.selector = selected;
+    const calculation = window.SF676PaymentModel?.validateCalculation(value.calculation);
+    if (calculation) result.calculation = calculation;
     const groups = {
-      configuration: ['workTable', 'spindleTaper', 'droType', 'coordinates', 'screwDrive'],
-      calculation: null
+      configuration: ['workTable', 'spindleTaper', 'droType', 'coordinates', 'screwDrive']
     };
     for (const [group, keys] of Object.entries(groups)) {
       const source = value[group];
@@ -178,6 +179,16 @@
       const item = el('div'); item.append(el('dt', '', row.label), el('dd', '', row.value)); list.appendChild(item);
     });
     box.append(list, el('p', '', summary.notice)); fields.appendChild(box);
+  }
+  function renderPayment(calculation) {
+    const box = el('div', 'request-payment request-field-wide');
+    box.appendChild(el('h3', '', 'Расчёт по указанной вами стоимости'));
+    const list = el('dl');
+    for (const [key, label] of [['totalKopeks', 'Стоимость, введённая пользователем'], ['advanceKopeks', 'Предоплата — 50%'], ['readinessKopeks', 'После готовности станка — 45%'], ['finalKopeks', 'Окончательный платёж — 5%']]) {
+      const row = el('div'); row.append(el('dt', '', label), el('dd', '', window.SF676PaymentModel.format(calculation[key]))); list.appendChild(row);
+    }
+    box.append(list, el('p', 'request-payment-note', 'Сумма указана вами и не подтверждена заводом. Это распределение платежей, а не коммерческое предложение. Условия окончательного платежа фиксируются в договоре. Доставка, разгрузка, страхование, командировочные расходы и дополнительная комплектация вне введённой суммы не рассчитаны. НДС не пересчитывается.'));
+    fields.appendChild(box);
   }
   function identifier(value, fallback) { return typeof value === 'string' && /^[a-zA-Z0-9_-]{1,80}$/.test(value) ? value : fallback; }
   function lockPage() {
@@ -214,6 +225,7 @@
     if (dialog.open) return false; // No nested windows; caller can close explicitly first.
     const context = cleanContext(options.context);
     if (options.context && Object.hasOwn(options.context, 'selector') && (options.formId !== 'configuration_help' || !context.selector)) return false;
+    if (options.context && Object.hasOwn(options.context, 'calculation') && (options.formId !== 'price_quote' || !context.calculation)) return false;
     cleanup();
     const scenario = scenarios[options.formId];
     fields.replaceChildren(); form.reset(); status.textContent = ''; delete status.dataset.state;
@@ -224,6 +236,7 @@
       description.textContent = 'Ваша сводка добавлена ниже. Укажите контакт для обсуждения с технологом. Это демонстрационная форма без отправки.';
       renderSelection(context.selector);
     }
+    if (context.calculation) renderPayment(context.calculation);
     fieldKeys.forEach(renderField);
     if (scenario.note) fields.appendChild(el('p', 'request-hint request-field-wide', scenario.note));
     const trigger = options.trigger instanceof HTMLElement ? options.trigger : document.activeElement;
@@ -270,7 +283,8 @@
     link.setAttribute('aria-haspopup', 'dialog'); link.setAttribute('aria-controls', 'request-dialog');
     link.addEventListener('click', event => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      if (open({formId: link.dataset.requestForm, sourceSection: link.dataset.sourceSection, sourceCta: link.dataset.sourceCta, trigger: link})) event.preventDefault();
+      const calculation = link.hasAttribute('data-payment-calculator') ? window.SF676Payments?.getCalculation() : null;
+      if (open({formId: link.dataset.requestForm, sourceSection: link.dataset.sourceSection, sourceCta: link.dataset.sourceCta, trigger: link, context: calculation ? {calculation} : undefined})) event.preventDefault();
     });
   });
 })();

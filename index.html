@@ -608,9 +608,12 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 </style>
 <link rel="stylesheet" href="assets/css/request-forms.css">
 <link rel="stylesheet" href="assets/css/sf676-selector.css">
+<link rel="stylesheet" href="assets/css/payment-calculator.css">
+<script src="assets/js/payment-model.js" defer></script>
 <script src="assets/js/sf676-selector-model.js" defer></script>
 <script src="assets/js/request-forms.js" defer></script>
 <script src="assets/js/sf676-selector.js" defer></script>
+<script src="assets/js/payment-calculator.js" defer></script>
 </head>
 <body>
 
@@ -746,18 +749,34 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
   <div class="wrap">
     <h2 class="section-heading">Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
     <p class="lead">Каждый СФ676 собирается под спецификацию заказчика. Согласуем пять параметров: стол, конус шпинделя, УЦИ, количество отображаемых координат и тип винтовой передачи. Коммерческое предложение с ценой и сроком пришлём на почту в течение одного рабочего дня. Без звонков, если вы их не просили.</p>
-    <div class="payment-flow"><div class="payment-scale" aria-hidden="true"><span></span><span></span><span></span></div><ol class="payment-plan" aria-label="Этапы оплаты: 50 процентов, 45 процентов, 5 процентов">
-      <li><b class="percentage">50%</b><h3>Предоплата</h3></li>
-      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">45%</b><h3>После готовности станка</h3></li>
-      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">5%</b><h3>Окончательный платёж</h3><p><span class="q" data-q="oplata">Условия фиксируются в договоре.</span></p></li>
-    </ol></div>
+    <div class="payment-flow" id="payment-calculator">
+      <div class="payment-input-block" data-payment-enhanced hidden>
+        <h3>Рассчитайте платежи по стоимости станка</h3>
+        <p>Укажите стоимость оборудования из полученного коммерческого предложения — калькулятор покажет распределение суммы по этапам оплаты.</p>
+        <label for="payment-total">Стоимость станка, ₽</label>
+        <input id="payment-total" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="payment-hint payment-error">
+        <p id="payment-hint" class="payment-hint">Рубли и копейки: запятая или точка, до двух знаков после неё. Допустимы пробелы между тысячами. Максимум — 1 000 000 000 ₽.</p>
+        <p id="payment-error" class="payment-error"></p>
+        <p id="payment-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div><div class="payment-scale" aria-hidden="true"><span></span><span></span><span></span></div><ol class="payment-plan" aria-label="Этапы оплаты: 50 процентов, 45 процентов, 5 процентов">
+      <li><b class="percentage">50%</b><h3>Предоплата</h3><p class="payment-amount payment-value-empty" data-payment-value="advanceKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p></li>
+      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">45%</b><h3>После готовности станка</h3><p class="payment-amount payment-value-empty" data-payment-value="readinessKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p></li>
+      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">5%</b><h3>Окончательный платёж</h3><p class="payment-amount payment-value-empty" data-payment-value="finalKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p><p><span class="q" data-q="oplata">Условия фиксируются в договоре.</span></p></li>
+    </ol>
+      <div class="payment-result-note" data-payment-enhanced hidden>
+        <p class="payment-total-line">Общая сумма: <strong class="payment-value-empty" data-payment-value="totalKopeks">Сумма появится после ввода стоимости</strong></p>
+        <p>Расчёт выполнен на основании стоимости, указанной вами. Он показывает распределение платежей и не является коммерческим предложением завода.</p>
+        <p>Калькулятор не рассчитывает доставку, разгрузку, страхование груза, командировочные расходы специалистов и стоимость дополнительной комплектации, если она не учтена в введённой сумме. НДС не выделяется и не пересчитывается.</p>
+        <p class="payment-rounding">Первые два платежа округляются до копейки, окончательный платёж — остаток общей суммы. Условия окончательного платежа фиксируются в договоре.</p>
+      </div>
+    </div>
+    <a class="btn red payment-quote" href="#order" data-request-form="price_quote" data-source-section="price" data-source-cta="payment-calculator" data-payment-calculator>Получить официальное КП</a>
     <dl class="purchase-conditions">
       <div><dt>Срок изготовления</dt><dd>От 20 рабочих дней с момента предоплаты для любой модификации. Конкретная комплектация, срок изготовления и условия поставки фиксируются в договоре.</dd></div>
       <div><dt>Доставка</dt><dd>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</dd></div>
       <div><dt>Упаковка и консервация</dt><dd>Упаковка в деревянный ящик и консервация на 1 год входят в стоимость станка.</dd></div>
       <div><dt>Льготный лизинг</dt><dd>Станок можно приобрести в льготный лизинг. Условия по запросу.</dd></div>
     </dl>
-    <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="price" data-source-cta="terms-price">Получить цену с доставкой до вашего цеха</a>
   </div>
 </section>
 
