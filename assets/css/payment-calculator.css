@@ -1,0 +1,29 @@
+/* Scoped enhancement of the existing payment infographic. */
+#payment-calculator [hidden]{display:none}
+.payment-input-block{padding:24px;border-bottom:1px solid var(--line)}
+.payment-input-block h3{font-size:1.25rem;line-height:1.4;color:var(--steel);margin-bottom:12px}
+.payment-input-block p{font-size:1rem;margin-bottom:16px;max-width:70ch}
+.payment-input-block label{display:block;font-size:1rem;font-weight:700;color:var(--graphite);margin-bottom:8px}
+.payment-input-block input{width:100%;max-width:420px;min-height:48px;padding:12px;border:1px solid #7c8b98;border-radius:4px;background:#fff;color:var(--ink);font:inherit;font-size:1.125rem;font-variant-numeric:tabular-nums;scroll-margin-top:calc(var(--sticky-height,64px) + 16px)}
+.payment-input-block input:focus-visible{outline:3px solid #795f00;outline-offset:3px}
+.payment-input-block input[aria-invalid="true"]{border:2px solid #962d24}
+.payment-input-block .payment-hint{font-size:.875rem;color:#52616d;margin:8px 0 0}
+.payment-input-block .payment-error{font-size:1rem;color:#962d24;margin:12px 0 0}
+.payment-error:empty{display:none}
+#payment-calculator .payment-amount{font-size:1.375rem;line-height:1.4;font-weight:700;color:var(--graphite);font-variant-numeric:tabular-nums;margin-top:12px;overflow-wrap:normal}
+#payment-calculator .payment-value-empty{font-size:.875rem;font-weight:400;color:#52616d}
+.payment-result-note{padding:20px 24px;border-top:1px solid var(--line)}
+.payment-result-note p{font-size:.9375rem;line-height:1.5;margin:12px 0 0;max-width:80ch}
+.payment-result-note .payment-total-line{font-size:1rem;margin:0;color:var(--steel)}
+.payment-result-note .payment-total-line strong{display:block;font-size:1.375rem;font-variant-numeric:tabular-nums;line-height:1.4;margin-top:4px}
+.payment-result-note .payment-rounding{font-size:.875rem;color:#52616d}
+#price .payment-quote{margin-bottom:24px;max-width:100%;text-align:center}
+.request-payment{padding:16px;background:var(--light);border:1px solid var(--line);border-radius:4px;min-width:0}
+.request-payment h3{font-size:1.125rem;line-height:1.4;margin-bottom:12px;color:var(--steel)}
+.request-payment dl{margin:0}
+.request-payment dl>div{display:grid;grid-template-columns:1fr;gap:4px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9375rem}
+.request-payment dt{color:var(--steel)}
+.request-payment dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+.request-payment .request-payment-note{font-size:.875rem;line-height:1.5;margin:12px 0 0}
+@media(max-width:700px){.payment-input-block,.payment-result-note{padding:16px 20px}#payment-calculator .payment-plan li{padding:16px 20px}#payment-calculator .payment-amount,.payment-result-note .payment-total-line strong{font-size:1.125rem}}
+@media(prefers-reduced-motion:reduce){#payment-calculator *{scroll-behavior:auto;transition:none;animation:none}}
