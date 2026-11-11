@@ -34,3 +34,18 @@ test('Text is bounded and never interpreted as HTML; output is a detached valida
 test('Two modes and reset snapshots are independent; no supplied defaults in exact mode',()=>{
  const a=m.emptyAnswers('exact'),b=m.emptyAnswers('quiz');assert.equal(m.getResult('exact',a),null);m.setAnswer(a,'exact','table','table_300x800');assert.equal(b.table,undefined);assert.deepEqual(m.emptyAnswers('exact'),{});
 });
+
+test('Exact selection keeps order-only variants and labels them in the validated summary', () => {
+  const selections = { ...exact(), coordinates: 'coordinates_f2' };
+  const result = m.validateResult(m.getResult('exact', selections));
+  assert.deepEqual(result.selections, selections);
+  const rows = m.summarize(result).rows;
+  assert.equal(rows.length, 5);
+  assert.equal(rows.find(row => row.label === 'УЦИ').value, 'Оптическая УЦИ — только по специальному заказу');
+  assert.equal(rows.find(row => row.label === 'Количество координат').value, 'Ф2 — X, Y (только по специальному заказу)');
+
+  const regular = m.getResult('exact', { ...selections, dro: 'dro_magnetic', coordinates: 'coordinates_f3' });
+  const regularRows = m.summarize(regular).rows;
+  assert.equal(regularRows.find(row => row.label === 'УЦИ').value, 'Магнитная УЦИ');
+  assert.equal(regularRows.find(row => row.label === 'Количество координат').value, 'Ф3 — X, Y, Z');
+});

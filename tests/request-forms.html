@@ -45,7 +45,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
  }
  record(`${width}/${mode}/no-side-effects`,!w.__testErrors.length&&!w.__testSinks.length,{errors:w.__testErrors,sinks:w.__testSinks});
  }
- const {w,d}=await load(390,'review');record('review-questions',d.body.classList.contains('showq')&&d.querySelectorAll('#qol li').length===12);
+ const {w,d}=await load(390,'review');record('review-questions',d.body.classList.contains('showq')&&d.querySelector('#ql-rop a')?.hash==='#q-rop');
  const n=await load(390,'nojs');record('nojs-fallback',!n.w.SF676Requests&&n.d.querySelectorAll('section[id]:not(#qlist)').length===13&&Array.from(n.d.querySelectorAll('[data-request-form]')).every(a=>a.getAttribute('href')==='#order')&&n.d.querySelectorAll('#faq details').length===9&&!n.d.querySelector('dialog').open);
  }catch(e){record('exception',false,{message:String(e)})}report();}
 async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;const link=d.querySelector('[data-source-cta="hero-price"]');link.click();

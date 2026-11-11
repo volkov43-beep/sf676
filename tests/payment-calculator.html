@@ -50,7 +50,7 @@ async function regressions(){results=[];try{
  input(w,d,'1000000');record('snapshot-independent',w.SF676Payments.getCalculation().currency==='RUB');
  ({w,d}=await load(390,'nocalc'));record('missing-calculator-script',!w.SF676Payments&&d.querySelector('#payment-total').closest('[hidden]'));d.querySelector('[data-payment-calculator]').click();record('missing-calc-standard-form',d.querySelector('dialog').open&&!d.querySelector('.request-payment'));w.SF676Requests.close();
  ({w,d}=await load(390,'noforms'));input(w,d,'4000000');record('missing-form-script',!w.SF676Requests&&w.SF676Payments.getCalculation().totalKopeks===400000000);d.querySelector('[data-payment-calculator]').click();await tick();record('fallback-order',frame.contentWindow.location.hash==='#order');
- ({w,d}=await load(390,'review'));record('review',d.querySelectorAll('#qol li').length===12&&d.querySelector('[data-q="oplata"]').textContent.includes('Условия фиксируются в договоре'));
+ ({w,d}=await load(390,'review'));record('review',d.querySelector('#ql-oplata a')?.hash==='#q-oplata'&&d.querySelector('[data-q="oplata"]').textContent.includes('Условия фиксируются в договоре'));
  ({w,d}=await load(390,'nojs'));record('nojs',d.querySelector('#payment-total').closest('[hidden]')&&!w.SF676Payments&&d.querySelector('.payment-plan').getBoundingClientRect().height>0&&d.querySelectorAll('#price .purchase-conditions div').length===4&&d.querySelector('[data-payment-calculator]').getAttribute('href')==='#order');
  record('static-regression',d.querySelectorAll('section[id]:not(#qlist)').length===13&&d.querySelectorAll('#faq details').length===9&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
  }catch(e){record('exception',false,{message:String(e)})}report()}

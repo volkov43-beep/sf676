@@ -21,9 +21,19 @@ function shape(w,d,where){const box=d.querySelector(where),r=box.getBoundingClie
 async function next(w,d,name){click(d,'next');await tick();record(name+'/layout',shape(w,d,'#sf676-selector'));const h=d.querySelector('#selector-stage [tabindex="-1"]');const marker=d.querySelector('.selector-progress')||h;record(name+'/focus',d.activeElement===h&&marker.getBoundingClientRect().top>=d.querySelector('.sticky').getBoundingClientRect().bottom-2,{focused:d.activeElement===h,top:marker.getBoundingClientRect().top,headerBottom:d.querySelector('.sticky').getBoundingClientRect().bottom});}
 async function exact(w,d,prefix){
  d.querySelector('[data-selector-mode="exact"]').click();click(d,'next');record(prefix+'/required',!!d.querySelector('#selector-error').textContent&&d.querySelector('legend').textContent.includes('размер'));
- for(const id of ['table-table_300x800','taper-taper_km4','dro-dro_optical','coordinates-coordinates_f3','screw-screw_ball']){pick(w,d,id);await next(w,d,prefix+'/'+id)}
- let r=w.SF676Selector.getResult();record(prefix+'/actual-result',r.selections.table==='table_300x800'&&r.selections.coordinates==='coordinates_f3'&&d.querySelector('.selector-summary').textContent.includes('300 × 800'));
- const resultCta=d.querySelector('[data-selector-action="request"]');resultCta.click();await tick();record(prefix+'/form-summary',d.querySelector('dialog').open&&d.querySelector('.request-selection').textContent.includes('300 × 800')&&shape(w,d,'dialog'));
+ const chosenLabels=[];
+ for(const id of ['table-table_300x800','taper-taper_km4','dro-dro_optical','coordinates-coordinates_f2','screw-screw_ball']){
+  const input=d.getElementById('selector-'+id);
+  chosenLabels.push(input.labels[0].querySelector('b').textContent);
+  pick(w,d,id);await next(w,d,prefix+'/'+id);
+ }
+ let r=w.SF676Selector.getResult();
+ record(prefix+'/actual-result',r.selections.table==='table_300x800'&&r.selections.dro==='dro_optical'&&r.selections.coordinates==='coordinates_f2');
+ record(prefix+'/special-order-labels',chosenLabels[2].includes('по специальному заказу')&&chosenLabels[3].includes('по специальному заказу'));
+ const matchesChoices=selector=>Array.from(d.querySelectorAll(selector+' dd'),cell=>cell.textContent).join('|')===chosenLabels.join('|');
+ record(prefix+'/summary',matchesChoices('.selector-summary'));
+ const resultCta=d.querySelector('[data-selector-action="request"]');resultCta.click();await tick();
+ record(prefix+'/form-summary',d.querySelector('dialog').open&&matchesChoices('.request-selection')&&shape(w,d,'dialog'));
  d.querySelector('#request-contact').value='qa@example.com';let draft=w.SF676Requests.getDraft();record(prefix+'/payload',JSON.stringify(draft.context.selector)===JSON.stringify(r)&&draft.sourceSection==='config'&&draft.sourceCta==='selector-exact-result');w.SF676Requests.close();await tick();record(prefix+'/return-focus',d.activeElement===resultCta);
  click(d,'edit');click(d,'next');click(d,'next');pick(w,d,'dro-dro_none');await next(w,d,prefix+'/no-dro');record(prefix+'/not-applicable',!d.querySelector('#selector-stage input')&&d.querySelector('.selector-unavailable').textContent.includes('Не применяется'));await next(w,d,prefix+'/skip-coordinates');await next(w,d,prefix+'/result-without-dro');r=w.SF676Selector.getResult();record(prefix+'/cleared-coordinates',r.selections.coordinates==='not_applicable');
  click(d,'edit');click(d,'next');click(d,'next');pick(w,d,'dro-dro_magnetic');click(d,'next');click(d,'next');record(prefix+'/reselection-required',!!d.querySelector('#selector-error').textContent&&w.SF676Selector.getResult()===null&&!d.querySelector('input:checked'));pick(w,d,'coordinates-consultation');click(d,'next');click(d,'next');
@@ -44,8 +54,12 @@ async function regressions(){results=[];try{
  for(let i=0;i<20;i++){w.SF676Selector.start(i%2?'exact':'quiz');w.SF676Selector.reset()}record('repeated-mode-switches',d.querySelectorAll('#selector-stage fieldset').length===1);
  w.SF676Selector.start('exact');pick(w,d,'table-consultation');click(d,'next');pick(w,d,'taper-consultation');click(d,'next');pick(w,d,'dro-consultation');click(d,'next');pick(w,d,'coordinates-consultation');click(d,'next');pick(w,d,'screw-consultation');click(d,'next');record('all-unknown-valid',Object.values(w.SF676Selector.getResult().selections).every(v=>v==='consultation'));
  w.SF676Requests=undefined;d.querySelector('[data-selector-action="request"]').click();record('no-form-fallback',w.location.hash==='#order'&&!d.querySelector('dialog').open);
- ({w,d}=await load(390,'review'));record('review',d.querySelectorAll('#qol li').length===12);d.querySelector('#ql-stol a').click();
- const q=d.querySelector('#q-stol-2');const back=d.createElement('a');back.href='#q-stol-2';d.body.appendChild(back);back.click();await tick();record('review-hidden-reference',d.querySelector('#config-reference').open&&q.getBoundingClientRect().height>0);
+ ({w,d}=await load(390,'review'));
+ const questions=['docs','oplata','acts','raschet','reestr','deklar','sami','logo','vizit','rop'];
+ record('review',d.body.classList.contains('showq')&&d.querySelectorAll('#qol li').length===questions.length&&questions.every(key=>d.getElementById('ql-'+key)?.querySelector('a')?.hash==='#q-'+key)&&!d.querySelector('[data-q="stol"]'));
+ const visit=d.getElementById('q-vizit');
+ d.querySelector('#ql-vizit a').click();await tick();
+ record('review-hidden-reference',visit.closest('details').open&&visit.getBoundingClientRect().height>0);
  ({w,d}=await load(390,'nojs'));record('nojs-static-content',d.querySelector('#sf676-selector').hidden&&d.querySelectorAll('.config-option').length===5&&d.querySelectorAll('#config-reference summary').length===1&&!w.SF676Selector);
  d.querySelector('#config-reference').open=true;record('nojs-details-readable',d.querySelector('.config-options').getBoundingClientRect().height>0&&d.querySelector('a[href^="tel:"]')&&d.querySelector('a[href^="mailto:"]'));
  }catch(e){record('exception',false,{message:String(e)})}report()}
