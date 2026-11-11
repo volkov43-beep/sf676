@@ -55,8 +55,15 @@ async function regressions(){results=[];try{
  w.SF676Selector.start('exact');pick(w,d,'table-consultation');click(d,'next');pick(w,d,'taper-consultation');click(d,'next');pick(w,d,'dro-consultation');click(d,'next');pick(w,d,'coordinates-consultation');click(d,'next');pick(w,d,'screw-consultation');click(d,'next');record('all-unknown-valid',Object.values(w.SF676Selector.getResult().selections).every(v=>v==='consultation'));
  w.SF676Requests=undefined;d.querySelector('[data-selector-action="request"]').click();record('no-form-fallback',w.location.hash==='#order'&&!d.querySelector('dialog').open);
  ({w,d}=await load(390,'review'));
- const questions=['docs','oplata','acts','repair-price','raschet','reestr','deklar','sami','logo','vizit','rop'];
+ const questions=['docs','oplata','acts','repair-price','raschet','reestr','deklar','tz-samples','sami','logo','vizit','rop'];
  record('review',d.body.classList.contains('showq')&&d.querySelectorAll('#qol li').length===questions.length&&questions.every(key=>d.getElementById('ql-'+key)?.querySelector('a')?.hash==='#q-'+key)&&!d.querySelector('[data-q="stol"]'));
+ for(const [key,section] of [['reestr','gov'],['deklar','gov'],['tz-samples','gov'],['logo','plant']]){
+  const entry=d.getElementById('ql-'+key),target=d.getElementById('q-'+key);
+  entry.querySelector('a').click();await tick();
+  record('review-target/'+key,w.location.hash==='#q-'+key&&target.closest('section').id===section&&target.getBoundingClientRect().height>0);
+  target.querySelector('sup a').click();await tick();
+  record('review-return/'+key,w.location.hash==='#ql-'+key);
+ }
  const visit=d.getElementById('q-vizit');
  d.querySelector('#ql-vizit a').click();await tick();
  record('review-hidden-reference',visit.closest('details').open&&visit.getBoundingClientRect().height>0);
