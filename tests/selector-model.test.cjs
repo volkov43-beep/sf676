@@ -46,6 +46,6 @@ test('Exact selection keeps order-only variants and labels them in the validated
 
   const regular = m.getResult('exact', { ...selections, dro: 'dro_magnetic', coordinates: 'coordinates_f3' });
   const regularRows = m.summarize(regular).rows;
-  assert.equal(regularRows.find(row => row.label === 'УЦИ').value, 'Магнитная УЦИ');
-  assert.equal(regularRows.find(row => row.label === 'Количество координат').value, 'Ф3 — X, Y, Z');
+  assert.equal(regularRows.find(row => row.label === 'УЦИ').value, 'Магнитная УЦИ — обычное исполнение');
+  assert.equal(regularRows.find(row => row.label === 'Количество координат').value, 'Ф3 — X, Y, Z (основное исполнение)');
 });

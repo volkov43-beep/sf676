@@ -55,18 +55,22 @@ async function regressions(){results=[];try{
  w.SF676Selector.start('exact');pick(w,d,'table-consultation');click(d,'next');pick(w,d,'taper-consultation');click(d,'next');pick(w,d,'dro-consultation');click(d,'next');pick(w,d,'coordinates-consultation');click(d,'next');pick(w,d,'screw-consultation');click(d,'next');record('all-unknown-valid',Object.values(w.SF676Selector.getResult().selections).every(v=>v==='consultation'));
  w.SF676Requests=undefined;d.querySelector('[data-selector-action="request"]').click();record('no-form-fallback',w.location.hash==='#order'&&!d.querySelector('dialog').open);
  ({w,d}=await load(390,'review'));
- const questions=['docs','oplata','acts','repair-price','raschet','reestr','deklar','tz-samples','sami','logo','vizit','rop'];
- record('review',d.body.classList.contains('showq')&&d.querySelectorAll('#qol li').length===questions.length&&questions.every(key=>d.getElementById('ql-'+key)?.querySelector('a')?.hash==='#q-'+key)&&!d.querySelector('[data-q="stol"]'));
- for(const [key,section] of [['reestr','gov'],['deklar','gov'],['tz-samples','gov'],['logo','plant']]){
-  const entry=d.getElementById('ql-'+key),target=d.getElementById('q-'+key);
-  entry.querySelector('a').click();await tick();
-  record('review-target/'+key,w.location.hash==='#q-'+key&&target.closest('section').id===section&&target.getBoundingClientRect().height>0);
-  target.querySelector('sup a').click();await tick();
-  record('review-return/'+key,w.location.hash==='#ql-'+key);
+ const sections={docs:['specs','delivery'],oplata:['price'],acts:['acceptance'],'repair-price':['compare'],raschet:['compare'],reestr:['gov'],deklar:['gov'],'tz-samples':['gov'],sami:['plant'],logo:['plant'],vizit:['faq'],rop:['order']};
+ record('review',d.body.classList.contains('showq')&&d.querySelectorAll('#qol li').length===Object.keys(sections).length&&!d.querySelector('[data-q="stol"]'));
+ for(const [key,locations] of Object.entries(sections)){
+  const links=d.getElementById('ql-'+key).querySelectorAll('a');
+  record('review-locations/'+key,links.length===locations.length);
+  for(const [i,section] of locations.entries()){
+   const id='q-'+key+(i ? '-'+(i+1) : '');
+   const target=d.getElementById(id);
+   const details=target.closest('details');
+   if(details) details.open=false;
+   links[i].click();await tick();
+   record('review-target/'+id,w.location.hash==='#'+id&&target.closest('section').id===section&&target.getBoundingClientRect().height>0&&(!details||details.open));
+   target.querySelector('sup a').click();await tick();
+   record('review-return/'+id,w.location.hash==='#ql-'+key);
+  }
  }
- const visit=d.getElementById('q-vizit');
- d.querySelector('#ql-vizit a').click();await tick();
- record('review-hidden-reference',visit.closest('details').open&&visit.getBoundingClientRect().height>0);
  ({w,d}=await load(390,'nojs'));record('nojs-static-content',d.querySelector('#sf676-selector').hidden&&d.querySelectorAll('.config-option').length===5&&d.querySelectorAll('#config-reference summary').length===1&&!w.SF676Selector);
  d.querySelector('#config-reference').open=true;record('nojs-details-readable',d.querySelector('.config-options').getBoundingClientRect().height>0&&d.querySelector('a[href^="tel:"]')&&d.querySelector('a[href^="mailto:"]'));
  }catch(e){record('exception',false,{message:String(e)})}report()}

@@ -50,6 +50,7 @@ table{table-layout:fixed;word-wrap:break-word}
 .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 /* questions */
 .q sup{font-size:.7em;color:#8a6d00;font-weight:700;margin-left:2px;text-decoration:none}
+.q sup a{color:inherit;text-decoration:none}
 body:not(.showq) .q sup{display:none}
 #qlist{display:none;background:#FFF8DC;border-top:3px solid #c9a800;padding:48px 0}
 body.showq #qlist{display:block}
@@ -211,9 +212,6 @@ body{overflow-wrap:anywhere}
 .v1 .spec-table .q{font-weight:400}
 .spec-operations{margin:var(--ui-space-3) 0 0;color:var(--steel);font-size:1rem}
 .spec-docs{margin-top:var(--ui-space-5);padding-top:var(--ui-space-4);border-top:1px solid var(--line)}
-.doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap)}
-.doc-grid .ui-card h3{font-size:1.125rem}
-.spec-docs .doc-extra{margin-top:var(--ui-space-2)}
 /* Fixed contact header: no layout shift while scrolling. */
 .sticky{overflow-wrap:anywhere;position:fixed;inset-inline:0;top:0;display:block;visibility:hidden;pointer-events:none;padding:6px 0}
 body.scrolled .sticky{visibility:visible;pointer-events:auto}
@@ -235,7 +233,6 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
  .hero-media{width:100%;max-width:520px;justify-self:center}
  .hero-media img{aspect-ratio:1}
  .hero-fact b{font-size:1.375rem}
- .doc-grid{grid-template-columns:1fr}
 }
 @media (max-width:600px){
  .v1 .wrap{padding-inline:24px}
@@ -363,11 +360,6 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 .acceptance-processes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-gap);margin-top:var(--ui-space-4)}
 .acceptance-processes p,.acceptance-processes li{font-size:1rem}
 .acceptance-processes ul{margin:0;padding-left:20px;display:grid;gap:12px}
-.acceptance-docs{margin:var(--ui-space-3) 0 0}
-.acceptance-media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-gap);margin-top:var(--ui-space-4)}
-.acceptance-media .media-frame{max-width:380px;margin-inline:auto}
-.acceptance-media .media-document .media-frame{max-width:200px}
-.acceptance-media figcaption{text-align:center}
 .construction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ui-gap);align-items:start}
 .construction-card .prototype-media{margin-bottom:var(--ui-space-3)}
 .construction-card .feature-benefit{font-weight:700;color:var(--steel);margin-bottom:var(--ui-space-2)}
@@ -424,9 +416,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
  .plant-media{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:700px){
- .construction-grid,.acceptance-media,.plant-facts,.industry-list,.plant-media{grid-template-columns:1fr}
+ .construction-grid,.plant-facts,.industry-list,.plant-media{grid-template-columns:1fr}
  .procurement-actions{align-items:stretch;flex-direction:column}
- .acceptance-media .media-frame{max-width:320px}
  .plant-facts{gap:var(--ui-space-3)}
 }
 @media (max-width:600px){
@@ -440,10 +431,6 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 .site-photo.media-square .media-frame{--media-ratio:1/1}
 .adv-card{align-self:start}
 .adv-card .prototype-media{margin-bottom:var(--ui-space-3)}
-.v1 .media-pending-note{padding:12px 16px;border:1px solid var(--line);border-radius:var(--ui-radius);font-size:var(--ui-small);line-height:1.5;color:var(--mute);background:#eef0f2;margin:0 0 var(--ui-space-3)}
-.v1 .media-pending .media-frame{aspect-ratio:auto;max-width:none;min-height:56px}
-.acceptance-media{align-items:start}
-.acceptance-media .media-pending figcaption{text-align:left}
 .v1 .specs-visual{flex:0 0 320px;aspect-ratio:auto}
 .v1 .config-photo{max-width:280px;margin-top:var(--ui-space-2)}
 .plant-media{display:block;max-width:920px;margin-inline:auto;margin-bottom:var(--ui-space-3)}
@@ -466,7 +453,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 .v1 .ux-details{padding:0;margin:16px 0 0;background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;min-width:0}
 .ux-details summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;min-height:48px;font-size:1rem;line-height:1.4;list-style:none}
 .ux-details summary::-webkit-details-marker{display:none}
-.ux-details summary::after{content:"+";font-size:1.5rem;font-weight:400;flex:none;line-height:1;width:24px;text-align:center;color:var(--red)}
+.ux-details summary::after{content:"+";font-size:1.5rem;font-weight:400;flex:none;line-height:1;width:1em;text-align:center;color:var(--red)}
 .ux-details[open] summary::after{content:"−"}
 .ux-details summary:focus-visible{outline:3px solid var(--focus-light);outline-offset:4px}
 .ux-details .ux-detail-body{padding:4px 0 12px}
@@ -553,7 +540,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 .industry-list li span{min-width:0}
 .v1.faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;list-style:none}
 .v1.faq summary::-webkit-details-marker{display:none}
-.v1.faq summary::after{content:"+";font-size:1.5rem;font-weight:400;flex:none;width:24px;text-align:center;color:var(--red)}
+.v1.faq summary::after{content:"+";font-size:1.5rem;font-weight:400;flex:none;width:1em;text-align:center;color:var(--red)}
 .v1.faq details[open] summary::after{content:"−"}
 @media (max-width:1100px){
  .specs-overview{grid-template-columns:minmax(0,1fr) 220px;gap:24px}
@@ -655,7 +642,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <div class="hero-fact"><b>От 20 рабочих дней</b><small>изготовление станка в любой модификации</small></div>
     </div>
     <div class="hero-trust">
-      <span>В реестре промышленной продукции Минпромторга</span>
+      <span>Реквизиты реестра Минпромторга — по запросу для выбранного исполнения</span>
       <span>Современное исполнение выпускается с 2016 года</span>
     </div>
   </div>
@@ -734,15 +721,9 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       </table>
     </div>
     <p class="spec-operations">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка</p>
-    <div class="spec-docs">
-      <h3>Техническая документация</h3>
-      <p class="ui-note"><span class="q" data-q="docs">PDF-файлы пока не добавлены.</span></p>
-      <div class="doc-grid" id="technical-documents">
-        <article class="ui-card"><h3>Полные технические характеристики</h3><p class="ui-note">Файл пока не добавлен</p></article>
-        <article class="ui-card"><h3>Стандартная комплектация</h3><p class="ui-note">Файл пока не добавлен</p></article>
-        <article class="ui-card"><h3>Дополнительная комплектация</h3><p class="ui-note">Файл пока не добавлен</p></article>
-      </div>
-      <p class="ui-note doc-extra">Дополнительные материалы: эскизы столов и шпинделей, руководство по эксплуатации. Файлы пока не добавлены.</p>
+    <div class="spec-docs" id="technical-documents">
+      <h3><span class="q" data-q="docs" data-location="Характеристики">Техническая документация</span></h3>
+      <p>В отделе продаж можно запросить полные характеристики, перечни стандартной и дополнительной комплектации, эскизы столов и шпинделей и руководство по эксплуатации.</p>
     </div>
   </div>
 </section>
@@ -802,12 +783,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н — основное исполнение. П — по запросу, допуски по согласованной документации.</td></tr>
       </tbody>
     </table>
-    <details class="ux-details acceptance-explanation"><summary>Документы и контроль по заводскому номеру</summary><div class="ux-detail-body"><p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами. Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p></div></details>
-    <p class="ui-note acceptance-docs"><span class="q" data-q="acts">Образцы документов заводской приёмки и пусконаладочных работ пока не добавлены; точные наименования будут уточнены после получения файлов.</span></p>
-    <div class="acceptance-media">
-      <figure class="prototype-media media-inspection media-pending"><div class="media-frame"><span>Фотография пока не добавлена</span></div><figcaption>Контроль ОТК — проверка станка специалистом</figcaption></figure>
-      <figure class="prototype-media media-document media-pending"><div class="media-frame"><span>Документ пока не добавлен</span></div><figcaption>Действительный акт приёмки</figcaption></figure>
-    </div>
+    <details class="ux-details acceptance-explanation"><summary>Документы и контроль по заводскому номеру</summary><div class="ux-detail-body"><p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. <span class="q" data-q="acts">Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами.</span> Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p></div></details>
   </div>
 </section>
 
@@ -820,7 +796,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <article class="ui-card construction-card"><figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#spindles"></use></svg><figcaption>Горизонтальное и вертикальное направления обработки — условно</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#directions"></use></svg><span>Горизонтальный и вертикальный шпиндели</span></h3><p class="feature-benefit">Два шпинделя — один станок вместо двух</p><p class="ux-note feature-condition">Для долбления нужна дополнительная головка.</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Горизонтальный и вертикальный шпиндели</span></summary><div class="ux-detail-body"><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></div></details></article>
       <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-bed-640.webp" srcset="assets/images/sf676-bed-320.webp 320w, assets/images/sf676-bed-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="779" alt="Нижняя часть станины СФ676, основание на виброопорах и опорные узлы" loading="lazy" decoding="async"></div><figcaption>Станина и основание СФ676</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#bed"></use></svg><span>Литая станина</span></h3><p class="feature-benefit">Литая станина 1050 кг гасит вибрации</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Литая станина</span></summary><div class="ux-detail-body"><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></div></details></article>
       <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-controls-640.webp" srcset="assets/images/sf676-controls-320.webp 320w, assets/images/sf676-controls-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="853" alt="Рукоятки управления и градуированный диск выбора режимов на СФ676" loading="lazy" decoding="async"></div><figcaption>Рукоятки и диск выбора режимов</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#controls"></use></svg><span>Скорости вращения и рабочие подачи</span></h3><p class="feature-benefit">16 скоростей и 16 подач — режим под любой материал</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Скорости вращения и рабочие подачи</span></summary><div class="ux-detail-body"><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></div></details></article>
-      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Пульт УЦИ СФ676 с тремя строками координат X, Y и Z" loading="lazy" decoding="async"></div><figcaption>Пульт УЦИ с индикацией X, Y и Z</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#dro"></use></svg><span>УЦИ</span></h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: УЦИ</span></summary><div class="ux-detail-body"><p>Линейки на осях показывают фактическое положение стола. Дискретность — 0,001 мм. Основное исполнение Ф3 отображает три координаты. На выбор — магнитная УЦИ или оптическая УЦИ по специальному заказу. Можно установить позже, УЦИ любого производителя.</p></div></details></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Пульт УЦИ СФ676 с тремя строками координат X, Y и Z" loading="lazy" decoding="async"></div><figcaption>Пульт УЦИ с индикацией X, Y и Z</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#dro"></use></svg><span>УЦИ</span></h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: УЦИ</span></summary><div class="ux-detail-body"><p>Линейки на осях показывают фактическое положение стола. Дискретность — 0,001 мм. Основное исполнение Ф3 отображает три координаты. Магнитная УЦИ — обычное исполнение, оптическая — только по специальному заказу. Можно установить позже, УЦИ любого производителя.</p></div></details></article>
       <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-square"><div class="media-frame"><img src="assets/images/sf676-coolant-light-960.webp" srcset="assets/images/sf676-coolant-light-480.webp 480w, assets/images/sf676-coolant-light-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="960" alt="Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676" loading="lazy" decoding="async"></div><figcaption>Трубка СОЖ и местное освещение</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#coolant"></use></svg><span>СОЖ, смазка и освещение</span></h3><p class="feature-benefit">СОЖ, смазка и свет — меньше обслуживания</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: СОЖ, смазка и освещение</span></summary><div class="ux-detail-body"><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></div></details></article>
     </div>
   </div>
@@ -850,7 +826,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <tr><th scope="row">Комплектность</th><td data-h="Оставить как есть">Как есть</td><td data-h="Отремонтировать свой">Недостающие узлы (головка, хобот, серьга) — искать отдельно</td><td data-h="Новый СФ676">Зафиксирована в спецификации договора</td></tr>
       <tr><th scope="row">Запасные части</th><td data-h="Оставить как есть">Продаются, в том числе крупные узлы, — но цена по запросу, часть позиций б/у, редкие приходится искать или изготавливать</td><td data-h="Отремонтировать свой">То же</td><td data-h="Новый СФ676">Завод-производитель; чертежи быстроизнашивающихся деталей в РЭ</td></tr>
       <tr><th scope="row">Простой при поломке</th><td data-h="Оставить как есть">Полный, на неопределённый срок</td><td data-h="Отремонтировать свой">Меньше вероятность, но тот же поиск деталей</td><td data-h="Новый СФ676">Гарантия и сервис производителя</td></tr>
-      <tr><th scope="row">Закупка по 44-ФЗ / 223-ФЗ</th><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Российское происхождение подтверждено реестром</td></tr>
+      <tr><th scope="row">Закупка по 44-ФЗ / 223-ФЗ</th><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Для выбранного исполнения запросите реквизиты записи Минпромторга</td></tr>
     </tbody>
     </table>
         <p class="mute comparison-source">В открытых предложениях за сентябрь 2026 года сторонние сервисы указывали выездную диагностику от 25 000 ₽ и ремонт станков соседнего класса за 650–770 тыс. ₽. В тот же период продавцы просили за подержанные рабочие 676П 165–220 тыс. ₽, за ФУ-251 — 280–450 тыс. ₽, за СФ676 1979 года — 200 тыс. ₽.</p>
@@ -858,7 +834,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     </details>
     <p class="comparison-context">Если у вас есть полгода, комплектный станок и специалист с опытом ремонта 676, восстановление может оказаться выгодным. Если детали нужны в этом квартале, сопоставьте возможный простой на время ремонта со сроком изготовления, доставки и запуска нового СФ676.</p>
     <div class="comparison-request">
-      <p><span class="q" data-q="raschet">Пришлите фото станка, короткое видео шпинделя на оборотах и данные по люфтам для сравнения стоимости восстановления и нового СФ676 в нужной комплектации. Условия подготовки расчёта уточняются.</span></p>
+      <p><span class="q" data-q="raschet">Для оценки ремонта можно указать данные станка и описать его состояние. Фото шильдика, видео шпинделя и сведения о люфтах можно передать специалисту при дальнейшем общении. Условия подготовки расчёта уточняются.</span></p>
       <a class="btn red" href="#order" data-request-form="repair_comparison" data-source-section="compare" data-source-cta="compare-request">Посчитать для моего станка</a>
     </div>
   </div>
@@ -900,14 +876,14 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <li class="ui-card config-option">
         <h3><span class="option-letter" aria-hidden="true">C</span><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#dro"></use></svg>УЦИ</h3>
         <div class="config-columns">
-          <div><h4>Доступные варианты</h4><ul><li>0 — без УЦИ</li><li>М — магнитная УЦИ</li><li>О — оптическая УЦИ, только по специальному заказу</li></ul></div>
+          <div><h4>Доступные варианты</h4><ul><li>0 — без УЦИ</li><li>М — магнитная УЦИ, обычное исполнение</li><li>О — оптическая УЦИ, только по специальному заказу</li></ul></div>
           <div><h4>Как выбрать</h4><p>Нужен, если много расточной и точной работы. Для чернового фрезерования и ремонта — лимбы (цена деления 0,05 мм), УЦИ можно поставить позже. Магнитная неприхотлива, но замена комплектующих долгая. Оптическая чувствительнее к стружке, зато замена быстрая.</p></div>
         </div>
       </li>
       <li class="ui-card config-option">
         <h3><span class="option-letter" aria-hidden="true">D</span><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#coordinates"></use></svg>Количество координат</h3>
         <div class="config-columns">
-          <div><h4>Доступные варианты</h4><ul><li>Ф3 — X, Y, Z</li><li>Ф2 — X, Y, только по специальному заказу</li></ul><figure class="prototype-media site-photo config-photo"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:378px) calc(100vw - 98px), 280px" width="960" height="640" alt="Три строки координат X, Y и Z на пульте УЦИ СФ676" loading="lazy" decoding="async"></div><figcaption>Пример индикации трёх координат: X, Y, Z</figcaption></figure></div>
+          <div><h4>Доступные варианты</h4><ul><li>Ф3 — X, Y, Z, основное исполнение</li><li>Ф2 — X, Y, только по специальному заказу</li></ul><figure class="prototype-media site-photo config-photo"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:378px) calc(100vw - 98px), 280px" width="960" height="640" alt="Три строки координат X, Y и Z на пульте УЦИ СФ676" loading="lazy" decoding="async"></div><figcaption>Пример индикации трёх координат: X, Y, Z</figcaption></figure></div>
           <div><h4>Как выбрать</h4><p>Ф3 — основное предлагаемое исполнение. На пульте видна и вертикальная координата Z.</p></div>
         </div>
       </li>
@@ -952,7 +928,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         <div class="timeline-node"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#truck"></use></svg><span aria-hidden="true">03</span></div><h3>Доставка и подготовка площадки</h3>
         <ol class="delivery-steps" start="6">
           <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">6</span><h4>Доставка</h4></div><p>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</p></li>
-          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">7</span><h4>Подготовка места</h4></div><p>Установка на виброопоры при соблюдении требований к основанию или на фундамент по чертежу из РЭ; 380 В, 3 фазы; кран или погрузчик от 3 т для ящика; для точных работ — помещение +20 ± 2 °C, не рядом с абразивными станками.</p></li>
+          <li><div class="delivery-step-heading"><span class="step-number" aria-hidden="true">7</span><h4><span class="q" data-q="docs" data-location="Подготовка места">Подготовка места</span></h4></div><p>Установка на виброопоры при соблюдении требований к основанию или на фундамент по чертежу из РЭ; 380 В, 3 фазы; кран или погрузчик от 3 т для ящика; для точных работ — помещение +20 ± 2 °C, не рядом с абразивными станками.</p></li>
         </ol>
       </article>
       <article class="ui-card delivery-group">
@@ -989,8 +965,6 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         </ul>
       </article>
     </div>
-    <p class="mute"><span class="q" data-q="docs">Памятка по подготовке места установки (PDF) — файл пока не добавлен.</span></p>
-    <p class="media-pending-note">Фотографии упаковки и отгрузки пока не добавлены.</p>
   </div>
 </section>
 
@@ -1015,7 +989,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 <section class="v1 trust-section" id="plant">
   <div class="wrap">
     <h2 class="section-heading">Вятский станкостроительный завод</h2>
-    <p class="section-intro">Выпускает СФ676 с 2016 года. Завод расположен в Кирове. <span class="q" data-q="sami">Состав собственного производства — механообработка, сборка, ОТК и литьё — требует уточнения</span>. Кроме СФ676 выпускаем настольно-сверлильный станок 2М112, точильно-шлифовальные станки ТШ и гидравлический пресс ПГП-50; оказываем услуги лазерной резки и электролаборатории.</p>
+    <p class="section-intro"><span class="q" data-q="sami">Завод выпускает СФ676 в Кирове с 2016 года.</span> Кроме СФ676 выпускаем настольно-сверлильный станок 2М112, точильно-шлифовальные станки ТШ и гидравлический пресс ПГП-50; оказываем услуги лазерной резки и электролаборатории.</p>
     <dl class="plant-facts">
       <div><dt><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#machine"></use></svg><span>Более 1 000</span></dt><dd>станков поставлено</dd></div>
       <div><dt><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#calendar"></use></svg><span>2016 год</span></dt><dd>начало выпуска современного исполнения СФ676</dd></div>
@@ -1142,9 +1116,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     </div>
     <h3><span class="q" data-q="logo">Отрасли применения СФ676</span></h3>
     <ul class="industry-list"><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#factory"></use></svg><span>Машиностроение</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#shield"></use></svg><span>Оборонная промышленность</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#atom"></use></svg><span>Атомная отрасль</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#controls"></use></svg><span>Инструментальные производства</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#book"></use></svg><span>Учреждения среднего профессионального образования</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#energy"></use></svg><span>Ремонтные службы энергетики</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#repair"></use></svg><span>Ремонтные службы нефтегазовой промышленности</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#factory"></use></svg><span>Пищевая промышленность</span></li></ul>
-    <p class="ui-note">Отзывы — блок скрыт до появления двух-трёх отзывов.</p>
     <div class="plant-media"><figure class="prototype-media site-photo media-production"><div class="media-frame"><img src="assets/images/sf676-production-1600.webp" srcset="assets/images/sf676-production-800.webp 800w, assets/images/sf676-production-1600.webp 1600w" sizes="(max-width:968px) calc(100vw - 48px), 920px" width="1600" height="1067" alt="СФ676 на переднем плане и ряд станков в производственном цехе ВСЗ" loading="lazy" decoding="async"></div><figcaption>Работа на СФ676 на производственном участке ВСЗ</figcaption></figure></div>
-    <p class="media-pending-note">Видеообзор станка пока не добавлен.</p>
   </div>
 </section>
 
@@ -1161,7 +1133,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <details><summary>Нужен ли УЦИ?</summary><div class="faq-answer">Если много расточной и точной работы — да, лучше сразу на три координаты. Для ремонта и чернового фрезерования можно работать по лимбам (цена деления 0,05 мм) и поставить УЦИ позже: станок допускает установку системы любого производителя.</div></details>
       <details><summary>Какая гарантия?</summary><div class="faq-answer">Гарантия 12 месяцев. Что входит и что не является гарантийным случаем — в договоре и РЭ. Поломки из-за неправильного подключения к сети или небрежной установки под гарантию не попадают.</div></details>
       <details><summary>Что с запчастями через пять лет?</summary><div class="faq-answer">Запасные части поставляет завод-производитель; в руководстве по эксплуатации есть чертежи быстроизнашивающихся деталей, спецификации подшипников и покупных изделий — часть можно изготовить или купить на месте. Конструкция серийная, узлы взаимозаменяемы в пределах исполнения.</div></details>
-      <details><summary>Можно ли посмотреть станок до покупки?</summary><div class="faq-answer">Видеообзор пока не добавлен. <span class="q" data-q="vizit">Возможность визита на завод в Киров для осмотра станка в работе уточняется.</span> При отгрузке — приёмка с вашим участием.</div></details>
+      <details><summary>Можно ли посмотреть станок до покупки?</summary><div class="faq-answer"><span class="q" data-q="vizit">Уточните в отделе продаж, можно ли осмотреть станок на заводе в Кирове до покупки.</span> При отгрузке — приёмка с вашим участием.</div></details>
     </div>
   </div>
 </section>
@@ -1192,7 +1164,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
   </div>
 </section>
 
-<section id="qlist"><div class="wrap"><h2>Вопросы к заводу — что стоит за жёлтыми отметками</h2><p class="mute">Номер сноски совпадает с номером в списке. Нажатие на сноску ведёт сюда, нажатие на «где» — обратно к месту на странице.</p><ol id="qol"></ol></div></section>
+<section id="qlist"><div class="wrap"><h2>Вопросы к заводу — что стоит за жёлтыми отметками</h2><p class="mute">Номер сноски ведёт к вопросу в списке. Ссылки рядом с вопросом открывают соответствующие места на странице.</p><ol id="qol"></ol></div></section>
 <footer>
   <div class="wrap">ООО «Вятский станкостроительный завод», ОГРН 1164350074900 · <span>Политика конфиденциальности</span> · <span>Согласие на обработку персональных данных</span> · Предложение не является публичной офертой · <span>vsp-kirov.ru</span></div>
 </footer>
@@ -1239,7 +1211,7 @@ var QUESTIONS = {
  acts:{t:'Предоставить образцы документов заводской приёмки и ПНР; подтвердить точные названия: акт индивидуальных испытаний, акт приёмки, акт ПНР.',w:'технолог / отдел продаж'},
  'repair-price':{t:'Подтвердить, как ВСЗ фиксирует цену капитального ремонта, когда применим ориентир 75% стоимости нового станка, как учитывается исходная комплектность и какие работы входят в цену.',w:'руководство завода'},
  raschet:{t:'Для расчёта «ремонт или новый» по фото и видео уточнить ответственного, срок подготовки и стоимость услуги.',w:'руководство завода / технолог'},
- reestr:{t:'Предоставить документы и реквизиты реестровой записи Минпромторга для выбранного исполнения станка.',w:'руководство завода'},
+ reestr:{t:'Предоставить документы и реквизиты реестровой записи Минпромторга для выбранного исполнения станка.',w:'отдел продаж / руководство завода'},
  deklar:{t:'Сверить текущий статус декларации ЕАЭС N RU Д-RU.РА11.В.38671/24 и перечень исполнений СФ676. В копии ВСЗ указан срок по 10.12.2029. Предоставить актуальную выписку для закупки.',w:'отдел продаж'},
  'tz-samples':{t:'Предоставить согласованные образцы технических заданий для закупки СФ676 по 44-ФЗ и 223-ФЗ. Подтвердить возможность публикации и скачивания обоих файлов.',w:'отдел продаж / руководство завода'},
  sami:{t:'Что делаем сами: литьё, механообработка, сборка, контроль — формулировка о производстве.',w:'руководство завода'},
@@ -1249,10 +1221,40 @@ var QUESTIONS = {
 };
 
 (function(){
-  var order=[], seen={}, occurrences={}, spans=document.querySelectorAll('.q[data-q]');
-  spans.forEach(function(sp){var k=sp.getAttribute('data-q'); if(!seen[k]){seen[k]=order.length+1; order.push(k);} var n=seen[k]; occurrences[k]=(occurrences[k]||0)+1; if(!sp.id) sp.id='q-'+k+(occurrences[k]>1 ? '-'+occurrences[k] : ''); var sup=document.createElement('sup'); sup.innerHTML='<a href="#ql-'+k+'" style="color:inherit;text-decoration:none">'+n+'</a>'; sp.appendChild(sup);});
-  var ol=document.getElementById('qol');
-  order.forEach(function(k,i){var q=QUESTIONS[k]||{t:k,w:''}; var li=document.createElement('li'); li.id='ql-'+k; li.innerHTML='<b>'+q.t+'</b> <span class="mute">— '+q.w+'</span> &nbsp;<a href="#q-'+k+'">где на странице ↑</a>'; ol.appendChild(li);});
+  var markers=new Map();
+  document.querySelectorAll('.q[data-q]').forEach(function(marker){
+    var key=marker.dataset.q;
+    if(!markers.has(key)) markers.set(key,{number:markers.size+1,locations:[]});
+    var entry=markers.get(key);
+    entry.locations.push(marker);
+    if(!marker.id) marker.id='q-'+key+(entry.locations.length>1 ? '-'+entry.locations.length : '');
+    var footnote=document.createElement('sup');
+    var link=document.createElement('a');
+    link.href='#ql-'+key;
+    link.textContent=entry.number;
+    link.setAttribute('aria-label','К вопросу '+entry.number);
+    footnote.append(link);
+    marker.append(footnote);
+  });
+  var list=document.getElementById('qol');
+  markers.forEach(function(entry,key){
+    var question=QUESTIONS[key];
+    var item=document.createElement('li');
+    item.id='ql-'+key;
+    var title=document.createElement('b');
+    title.textContent=question.t;
+    var owner=document.createElement('span');
+    owner.className='mute';
+    owner.textContent=' — '+question.w;
+    item.append(title,owner);
+    entry.locations.forEach(function(marker,index){
+      var link=document.createElement('a');
+      link.href='#'+marker.id;
+      link.textContent=(marker.dataset.location || 'где на странице')+' ↑';
+      item.append(index ? ' · ' : ' ',link);
+    });
+    list.append(item);
+  });
   var sticky=document.querySelector('.sticky');
   function enableReview(){document.body.classList.add('review-mode','showq')}
   if(new URLSearchParams(location.search).get('review')==='1') enableReview();
