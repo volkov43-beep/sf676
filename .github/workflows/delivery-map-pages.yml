@@ -1,0 +1,63 @@
+name: Publish SF676 to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+concurrency:
+  group: sf676-pages
+  cancel-in-progress: false
+
+jobs:
+  source:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: read
+    outputs:
+      mode: ${{ steps.pages.outputs.mode }}
+    steps:
+      - name: Read the existing Pages source
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mode=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: source
+    if: needs.source.outputs.mode == 'workflow'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check the delivery registry and the static list
+        run: |
+          python3 tests/delivery-points.py
+          python3 scripts/delivery-directory.py --check
+      - name: Prepare the static site
+        env:
+          YANDEX_MAPS_API_KEY: ${{ secrets.YANDEX_MAPS_API_KEY }}
+        run: python3 scripts/build-pages.py "$RUNNER_TEMP/pages"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/pages
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the checked artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
