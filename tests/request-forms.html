@@ -9,7 +9,13 @@
 <script>
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
 const widths=[320,375,390,768,1024,1366,1920];
-const expected={price_quote:['contact','name','company','city','comment'],configuration_help:['contact','name','company','task','comment'],repair_comparison:['model','condition','problem','contact','name'],procurement_documents:['contact','organization','purchaseType','documents'],procurement_nmck:['organization','contact','purchaseType','requirements','supplyCity','comment']};
+const expected={
+ price_quote:['contact','name','company','city','deliveryAddress','comment'],
+ configuration_help:['contact','name','company','task'],
+ repair_comparison:['machineIdentity','problem','contact','name'],
+ procurement_documents:['contact','organization','purchaseType','documents'],
+ procurement_nmck:['organization','contact','purchaseType','requirements','supplyCity','comment']
+};
 const tick=()=>new Promise(r=>{requestAnimationFrame(()=>requestAnimationFrame(r));setTimeout(r,60)});
 async function until(test){for(let i=0;i<100;i++){if(test())return;await new Promise(r=>setTimeout(r,20))}throw Error('Timed out waiting for visible sticky header')}
 function report(){output.textContent=JSON.stringify({cases:records.length,failed:records.filter(r=>!r.pass),records},null,2)}
@@ -48,7 +54,57 @@ async function matrix(){records=[];output.textContent='Проверка…';
  const {w,d}=await load(390,'review');record('review-questions',d.body.classList.contains('showq')&&d.querySelector('#ql-rop a')?.hash==='#q-rop');
  const n=await load(390,'nojs');record('nojs-fallback',!n.w.SF676Requests&&n.d.querySelectorAll('section[id]:not(#qlist)').length===13&&Array.from(n.d.querySelectorAll('[data-request-form]')).every(a=>a.getAttribute('href')==='#order')&&n.d.querySelectorAll('#faq details').length===9&&!n.d.querySelector('dialog').open);
  }catch(e){record('exception',false,{message:String(e)})}report();}
-async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;const link=d.querySelector('[data-source-cta="hero-price"]');link.click();
+function checkSalesDrafts(w,d){
+ const api=w.SF676Requests, form=d.getElementById('request-form');
+ const field=name=>form.elements.namedItem(name);
+ const set=(key,value)=>{field(key).value=value};
+ const email='qa@example.com', identity='Станок Т-1, завод «Пример»\n№ Т-0001, 1986 г.';
+ const problem='Шпиндель шумит при работе.', address='Тестовый посёлок, ул. 1-я, д. 2Б, корпус 3';
+ for(const id of ['price_quote','configuration_help']){
+  d.querySelector('[data-request-form="'+id+'"]').click();
+  set('contact',email);
+  record(id+'/company-label',field('company').labels[0].textContent.includes('ИНН или название предприятия'));
+  for(const company of ['','0000000000','ООО «Тестовое предприятие»']){
+   set('company',company);
+   record(id+'/company-free-text',api.validate()&&api.getDraft().contact.company===company);
+  }
+  if(id==='price_quote'){
+   set('city','Тестовый город'); set('deliveryAddress',address); set('comment','Позвонить заранее');
+   const ctx=api.getDraft().context;
+   record('quote/logistics',ctx.city==='Тестовый город'&&ctx.deliveryAddress===address&&ctx.comment==='Позвонить заранее');
+   set('deliveryAddress','а'.repeat(301));
+   record('quote/address-limit',!api.validate()&&api.getDraft()===null);
+   set('deliveryAddress',address);
+   record('quote/correct-address',api.validate()&&api.getDraft().context.deliveryAddress===address);
+  }else{
+   set('task','Фрезерование корпуса');
+   const ctx=api.getDraft().context;
+   record('consultation/task-only',ctx.task==='Фрезерование корпуса'&&!('comment' in ctx));
+  }
+  api.close();
+ }
+ const trigger=d.querySelector('[data-source-cta="compare-request"]');
+ trigger.click();set('contact',email);
+ record('repair/contact-only',api.validate()&&api.getDraft().context.machineIdentity===''&&api.getDraft().context.problem==='');
+ const hint=d.getElementById('request-machineIdentity-hint');
+ record('repair/plate-instructions',field('machineIdentity').getAttribute('aria-describedby').split(' ').includes(hint.id)&&/модель, производителя, заводской номер и год/.test(hint.textContent)&&d.querySelector('#request-fields').textContent.includes('фотография заводского шильдика')&&!form.querySelector('[type=file]'));
+ set('machineIdentity',identity);set('problem',problem);set('name','Тест');
+ const draft=api.getDraft();
+ record('repair/identity-and-condition',Object.keys(draft.context).sort().join(',')==='machineIdentity,problem'&&draft.context.machineIdentity===identity&&draft.context.problem===problem&&draft.contact.name==='Тест');
+ for(const [key,valid] of [['machineIdentity',identity],['problem',problem]]){
+  const input=field(key);
+  for(const [reason,value] of [['length','x'.repeat(input.maxLength+1)],['markup','<b>текст</b>'],['control','текст\u0001'],['direction','№\u202e123']]){
+   set(key,value);
+   record('repair/'+key+'/'+reason,!api.validate()&&api.getDraft()===null&&input.getAttribute('aria-invalid')==='true'&&d.getElementById(input.id+'-error').textContent.length>0);
+  }
+  set(key,valid);
+  record('repair/correct-'+key,api.validate()&&!input.hasAttribute('aria-invalid'));
+ }
+ api.close();trigger.click();
+ record('repair/clean-reopen',expected.repair_comparison.every(key=>field(key).value==='')&&api.getDraft()===null);
+ api.close();
+}
+async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;checkSalesDrafts(w,d);const link=d.querySelector('[data-source-cta="hero-price"]');link.click();
  const values=[['',false],['test@',false],['test@example..com',false],['test@example.com',true],['qa+tag@sub.example.com',true],['тест@пример.рф',true],['+7 (800) 707-26-76',true],['8 800 707 26 76',true],['8007072676',true],['7999999999',true],['+375 29 123 45 67',true],['12345',false],['+78007072676123456',false],['1111111111',false],['<b>test</b>@example.com',false]];
  for(const[value,valid]of values){const input=d.querySelector('#request-contact');input.value=value;const result=api.validate();record('contact/'+values.findIndex(x=>x[0]===value),result===valid&&input.value===value);}
  d.querySelector('#request-contact').value='qa@example.com';d.querySelector('#request-comment').value='<img src=x onerror=alert(1)>';record('html-rejected',!api.validate()&&api.getDraft()===null);d.querySelector('#request-comment').value='x'.repeat(2001);record('length-rejected',!api.validate());api.close();

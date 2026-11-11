@@ -18,15 +18,18 @@
   const definitions = {
     contact: {label: 'Телефон или e-mail', required: true, max: 254, wide: true},
     name: {label: 'Имя', max: 100},
-    company: {label: 'Название предприятия', max: 200},
+    company: {label: 'ИНН или название предприятия', max: 200},
     organization: {label: 'Название организации', max: 200, wide: true},
     city: {label: 'Город доставки', max: 160, wide: true},
+    deliveryAddress: {label: 'Адрес доставки', max: 300, wide: true},
     supplyCity: {label: 'Город поставки', max: 160, wide: true},
     comment: {label: 'Комментарий', type: 'textarea', max: 2000, wide: true},
     task: {label: 'Производственная задача или требования', type: 'textarea', max: 2000, wide: true},
-    model: {label: 'Модель существующего станка', max: 160, wide: true},
-    condition: {label: 'Состояние оборудования', max: 500, wide: true},
-    problem: {label: 'Описание неисправности или производственной задачи', type: 'textarea', max: 2000, wide: true},
+    machineIdentity: {
+      label: 'Данные станка', type: 'textarea', max: 500, wide: true,
+      hint: 'Укажите модель, производителя, заводской номер и год выпуска, если они известны.'
+    },
+    problem: {label: 'Техническое состояние или описание неисправности', type: 'textarea', max: 2000, wide: true},
     purchaseType: {label: 'Тип закупки', type: 'select', options: purchaseTypes, wide: true},
     documents: {label: 'Какие документы необходимы', type: 'checkboxes', options: documents, wide: true},
     requirements: {label: 'Требования к комплектации', type: 'textarea', max: 2000, wide: true}
@@ -34,19 +37,19 @@
   const scenarios = {
     price_quote: {
       title: 'Получить цену СФ676 с доставкой',
-      description: 'Укажите контактные данные и город доставки. Подготовим коммерческое предложение с комплектацией, стоимостью и сроком изготовления',
-      fields: ['contact', 'name', 'company', 'city', 'comment'], action: 'Отправить запрос цены'
+      description: 'Оставьте телефон или e-mail. Если место доставки уже известно, укажите город и адрес.',
+      fields: ['contact', 'name', 'company', 'city', 'deliveryAddress', 'comment'], action: 'Отправить запрос цены'
     },
     configuration_help: {
       title: 'Поможем подобрать комплектацию СФ676',
       description: 'Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка',
-      fields: ['contact', 'name', 'company', 'task', 'comment'], action: 'Запросить консультацию'
+      fields: ['contact', 'name', 'company', 'task'], action: 'Запросить консультацию'
     },
     repair_comparison: {
       title: 'Сравнить ремонт и приобретение нового СФ676',
       description: 'Расскажите о существующем оборудовании. Специалист поможет оценить варианты восстановления и приобретения нового станка',
-      fields: ['model', 'condition', 'problem', 'contact', 'name'], action: 'Запросить сравнительный расчёт',
-      note: 'Фотографии, видео работы шпинделя и технические материалы можно передать специалисту при дальнейшем общении. Автоматический расчёт и загрузка файлов здесь не выполняются.'
+      fields: ['machineIdentity', 'problem', 'contact', 'name'], action: 'Запросить сравнительный расчёт',
+      note: 'Для точной идентификации станка полезна фотография заводского шильдика. Её можно будет передать специалисту при дальнейшем общении.'
     },
     procurement_documents: {
       title: 'Запросить документы для закупки СФ676',
@@ -94,9 +97,17 @@
         if (key === 'contact') { input.spellcheck = false; input.setAttribute('autocapitalize', 'none'); }
       }
       input.required = !!spec.required;
-      input.setAttribute('aria-describedby', id + '-error');
-      group.append(input, el('p', 'request-error'));
-      group.lastChild.id = id + '-error';
+      const error = el('p', 'request-error');
+      error.id = id + '-error';
+      if (spec.hint) {
+        const hint = el('small', 'request-hint', spec.hint);
+        hint.id = id + '-hint';
+        group.appendChild(hint);
+        input.setAttribute('aria-describedby', hint.id + ' ' + error.id);
+      } else {
+        input.setAttribute('aria-describedby', error.id);
+      }
+      group.append(input, error);
     }
     fields.appendChild(group);
   }
@@ -124,6 +135,8 @@
     if (!spec || spec.type === 'checkboxes') return '';
     if (spec.max && input.value.length > spec.max) return 'Максимум ' + spec.max + ' символов.';
     if (/[<>\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(input.value)) return 'Используйте обычный текст без HTML-разметки и символов «<» и «>».';
+    if (['company', 'deliveryAddress', 'task', 'machineIdentity', 'problem'].includes(input.name)
+        && /[\u007f-\u009f\u202a-\u202e\u2066-\u2069]/.test(input.value)) return 'Удалите скрытые управляющие символы из текста.';
     if (spec.type === 'select' && !spec.options.some(([value]) => value === input.value)) return 'Выберите тип закупки из списка.';
     return input.name === 'contact' ? contactError(input.value) : '';
   }
