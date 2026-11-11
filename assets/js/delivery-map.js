@@ -42,10 +42,9 @@ function bounds(features) {
 }
 
 // Called once per block. The deadline includes data, API script, API readiness and optional clustering.
-export function mountDeliveryMap(root, {
-  key, getApi = loadApi, getPoints = loadPoints, getClusters = loadClusters,
-  timeout = 15000, moduleTimeout = 1800
-}) {
+function mountDeliveryMap(root, key) {
+  const timeout = 15000;
+  const moduleTimeout = 1800;
   const ui = root.querySelector('.delivery-map-ui');
   const status = root.querySelector('.delivery-status');
   const canvas = root.querySelector('.delivery-canvas');
@@ -171,7 +170,7 @@ export function mountDeliveryMap(root, {
     deadlineTimer = setTimeout(unavailable, timeout);
     status.textContent = 'Загружается карта поставок…';
     try {
-      const [loadedApi, points] = await Promise.all([getApi(key), getPoints(signal)]);
+      const [loadedApi, points] = await Promise.all([loadApi(key), loadPoints(signal)]);
       if (signal.aborted) return;
       api = loadedApi;
       features = points.map(p => ({
@@ -180,7 +179,7 @@ export function mountDeliveryMap(root, {
       // The optional package only gets the unused part of the startup budget.
       clearTimeout(deadlineTimer);
       const clusters = await Promise.race([
-        Promise.resolve().then(() => getClusters(api)).catch(() => null),
+        Promise.resolve().then(() => loadClusters(api)).catch(() => null),
         new Promise(resolve => {
           moduleTimer = setTimeout(() => resolve(null), Math.max(0, Math.min(moduleTimeout, end - performance.now())));
         })
@@ -190,9 +189,28 @@ export function mountDeliveryMap(root, {
       ui.hidden = false;
       map = new api.YMap(canvas, {
         location: { bounds: bounds(features) }, margin: [28, 28, 28, 28],
-        behaviors: [], zoomRounding: 'smooth', copyrightsPosition: 'bottom right'
+        mode: 'raster', behaviors: [], zoomRounding: 'smooth', copyrightsPosition: 'bottom right'
       });
-      map.addChild(new api.YMapDefaultSchemeLayer({}));
+      // A ready SDK can still receive no basemap tiles (for example when service limits apply).
+      // Use the provider's layer state when available; missing diagnostics alone are not an error.
+      let awaitingTiles = false;
+      let hasTiles = false;
+      map.addChild(new api.YMapListener({
+        onStateChanged(state) {
+          if (hasTiles || signal.aborted) return;
+          const tiles = state.getLayerState('delivery-ground', 'tile', 'raster');
+          if (!tiles) return;
+          awaitingTiles = tiles.tilesTotal > 0;
+          if (tiles.tilesReady > 0) {
+            hasTiles = true;
+            clearTimeout(deadlineTimer);
+          }
+        }
+      }));
+      deadlineTimer = setTimeout(() => {
+        if (awaitingTiles && !hasTiles) unavailable();
+      }, Math.max(0, end - performance.now()));
+      map.addChild(new api.YMapDefaultSchemeLayer({ layers: { ground: { id: 'delivery-ground' } } }));
       map.addChild(new api.YMapDefaultFeaturesLayer({}));
       if (clusters) {
         try {
@@ -233,4 +251,4 @@ export function mountDeliveryMap(root, {
 }
 
 const geography = document.getElementById('delivery-geography');
-if (geography) mountDeliveryMap(geography, { key: document.querySelector('meta[name="yandex-maps-key"]')?.content });
+if (geography) mountDeliveryMap(geography, document.querySelector('meta[name="yandex-maps-key"]')?.content);
