@@ -1,6 +1,7 @@
 const API_URL = 'https://api-maps.yandex.ru/v3/';
 const CLUSTER_PACKAGE = '@yandex/ymaps3-clusterer';
 const registry = new URL('../data/delivery-points.json', import.meta.url);
+const MAP_PADDING = 28;
 let apiRequest;
 
 function loadApi(key) {
@@ -34,11 +35,23 @@ async function loadClusters(api) {
   return api.import(CLUSTER_PACKAGE);
 }
 
-function bounds(features) {
+// YMap LngLatBounds: top-left [west, north], bottom-right [east, south].
+export function bounds(features) {
   const coords = features.map(feature => feature.geometry.coordinates);
   const lons = coords.map(point => point[0]);
   const lats = coords.map(point => point[1]);
-  return [[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]];
+  return [[Math.min(...lons), Math.max(...lats)], [Math.max(...lons), Math.min(...lats)]];
+}
+
+export function fittedLocation(features, projection, width, height) {
+  const [nw, se] = bounds(features).map(point => projection.toWorldCoordinates(point));
+  const center = projection.fromWorldCoordinates({ x: (nw.x + se.x) / 2, y: (nw.y + se.y) / 2 });
+  // The grid renders at integer zooms. Round down to include the outer cells and marker radii.
+  // YMap's projected world spans two units, or 256 CSS pixels at zoom zero.
+  const fitX = (width - 2 * MAP_PADDING) / (128 * Math.abs(se.x - nw.x));
+  const fitY = (height - 2 * MAP_PADDING) / (128 * Math.abs(se.y - nw.y));
+  const zoom = Math.max(0, Math.min(19, Math.floor(Math.log2(Math.min(fitX, fitY)))));
+  return { center, zoom };
 }
 
 // Called once per block. The deadline includes data, API script, API readiness and optional clustering.
@@ -110,14 +123,7 @@ function mountDeliveryMap(root, key) {
   }
 
   function fit(items) {
-    const [low, high] = bounds(items).map(point => map.projection.toWorldCoordinates(point));
-    const center = map.projection.fromWorldCoordinates({ x: (low.x + high.x) / 2, y: (low.y + high.y) / 2 });
-    // The grid renders at integer zooms. Round down to include the outer cells and marker radii.
-    // YMap's projected world spans two units, or 256 CSS pixels at zoom zero.
-    const fitX = (canvas.clientWidth - 56) / (128 * Math.abs(high.x - low.x));
-    const fitY = (canvas.clientHeight - 56) / (128 * Math.abs(high.y - low.y));
-    const zoom = Math.max(0, Math.min(19, Math.floor(Math.log2(Math.min(fitX, fitY)))));
-    map.setLocation({ center, zoom });
+    map.setLocation(fittedLocation(items, map.projection, canvas.clientWidth, canvas.clientHeight));
   }
 
   function cluster(coordinates, items) {
@@ -188,7 +194,7 @@ function mountDeliveryMap(root, key) {
       if (signal.aborted) return;
       ui.hidden = false;
       map = new api.YMap(canvas, {
-        location: { bounds: bounds(features) }, margin: [28, 28, 28, 28],
+        location: { bounds: bounds(features) }, margin: [MAP_PADDING, MAP_PADDING, MAP_PADDING, MAP_PADDING],
         mode: 'raster', behaviors: [], zoomRounding: 'smooth', copyrightsPosition: 'bottom right'
       });
       // A ready SDK can still receive no basemap tiles (for example when service limits apply).
@@ -250,5 +256,5 @@ function mountDeliveryMap(root, key) {
   return dispose;
 }
 
-const geography = document.getElementById('delivery-geography');
+const geography = globalThis.document?.getElementById('delivery-geography');
 if (geography) mountDeliveryMap(geography, document.querySelector('meta[name="yandex-maps-key"]')?.content);

@@ -1,0 +1,37 @@
+name: SF676 PR checks
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check delivery map and static build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check syntax and run model tests
+        run: |
+          for file in assets/js/*.js; do node --check "$file"; done
+          python3 -m compileall -q scripts tests
+          node --test tests/*.test.cjs tests/*.test.mjs
+      - name: Verify map data and fallback list
+        run: |
+          python3 tests/delivery-points.py
+          python3 scripts/delivery-directory.py --check
+      - name: Smoke-test the static build
+        env:
+          YANDEX_MAPS_API_KEY: synthetic-ci-only
+        run: |
+          site="$RUNNER_TEMP/sf676-pr"
+          python3 scripts/build-pages.py "$site"
+          grep -Fq '<meta name="yandex-maps-key" content="synthetic-ci-only">' "$site/index.html"
+          diff -qr assets "$site/assets"
