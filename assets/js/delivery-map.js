@@ -54,12 +54,45 @@ export function fittedLocation(features, projection, width, height) {
   return { center, zoom };
 }
 
+// Keep native page scrolling. A swipe (even one that returns to its origin),
+// a second finger or a browser-cancelled pointer cannot unlock the map.
+export function listenForActivationTap(surface, activate, signal) {
+  let start;
+  function moved(event) {
+    return Math.hypot(event.clientX - start.x, event.clientY - start.y) >= 10;
+  }
+  surface.addEventListener('pointerdown', event => {
+    start = null;
+    if (event.target === surface && surface.classList.contains('touch-locked') &&
+        event.isPrimary && event.button === 0) {
+      start = { id: event.pointerId, x: event.clientX, y: event.clientY, time: event.timeStamp };
+    }
+  }, { signal });
+  surface.addEventListener('pointermove', event => {
+    if (start?.id === event.pointerId && moved(event)) start = null;
+  }, { signal });
+  for (const type of ['pointercancel', 'pointerleave']) {
+    surface.addEventListener(type, event => {
+      if (start?.id === event.pointerId) start = null;
+    }, { signal });
+  }
+  surface.addEventListener('pointerup', event => {
+    if (start?.id !== event.pointerId) return;
+    const tapped = !moved(event) && event.timeStamp - start.time < 700;
+    start = null;
+    if (tapped && surface.classList.contains('touch-locked')) activate();
+  }, { signal });
+}
+
 // Called once per block. The deadline includes data, API script, API readiness and optional clustering.
 function mountDeliveryMap(root, key) {
   const timeout = 15000;
   const moduleTimeout = 1800;
   const ui = root.querySelector('.delivery-map-ui');
   const status = root.querySelector('.delivery-status');
+  const directory = root.querySelector('.delivery-directory');
+  const surface = root.querySelector('.delivery-surface');
+  const hint = root.querySelector('.delivery-tap-hint');
   const canvas = root.querySelector('.delivery-canvas');
   const selection = root.querySelector('.delivery-selection');
   const touchButton = root.querySelector('.delivery-touch');
@@ -75,6 +108,11 @@ function mountDeliveryMap(root, key) {
   let selected;
   let filter = 'all';
 
+  function setMapReady(ready) {
+    directory.hidden = ready;
+    status.classList.toggle('sr-only', ready);
+  }
+
   function dispose() {
     controller.abort();
     observer?.disconnect();
@@ -83,6 +121,7 @@ function mountDeliveryMap(root, key) {
     map?.destroy();
     map = null;
     ui.hidden = true;
+    setMapReady(false);
   }
 
   function unavailable() {
@@ -153,8 +192,8 @@ function mountDeliveryMap(root, key) {
     }
     fit(visible);
     for (const button of filters) button.setAttribute('aria-pressed', String(button.dataset.filter === value));
-    status.textContent = 'Географических точек в выбранной группе: ' + visible.length + '.';
-    if (clusterer) status.textContent += ' Число в кружке обозначает количество точек.';
+    status.textContent = 'Географических точек в выбранной группе: ' + visible.length + '.' +
+      (clusterer ? ' Число в кружке обозначает количество точек.' : '');
   }
 
   function setTouch(active) {
@@ -162,8 +201,11 @@ function mountDeliveryMap(root, key) {
     touchButton.setAttribute('aria-pressed', String(active));
     touchButton.textContent = active ? 'Вернуть прокрутку страницы' : 'Двигать карту';
     const locked = coarse.matches && !active;
-    canvas.classList.toggle('touch-locked', locked);
-    map.setBehaviors(locked ? [] : ['drag', 'pinchZoom', 'dblClick']);
+    surface.classList.toggle('touch-locked', locked);
+    hint.hidden = !locked;
+    const behaviors = ['drag', 'pinchZoom', 'dblClick'];
+    if (!coarse.matches) behaviors.push('scrollZoom');
+    map.setBehaviors(locked ? [] : behaviors);
   }
 
   async function start() {
@@ -229,6 +271,8 @@ function mountDeliveryMap(root, key) {
         }
       }
       setTouch(false);
+      listenForActivationTap(surface, () => setTouch(true), signal);
+      setMapReady(true);
       showFilter('all');
       for (const b of filters) b.addEventListener('click', () => showFilter(b.dataset.filter), { signal });
       for (const b of root.querySelectorAll('[data-zoom]')) {

@@ -1039,6 +1039,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         </div>
         <div class="delivery-surface">
           <div class="delivery-canvas" role="group" aria-label="Карта регионов и городов поставки"></div>
+          <span class="delivery-tap-hint" aria-hidden="true" hidden>Нажмите, чтобы двигать карту</span>
           <div class="delivery-selection" hidden>
             <span id="delivery-label"></span>
             <button type="button" aria-label="Закрыть подпись" aria-describedby="delivery-label">Закрыть</button>
@@ -1046,9 +1047,9 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
         </div>
       </div>
       <p class="delivery-status" role="status"></p>
-      <p class="ui-note">Точки в России условно размещены в административных центрах регионов поставки и не обозначают точные адреса покупателей.</p>
       <details class="ux-details delivery-directory">
         <summary>Список регионов и городов</summary>
+        <p class="ui-note">Точки в России условно размещены в административных центрах регионов поставки и не обозначают точные адреса покупателей.</p>
         <!-- delivery-directory:start -->
         <h4>Россия · регион и условная точка</h4>
         <ul class="delivery-regions">
