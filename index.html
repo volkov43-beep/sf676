@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yandex-maps-key" content="">
 <meta name="robots" content="noindex, nofollow">
 <title>СФ676 — прототип посадочной страницы (черновик)</title>
 <style>
@@ -609,6 +610,8 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 <link rel="stylesheet" href="assets/css/request-forms.css">
 <link rel="stylesheet" href="assets/css/sf676-selector.css">
 <link rel="stylesheet" href="assets/css/payment-calculator.css">
+<link rel="stylesheet" href="assets/css/delivery-map.css">
+<script type="module" src="assets/js/delivery-map.js"></script>
 <script src="assets/js/payment-model.js" defer></script>
 <script src="assets/js/sf676-selector-model.js" defer></script>
 <script src="assets/js/request-forms.js" defer></script>
@@ -1016,8 +1019,126 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
     <dl class="plant-facts">
       <div><dt><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#machine"></use></svg><span>Более 1 000</span></dt><dd>станков поставлено</dd></div>
       <div><dt><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#calendar"></use></svg><span>2016 год</span></dt><dd>начало выпуска современного исполнения СФ676</dd></div>
-      <div><dt><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#geography"></use></svg><span><span class="q" data-q="region">75</span> регионов</span></dt><dd>география поставок</dd><dd class="preliminary">Предварительные данные — требуют подтверждения.</dd></div>
+      <div><dt><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#geography"></use></svg><span>73 региона</span></dt><dd>поставки по России</dd></div>
     </dl>
+    <div class="delivery-geography" id="delivery-geography" aria-labelledby="delivery-heading" role="region">
+      <h3 id="delivery-heading">География поставок СФ676</h3>
+      <p>Станки СФ676 поставлялись в 73 региона России и 17 городов шести зарубежных стран.</p>
+      <div class="delivery-map-ui" hidden>
+        <div class="delivery-toolbar">
+          <div class="delivery-filters" role="group" aria-label="География поставок">
+            <button type="button" data-filter="all" aria-pressed="true">Все <span>90</span></button>
+            <button type="button" data-filter="russia" aria-pressed="false">Россия <span>73</span></button>
+            <button type="button" data-filter="export" aria-pressed="false">Экспорт <span>17</span></button>
+          </div>
+          <button type="button" class="delivery-touch" aria-pressed="false" hidden>Двигать карту</button>
+          <div class="delivery-zoom" role="group" aria-label="Масштаб карты">
+            <button type="button" data-zoom="-1" aria-label="Уменьшить масштаб">−</button>
+            <button type="button" data-zoom="1" aria-label="Увеличить масштаб">+</button>
+          </div>
+        </div>
+        <div class="delivery-surface">
+          <div class="delivery-canvas" role="group" aria-label="Карта регионов и городов поставки"></div>
+          <div class="delivery-selection" hidden>
+            <span id="delivery-label"></span>
+            <button type="button" aria-label="Закрыть подпись" aria-describedby="delivery-label">Закрыть</button>
+          </div>
+        </div>
+      </div>
+      <p class="delivery-status" role="status"></p>
+      <p class="ui-note">Точки в России условно размещены в административных центрах регионов поставки и не обозначают точные адреса покупателей.</p>
+      <details class="ux-details delivery-directory">
+        <summary>Список регионов и городов</summary>
+        <!-- delivery-directory:start -->
+        <h4>Россия · регион и условная точка</h4>
+        <ul class="delivery-regions">
+          <li>Республика Адыгея — Майкоп</li>
+          <li>Республика Алтай — Горно-Алтайск</li>
+          <li>Республика Башкортостан — Уфа</li>
+          <li>Республика Бурятия — Улан-Удэ</li>
+          <li>Республика Дагестан — Махачкала</li>
+          <li>Республика Ингушетия — Магас</li>
+          <li>Республика Карелия — Петрозаводск</li>
+          <li>Республика Коми — Сыктывкар</li>
+          <li>Республика Марий Эл — Йошкар-Ола</li>
+          <li>Республика Мордовия — Саранск</li>
+          <li>Республика Саха (Якутия) — Якутск</li>
+          <li>Республика Северная Осетия — Алания — Владикавказ</li>
+          <li>Республика Татарстан — Казань</li>
+          <li>Удмуртская Республика — Ижевск</li>
+          <li>Чеченская Республика — Грозный</li>
+          <li>Чувашская Республика — Чебоксары</li>
+          <li>Алтайский край — Барнаул</li>
+          <li>Забайкальский край — Чита</li>
+          <li>Камчатский край — Петропавловск-Камчатский</li>
+          <li>Краснодарский край — Краснодар</li>
+          <li>Красноярский край — Красноярск</li>
+          <li>Пермский край — Пермь</li>
+          <li>Приморский край — Владивосток</li>
+          <li>Ставропольский край — Ставрополь</li>
+          <li>Хабаровский край — Хабаровск</li>
+          <li>Амурская область — Благовещенск</li>
+          <li>Архангельская область — Архангельск</li>
+          <li>Белгородская область — Белгород</li>
+          <li>Брянская область — Брянск</li>
+          <li>Владимирская область — Владимир</li>
+          <li>Волгоградская область — Волгоград</li>
+          <li>Вологодская область — Вологда</li>
+          <li>Воронежская область — Воронеж</li>
+          <li>Ивановская область — Иваново</li>
+          <li>Иркутская область — Иркутск</li>
+          <li>Калининградская область — Калининград</li>
+          <li>Калужская область — Калуга</li>
+          <li>Кемеровская область — Кузбасс — Кемерово</li>
+          <li>Кировская область — Киров</li>
+          <li>Костромская область — Кострома</li>
+          <li>Курганская область — Курган</li>
+          <li>Курская область — Курск</li>
+          <li>Ленинградская область — Гатчина</li>
+          <li>Липецкая область — Липецк</li>
+          <li>Московская область — Красногорск</li>
+          <li>Мурманская область — Мурманск</li>
+          <li>Нижегородская область — Нижний Новгород</li>
+          <li>Новгородская область — Великий Новгород</li>
+          <li>Новосибирская область — Новосибирск</li>
+          <li>Омская область — Омск</li>
+          <li>Оренбургская область — Оренбург</li>
+          <li>Орловская область — Орёл</li>
+          <li>Пензенская область — Пенза</li>
+          <li>Псковская область — Псков</li>
+          <li>Ростовская область — Ростов-на-Дону</li>
+          <li>Рязанская область — Рязань</li>
+          <li>Самарская область — Самара</li>
+          <li>Саратовская область — Саратов</li>
+          <li>Свердловская область — Екатеринбург</li>
+          <li>Смоленская область — Смоленск</li>
+          <li>Тамбовская область — Тамбов</li>
+          <li>Тверская область — Тверь</li>
+          <li>Томская область — Томск</li>
+          <li>Тульская область — Тула</li>
+          <li>Тюменская область — Тюмень</li>
+          <li>Ульяновская область — Ульяновск</li>
+          <li>Челябинская область — Челябинск</li>
+          <li>Ярославская область — Ярославль</li>
+          <li>Москва</li>
+          <li>Санкт-Петербург</li>
+          <li>Ненецкий автономный округ — Нарьян-Мар</li>
+          <li>Ханты-Мансийский автономный округ — Югра — Ханты-Мансийск</li>
+          <li>Ямало-Ненецкий автономный округ — Салехард</li>
+        </ul>
+        <h4>Экспорт · города поставок</h4>
+        <dl class="delivery-countries">
+          <div><dt>Беларусь</dt><dd>Могилёв, Лида, Орша, Гомель</dd></div>
+          <div><dt>Узбекистан</dt><dd>Ташкент</dd></div>
+          <div><dt>Казахстан</dt><dd>Темиртау, Костанай, Актау, Атырау, Петропавловск, Конаев, Актобе, Караганда, Алматы</dd></div>
+          <div><dt>Армения</dt><dd>Вагаршапат</dd></div>
+          <div><dt>Кыргызстан</dt><dd>Бишкек</dd></div>
+          <div><dt>Латвия</dt><dd>Рига</dd></div>
+        </dl>
+        <!-- delivery-directory:end -->
+        <p class="ui-note">Координаты городов — <a href="https://www.geonames.org/">GeoNames</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+      </details>
+    </div>
     <h3>Кому поставляли оборудование</h3>
     <ul class="industry-list"><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#factory"></use></svg><span>Машиностроение</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#shield"></use></svg><span>Оборонная промышленность</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#atom"></use></svg><span>Атомная отрасль</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#controls"></use></svg><span>Инструментальные производства</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#book"></use></svg><span>Учреждения среднего профессионального образования</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#energy"></use></svg><span>Ремонтные службы энергетики</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#repair"></use></svg><span>Ремонтные службы нефтегазовой промышленности</span></li><li><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#factory"></use></svg><span>Пищевая промышленность</span></li></ul>
     <p class="ui-note"><span class="q" data-q="logo">Логотипы заказчиков — после получения разрешения.</span></p>
@@ -1121,7 +1242,6 @@ var QUESTIONS = {
  reestr:{t:'Предоставить документы и реквизиты реестровой записи Минпромторга для выбранного исполнения станка.',w:'руководство завода'},
  deklar:{t:'Декларация соответствия ТР ТС 010/2011: номер и срок действия.',w:'отдел продаж'},
  sami:{t:'Что делаем сами: литьё, механообработка, сборка, контроль — формулировка о производстве.',w:'руководство завода'},
- region:{t:'Подтвердить предварительное значение 75 регионов поставок.',w:'отдел продаж'},
  logo:{t:'Можно ли называть покупателей и использовать логотипы: РусГидро, Лукойл, Гидроприбор с текущего сайта; НПО машиностроения и атомная отрасль из открытых закупок.',w:'руководство завода'},
  vizit:{t:'Визит на завод для осмотра станка до покупки — принимаем ли.',w:'руководство завода'},
  rop:{t:'Предоставить точную должность и фотографию Николая Багина, подтвердить согласие на публикацию фотографии.',w:'отдел продаж'}

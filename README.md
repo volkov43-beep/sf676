@@ -1,1 +1,6 @@
 # sf676
+## География поставок СФ676
+
+Реестр хранится в `assets/data/delivery-points.json`. Названия и география поставок согласованы заводом. Координаты городов взяты из [GeoNames cities1000](https://download.geonames.org/export/dump/) по [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), с привязкой к стране. Число в идентификаторе `gn-…` соответствует записи GeoNames. В JSON координаты записаны в порядке «долгота, широта». После изменения реестра обновите резервный список командой `python3 scripts/delivery-directory.py`. Сверить все координаты с исходной выгрузкой можно командой `python3 tests/delivery-points.py /путь/cities1000.zip`.
+
+После согласованного объединения PR владелец выбирает **Settings → Pages → Build and deployment → Source → GitHub Actions**, затем **Actions → Publish SF676 to GitHub Pages → Run workflow → main**. Следующие изменения в main публикуются автоматически при этом источнике. Значение существующего `YANDEX_MAPS_API_KEY` добавляется только в публикуемый HTML. Браузерный ключ виден на опубликованной странице и ограничивается HTTP Referer в кабинете Яндекс Карт. Проверьте карту на разрешённом домене. При пустом ключе посетителю доступен полный список.
