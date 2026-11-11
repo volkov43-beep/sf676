@@ -55,7 +55,7 @@ async function regressions(){results=[];try{
  w.SF676Selector.start('exact');pick(w,d,'table-consultation');click(d,'next');pick(w,d,'taper-consultation');click(d,'next');pick(w,d,'dro-consultation');click(d,'next');pick(w,d,'coordinates-consultation');click(d,'next');pick(w,d,'screw-consultation');click(d,'next');record('all-unknown-valid',Object.values(w.SF676Selector.getResult().selections).every(v=>v==='consultation'));
  w.SF676Requests=undefined;d.querySelector('[data-selector-action="request"]').click();record('no-form-fallback',w.location.hash==='#order'&&!d.querySelector('dialog').open);
  ({w,d}=await load(390,'review'));
- const questions=['docs','oplata','acts','raschet','reestr','deklar','sami','logo','vizit','rop'];
+ const questions=['docs','oplata','acts','repair-price','raschet','reestr','deklar','sami','logo','vizit','rop'];
  record('review',d.body.classList.contains('showq')&&d.querySelectorAll('#qol li').length===questions.length&&questions.every(key=>d.getElementById('ql-'+key)?.querySelector('a')?.hash==='#q-'+key)&&!d.querySelector('[data-q="stol"]'));
  const visit=d.getElementById('q-vizit');
  d.querySelector('#ql-vizit a').click();await tick();
