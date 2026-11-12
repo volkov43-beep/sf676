@@ -119,7 +119,7 @@
 .delivery-regions li { break-inside: avoid; padding-block: 2px; }
 .delivery-countries { display: grid; gap: 8px; margin: 0; }
 .delivery-countries div { display: flex; flex-wrap: wrap; gap: 0 .6em; }
-.delivery-countries dt { font-weight: 700; }
+.delivery-countries dt { font-weight: 600; }
 .delivery-countries dd { margin: 0; }
 @media (max-width: 480px) {
   .delivery-geography { padding: 14px; }

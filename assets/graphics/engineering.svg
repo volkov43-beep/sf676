@@ -29,7 +29,7 @@
       <path d="M58 43h37m50 0h37" stroke-dasharray="4 5"/>
       <path d="M57 43a63 63 0 0 0 126 0m-5 8 5-8 5 8M52 51l5-8 5 8" stroke="var(--diagram-accent)"/>
     </g>
-    <text x="120" y="24" text-anchor="middle" fill="var(--diagram-accent)" font-family="Arial,sans-serif" font-size="18" font-weight="700">±90°</text>
+    <text x="120" y="24" text-anchor="middle" fill="var(--diagram-accent)" font-family="var(--font-heading)" font-size="18" font-weight="700">±90°</text>
   </symbol>
   <symbol id="slotting" viewBox="0 0 240 140">
     <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -43,7 +43,7 @@
       <path d="M80 98h110m-8-6 8 6-8 6M80 98 34 132m1-9-1 9 9-1M80 98V24m-6 8 6-8 6 8"/>
       <circle cx="80" cy="98" r="4" fill="var(--diagram-accent)" stroke="var(--diagram-accent)"/>
     </g>
-    <g fill="var(--diagram-accent)" font-family="Arial,sans-serif" font-size="17" font-weight="700"><text x="196" y="104">X</text><text x="14" y="142">Y</text><text x="74" y="17">Z</text></g>
+    <g fill="var(--diagram-accent)" font-family="var(--font-heading)" font-size="17" font-weight="700"><text x="196" y="104">X</text><text x="14" y="142">Y</text><text x="74" y="17">Z</text></g>
   </symbol>
   <!-- Reusable 48px icons: 2px strokes; text labels always remain in HTML. -->
   <symbol id="document" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5h17l8 8v30H12zM29 5v8h8M18 22h13M18 29h13M18 36h8"/></g></symbol>
