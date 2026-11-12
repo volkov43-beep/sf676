@@ -6,13 +6,19 @@
 <meta name="yandex-maps-key" content="">
 <meta name="robots" content="noindex, nofollow">
 <title>СФ676 — прототип посадочной страницы (черновик)</title>
+<link rel="preload" href="assets/fonts/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/panton-bold.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Open Sans";src:url("assets/fonts/open-sans-regular.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Open Sans";src:url("assets/fonts/open-sans-semibold.woff2") format("woff2");font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:"Panton";src:url("assets/fonts/panton-semibold.woff2") format("woff2");font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:"Panton";src:url("assets/fonts/panton-bold.woff2") format("woff2");font-style:normal;font-weight:700;font-display:swap}
 :root{--red:#B03A2E;--steel:#34495E;--graphite:#2C3E50;--light:#F5F5F5;--ink:#1A1A1A;--mute:#6B6B6B;--line:#D9D9D9;--q:#FFF1B8;}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-synthesis:none}
 section[id],.q[id],#qol li{scroll-margin-top:calc(var(--sticky-height,64px) + 12px)}
-body{margin:0;font-family:"PT Sans","Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);line-height:1.5;font-size:17px;background:#fff}
-h1,h2,h3{margin:0 0 .5em;line-height:1.15;color:var(--steel)}
+body{margin:0;font-family:"Open Sans","Panton","Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);line-height:1.5;font-size:17px;background:#fff}
+h1,h2,h3{font-family:"Panton","Open Sans",Arial,sans-serif;margin:0 0 .5em;line-height:1.15;color:var(--steel)}
 h1{font-size:2.4rem;font-weight:700}
 h2{font-size:1.9rem;font-weight:700}
 h3{font-size:1.15rem;font-weight:700;color:var(--ink)}
