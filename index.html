@@ -6,6 +6,8 @@
 <meta name="yandex-maps-key" content="">
 <meta name="robots" content="noindex, nofollow">
 <title>СФ676 — прототип посадочной страницы (черновик)</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/images/vsz-favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/images/vsz-touch-180.png">
 <link rel="preload" href="assets/fonts/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/panton-bold.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -85,7 +87,8 @@ body.showq #qlist{display:block}
 /* sticky header */
 .sticky{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 0;display:none}
 .sticky .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.sticky .logo{font-weight:600;color:var(--navy);font-size:1.3rem;letter-spacing:.02em}
+.sticky .logo{display:inline-flex;align-items:center;gap:8px;flex:none;min-width:44px;min-height:44px;font:700 1.2rem/1 var(--font-heading);color:var(--navy);letter-spacing:.02em;text-decoration:none}
+.sticky .logo img{display:block;width:40px;height:40px}
 .sticky .tel{font-weight:600;color:var(--ink);text-decoration:none}
 body.scrolled .sticky{display:block}
 /* hero */
@@ -232,10 +235,9 @@ body{overflow-wrap:anywhere}
 .spec-operations{margin:var(--ui-space-3) 0 0;color:var(--navy);font-size:var(--ui-body)}
 .spec-docs{margin-top:var(--ui-space-5);padding-top:var(--ui-space-4);border-top:1px solid var(--line)}
 /* Fixed contact header: no layout shift while scrolling. */
-.sticky{overflow-wrap:anywhere;position:fixed;inset-inline:0;top:0;display:block;visibility:hidden;pointer-events:none;padding:6px 0}
+.sticky{container:contact-bar / inline-size;overflow-wrap:anywhere;position:fixed;inset-inline:0;top:0;display:block;visibility:hidden;pointer-events:none;padding:6px 0}
 body.scrolled .sticky{visibility:visible;pointer-events:auto}
 .sticky .wrap{gap:12px;flex-wrap:nowrap}
-.sticky .logo{font-size:1.2rem;text-decoration:none}
 .sticky .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:10px 16px;font-size:.9375rem}
 .sticky .tel{font-size:1rem}
 .sticky .tel-short{display:none}
@@ -269,13 +271,16 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
  .v1 .spec-table th[scope="row"],.v1 .spec-table td{display:block;border:0;padding:12px 16px;width:auto}
  .v1 .spec-table th[scope="row"]{padding-bottom:4px;color:var(--mute);font-size:.9375rem}
  .v1 .spec-table td{padding-top:0}
- .sticky .wrap{padding-inline:16px;gap:8px;flex-wrap:wrap}
+ .sticky .wrap{padding-inline:16px;gap:8px}
  .sticky .logo{font-size:1.125rem}
- .sticky .tel{font-size:.875rem}
+ .sticky .tel{font-size:.875rem;white-space:nowrap}
  .sticky .tel-long{display:none}
  .sticky .tel-short{display:inline}
- .sticky .btn{font-size:.875rem;padding-inline:12px}
+ .sticky .btn{font-size:.875rem;padding-inline:12px;white-space:nowrap}
 }
+@media (max-width:390px){.sticky .logo img{width:36px;height:36px}}
+/* Keep the wordmark whenever the three controls fit inside the header. */
+@container contact-bar (max-width:21.25rem){.sticky .logo span{display:none}}
 @media (max-width:479px){.hero-facts{grid-template-columns:1fr}}
 
 
@@ -628,7 +633,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 
 <header class="sticky" aria-label="Быстрые контакты">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="ВСЗ — в начало страницы">ВСЗ</a>
+    <a class="logo" href="#top" aria-label="ВСЗ — Вятский станкостроительный завод, наверх страницы"><img src="assets/images/vsz-logo-80.png" srcset="assets/images/vsz-logo-80.png 2x, assets/images/vsz-logo-160.png 4x" width="40" height="40" alt=""><span aria-hidden="true">ВСЗ</span></a>
     <a class="tel" href="tel:88007072676" aria-label="Позвонить: 8 (800) 707-26-76"><span class="tel-long">8 (800) 707-26-76</span><span class="tel-short">Позвонить</span></a>
     <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="sticky" data-source-cta="sticky-price">Получить цену</a>
   </div>
