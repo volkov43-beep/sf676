@@ -1,0 +1,228 @@
+{
+  "cases": 55,
+  "failed": [],
+  "records": [
+    {
+      "name": "price_quote/company-label",
+      "pass": true
+    },
+    {
+      "name": "price_quote/company-free-text",
+      "pass": true
+    },
+    {
+      "name": "price_quote/company-free-text",
+      "pass": true
+    },
+    {
+      "name": "price_quote/company-free-text",
+      "pass": true
+    },
+    {
+      "name": "quote/empty-optional-keys",
+      "pass": true
+    },
+    {
+      "name": "quote/collapsed-values",
+      "pass": true
+    },
+    {
+      "name": "quote/logistics",
+      "pass": true
+    },
+    {
+      "name": "quote/address-limit",
+      "pass": true
+    },
+    {
+      "name": "quote/correct-address",
+      "pass": true
+    },
+    {
+      "name": "quote/reopen-empty",
+      "pass": true
+    },
+    {
+      "name": "configuration_help/company-label",
+      "pass": true
+    },
+    {
+      "name": "configuration_help/company-free-text",
+      "pass": true
+    },
+    {
+      "name": "configuration_help/company-free-text",
+      "pass": true
+    },
+    {
+      "name": "configuration_help/company-free-text",
+      "pass": true
+    },
+    {
+      "name": "consultation/task-only",
+      "pass": true
+    },
+    {
+      "name": "repair/contact-only",
+      "pass": true
+    },
+    {
+      "name": "repair/plate-instructions",
+      "pass": true
+    },
+    {
+      "name": "repair/identity-and-condition",
+      "pass": true
+    },
+    {
+      "name": "repair/machineIdentity/length",
+      "pass": true
+    },
+    {
+      "name": "repair/machineIdentity/markup",
+      "pass": true
+    },
+    {
+      "name": "repair/machineIdentity/control",
+      "pass": true
+    },
+    {
+      "name": "repair/machineIdentity/direction",
+      "pass": true
+    },
+    {
+      "name": "repair/correct-machineIdentity",
+      "pass": true
+    },
+    {
+      "name": "repair/problem/length",
+      "pass": true
+    },
+    {
+      "name": "repair/problem/markup",
+      "pass": true
+    },
+    {
+      "name": "repair/problem/control",
+      "pass": true
+    },
+    {
+      "name": "repair/problem/direction",
+      "pass": true
+    },
+    {
+      "name": "repair/correct-problem",
+      "pass": true
+    },
+    {
+      "name": "repair/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "contact/0",
+      "pass": true
+    },
+    {
+      "name": "contact/1",
+      "pass": true
+    },
+    {
+      "name": "contact/2",
+      "pass": true
+    },
+    {
+      "name": "contact/3",
+      "pass": true
+    },
+    {
+      "name": "contact/4",
+      "pass": true
+    },
+    {
+      "name": "contact/5",
+      "pass": true
+    },
+    {
+      "name": "contact/6",
+      "pass": true
+    },
+    {
+      "name": "contact/7",
+      "pass": true
+    },
+    {
+      "name": "contact/8",
+      "pass": true
+    },
+    {
+      "name": "contact/9",
+      "pass": true
+    },
+    {
+      "name": "contact/10",
+      "pass": true
+    },
+    {
+      "name": "contact/11",
+      "pass": true
+    },
+    {
+      "name": "contact/12",
+      "pass": true
+    },
+    {
+      "name": "contact/13",
+      "pass": true
+    },
+    {
+      "name": "contact/14",
+      "pass": true
+    },
+    {
+      "name": "html-rejected",
+      "pass": true
+    },
+    {
+      "name": "length-rejected",
+      "pass": true
+    },
+    {
+      "name": "unknown-form",
+      "pass": true
+    },
+    {
+      "name": "context-open",
+      "pass": true
+    },
+    {
+      "name": "context-projection",
+      "pass": true
+    },
+    {
+      "name": "snapshot-independent",
+      "pass": true
+    },
+    {
+      "name": "no-nesting",
+      "pass": true
+    },
+    {
+      "name": "multiple-documents",
+      "pass": true
+    },
+    {
+      "name": "implicit-submit-safe",
+      "pass": true
+    },
+    {
+      "name": "single-dialog-repeated",
+      "pass": true
+    },
+    {
+      "name": "no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    }
+  ]
+}
