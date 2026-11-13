@@ -10,9 +10,16 @@
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
 const widths=[320,375,390,768,1024,1366,1920];
 const sectionButtons=[
- {section:'specs',cta:'specs-fit',label:'Проверить станок под мою деталь'},
- {section:'acceptance',cta:'acceptance-accuracy',label:'Подобрать класс точности под мою задачу'}
+ {section:'specs',cta:'specs-fit',form:'configuration_help',label:'Проверить станок под мою деталь'},
+ {section:'acceptance',cta:'acceptance-accuracy',form:'configuration_help',label:'Подобрать класс точности под мою задачу'},
+ {section:'design',cta:'design-price',form:'price_quote',label:'Узнать цену в нужной комплектации'},
+ {section:'delivery',cta:'delivery-quote',form:'price_quote',label:'Рассчитать доставку до моего цеха'},
+ {section:'plant',cta:'plant-region',form:'price_quote',label:'Узнать цену для моего региона'}
 ];
+const scenarioCopy={
+ configuration_help:['Поможем подобрать комплектацию СФ676','Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка'],
+ price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail. Если место доставки уже известно, укажите город и адрес.']
+};
 const expected={
  price_quote:['contact','name','company','city','deliveryAddress','comment'],
  configuration_help:['contact','name','company','task'],
@@ -41,13 +48,17 @@ function geometry(w,d){const dialog=d.querySelector('dialog'),r=dialog.getBoundi
 async function matrix(){records=[];output.textContent='Проверка…';
  try{
  for(const mode of ['normal','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
+ const total=d.getElementById('payment-total');
+ total.value='1000000';
+ total.dispatchEvent(new w.Event('input',{bubbles:true}));
+ record(`${width}/${mode}/calculation-ready`,w.SF676Payments.getCalculation()?.totalKopeks===100000000);
  const triggers=[...d.querySelectorAll('[data-request-form]')];
- record(`${width}/${mode}/ten-triggers`,triggers.length===10);
- for(const {section,cta,label} of sectionButtons){
+ record(`${width}/${mode}/thirteen-triggers`,triggers.length===13);
+ for(const {section,cta,label,form} of sectionButtons){
    const matches=triggers.filter(link=>link.dataset.sourceCta===cta);
    const link=matches[0], wrap=d.getElementById(section).querySelector('.wrap');
    record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===wrap.lastElementChild &&
-     link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm==='configuration_help');
+     link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm===form && !link.hasAttribute('data-payment-calculator'));
    if(link){
      const box=link.getBoundingClientRect(), column=link.parentElement.getBoundingClientRect();
      record(`${width}/${mode}/${cta}/layout`,box.height>=48 && Math.abs(box.left-column.left)<=1 &&
@@ -63,14 +74,23 @@ async function matrix(){records=[];output.textContent='Проверка…';
  link.focus({preventScroll:true});await tick();const y=w.scrollY;link.click();await tick();
  const dialog=d.querySelector('dialog'), names=[...new Set(Array.from(d.querySelectorAll('#request-fields [name]')).map(e=>e.name))];
  record(`${width}/${mode}/${link.dataset.sourceCta}/open`,dialog.open&&JSON.stringify(names)===JSON.stringify(expected[id])&&geometry(w,d)&&w.getComputedStyle(d.body).position==='fixed'&&d.activeElement.id==='request-title');
- if(sectionButtons.some(button=>button.cta===link.dataset.sourceCta)){
+ const sectionButton=sectionButtons.find(button=>button.cta===link.dataset.sourceCta);
+ if(sectionButton){
+   const [title,description]=scenarioCopy[sectionButton.form];
    record(`${width}/${mode}/${link.dataset.sourceCta}/scenario-copy`,
-     d.getElementById('request-title').textContent==='Поможем подобрать комплектацию СФ676' &&
-     d.getElementById('request-description').textContent==='Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка');
+     d.getElementById('request-title').textContent===title &&
+     d.getElementById('request-description').textContent===description);
  }
  d.querySelector('#request-check').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true');
  const contact=d.querySelector('#request-contact');contact.value='qa+sf676@example.com';d.querySelector('#request-check').click();
  const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&d.querySelector('#request-submit').disabled&&d.querySelector('#request-status').textContent.includes('данные не отправлены'));
+ if(link.hasAttribute('data-payment-calculator')){
+   record(`${width}/${mode}/calculator-quote`,draft?.context.calculation?.totalKopeks===100000000 && !!dialog.querySelector('.request-payment'));
+ }
+ if(sectionButton?.form==='price_quote'){
+   record(`${width}/${mode}/${sectionButton.cta}/plain-quote`,!!draft &&
+     !('calculation' in draft.context) && !dialog.querySelector('.request-payment'));
+ }
  d.querySelector('.request-content').scrollTop=1e6;record(`${width}/${mode}/${id}/scroll`,geometry(w,d));
  d.querySelector('.request-close').click();await tick();
  record(`${width}/${mode}/${link.dataset.sourceCta}/close`,!dialog.open&&d.activeElement===link&&Math.abs(w.scrollY-y)<=2&&w.SF676Requests.getDraft()===null&&d.querySelectorAll('#request-fields input').length===0&&w.getComputedStyle(d.body).position!=='fixed',{yBefore:y,yAfter:w.scrollY,focus:d.activeElement.dataset.sourceCta||d.activeElement.id});

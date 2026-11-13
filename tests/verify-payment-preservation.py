@@ -1,4 +1,4 @@
-"""Usage: python tests/verify-payment-preservation.py BASELINE CURRENT [--branding | --historical] (requires lxml)."""
+"""Usage: python tests/verify-payment-preservation.py BASELINE CURRENT [--branding | --historical | --part1] (requires lxml)."""
 from lxml import etree
 from preservation import read_pages
 
