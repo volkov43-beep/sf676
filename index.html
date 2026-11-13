@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/images/vsz-touch-180.png">
 <link rel="preload" href="assets/fonts/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/panton-bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" href="assets/images/sf676-operator-1200.webp" imagesrcset="assets/images/sf676-operator-800.webp 800w, assets/images/sf676-operator-1200.webp 1200w, assets/images/sf676-operator-1600.webp 1600w, assets/images/sf676-operator-2000.webp 2000w" imagesizes="(max-width: 900px) 100vw, 64vw" fetchpriority="high">
 <style>
 @font-face{font-family:"Open Sans";src:url("assets/fonts/open-sans-regular.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:"Open Sans";src:url("assets/fonts/open-sans-semibold.woff2") format("woff2");font-style:normal;font-weight:600;font-display:swap}
@@ -18,7 +19,7 @@
 :root{
  --font-body:"Open Sans","Panton","Segoe UI",Roboto,Arial,sans-serif;
  --font-heading:"Panton","Open Sans",Arial,sans-serif;
- --navy:#0F2440;--blue:#1D4F91;--red:#C9281D;--red-hover:#A81F17;--red-tint:#FDF1EF;
+ --navy:#0F2440;--navy-line:#3D5A85;--blue:#1D4F91;--red:#C9281D;--red-hover:#A81F17;--red-tint:#FDF1EF;
  --ink:#1B2430;--mute:#5A6779;--control:#7A889B;--line:#D5DCE6;--line-strong:#B8C2CF;
  --surface:#F2F5F9;--surface-2:#E6EBF2;--on-dark:#FFFFFF;--on-dark-mute:#A9B8CC;
  --paper:var(--on-dark);--dark-surface:color-mix(in srgb,var(--navy) 88%,var(--on-dark));
@@ -84,27 +85,13 @@ body.showq #qlist{display:block}
 #qlist li b{color:#5a4a00}
 #qlist li a{font-size:var(--ui-small);color:var(--mute)}
 .q:target{outline:3px solid #c9a800}
-/* sticky header */
-.sticky{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 0;display:none}
-.sticky .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.sticky .logo{display:inline-flex;align-items:center;gap:8px;flex:none;min-width:44px;min-height:44px;font:700 1.2rem/1 var(--font-heading);color:var(--navy);letter-spacing:.02em;text-decoration:none}
-.sticky .logo img{display:block;width:40px;height:40px}
-.sticky .tel{font-weight:600;color:var(--ink);text-decoration:none}
-body.scrolled .sticky{display:block}
-/* hero */
-.hero{padding:0;min-height:88vh;display:grid;grid-template-columns:42% 58%}
-.hero .txt{padding:64px 40px 48px 24px;display:flex;flex-direction:column;justify-content:center;max-width:620px;margin-left:auto;min-width:0;overflow-wrap:anywhere}
-.hero .over{color:var(--mute);font-size:.9rem;margin-bottom:14px}
-.hero .sub{font-size:1.15rem;margin:14px 0 26px;max-width:560px}
+/* Figures used in the plant section. */
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 28px}
 .nums b{display:block;font-size:1.45rem;color:var(--ink);line-height:1.1}
 .nums small{color:var(--mute);font-size:var(--ui-small)}
 #plant .nums > div{min-width:0;overflow-wrap:anywhere}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.hero .cta .tel{color:var(--mute);font-size:.95rem;margin-left:8px}
 .trust{margin-top:auto;padding-top:36px;font-size:var(--ui-small);color:var(--mute);display:flex;gap:18px;flex-wrap:wrap}
 .trust > span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--navy);border-radius:50%;margin-right:6px;vertical-align:-1px}
-.hero .ph{border-radius:0;min-height:520px}
 /* specs */
 .specs{grid-template-columns:40% 1fr}
 .specs table td:first-child{color:var(--mute);width:52%}
@@ -141,9 +128,6 @@ footer{background:var(--navy);color:var(--on-dark-mute);font-size:var(--ui-small
 footer a{color:var(--on-dark)}
 /* mobile */
 @media (max-width:900px){
- .hero{grid-template-columns:1fr;min-height:0}
- .hero .ph{min-height:34vh;order:-1}
- .hero .txt{padding:28px 24px}
  .nums{grid-template-columns:1fr 1fr}
  .g2,.g3,.g4,.specs,.cfg{grid-template-columns:1fr}
  .advantages{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -162,7 +146,6 @@ footer a{color:var(--on-dark)}
  .dark table.stack td::before{color:var(--on-dark-mute)}
  table.stack td:first-child::before{display:none}
  .cmp td:first-child{width:auto;color:var(--on-dark)}
- .sticky .btn{padding:10px 14px;font-size:.9rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media (max-width:540px){.advantages{grid-template-columns:1fr}}
@@ -193,26 +176,6 @@ body{overflow-wrap:anywhere}
 .v1 .text-link:hover{text-decoration-thickness:2px}
 .v1 .media-placeholder{display:flex;align-items:center;justify-content:center;aspect-ratio:2/1;padding:var(--ui-space-2);border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--surface);color:var(--mute);text-align:center;font-size:var(--ui-small);line-height:1.4}
 .hero-fact b,.acceptance-metric b,.payment-plan .percentage,.travel-values dt,.travel-values dd,.plant-facts dt{font-family:var(--font-heading);font-weight:700}
-/* Hero: one image in the DOM; CSS grid moves it after the CTA on mobile. */
-.hero.v1{display:block;min-height:0;padding:var(--ui-space-5) 0 var(--ui-space-6)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy media" "facts media" "trust trust";gap:var(--ui-space-4) var(--ui-space-5);align-items:start}
-.hero-grid > *{min-width:0}
-.hero-copy{grid-area:copy}
-.hero-eyebrow{font-size:var(--ui-small);color:var(--navy);margin:0 0 var(--ui-space-2)}
-.hero-copy h1{max-width:12em;margin:0 0 var(--ui-space-3)}
-.hero-description{margin:0 0 var(--ui-space-3);max-width:36em}
-.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:var(--ui-space-1) var(--ui-space-3)}
-.hero-contact{margin:var(--ui-space-2) 0 0;font-size:var(--ui-small);color:var(--mute)}
-.hero-contact a{color:var(--blue);text-underline-offset:3px}
-.hero-media{grid-area:media;margin:0;border-radius:var(--ui-radius);overflow:hidden;background:var(--surface)}
-.hero-media picture{display:block}
-.hero-media img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center}
-.hero-media figcaption{background:var(--surface);padding:12px var(--ui-space-2);font-size:var(--ui-small);color:var(--navy);border:1px solid var(--line);border-top:0}
-.hero-facts{grid-area:facts;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ui-space-3);margin:0}
-.hero-fact{min-width:0;border-top:2px solid var(--line);padding-top:var(--ui-space-2)}
-.hero-fact b{display:block;font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.3;color:var(--navy);margin-bottom:var(--ui-space-1)}
-.hero-fact small{display:block;font-size:var(--ui-small);color:var(--mute);line-height:1.5}
-.hero-trust{grid-area:trust;display:flex;gap:var(--ui-space-2) var(--ui-space-4);flex-wrap:wrap;border-top:1px solid var(--line);padding-top:var(--ui-space-3);font-size:var(--ui-small);color:var(--navy)}
 /* Five cards: three above and two centred below, then two / one columns. */
 .adv-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--ui-gap)}
 .adv-card{grid-column:span 2}
@@ -235,31 +198,14 @@ body{overflow-wrap:anywhere}
 .spec-operations{margin:var(--ui-space-3) 0 0;color:var(--navy);font-size:var(--ui-body)}
 .spec-docs{margin-top:var(--ui-space-5);padding-top:var(--ui-space-4);border-top:1px solid var(--line)}
 /* Fixed contact header: no layout shift while scrolling. */
-.sticky{container:contact-bar / inline-size;overflow-wrap:anywhere;position:fixed;inset-inline:0;top:0;display:block;visibility:hidden;pointer-events:none;padding:6px 0}
-body.scrolled .sticky{visibility:visible;pointer-events:auto}
-.sticky .wrap{gap:12px;flex-wrap:nowrap}
-.sticky .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:10px 16px;font-size:.9375rem}
-.sticky .tel{font-size:1rem}
-.sticky .tel-short{display:none}
 @media (max-width:1100px){
- .hero-grid{gap:var(--ui-space-4)}
  .adv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .adv-card,.adv-card:nth-child(4),.adv-card:nth-child(5){grid-column:auto}
 }
 @media (max-width:900px){
- .hero.v1{padding:var(--ui-space-4) 0 var(--ui-space-5)}
- .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "media" "facts" "trust";gap:var(--ui-space-4)}
- .hero-copy h1{max-width:none}
- .hero-description{max-width:none}
- .hero-media{width:100%;max-width:520px;justify-self:center}
- .hero-media img{aspect-ratio:1}
- .hero-fact b{font-size:1.375rem}
 }
 @media (max-width:600px){
  .v1 .wrap{padding-inline:24px}
- .hero.v1{padding-top:var(--ui-space-3)}
- .hero-actions{align-items:stretch;flex-direction:column;gap:var(--ui-space-1)}
- .hero-actions .text-link{align-self:flex-start}
  .adv-grid{grid-template-columns:1fr}
  .specs-heading{align-items:flex-start;flex-direction:column;gap:var(--ui-space-3)}
  .v1 .specs-visual{flex:none;width:168px}
@@ -271,17 +217,7 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
  .v1 .spec-table th[scope="row"],.v1 .spec-table td{display:block;border:0;padding:12px 16px;width:auto}
  .v1 .spec-table th[scope="row"]{padding-bottom:4px;color:var(--mute);font-size:.9375rem}
  .v1 .spec-table td{padding-top:0}
- .sticky .wrap{padding-inline:16px;gap:8px}
- .sticky .logo{font-size:1.125rem}
- .sticky .tel{font-size:.875rem;white-space:nowrap}
- .sticky .tel-long{display:none}
- .sticky .tel-short{display:inline}
- .sticky .btn{font-size:.875rem;padding-inline:12px;white-space:nowrap}
 }
-@media (max-width:390px){.sticky .logo img{width:36px;height:36px}}
-/* Keep the wordmark whenever the three controls fit inside the header. */
-@container contact-bar (max-width:21.25rem){.sticky .logo span{display:none}}
-@media (max-width:479px){.hero-facts{grid-template-columns:1fr}}
 
 
 /* Iteration 02: the existing .v1 tokens and components extend to four content sections. */
@@ -617,6 +553,104 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 @media (max-width:360px){.scenario-title{flex-direction:column;gap:8px}.scenario-title span{width:100%}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ux-icon,.ux-details,.principle-figure{animation:none;transition:none}}
 
+/* The sticky header stays in normal flow, including before JS measures it. */
+.sticky{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
+.sticky .wrap{max-width:1608px;display:flex;align-items:center;gap:16px;min-height:60px;padding-block:5px}
+.sticky .logo{display:flex;align-items:center;gap:9px;min-width:0;min-height:44px;margin-right:auto;font:600 1rem/1.15 var(--font-body);color:var(--navy);text-decoration:none}
+.sticky .logo img{width:40px;height:40px;flex:none}
+.sticky .tel{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-size:1rem;font-weight:600;text-decoration:none;white-space:nowrap}
+.sticky .tel-short{display:none}
+.sticky .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;text-align:center}
+.sticky .btn[hidden]{display:none}
+@media (max-width:600px){
+ .sticky .wrap{gap:8px;padding-inline:12px}
+ .sticky .logo{font-size:var(--ui-small);gap:6px;max-width:26ch}
+ .sticky .logo img{width:34px;height:34px}
+ .sticky .tel{font-size:var(--ui-small)}
+ .sticky .tel-long{display:none}
+ .sticky .tel-short{display:inline}
+ .sticky .btn{padding:6px 8px;font-size:var(--ui-small)}
+}
+@media (max-width:405px){
+ .sticky .wrap{min-height:56px;padding-inline:6px;gap:5px}
+ .sticky .logo{font-size:.8125rem;gap:4px}
+ .sticky .logo img{width:28px;height:28px}
+ .sticky .brand-name span{display:block;white-space:nowrap}
+ .sticky .brand-name span:first-child::after{content:"-"}
+ .sticky .btn{max-width:7.3em;padding-inline:4px}
+}
+@media (max-width:350px){
+ .sticky .wrap{padding-inline:4px;gap:3px}
+ .sticky .logo{font-size:.75rem;gap:3px}
+ .sticky .logo img{width:25px;height:25px}
+ .sticky .tel,.sticky .btn{font-size:.75rem}
+ .sticky .btn{max-width:5.7em;padding-inline:2px}
+}
+
+/* Iteration 07: the text column ends before the fade starts. */
+.hero.v1{display:block;min-height:0;padding:0;background:var(--paper)}
+.hero-stage{position:relative;isolation:isolate;display:grid;align-items:center;min-height:clamp(490px,min(42vw,calc(100svh - 180px)),720px);background:var(--navy);color:var(--on-dark)}
+.hero-photo{position:absolute;z-index:-1;inset:0 0 0 36%;margin:0}
+.hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:38% 47%}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,var(--navy) 0 16%,rgb(from var(--navy) r g b / 0) 34%)}
+.hero-copy{width:min(40%,590px);margin-left:max(24px,calc((100% - 1560px)/2));padding-block:clamp(24px,3vw,52px);display:grid;align-content:center;gap:clamp(14px,1.35vw,24px)}
+.hero-copy h1{margin:0;max-width:15ch;color:var(--on-dark);text-wrap:balance}
+.hero-eyebrow{margin:0 0 6px;font-size:var(--ui-small);font-weight:600;color:var(--on-dark-mute)}
+.hero-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hero-feature{border:1px solid var(--navy-line);border-radius:var(--ui-radius);padding:10px 12px}
+.hero-feature strong{display:flex;align-items:center;gap:8px;font:700 var(--ui-h3)/1.13 var(--font-heading)}
+.hero-feature svg{width:26px;height:26px;flex:none;color:var(--on-dark-mute)}
+.hero-feature small{display:block;margin-top:5px;color:var(--on-dark-mute);line-height:1.35}
+.hero-offer{margin:0;max-width:45ch;font-weight:600;line-height:1.45}
+.hero-offer span{white-space:nowrap}
+.hero-uses{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;color:var(--on-dark-mute);font-size:var(--ui-small);line-height:1.35}
+.hero-uses li{display:flex;align-items:baseline;gap:9px}
+.hero-uses li::before{content:"";display:block;flex:none;width:9px;height:5px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
+.hero-copy .btn{justify-self:start;border-color:var(--on-dark)}
+.hero-copy .btn:is(:hover,:active){border-color:var(--on-dark)}
+.hero-copy .btn:focus-visible{outline-color:var(--focus-dark)}
+.hero-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 auto;max-width:1608px;padding:22px 24px;background:var(--paper)}
+.hero-fact{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:0 clamp(12px,2.2vw,36px);border-left:1px solid var(--line)}
+.hero-fact:first-child{border:0;padding-left:0}
+.hero-fact b{font:700 clamp(1.25rem,2vw,2rem)/1.2 var(--font-heading);color:var(--navy)}
+.hero-fact small{font-size:var(--ui-small);line-height:1.35;color:var(--mute)}
+.hero-registry{flex-direction:row;align-items:center;justify-content:flex-start;gap:10px}
+.hero-registry img{width:36px;height:auto;flex:none}
+.hero-facts .unit{white-space:nowrap}
+.machine-overview{display:block;width:min(100%,320px);margin:12px auto 0}
+.machine-overview img{display:block;width:100%;height:auto}
+@media (min-width:901px) and (max-width:1100px){
+ .hero-copy{width:41%;margin-left:20px}
+ .hero-feature{padding:8px}
+ .hero-feature strong{gap:5px}
+}
+@media (max-width:900px){
+ .hero-stage{display:flex;align-items:stretch;flex-direction:column;min-height:0}
+ .hero-photo{position:relative;z-index:auto;inset:auto;height:min(60vw,38svh);width:100%}
+ .hero-photo img{object-position:50% 46%}
+ .hero-photo::after{background:linear-gradient(to bottom,rgb(from var(--navy) r g b / 0) 74%,var(--navy) 100%)}
+ .hero-copy{width:100%;max-width:660px;margin:0 auto;padding:20px 24px 30px;gap:16px}
+ .hero-copy h1{max-width:none;text-wrap:initial}
+ .hero-copy .btn{justify-self:stretch}
+ .hero-facts{grid-template-columns:repeat(2,minmax(0,1fr));padding:0 24px}
+ .hero-fact{padding:16px 0 16px 16px}
+ .hero-fact:nth-child(odd){border-left:0;padding-left:0;padding-right:12px}
+ .hero-fact:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:480px){
+ .hero-copy{padding-inline:16px}
+ .hero-feature{padding:9px 8px}
+ .hero-feature strong{gap:5px}
+ .hero-feature svg{width:24px;height:24px}
+ .hero-facts{padding-inline:16px}
+}
+@media (max-width:360px){
+ .hero-uses{grid-template-columns:1fr}
+}
+@media (max-width:350px){
+ .hero-pair{grid-template-columns:1fr}
+}
+
 </style>
 <link rel="stylesheet" href="assets/css/request-forms.css">
 <link rel="stylesheet" href="assets/css/sf676-selector.css">
@@ -633,42 +667,48 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
 
 <header class="sticky" aria-label="Быстрые контакты">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="ВСЗ — Вятский станкостроительный завод, наверх страницы"><img src="assets/images/vsz-logo-80.png" srcset="assets/images/vsz-logo-80.png 2x, assets/images/vsz-logo-160.png 4x" width="40" height="40" alt=""><span aria-hidden="true">ВСЗ</span></a>
+    <a class="logo" href="#top" aria-label="ВСЗ — Вятский станкостроительный завод, наверх страницы"><img src="assets/images/vsz-logo-80.png" srcset="assets/images/vsz-logo-80.png 2x, assets/images/vsz-logo-160.png 4x" width="40" height="40" alt=""><span class="brand-name" aria-hidden="true"><span>Вятский станко</span><span>строительный завод</span></span></a>
     <a class="tel" href="tel:88007072676" aria-label="Позвонить: 8 (800) 707-26-76"><span class="tel-long">8 (800) 707-26-76</span><span class="tel-short">Позвонить</span></a>
-    <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="sticky" data-source-cta="sticky-price">Получить цену</a>
+    <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="sticky" data-source-cta="sticky-price" hidden>Получить цену</a>
   </div>
 </header>
 
 <!-- 1 -->
 <section class="hero v1" id="top">
-  <div class="wrap hero-grid">
+  <div class="hero-stage">
+    <div class="hero-photo">
+      <img src="assets/images/sf676-operator-1200.webp" srcset="assets/images/sf676-operator-800.webp 800w, assets/images/sf676-operator-1200.webp 1200w, assets/images/sf676-operator-1600.webp 1600w, assets/images/sf676-operator-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 64vw" width="2048" height="1365" fetchpriority="high" alt="Оператор работает на фрезерном станке СФ676 в цехе Вятского станкостроительного завода, на заднем плане ряд станков">
+    </div>
     <div class="hero-copy">
-      <p class="hero-eyebrow">Вятский станкостроительный завод · Киров · производитель</p>
-      <h1>Станок фрезерный СФ676</h1>
-      <p class="hero-description">Широкоуниверсальный фрезерный станок с двумя шпинделями — горизонтальным и вертикальным — и двумя рабочими столами: вертикальным и угловым горизонтальным. Для серийного производства деталей, инструментальных, экспериментальных, вспомогательных и ремонтных подразделений предприятий.</p>
-      <div class="hero-actions">
-        <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="top" data-source-cta="hero-price">Получить цену с доставкой</a>
-        <a class="text-link" href="#specs">Технические характеристики</a>
+      <div>
+        <p class="hero-eyebrow">Широкоуниверсальный</p>
+        <h1>Станок фрезерный СФ676</h1>
       </div>
-      <p class="hero-contact"><a href="tel:88007072676">8 (800) 707-26-76</a> — бесплатно по России</p>
+      <div class="hero-pair">
+        <div class="hero-feature">
+          <strong><svg aria-hidden="true" focusable="false" viewBox="0 0 28 28"><use href="assets/graphics/engineering.svg#spindles-small"></use></svg>2 шпинделя</strong>
+          <small>горизонтальный и вертикальный</small>
+        </div>
+        <div class="hero-feature">
+          <strong><svg aria-hidden="true" focusable="false" viewBox="0 0 28 28"><use href="assets/graphics/engineering.svg#tables-small"></use></svg>2 рабочих стола</strong>
+          <small>вертикальный и угловой горизонтальный</small>
+        </div>
+      </div>
+      <p class="hero-offer">Оснастка, ремонтные детали, опытные образцы и серийные партии — <span>на одном станке</span></p>
+      <ul class="hero-uses" role="list">
+        <li>инструментальные участки</li>
+        <li>экспериментальные участки</li>
+        <li>серийное производство</li>
+        <li>ремонтные и вспомогательные службы</li>
+      </ul>
+      <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="top" data-source-cta="hero-price">Получить цену с доставкой</a>
     </div>
-    <figure class="hero-media">
-      <picture>
-        <source media="(max-width:900px)" srcset="assets/images/sf676-hero-square-480.webp 480w, assets/images/sf676-hero-square-800.webp 800w" sizes="(max-width:568px) calc(100vw - 48px), 520px" width="800" height="800">
-        <img src="assets/images/sf676-hero-portrait-800.webp" srcset="assets/images/sf676-hero-portrait-480.webp 480w, assets/images/sf676-hero-portrait-800.webp 800w, assets/images/sf676-hero-portrait-1092.webp 1092w" sizes="(max-width:1100px) calc((100vw - 80px) / 2), (max-width:1200px) calc((100vw - 96px) / 2), 552px" width="1092" height="1365" alt="СФ676 на переднем плане производственного участка Вятского станкостроительного завода" fetchpriority="high">
-      </picture>
-      <figcaption>СФ676 на производственном участке ВСЗ</figcaption>
-    </figure>
-    <div class="hero-facts">
-      <div class="hero-fact"><b>250 × 630 мм</b><small>рабочая поверхность вертикального стола</small></div>
-      <div class="hero-fact"><b>250 × 800 мм</b><small>рабочая поверхность углового горизонтального стола; исполнение 300 × 800 мм</small></div>
-      <div class="hero-fact"><b>450 / 300 / 380 мм</b><small>перемещения X / Y / Z</small></div>
-      <div class="hero-fact"><b>От 20 рабочих дней</b><small>изготовление станка в любой модификации</small></div>
-    </div>
-    <div class="hero-trust">
-      <span>Реквизиты реестра Минпромторга — по запросу для выбранного исполнения</span>
-      <span>Современное исполнение выпускается с 2016 года</span>
-    </div>
+  </div>
+  <div class="hero-facts">
+    <div class="hero-fact"><b>от 20 рабочих дней</b><small>изготовление</small></div>
+    <div class="hero-fact"><b>450 / 300 / <span class="unit">380 мм</span></b><small>перемещения X / Y / Z</small></div>
+    <div class="hero-fact"><b>12 месяцев</b><small>гарантия</small></div>
+    <div class="hero-fact hero-registry"><img src="assets/images/minpromtorg-72.png" srcset="assets/images/minpromtorg-72.png 2x, assets/images/minpromtorg-144.png 4x" width="36" height="36" alt=""><small>В реестре Минпромторга РФ</small></div>
   </div>
 </section>
 
@@ -681,6 +721,12 @@ body.scrolled .sticky{visibility:visible;pointer-events:auto}
       <article class="ui-card adv-card">
         <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#spindles"></use></svg><figcaption>Условная схема принципа</figcaption></figure>
         <h3>Два шпинделя</h3><p>Горизонтальный и вертикальный — для разных фрезерных операций.</p>
+        <details class="ux-details photo-details"><summary>СФ676 на производственном участке ВСЗ</summary>
+          <picture class="machine-overview">
+        <source media="(max-width:900px)" srcset="assets/images/sf676-hero-square-480.webp 480w, assets/images/sf676-hero-square-800.webp 800w" sizes="(max-width: 360px) 80vw, 320px" width="800" height="800">
+        <img src="assets/images/sf676-hero-portrait-800.webp" srcset="assets/images/sf676-hero-portrait-480.webp 480w, assets/images/sf676-hero-portrait-800.webp 800w, assets/images/sf676-hero-portrait-1092.webp 1092w" sizes="(max-width: 360px) 80vw, 320px" width="1092" height="1365" alt="СФ676 на переднем плане производственного участка Вятского станкостроительного завода" loading="lazy" decoding="async">
+      </picture>
+        </details>
       </article>
       <article class="ui-card adv-card">
         <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#tables"></use></svg><figcaption>Условная схема принципа</figcaption></figure>
@@ -1282,15 +1328,22 @@ var QUESTIONS = {
   var sticky=document.querySelector('.sticky');
   function enableReview(){document.body.classList.add('review-mode','showq')}
   if(new URLSearchParams(location.search).get('review')==='1') enableReview();
-  var hero=document.getElementById('top');
-  function onScroll(){document.body.classList.toggle('scrolled',window.scrollY>hero.offsetTop+hero.offsetHeight-sticky.getBoundingClientRect().height-24)}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var heroPrice=document.querySelector('[data-source-cta="hero-price"]');
+  var headerPrice=sticky.querySelector('[data-source-cta="sticky-price"]');
+  function updateHeaderPrice(){
+    var box=heroPrice.getBoundingClientRect();
+    headerPrice.hidden=box.bottom>sticky.getBoundingClientRect().bottom;
+  }
   function updateHeaderHeight(){
     document.documentElement.style.setProperty('--sticky-height',sticky.getBoundingClientRect().height+'px');
+    updateHeaderPrice();
   }
   var headerObserver=new ResizeObserver(updateHeaderHeight);
-  headerObserver.observe(sticky);updateHeaderHeight();
-  window.addEventListener('resize',function(){onScroll();updateHeaderHeight();});
+  headerObserver.observe(sticky);
+  headerObserver.observe(document.getElementById('top'));
+  window.addEventListener('scroll',updateHeaderPrice,{passive:true});
+  window.addEventListener('resize',updateHeaderHeight);
+  updateHeaderHeight();
   function revealAnchor(){
     var id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}
     var target=document.getElementById(id);if(!target) return;
@@ -1300,7 +1353,7 @@ var QUESTIONS = {
     }
     requestAnimationFrame(function(){
       updateHeaderHeight();
-      requestAnimationFrame(function(){target.scrollIntoView({block:'start'});onScroll();});
+      requestAnimationFrame(function(){target.scrollIntoView({block:'start'});updateHeaderPrice();});
     });
   }
   window.addEventListener('hashchange',revealAnchor);
