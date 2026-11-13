@@ -1,4 +1,4 @@
-"""Usage: python tests/verify-selector-preservation.py BASELINE CURRENT [--branding | --historical | --part1] (requires lxml)."""
+"""Usage: python tests/verify-selector-preservation.py BASELINE CURRENT [--branding | --historical | --part1 | --part2] (requires lxml)."""
 from lxml import etree
 from preservation import read_pages
 

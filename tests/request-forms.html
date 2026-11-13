@@ -18,10 +18,10 @@ const sectionButtons=[
 ];
 const scenarioCopy={
  configuration_help:['Поможем подобрать комплектацию СФ676','Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка'],
- price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail. Если место доставки уже известно, укажите город и адрес.']
+ price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail и укажите город доставки.']
 };
 const expected={
- price_quote:['contact','name','company','city','deliveryAddress','comment'],
+ price_quote:['contact','city','name','company','deliveryAddress','comment'],
  configuration_help:['contact','name','company','task'],
  repair_comparison:['machineIdentity','problem','contact','name'],
  procurement_documents:['contact','organization','purchaseType','documents'],
@@ -45,6 +45,18 @@ async function load(width,mode='normal'){
  d.documentElement.style.scrollBehavior='auto';await d.fonts.ready;await tick();return{w,d};
 }
 function geometry(w,d){const dialog=d.querySelector('dialog'),r=dialog.getBoundingClientRect(),c=d.querySelector('.request-close').getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1 && dialog.scrollWidth<=dialog.clientWidth+1 && r.left>=0&&r.right<=w.innerWidth+1&&r.top>=0&&r.bottom<=w.innerHeight+1&&c.top>=r.top&&c.bottom<=r.bottom&&Array.from(dialog.querySelectorAll('input,select,textarea,button,h2,fieldset,label')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||(b.left>=r.left&&b.right<=r.right+1)});}
+function checkQuoteDetails(w,d,prefix){
+ const fields=d.getElementById('request-fields'), details=fields.querySelector('details'), summary=details?.querySelector('summary');
+ const controls=[...fields.querySelectorAll('[name]')];
+ const visible=()=>controls.filter(e=>e.checkVisibility()).map(e=>e.name).join(',');
+ record(prefix+'/short-form',!!summary && !details.open && summary.textContent==='Добавить детали' && visible()==='contact,city');
+ summary.click();
+ record(prefix+'/expanded',details.open && visible()===expected.price_quote.join(',') && geometry(w,d));
+ summary.click();
+ record(prefix+'/collapsed',!details.open && visible()==='contact,city' && geometry(w,d));
+ const payment=fields.querySelector('.request-payment');
+ if(payment) record(prefix+'/payment-first',payment===fields.firstElementChild && payment.checkVisibility());
+}
 async function matrix(){records=[];output.textContent='Проверка…';
  try{
  for(const mode of ['normal','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
@@ -74,6 +86,8 @@ async function matrix(){records=[];output.textContent='Проверка…';
  link.focus({preventScroll:true});await tick();const y=w.scrollY;link.click();await tick();
  const dialog=d.querySelector('dialog'), names=[...new Set(Array.from(d.querySelectorAll('#request-fields [name]')).map(e=>e.name))];
  record(`${width}/${mode}/${link.dataset.sourceCta}/open`,dialog.open&&JSON.stringify(names)===JSON.stringify(expected[id])&&geometry(w,d)&&w.getComputedStyle(d.body).position==='fixed'&&d.activeElement.id==='request-title');
+ if(id==='price_quote') checkQuoteDetails(w,d,`${width}/${mode}/${link.dataset.sourceCta}`);
+ else record(`${width}/${mode}/${id}/flat-fields`,!d.querySelector('#request-fields details'));
  const sectionButton=sectionButtons.find(button=>button.cta===link.dataset.sourceCta);
  if(sectionButton){
    const [title,description]=scenarioCopy[sectionButton.form];
@@ -122,13 +136,26 @@ function checkSalesDrafts(w,d){
    record(id+'/company-free-text',api.validate()&&api.getDraft().contact.company===company);
   }
   if(id==='price_quote'){
+   const details=d.querySelector('#request-fields details'),summary=details.querySelector('summary');
+   set('company','');
+   const empty=api.getDraft();
+   record('quote/empty-optional-keys',JSON.stringify(empty.contact)===JSON.stringify({value:email,name:'',company:''}) &&
+     JSON.stringify(empty.context)===JSON.stringify({city:'',deliveryAddress:'',comment:''}));
+   summary.click();set('name','Тест');set('company','ООО «Тест»');
    set('city','Тестовый город'); set('deliveryAddress',address); set('comment','Позвонить заранее');
-   const ctx=api.getDraft().context;
+   summary.click();
+   const saved=api.getDraft();
+   record('quote/collapsed-values',!details.open && saved.contact.name==='Тест' && saved.contact.company==='ООО «Тест»');
+   const ctx=saved.context;
    record('quote/logistics',ctx.city==='Тестовый город'&&ctx.deliveryAddress===address&&ctx.comment==='Позвонить заранее');
    set('deliveryAddress','а'.repeat(301));
-   record('quote/address-limit',!api.validate()&&api.getDraft()===null);
+   record('quote/address-limit',!api.validate()&&api.getDraft()===null && details.open &&
+     d.activeElement===field('deliveryAddress') && field('deliveryAddress').getAttribute('aria-invalid')==='true');
    set('deliveryAddress',address);
    record('quote/correct-address',api.validate()&&api.getDraft().context.deliveryAddress===address);
+   api.close();d.querySelector('[data-source-cta="hero-price"]').click();
+   record('quote/reopen-empty',!d.querySelector('#request-fields details').open &&
+     expected.price_quote.every(k=>field(k).value===''));
   }else{
    set('task','Фрезерование корпуса');
    const ctx=api.getDraft().context;
