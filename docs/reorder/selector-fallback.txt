@@ -1,0 +1,238 @@
+{
+  "count": 58,
+  "failed": [],
+  "results": [
+    {
+      "name": "fresh-after-reload",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/sticky-price",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/hero-price",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/specs-fit",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/payment-calculator",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/acceptance-accuracy",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/design-price",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/compare-request",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/config-request",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/delivery-quote",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/gov-documents",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/gov-nmck",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/plant-region",
+      "pass": true
+    },
+    {
+      "name": "existing-cta/order-price",
+      "pass": true
+    },
+    {
+      "name": "repeated-mode-switches",
+      "pass": true
+    },
+    {
+      "name": "all-unknown-valid",
+      "pass": true
+    },
+    {
+      "name": "no-form-fallback",
+      "pass": true
+    },
+    {
+      "name": "review",
+      "pass": true
+    },
+    {
+      "name": "review-locations/docs",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-docs",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-docs",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-docs-2",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-docs-2",
+      "pass": true
+    },
+    {
+      "name": "review-locations/oplata",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-oplata",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-oplata",
+      "pass": true
+    },
+    {
+      "name": "review-locations/acts",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-acts",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-acts",
+      "pass": true
+    },
+    {
+      "name": "review-locations/repair-price",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-repair-price",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-repair-price",
+      "pass": true
+    },
+    {
+      "name": "review-locations/raschet",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-raschet",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-raschet",
+      "pass": true
+    },
+    {
+      "name": "review-locations/reestr",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-reestr",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-reestr",
+      "pass": true
+    },
+    {
+      "name": "review-locations/deklar",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-deklar",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-deklar",
+      "pass": true
+    },
+    {
+      "name": "review-locations/tz-samples",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-tz-samples",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-tz-samples",
+      "pass": true
+    },
+    {
+      "name": "review-locations/sami",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-sami",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-sami",
+      "pass": true
+    },
+    {
+      "name": "review-locations/logo",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-logo",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-logo",
+      "pass": true
+    },
+    {
+      "name": "review-locations/vizit",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-vizit",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-vizit",
+      "pass": true
+    },
+    {
+      "name": "review-locations/rop",
+      "pass": true
+    },
+    {
+      "name": "review-target/q-rop",
+      "pass": true
+    },
+    {
+      "name": "review-return/q-rop",
+      "pass": true
+    },
+    {
+      "name": "nojs-static-content",
+      "pass": true
+    },
+    {
+      "name": "nojs-details-readable",
+      "pass": {}
+    }
+  ]
+}
