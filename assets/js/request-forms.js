@@ -37,7 +37,7 @@
   const scenarios = {
     price_quote: {
       title: 'Получить цену СФ676 с доставкой',
-      description: 'Оставьте телефон или e-mail. Если место доставки уже известно, укажите город и адрес.',
+      description: 'Оставьте телефон или e-mail и укажите город доставки.',
       fields: ['contact', 'name', 'company', 'city', 'deliveryAddress', 'comment'], action: 'Отправить запрос цены'
     },
     configuration_help: {
@@ -109,7 +109,17 @@
       }
       group.append(input, error);
     }
-    fields.appendChild(group);
+    return group;
+  }
+  function renderPriceFields(keys) {
+    const details = el('details', 'request-details request-field-wide');
+    const extra = el('div', 'request-fields');
+    details.append(el('summary', '', 'Добавить детали'), extra);
+    for (const key of keys) {
+      const parent = key === 'contact' || key === 'city' ? fields : extra;
+      parent.appendChild(renderField(key));
+    }
+    fields.appendChild(details);
   }
   // Raw contact is never rewritten or truncated. This is syntax checking, not verification.
   function contactError(raw) {
@@ -150,12 +160,18 @@
   function validate() {
     if (!active || !dialog.open) return false;
     let first = null;
+    let firstCollapsed = null;
     fields.querySelectorAll('input:not([type="checkbox"]),textarea,select').forEach(input => {
-      if (showError(input) && !first) first = input;
+      if (!showError(input)) return;
+      if (!first) first = input;
+      if (!firstCollapsed && input.closest('details:not([open])')) firstCollapsed = input;
     });
     status.dataset.state = first ? 'invalid' : 'valid';
     status.textContent = first ? 'Проверьте отмеченные поля. Данные не отправлены.' : 'Поля заполнены корректно. Это только проверка: данные не отправлены. Для обращения используйте телефон или e-mail.';
-    if (first) first.focus();
+    if (firstCollapsed) {
+      firstCollapsed.closest('details').open = true;
+      firstCollapsed.focus();
+    } else if (first) first.focus();
     return !first;
   }
   // Only bounded, plain technical context is accepted; never a DOM fragment or HTML.
@@ -250,7 +266,8 @@
       renderSelection(context.selector);
     }
     if (context.calculation) renderPayment(context.calculation);
-    fieldKeys.forEach(renderField);
+    if (options.formId === 'price_quote') renderPriceFields(fieldKeys);
+    else fields.append(...fieldKeys.map(renderField));
     if (scenario.note) fields.appendChild(el('p', 'request-hint request-field-wide', scenario.note));
     const trigger = options.trigger instanceof HTMLElement ? options.trigger : document.activeElement;
     active = {formId: options.formId, sourceSection: identifier(options.sourceSection, 'unknown'), sourceCta: identifier(options.sourceCta, 'programmatic'), context, fieldKeys, trigger, page: lockPage()};
@@ -281,7 +298,8 @@
   dialog.addEventListener('click', event => { if (backdropStart && outside(event)) close(); backdropStart = false; });
   dialog.addEventListener('keydown', event => {
     if (event.key !== 'Tab') return;
-    const stops = Array.from(dialog.querySelectorAll('button:not(:disabled),input:not(:disabled),select,textarea,a[href]'));
+    const stops = Array.from(dialog.querySelectorAll('button:not(:disabled),input:not(:disabled),select,textarea,summary,a[href]'))
+      .filter(node => !node.matches('details:not([open]) :not(summary)') && node.getClientRects().length);
     const first = stops[0], last = stops[stops.length - 1];
     if (event.shiftKey && (document.activeElement === first || document.activeElement === title)) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
