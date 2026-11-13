@@ -1,0 +1,1899 @@
+{
+  "count": 384,
+  "failed": [
+    {
+      "name": "320/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 86.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "390/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 91.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "768/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 140.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "1366/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 80.75,
+      "headerBottom": 107.78125
+    }
+  ],
+  "results": [
+    {
+      "name": "init/320/normal",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/table-table_300x800/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "320/normal/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.84375,
+      "headerBottom": 57
+    },
+    {
+      "name": "320/normal/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "320/normal/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "320/normal/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/390/normal",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/table-table_300x800/focus",
+      "pass": true,
+      "focused": true,
+      "top": 76.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "390/normal/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.28125,
+      "headerBottom": 60.59375
+    },
+    {
+      "name": "390/normal/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "390/normal/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "390/normal/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/768/normal",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/table-table_300x800/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "768/normal/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 80.765625,
+      "headerBottom": 61
+    },
+    {
+      "name": "768/normal/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "768/normal/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "768/normal/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/1366/normal",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/table-table_300x800/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 81.234375,
+      "headerBottom": 61
+    },
+    {
+      "name": "1366/normal/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/320/zoom",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 86.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 133.578125,
+      "headerBottom": 113.390625
+    },
+    {
+      "name": "320/zoom/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/390/zoom",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 91.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 148.171875,
+      "headerBottom": 127.78125
+    },
+    {
+      "name": "390/zoom/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/768/zoom",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 140.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 165.765625,
+      "headerBottom": 146.171875
+    },
+    {
+      "name": "768/zoom/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "init/1366/zoom",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/table-table_300x800/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/table-table_300x800/focus",
+      "pass": false,
+      "focused": true,
+      "top": 80.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/taper-taper_km4/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/taper-taper_km4/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/dro-dro_optical/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/dro-dro_optical/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/coordinates-coordinates_f2/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/coordinates-coordinates_f2/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/screw-screw_ball/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/screw-screw_ball/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/actual-result",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/special-order-labels",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/summary",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/form-summary",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/payload",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/return-focus",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/no-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/no-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/not-applicable",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/skip-coordinates/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/skip-coordinates/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/result-without-dro/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/result-without-dro/focus",
+      "pass": true,
+      "focused": true,
+      "top": 127.75,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/exact/cleared-coordinates",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/exact/reselection-required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/consultation-exclusive",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/operations/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/operations/focus",
+      "pass": true,
+      "focused": true,
+      "top": 128.15625,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/quiz/parts/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/parts/focus",
+      "pass": true,
+      "focused": true,
+      "top": 128.15625,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/quiz/tooling/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/tooling/focus",
+      "pass": true,
+      "focused": true,
+      "top": 128.15625,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/quiz/positioning/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/positioning/focus",
+      "pass": true,
+      "focused": true,
+      "top": 128.15625,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/quiz/extras/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/extras/focus",
+      "pass": true,
+      "focused": true,
+      "top": 128.15625,
+      "headerBottom": 107.78125
+    },
+    {
+      "name": "1366/zoom/quiz/requirements-only",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/modal-visible",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/payload",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/back-retains",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/edited-summary",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/mode-separation",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/quiz-retained",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/reset",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/quiz/optional-skipped",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/clean",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    }
+  ]
+}
