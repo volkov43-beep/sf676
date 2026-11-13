@@ -9,6 +9,10 @@
 <script>
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
 const widths=[320,375,390,768,1024,1366,1920];
+const sectionButtons=[
+ {section:'specs',cta:'specs-fit',label:'Проверить станок под мою деталь'},
+ {section:'acceptance',cta:'acceptance-accuracy',label:'Подобрать класс точности под мою задачу'}
+];
 const expected={
  price_quote:['contact','name','company','city','deliveryAddress','comment'],
  configuration_help:['contact','name','company','task'],
@@ -31,19 +35,42 @@ async function load(width,mode='normal'){
  w.navigator.sendBeacon=()=>{w.__testSinks.push('beacon');return false};
  w.Storage.prototype.setItem=function(){w.__testSinks.push('storage');throw Error('Unexpected storage')};
  if(mode==='zoom') d.documentElement.style.fontSize='200%';
- d.documentElement.style.scrollBehavior='auto';await tick();return{w,d};
+ d.documentElement.style.scrollBehavior='auto';await d.fonts.ready;await tick();return{w,d};
 }
 function geometry(w,d){const dialog=d.querySelector('dialog'),r=dialog.getBoundingClientRect(),c=d.querySelector('.request-close').getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1 && dialog.scrollWidth<=dialog.clientWidth+1 && r.left>=0&&r.right<=w.innerWidth+1&&r.top>=0&&r.bottom<=w.innerHeight+1&&c.top>=r.top&&c.bottom<=r.bottom&&Array.from(dialog.querySelectorAll('input,select,textarea,button,h2,fieldset,label')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||(b.left>=r.left&&b.right<=r.right+1)});}
 async function matrix(){records=[];output.textContent='Проверка…';
  try{
  for(const mode of ['normal','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
- for(const link of d.querySelectorAll('[data-request-form]')){
- const id=link.dataset.requestForm;if(link.closest('.sticky')){d.querySelector('#price').scrollIntoView();await until(()=>w.getComputedStyle(d.querySelector('.sticky')).visibility==='visible')}else link.scrollIntoView();link.focus();await tick();const y=w.scrollY;link.click();await tick();
+ const triggers=[...d.querySelectorAll('[data-request-form]')];
+ record(`${width}/${mode}/ten-triggers`,triggers.length===10);
+ for(const {section,cta,label} of sectionButtons){
+   const matches=triggers.filter(link=>link.dataset.sourceCta===cta);
+   const link=matches[0], wrap=d.getElementById(section).querySelector('.wrap');
+   record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===wrap.lastElementChild &&
+     link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm==='configuration_help');
+   if(link){
+     const box=link.getBoundingClientRect(), column=link.parentElement.getBoundingClientRect();
+     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && Math.abs(box.left-column.left)<=1 &&
+       box.right<=column.right+1 && (width>568 || Math.abs(box.width-column.width)<=1));
+   }
+ }
+ for(const link of triggers){
+ const id=link.dataset.requestForm;
+ if(link.closest('.sticky')){
+   d.querySelector('#price').scrollIntoView();
+   await until(()=>link.getClientRects().length>0);
+ }else link.scrollIntoView();
+ link.focus({preventScroll:true});await tick();const y=w.scrollY;link.click();await tick();
  const dialog=d.querySelector('dialog'), names=[...new Set(Array.from(d.querySelectorAll('#request-fields [name]')).map(e=>e.name))];
  record(`${width}/${mode}/${link.dataset.sourceCta}/open`,dialog.open&&JSON.stringify(names)===JSON.stringify(expected[id])&&geometry(w,d)&&w.getComputedStyle(d.body).position==='fixed'&&d.activeElement.id==='request-title');
+ if(sectionButtons.some(button=>button.cta===link.dataset.sourceCta)){
+   record(`${width}/${mode}/${link.dataset.sourceCta}/scenario-copy`,
+     d.getElementById('request-title').textContent==='Поможем подобрать комплектацию СФ676' &&
+     d.getElementById('request-description').textContent==='Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка');
+ }
  d.querySelector('#request-check').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true');
  const contact=d.querySelector('#request-contact');contact.value='qa+sf676@example.com';d.querySelector('#request-check').click();
- const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${id}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&d.querySelector('#request-submit').disabled&&d.querySelector('#request-status').textContent.includes('данные не отправлены'));
+ const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&d.querySelector('#request-submit').disabled&&d.querySelector('#request-status').textContent.includes('данные не отправлены'));
  d.querySelector('.request-content').scrollTop=1e6;record(`${width}/${mode}/${id}/scroll`,geometry(w,d));
  d.querySelector('.request-close').click();await tick();
  record(`${width}/${mode}/${link.dataset.sourceCta}/close`,!dialog.open&&d.activeElement===link&&Math.abs(w.scrollY-y)<=2&&w.SF676Requests.getDraft()===null&&d.querySelectorAll('#request-fields input').length===0&&w.getComputedStyle(d.body).position!=='fixed',{yBefore:y,yAfter:w.scrollY,focus:d.activeElement.dataset.sourceCta||d.activeElement.id});
@@ -53,6 +80,12 @@ async function matrix(){records=[];output.textContent='Проверка…';
  }
  const {w,d}=await load(390,'review');record('review-questions',d.body.classList.contains('showq')&&d.querySelector('#ql-rop a')?.hash==='#q-rop');
  const n=await load(390,'nojs');record('nojs-fallback',!n.w.SF676Requests&&n.d.querySelectorAll('section[id]:not(#qlist)').length===13&&Array.from(n.d.querySelectorAll('[data-request-form]')).every(a=>a.getAttribute('href')==='#order')&&n.d.querySelectorAll('#faq details').length===9&&!n.d.querySelector('dialog').open);
+ for(const {section,cta} of sectionButtons){
+   const link=n.d.querySelector('#'+section+' [data-source-cta="'+cta+'"]');
+   link.scrollIntoView();link.click();await tick();
+   const target=n.d.getElementById('order').getBoundingClientRect();
+   record('nojs/'+cta,n.w.location.hash==='#order' && target.top<n.w.innerHeight && target.bottom>0 && !n.d.querySelector('dialog').open);
+ }
  }catch(e){record('exception',false,{message:String(e)})}report();}
 function checkSalesDrafts(w,d){
  const api=w.SF676Requests, form=d.getElementById('request-form');

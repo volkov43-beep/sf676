@@ -651,6 +651,8 @@ body{overflow-wrap:anywhere}
  .hero-pair{grid-template-columns:1fr}
 }
 
+.section-cta{margin-top:var(--ui-space-4);text-align:left}
+@media (max-width:568px){.section-cta .btn{width:100%;min-height:48px;white-space:normal}}
 </style>
 <link rel="stylesheet" href="assets/css/request-forms.css">
 <link rel="stylesheet" href="assets/css/sf676-selector.css">
@@ -795,6 +797,9 @@ body{overflow-wrap:anywhere}
       <h3><span class="q" data-q="docs" data-location="Характеристики">Техническая документация</span></h3>
       <p>В отделе продаж можно запросить полные характеристики, перечни стандартной и дополнительной комплектации, эскизы столов и шпинделей и руководство по эксплуатации.</p>
     </div>
+    <div class="section-cta">
+      <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="specs" data-source-cta="specs-fit">Проверить станок под мою деталь</a>
+    </div>
   </div>
 </section>
 
@@ -854,6 +859,9 @@ body{overflow-wrap:anywhere}
       </tbody>
     </table>
     <details class="ux-details acceptance-explanation"><summary>Документы и контроль по заводскому номеру</summary><div class="ux-detail-body"><p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. <span class="q" data-q="acts">Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами.</span> Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p></div></details>
+    <div class="section-cta">
+      <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="acceptance" data-source-cta="acceptance-accuracy">Подобрать класс точности под мою задачу</a>
+    </div>
   </div>
 </section>
 

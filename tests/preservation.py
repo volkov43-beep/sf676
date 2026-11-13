@@ -1,4 +1,4 @@
-"""Shared checks for historical functional changes and the optional brand refresh."""
+"""Check section CTA additions or reproduce an earlier functional/branding acceptance."""
 from argparse import ArgumentParser
 from copy import deepcopy
 from pathlib import Path
@@ -10,19 +10,67 @@ def read_pages():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("baseline", type=Path)
     parser.add_argument("current", type=Path)
-    parser.add_argument("--branding", action="store_true", help="allow only the iteration 06 branding changes")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--historical", action="store_true", help="check an archived eight-CTA functional change")
+    modes.add_argument("--branding", action="store_true", help="allow only the iteration 06 branding changes")
     args = parser.parse_args()
     old, new = (html.fromstring(path.read_bytes()) for path in (args.baseline, args.current))
     if args.branding:
         verify_branding(old, new)
+    elif not args.historical:
+        verify_section_ctas(old, new)
+        return old, new, "section-ctas", 10
     else:
         for xpath in ("//picture|//img", "//style"):
             assert fragment_list(old, xpath) == fragment_list(new, xpath), xpath
-    return old, new, args.branding
+    assert len(new.xpath('//*[@data-request-form]')) == 8, "historical CTA count"
+    return old, new, "branding" if args.branding else "historical", 8
 
 
 def fragment_list(root, xpath):
     return [etree.tostring(node, method="html", with_tail=False) for node in root.xpath(xpath)]
+
+
+def verify_section_ctas(old, new):
+    """Validate the added links, then compare the entire remaining DOM to the baseline."""
+    links = new.xpath('//*[@data-request-form]')
+    assert len(links) == 10 and all(link.get("href") == "#order" for link in links)
+    expected = [
+        ("specs", "specs-fit", "Проверить станок под мою деталь"),
+        ("acceptance", "acceptance-accuracy", "Подобрать класс точности под мою задачу"),
+    ]
+    for page in (old, new):
+        # A newer baseline may already include both links. Validate them there as well.
+        if page is old and not page.xpath('//*[@class="section-cta"]'):
+            assert len(page.xpath('//*[@data-request-form]')) == 8
+            continue
+        for section, source, label in expected:
+            wrap, = page.get_element_by_id(section).xpath('./div[@class="wrap"]')
+            holder = wrap[-1]
+            assert holder.tag == "div" and dict(holder.attrib) == {"class": "section-cta"}
+            link, = holder
+            assert link.tag == "a" and len(link) == 0 and link.text == label
+            assert dict(link.attrib) == {
+                "class": "btn out", "href": "#order", "data-request-form": "configuration_help",
+                "data-source-section": section, "data-source-cta": source,
+            }
+            assert not (holder.text or "").strip() and not (link.tail or "").strip()
+            assert not (holder.tail or "").strip() and not (holder.getprevious().tail or "").strip()
+            holder.getprevious().tail = holder.tail
+            wrap.remove(holder)
+        assert not page.xpath('//*[@class="section-cta"]')
+
+    # All pre-existing CSS must survive, including rules used by the protected sections.
+    rules = (
+        ".section-cta{margin-top:var(--ui-space-4);text-align:left}\n"
+        "@media (max-width:568px){.section-cta .btn{width:100%;min-height:48px;white-space:normal}}\n"
+    )
+    for page in (new, old):
+        style, = page.xpath("/html/head/style")
+        if page is new or rules in style.text:
+            assert style.text.count(rules) == 1, "section CTA styles"
+            style.text = style.text.replace(rules, "")
+    assert etree.tostring(old) == etree.tostring(new), "unexpected change outside the two section CTAs"
 
 
 def verify_branding(old, new):
