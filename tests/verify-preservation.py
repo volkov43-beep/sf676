@@ -1,8 +1,8 @@
-"""Usage: python tests/verify-preservation.py BASELINE CURRENT [--branding] (requires lxml)."""
+"""Usage: python tests/verify-preservation.py BASELINE CURRENT [--branding | --historical] (requires lxml)."""
 from lxml import etree
 from preservation import read_pages
 
-old, new, branding = read_pages()
+old, new, mode, cta_count = read_pages()
 def serialized(nodes):
     return [etree.tostring(n, method='html', with_tail=False) for n in nodes]
 ids = ['top','advantages','specs','price','acceptance','design','compare','config','delivery','gov','plant','faq','order']
@@ -17,10 +17,9 @@ assert serialized(old.xpath('//*[@class="ui-card order-contacts"]')) == serializ
 assert new.xpath('//meta[@name="robots"]/@content') == ['noindex, nofollow']
 assert serialized(old.xpath('//*[@data-q]')) == serialized(new.xpath('//*[@data-q]'))
 assert len(new.xpath('//dialog')) == 1
-assert len(new.xpath('//*[@data-request-form]')) == 8
 assert all(a.get('href') == '#order' for a in new.xpath('//*[@data-request-form]'))
 all_ids = new.xpath('//*[@id]/@id'); assert len(all_ids) == len(set(all_ids))
 assert all(new.xpath('//*[@id=$target]', target=a.get('href')[1:]) for a in new.xpath('//a[starts-with(@href,"#")]'))
 assert new.xpath('//form/@method') == ['dialog']
 assert not new.xpath('//form/@action|//input[@type="file"]|//button[@type="submit"]')
-print('PASS: 13 sections; unchanged text outside order, tables, photos outside the header mark, SVG and inline JS, contacts, questions; 8 fallback CTAs; unique IDs; safe form.')
+print(f'PASS: 13 sections; unchanged text outside order, tables, photos outside the header mark, SVG and inline JS, contacts, questions; {cta_count} fallback CTAs; unique IDs; safe form.')

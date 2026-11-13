@@ -109,5 +109,5 @@ if __name__ == '__main__':
         paths = [Path(temp, name) for name in ('base.html', 'current.html')]
         for path, page in zip(paths, (old, new)):
             path.write_bytes(html.tostring(page, encoding='utf-8'))
-        subprocess.run([sys.executable, str(Path(__file__).with_name('verify-preservation.py')), *paths], check=True)
+        subprocess.run([sys.executable, str(Path(__file__).with_name('verify-preservation.py')), *paths, '--historical'], check=True)
     print('PASS: hero copy, CTA, preload, moved photo, header, metadata and all remaining page content.')
