@@ -1,0 +1,7832 @@
+{
+  "cases": 1813,
+  "failed": [],
+  "records": [
+    {
+      "name": "320/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "320/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "320/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "320/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "320/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "320/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "320/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 6505,
+      "yAfter": 6505,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 825,
+      "yAfter": 825,
+      "focus": "hero-price"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 6455,
+      "yAfter": 6455,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "320/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 8936,
+      "yAfter": 8936,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 12701,
+      "yAfter": 12701,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "320/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/design-price/close",
+      "pass": true,
+      "yBefore": 16244,
+      "yAfter": 16244,
+      "focus": "design-price"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 18567,
+      "yAfter": 18567,
+      "focus": "compare-request"
+    },
+    {
+      "name": "320/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/config-request/close",
+      "pass": true,
+      "yBefore": 20226,
+      "yAfter": 20226,
+      "focus": "config-request"
+    },
+    {
+      "name": "320/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 25050,
+      "yAfter": 25050,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 27697,
+      "yAfter": 27697,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "320/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 27802,
+      "yAfter": 27802,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "320/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 30067,
+      "yAfter": 30067,
+      "focus": "plant-region"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/normal/order-price/close",
+      "pass": true,
+      "yBefore": 31763,
+      "yAfter": 31763,
+      "focus": "order-price"
+    },
+    {
+      "name": "320/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "375/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "375/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "375/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "375/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "375/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "375/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "375/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "375/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 6001,
+      "yAfter": 6001,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 774,
+      "yAfter": 774,
+      "focus": "hero-price"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 5952,
+      "yAfter": 5952,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "375/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 8095,
+      "yAfter": 8095,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 11383,
+      "yAfter": 11383,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "375/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/design-price/close",
+      "pass": true,
+      "yBefore": 14586,
+      "yAfter": 14586,
+      "focus": "design-price"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 16445,
+      "yAfter": 16445,
+      "focus": "compare-request"
+    },
+    {
+      "name": "375/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/config-request/close",
+      "pass": true,
+      "yBefore": 17828,
+      "yAfter": 17828,
+      "focus": "config-request"
+    },
+    {
+      "name": "375/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 21880,
+      "yAfter": 21880,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 24136,
+      "yAfter": 24136,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "375/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 24222,
+      "yAfter": 24222,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "375/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 26213,
+      "yAfter": 26213,
+      "focus": "plant-region"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/normal/order-price/close",
+      "pass": true,
+      "yBefore": 27720,
+      "yAfter": 27720,
+      "focus": "order-price"
+    },
+    {
+      "name": "375/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "390/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "390/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "390/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "390/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "390/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "390/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "390/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 5945,
+      "yAfter": 5945,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 783,
+      "yAfter": 783,
+      "focus": "hero-price"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 5915,
+      "yAfter": 5915,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "390/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 8038,
+      "yAfter": 8038,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 11250,
+      "yAfter": 11250,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "390/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/design-price/close",
+      "pass": true,
+      "yBefore": 14388,
+      "yAfter": 14388,
+      "focus": "design-price"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 16220,
+      "yAfter": 16220,
+      "focus": "compare-request"
+    },
+    {
+      "name": "390/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/config-request/close",
+      "pass": true,
+      "yBefore": 17603,
+      "yAfter": 17603,
+      "focus": "config-request"
+    },
+    {
+      "name": "390/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 21577,
+      "yAfter": 21577,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 23700,
+      "yAfter": 23700,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "390/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 23786,
+      "yAfter": 23786,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "390/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 25788,
+      "yAfter": 25788,
+      "focus": "plant-region"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/normal/order-price/close",
+      "pass": true,
+      "yBefore": 27260,
+      "yAfter": 27260,
+      "focus": "order-price"
+    },
+    {
+      "name": "390/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "768/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "768/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "768/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "768/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "768/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "768/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "768/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 4325,
+      "yAfter": 4325,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 698,
+      "yAfter": 698,
+      "focus": "hero-price"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 4299,
+      "yAfter": 4299,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "768/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 5607,
+      "yAfter": 5607,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 7873,
+      "yAfter": 7873,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "768/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/design-price/close",
+      "pass": true,
+      "yBefore": 9555,
+      "yAfter": 9555,
+      "focus": "design-price"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 10847,
+      "yAfter": 10847,
+      "focus": "compare-request"
+    },
+    {
+      "name": "768/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/config-request/close",
+      "pass": true,
+      "yBefore": 11738,
+      "yAfter": 11738,
+      "focus": "config-request"
+    },
+    {
+      "name": "768/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 14517,
+      "yAfter": 14517,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 16064,
+      "yAfter": 16064,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "768/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 16131,
+      "yAfter": 16131,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "768/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 17812,
+      "yAfter": 17812,
+      "focus": "plant-region"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/normal/order-price/close",
+      "pass": true,
+      "yBefore": 19092,
+      "yAfter": 19092,
+      "focus": "order-price"
+    },
+    {
+      "name": "768/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "1024/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 3850,
+      "yAfter": 3850,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 483,
+      "yAfter": 483,
+      "focus": "hero-price"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 3811,
+      "yAfter": 3811,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "1024/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 5100,
+      "yAfter": 5100,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 7086,
+      "yAfter": 7086,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "1024/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/design-price/close",
+      "pass": true,
+      "yBefore": 8730,
+      "yAfter": 8730,
+      "focus": "design-price"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 9641,
+      "yAfter": 9641,
+      "focus": "compare-request"
+    },
+    {
+      "name": "1024/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/config-request/close",
+      "pass": true,
+      "yBefore": 10520,
+      "yAfter": 10520,
+      "focus": "config-request"
+    },
+    {
+      "name": "1024/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 12900,
+      "yAfter": 12900,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 13924,
+      "yAfter": 13924,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "1024/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 13991,
+      "yAfter": 13991,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "1024/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 15812,
+      "yAfter": 15812,
+      "focus": "plant-region"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/order-price/close",
+      "pass": true,
+      "yBefore": 16796,
+      "yAfter": 16796,
+      "focus": "order-price"
+    },
+    {
+      "name": "1024/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "1366/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 3728,
+      "yAfter": 3728,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 533,
+      "yAfter": 533,
+      "focus": "hero-price"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 3670,
+      "yAfter": 3670,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "1366/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 4992,
+      "yAfter": 4992,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 6771,
+      "yAfter": 6771,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "1366/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/design-price/close",
+      "pass": true,
+      "yBefore": 8077,
+      "yAfter": 8077,
+      "focus": "design-price"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 9040,
+      "yAfter": 9040,
+      "focus": "compare-request"
+    },
+    {
+      "name": "1366/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/config-request/close",
+      "pass": true,
+      "yBefore": 9902,
+      "yAfter": 9902,
+      "focus": "config-request"
+    },
+    {
+      "name": "1366/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 11728,
+      "yAfter": 11728,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 12755,
+      "yAfter": 12755,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "1366/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 12822,
+      "yAfter": 12822,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "1366/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 14627,
+      "yAfter": 14627,
+      "focus": "plant-region"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/order-price/close",
+      "pass": true,
+      "yBefore": 15730,
+      "yAfter": 15730,
+      "focus": "order-price"
+    },
+    {
+      "name": "1366/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "1920/normal/initialized",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/sticky-price/close",
+      "pass": true,
+      "yBefore": 3784,
+      "yAfter": 3784,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/hero-price/close",
+      "pass": true,
+      "yBefore": 567,
+      "yAfter": 567,
+      "focus": "hero-price"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/specs-fit/close",
+      "pass": true,
+      "yBefore": 3725,
+      "yAfter": 3725,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "1920/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/payment-calculator/close",
+      "pass": true,
+      "yBefore": 5048,
+      "yAfter": 5048,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 6829,
+      "yAfter": 6829,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "1920/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/design-price/close",
+      "pass": true,
+      "yBefore": 8136,
+      "yAfter": 8136,
+      "focus": "design-price"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/compare-request/close",
+      "pass": true,
+      "yBefore": 9099,
+      "yAfter": 9099,
+      "focus": "compare-request"
+    },
+    {
+      "name": "1920/normal/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/config-request/close",
+      "pass": true,
+      "yBefore": 9961,
+      "yAfter": 9961,
+      "focus": "config-request"
+    },
+    {
+      "name": "1920/normal/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/delivery-quote/close",
+      "pass": true,
+      "yBefore": 11789,
+      "yAfter": 11789,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/gov-documents/close",
+      "pass": true,
+      "yBefore": 12816,
+      "yAfter": 12816,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "1920/normal/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/gov-nmck/close",
+      "pass": true,
+      "yBefore": 12883,
+      "yAfter": 12883,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "1920/normal/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/plant-region/close",
+      "pass": true,
+      "yBefore": 14688,
+      "yAfter": 14688,
+      "focus": "plant-region"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/order-price/close",
+      "pass": true,
+      "yBefore": 15792,
+      "yAfter": 15792,
+      "focus": "order-price"
+    },
+    {
+      "name": "1920/normal/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/normal/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "320/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 15323,
+      "yAfter": 15323,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1874,
+      "yAfter": 1874,
+      "focus": "hero-price"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 15206,
+      "yAfter": 15206,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "320/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 23274,
+      "yAfter": 23274,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 34721,
+      "yAfter": 34721,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "320/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 42469,
+      "yAfter": 42469,
+      "focus": "design-price"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 49729,
+      "yAfter": 49729,
+      "focus": "compare-request"
+    },
+    {
+      "name": "320/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 54917,
+      "yAfter": 54917,
+      "focus": "config-request"
+    },
+    {
+      "name": "320/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 69434,
+      "yAfter": 69434,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 77609,
+      "yAfter": 77609,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "320/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 77811,
+      "yAfter": 77811,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "320/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 83525,
+      "yAfter": 83525,
+      "focus": "plant-region"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 87917,
+      "yAfter": 87917,
+      "focus": "order-price"
+    },
+    {
+      "name": "320/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "320/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "375/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 13475,
+      "yAfter": 13475,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1663,
+      "yAfter": 1663,
+      "focus": "hero-price"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 13362,
+      "yAfter": 13362,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "375/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 20040,
+      "yAfter": 20040,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 29736,
+      "yAfter": 29736,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "375/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 35855,
+      "yAfter": 35855,
+      "focus": "design-price"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 42046,
+      "yAfter": 42046,
+      "focus": "compare-request"
+    },
+    {
+      "name": "375/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 46368,
+      "yAfter": 46368,
+      "focus": "config-request"
+    },
+    {
+      "name": "375/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 58550,
+      "yAfter": 58550,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 65193,
+      "yAfter": 65193,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "375/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 65356,
+      "yAfter": 65356,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "375/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 70414,
+      "yAfter": 70414,
+      "focus": "plant-region"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 73993,
+      "yAfter": 73993,
+      "focus": "order-price"
+    },
+    {
+      "name": "375/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "375/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "390/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 13267,
+      "yAfter": 13267,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1672,
+      "yAfter": 1672,
+      "focus": "hero-price"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 13155,
+      "yAfter": 13155,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "390/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 19627,
+      "yAfter": 19627,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 28920,
+      "yAfter": 28920,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "390/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 34921,
+      "yAfter": 34921,
+      "focus": "design-price"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 40848,
+      "yAfter": 40848,
+      "focus": "compare-request"
+    },
+    {
+      "name": "390/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 45050,
+      "yAfter": 45050,
+      "focus": "config-request"
+    },
+    {
+      "name": "390/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 56766,
+      "yAfter": 56766,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 63300,
+      "yAfter": 63300,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "390/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 63463,
+      "yAfter": 63463,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "390/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 68166,
+      "yAfter": 68166,
+      "focus": "plant-region"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 71585,
+      "yAfter": 71585,
+      "focus": "order-price"
+    },
+    {
+      "name": "390/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "390/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "768/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 8552,
+      "yAfter": 8552,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1384,
+      "yAfter": 1384,
+      "focus": "hero-price"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 8567,
+      "yAfter": 8567,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "768/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 11881,
+      "yAfter": 11881,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 17509,
+      "yAfter": 17509,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "768/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 20804,
+      "yAfter": 20804,
+      "focus": "design-price"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 23605,
+      "yAfter": 23605,
+      "focus": "compare-request"
+    },
+    {
+      "name": "768/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 25692,
+      "yAfter": 25692,
+      "focus": "config-request"
+    },
+    {
+      "name": "768/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 33167,
+      "yAfter": 33167,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 36464,
+      "yAfter": 36464,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "768/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 36550,
+      "yAfter": 36550,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "768/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 39626,
+      "yAfter": 39626,
+      "focus": "plant-region"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 41805,
+      "yAfter": 41805,
+      "focus": "order-price"
+    },
+    {
+      "name": "768/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "768/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "1024/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 7301,
+      "yAfter": 7301,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1386,
+      "yAfter": 1386,
+      "focus": "hero-price"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 7303,
+      "yAfter": 7303,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "1024/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 10075,
+      "yAfter": 10075,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 14460,
+      "yAfter": 14460,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "1024/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 17108,
+      "yAfter": 17108,
+      "focus": "design-price"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 19528,
+      "yAfter": 19528,
+      "focus": "compare-request"
+    },
+    {
+      "name": "1024/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 21572,
+      "yAfter": 21572,
+      "focus": "config-request"
+    },
+    {
+      "name": "1024/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 27296,
+      "yAfter": 27296,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 30010,
+      "yAfter": 30010,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "1024/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 30173,
+      "yAfter": 30173,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "1024/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 33058,
+      "yAfter": 33058,
+      "focus": "plant-region"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 35223,
+      "yAfter": 35223,
+      "focus": "order-price"
+    },
+    {
+      "name": "1024/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1024/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "1366/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 6556,
+      "yAfter": 6556,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1072,
+      "yAfter": 1072,
+      "focus": "hero-price"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 6478,
+      "yAfter": 6478,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "1366/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 9131,
+      "yAfter": 9131,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 13150,
+      "yAfter": 13150,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "1366/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 15494,
+      "yAfter": 15494,
+      "focus": "design-price"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 17639,
+      "yAfter": 17639,
+      "focus": "compare-request"
+    },
+    {
+      "name": "1366/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 19472,
+      "yAfter": 19472,
+      "focus": "config-request"
+    },
+    {
+      "name": "1366/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 24012,
+      "yAfter": 24012,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 26502,
+      "yAfter": 26502,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "1366/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 26627,
+      "yAfter": 26627,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "1366/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 29353,
+      "yAfter": 29353,
+      "focus": "plant-region"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 31352,
+      "yAfter": 31352,
+      "focus": "order-price"
+    },
+    {
+      "name": "1366/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1366/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "1920/zoom/initialized",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/calculation-ready",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/thirteen-triggers",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/specs-fit/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/specs-fit/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/acceptance-accuracy/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/acceptance-accuracy/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/contract",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/layout",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/sticky-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/sticky-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/sticky-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/sticky-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/sticky-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/sticky-price/close",
+      "pass": true,
+      "yBefore": 6555,
+      "yAfter": 6555,
+      "focus": "sticky-price"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/hero-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/hero-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/hero-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/hero-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/hero-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/hero-price/close",
+      "pass": true,
+      "yBefore": 1086,
+      "yAfter": 1086,
+      "focus": "hero-price"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/specs-fit/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/specs-fit/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/specs-fit/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/specs-fit/close",
+      "pass": true,
+      "yBefore": 6478,
+      "yAfter": 6478,
+      "focus": "specs-fit"
+    },
+    {
+      "name": "1920/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/payment-first",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/calculator-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/payment-calculator/close",
+      "pass": true,
+      "yBefore": 9196,
+      "yAfter": 9196,
+      "focus": "payment-calculator"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/acceptance-accuracy/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/acceptance-accuracy/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/acceptance-accuracy/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/acceptance-accuracy/close",
+      "pass": true,
+      "yBefore": 13220,
+      "yAfter": 13220,
+      "focus": "acceptance-accuracy"
+    },
+    {
+      "name": "1920/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/design-price/close",
+      "pass": true,
+      "yBefore": 15566,
+      "yAfter": 15566,
+      "focus": "design-price"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/compare-request/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/repair_comparison/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/repair_comparison/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/compare-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/repair_comparison/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/compare-request/close",
+      "pass": true,
+      "yBefore": 17714,
+      "yAfter": 17714,
+      "focus": "compare-request"
+    },
+    {
+      "name": "1920/zoom/repair_comparison/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/config-request/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/config-request/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/configuration_help/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/config-request/close",
+      "pass": true,
+      "yBefore": 19551,
+      "yAfter": 19551,
+      "focus": "config-request"
+    },
+    {
+      "name": "1920/zoom/configuration_help/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/delivery-quote/close",
+      "pass": true,
+      "yBefore": 24157,
+      "yAfter": 24157,
+      "focus": "delivery-quote"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/gov-documents/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/procurement_documents/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/procurement_documents/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/gov-documents/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/procurement_documents/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/gov-documents/close",
+      "pass": true,
+      "yBefore": 26652,
+      "yAfter": 26652,
+      "focus": "gov-documents"
+    },
+    {
+      "name": "1920/zoom/procurement_documents/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/gov-nmck/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/procurement_nmck/flat-fields",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/procurement_nmck/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/gov-nmck/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/procurement_nmck/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/gov-nmck/close",
+      "pass": true,
+      "yBefore": 26777,
+      "yAfter": 26777,
+      "focus": "gov-nmck"
+    },
+    {
+      "name": "1920/zoom/procurement_nmck/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/scenario-copy",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/plain-quote",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/plant-region/close",
+      "pass": true,
+      "yBefore": 29504,
+      "yAfter": 29504,
+      "focus": "plant-region"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/order-price/open",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/order-price/short-form",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/order-price/expanded",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/order-price/collapsed",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/required",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/order-price/valid-context",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/price_quote/scroll",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/order-price/close",
+      "pass": true,
+      "yBefore": 31571,
+      "yAfter": 31571,
+      "focus": "order-price"
+    },
+    {
+      "name": "1920/zoom/price_quote/clean-reopen",
+      "pass": true
+    },
+    {
+      "name": "1920/zoom/no-side-effects",
+      "pass": true,
+      "errors": [],
+      "sinks": []
+    },
+    {
+      "name": "review-questions",
+      "pass": true
+    },
+    {
+      "name": "nojs-fallback",
+      "pass": true
+    },
+    {
+      "name": "nojs/specs-fit",
+      "pass": true
+    },
+    {
+      "name": "nojs/acceptance-accuracy",
+      "pass": true
+    },
+    {
+      "name": "nojs/design-price",
+      "pass": true
+    },
+    {
+      "name": "nojs/delivery-quote",
+      "pass": true
+    },
+    {
+      "name": "nojs/plant-region",
+      "pass": true
+    }
+  ]
+}
