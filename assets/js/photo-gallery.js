@@ -9,6 +9,7 @@ const close = viewer.querySelector('.gallery-close');
 let photos = [];
 let index = 0;
 let opener = null;
+let onSelection = null;
 
 function showPhoto(at) {
   if (at < 0 || at >= photos.length) return;
@@ -16,7 +17,8 @@ function showPhoto(at) {
   index = at;
   const photo = photos[index];
   photo.setAttribute('aria-current', 'true');
-  image.alt = photo.querySelector('img').alt;
+  onSelection?.(index);
+  image.alt = photo.querySelector('img')?.alt || photo.textContent.trim();
   image.src = photo.href;
   caption.textContent = image.alt;
   position.textContent = (index + 1) + ' из ' + photos.length;
@@ -24,13 +26,15 @@ function showPhoto(at) {
   next.setAttribute('aria-disabled', String(index === photos.length - 1));
 }
 
-function openViewer(group, link) {
+function openViewer(group, at, trigger, title, select = null) {
   if (document.querySelector('dialog[open]')) return;
   photos = group;
-  opener = link;
+  opener = trigger;
+  onSelection = select;
+  viewer.querySelector('#gallery-title').textContent = title;
   // A different thumbnail may have been selected the last time this group was open.
   for (const photo of group) photo.removeAttribute('aria-current');
-  index = group.indexOf(link);
+  index = at;
   document.body.append(viewer);
   showPhoto(index);
   viewer.showModal();
@@ -46,6 +50,7 @@ viewer.addEventListener('close', () => {
   if (opener?.isConnected && !document.querySelector('dialog[open]')) opener.focus({preventScroll: true});
   opener = null;
   photos = [];
+  onSelection = null;
 });
 
 // The native modal makes the page inert. Also yield if another dialog is opened by code.
@@ -61,71 +66,142 @@ viewer.addEventListener('keydown', event => {
     event.preventDefault();
     showPhoto(index + (event.key === 'ArrowLeft' ? -1 : 1));
   } else if (event.key === 'Tab') {
-    if (event.shiftKey && document.activeElement === previous) {
+    if (event.shiftKey && document.activeElement === close) {
+      event.preventDefault();
+      next.focus();
+    } else if (!event.shiftKey && document.activeElement === next) {
       event.preventDefault();
       close.focus();
-    } else if (!event.shiftKey && document.activeElement === close) {
-      event.preventDefault();
-      previous.focus();
     }
   }
 });
 
-const stage = viewer.querySelector('.gallery-stage');
-let touch = null;
-stage.addEventListener('pointerdown', event => {
-  touch = event.pointerType === 'touch' && event.isPrimary ? event : null;
-});
-stage.addEventListener('pointercancel', () => { touch = null; });
-stage.addEventListener('pointerup', event => {
-  const start = touch;
-  touch = null;
-  if (!start || start.pointerId !== event.pointerId) return;
-  const dx = event.clientX - start.clientX;
-  const dy = event.clientY - start.clientY;
-  if (Math.abs(dx) >= 48 && Math.abs(dx) > 1.5 * Math.abs(dy)) showPhoto(index + (dx < 0 ? 1 : -1));
-});
+// Consume the compatibility click of a drag, but leave taps, pinch zoom and vertical page scrolling native.
+function onSwipe(surface, step) {
+  let start;
+  let suppressClick = false;
+  surface.addEventListener('pointerdown', event => {
+    suppressClick = false;
+    start = event.pointerType === 'touch' && event.isPrimary ? event : null;
+  });
+  surface.addEventListener('pointercancel', () => { start = null; });
+  surface.addEventListener('pointerup', event => {
+    if (!start || event.pointerId !== start.pointerId) return;
+    const dx = event.clientX - start.clientX;
+    const dy = event.clientY - start.clientY;
+    start = null;
+    suppressClick = Math.max(Math.abs(dx), Math.abs(dy)) >= 12;
+    if (Math.abs(dx) >= 48 && Math.abs(dx) > 1.5 * Math.abs(dy)) step(dx < 0 ? 1 : -1);
+  });
+  surface.addEventListener('click', event => {
+    if (!suppressClick || event.detail === 0) return;
+    suppressClick = false;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+}
+
+onSwipe(viewer.querySelector('.gallery-stage'), direction => showPhoto(index + direction));
+
+function bindLink(link, activate) {
+  link.addEventListener('click', event => {
+    if (event.button || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    event.preventDefault();
+    activate();
+  });
+  link.addEventListener('keydown', event => {
+    if (event.key === ' ' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+      event.preventDefault();
+      if (!event.repeat) link.click();
+    }
+  });
+}
+
+function initShowcase(gallery, title) {
+  const main = gallery.querySelector('.tech-main');
+  const hero = main.querySelector('.tech-photo');
+  const preview = document.createElement('img');
+  preview.width = 1600;
+  preview.height = 1066;
+  preview.loading = 'lazy';
+  preview.decoding = 'async';
+  preview.sizes = '(min-width: 1200px) 722px, (min-width: 1024px) calc(64vw - 43px), calc(100vw - 48px)';
+  hero.prepend(preview);
+  const track = gallery.querySelector('.tech-thumbs');
+  const links = [...track.querySelectorAll('a')];
+  const desktop = matchMedia('(min-width: 1024px)');
+  const name = main.querySelector('.tech-name');
+  const counter = main.querySelector('.tech-counter');
+  let selected = 0;
+
+  function updateThumbnails() {
+    links.forEach((link, i) => {
+      const active = selected === i;
+      if (desktop.matches && active && document.activeElement === link) hero.focus({preventScroll: true});
+      link.parentElement.hidden = desktop.matches && active;
+      link.setAttribute('aria-current', String(active));
+    });
+    if (!desktop.matches) {
+      const item = links[selected].getBoundingClientRect();
+      const rail = track.getBoundingClientRect();
+      if (item.left < rail.left) track.scrollLeft += item.left - rail.left;
+      else if (item.right > rail.right) track.scrollLeft += item.right - rail.right;
+    }
+  }
+
+  function select(at) {
+    selected = (at + links.length) % links.length;
+    const link = links[selected];
+    const thumb = link.querySelector('img');
+    const label = link.querySelector('span').textContent;
+    hero.href = link.href;
+    hero.setAttribute('aria-label', 'Увеличить фото: ' + label);
+    preview.alt = thumb.alt;
+    preview.srcset = thumb.src + ' 640w, ' + link.href + ' 1600w';
+    preview.src = thumb.src;
+    name.textContent = label;
+    counter.textContent = String(selected + 1).padStart(2, '0') + ' / ' + String(links.length).padStart(2, '0');
+    updateThumbnails();
+  }
+
+  main.hidden = false;
+  select(0);
+  desktop.addEventListener('change', updateThumbnails);
+  for (const [at, link] of links.entries()) {
+    link.setAttribute('role', 'button');
+    link.setAttribute('aria-label', 'Выбрать ракурс: ' + link.querySelector('span').textContent);
+    link.setAttribute('aria-controls', hero.id);
+    bindLink(link, () => {
+      if (desktop.matches) hero.focus({preventScroll: true});
+      select(at);
+    });
+  }
+  main.querySelector('.gallery-prev').addEventListener('click', () => select(selected - 1));
+  main.querySelector('.gallery-next').addEventListener('click', () => select(selected + 1));
+  onSwipe(hero, direction => select(selected + direction));
+  if (typeof viewer.showModal === 'function') {
+    hero.setAttribute('aria-haspopup', 'dialog');
+    bindLink(hero, () => openViewer(links, selected, hero, title, select));
+  }
+}
 
 for (const gallery of document.querySelectorAll('[data-sf676-gallery]')) {
-  const track = gallery.querySelector('.gallery-track');
-  const links = Array.from(track.querySelectorAll('.gallery-photo'));
-  const controls = gallery.querySelector('.gallery-controls');
-  const back = controls.querySelector('.gallery-prev');
-  const forward = controls.querySelector('.gallery-next');
-
-  function updateControls() {
-    const limit = track.scrollWidth - track.clientWidth;
-    controls.hidden = limit <= 1;
-    back.setAttribute('aria-disabled', String(track.scrollLeft <= 1));
-    forward.setAttribute('aria-disabled', String(track.scrollLeft >= limit - 1));
+  const title = gallery.querySelector('h2, h3').textContent;
+  if (gallery.classList.contains('tech-gallery')) {
+    initShowcase(gallery, title);
+    continue;
   }
-
-  function scrollOne(direction) {
-    const step = links[1].getBoundingClientRect().left - links[0].getBoundingClientRect().left;
-    track.scrollBy({left: direction * step, behavior: 'instant'});
-  }
-
-  if (links.length > 1) {
-    back.addEventListener('click', () => scrollOne(-1));
-    forward.addEventListener('click', () => scrollOne(1));
-    track.addEventListener('scroll', updateControls, {passive: true});
-    new ResizeObserver(updateControls).observe(track);
-    updateControls();
-  }
-
-  if (typeof viewer.showModal !== 'function') continue;
-  for (const link of links) {
+  if (!gallery.classList.contains('mosaic-gallery') || typeof viewer.showModal !== 'function') continue;
+  const more = gallery.querySelector('.mosaic-more');
+  const visible = [...gallery.querySelectorAll('.mosaic-photo')];
+  const links = [...visible, ...more.querySelectorAll('a')];
+  for (const [at, link] of visible.entries()) {
     link.setAttribute('aria-haspopup', 'dialog');
-    link.addEventListener('click', event => {
-      if (event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      openViewer(links, link);
-    });
-    link.addEventListener('keydown', event => {
-      if (event.key === ' ' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
-        event.preventDefault();
-        if (!event.repeat) link.click();
-      }
-    });
+    link.setAttribute('aria-label', 'Увеличить фото: ' + link.querySelector('.mosaic-name').textContent);
+    bindLink(link, () => openViewer(links, at, link, title));
   }
+  const all = gallery.querySelector('.mosaic-open');
+  all.addEventListener('click', () => openViewer(links, 0, all, title));
+  all.hidden = false;
+  more.hidden = true;
 }
