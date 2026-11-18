@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>Проверка галереи СФ676</title>
+<style>
+  body { font: 16px system-ui; margin: 12px; }
+  pre { white-space: pre-wrap; }
+  #stage { max-width: 100%; overflow: auto; }
+  iframe { display: block; height: 740px; border: 0; }
+</style>
+<h1>Проверка галереи СФ676</h1>
+<button id="run">Проверить галерею</button>
+<button id="manual">Открыть для проверки клавиатуры</button>
+<pre id="results" role="status">Готово к проверке.</pre>
+<div id="stage"></div>
+<script type="module">
+const stage = document.getElementById('stage');
+const results = document.getElementById('results');
+const run = document.getElementById('run');
+const manual = document.getElementById('manual');
+const expected = [4204, 4209, 4212, 4257, 4335];
+
+function check(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+function painted(w) {
+  return new Promise(resolve => w.requestAnimationFrame(() => w.requestAnimationFrame(resolve)));
+}
+
+async function loadPage(width, zoom = 100, js = true) {
+  const frame = document.createElement('iframe');
+  frame.title = 'Проверяемый лендинг';
+  frame.width = width;
+  if (!js) frame.setAttribute('sandbox', 'allow-same-origin');
+  const loaded = new Promise(resolve => frame.addEventListener('load', resolve, {once: true}));
+  frame.src = '../index.html';
+  stage.replaceChildren(frame);
+  await loaded;
+  const d = frame.contentDocument;
+  d.documentElement.style.fontSize = zoom + '%';
+  d.documentElement.style.scrollBehavior = 'auto';
+  await d.fonts.ready;
+  await painted(frame.contentWindow);
+  return frame;
+}
+
+async function checkLayout(width, zoom) {
+  const frame = await loadPage(width, zoom);
+  const d = frame.contentDocument;
+  const w = frame.contentWindow;
+  const gallery = d.querySelector('#specs [data-sf676-gallery]');
+  const track = gallery.querySelector('.gallery-track');
+  const links = [...track.querySelectorAll('a')];
+  gallery.scrollIntoView({block: 'center', behavior: 'instant'});
+  await painted(w);
+  const sections = [...d.querySelectorAll('section[id]')].map(node => node.id);
+  check(sections.join(' ') === 'top advantages specs config price acceptance design compare delivery gov plant faq order qlist', 'Порядок секций');
+  check(d.querySelectorAll('[data-sf676-gallery]').length === 1 && links.length === 5, 'Состав галереи');
+  check(gallery.previousElementSibling.matches('.spec-operations') && gallery.nextElementSibling.id === 'technical-documents', 'Положение галереи');
+  check(d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1, 'Горизонтальная прокрутка страницы');
+  const bounds = track.getBoundingClientRect();
+  const cards = links.map(link => link.getBoundingClientRect());
+  const columns = width < 600 ? 1 : width < 1024 ? 2 : 3;
+  check(cards.filter(r => r.left >= bounds.left - 1 && r.right <= bounds.right + 1).length === columns, 'Число видимых кадров');
+  check(cards.every(r => Math.abs(r.width * .75 - r.height) < 1 && Math.abs(r.height - cards[0].height) < 1), 'Размеры 4:3');
+  const forward = gallery.querySelector('.gallery-next');
+  const back = gallery.querySelector('.gallery-prev');
+  for (let i = 0; i < links.length; i++) forward.click();
+  await painted(w);
+  check(forward.getAttribute('aria-disabled') === 'true' && track.scrollLeft > 0, 'Конец ленты');
+  for (let i = 0; i < links.length; i++) back.click();
+  await painted(w);
+  check(back.getAttribute('aria-disabled') === 'true' && track.scrollLeft < 1, 'Начало ленты');
+  check(!w.performance.getEntriesByType('resource').some(r => /galleries\/.*-1600\.webp/.test(r.name)), 'Преждевременная загрузка большого фото');
+
+  for (const [i, link] of links.entries()) {
+    link.scrollIntoView({block: 'center', inline: 'nearest', behavior: 'instant'});
+    const thumb = link.querySelector('img');
+    await thumb.decode();
+    check(thumb.currentSrc.endsWith(expected[i] + '-640.webp') && thumb.alt, 'Превью ' + (i + 1));
+    link.focus();
+    link.click();
+    const dialog = d.querySelector('.gallery-viewer:modal');
+    check(dialog && dialog.querySelector('.gallery-close') === d.activeElement, 'Начальный фокус');
+    const image = dialog.querySelector('img');
+    await image.decode();
+    check(image.src.endsWith(expected[i] + '-1600.webp') && image.naturalWidth === 1600 && image.naturalHeight === 1066, 'Открытие фото ' + (i + 1));
+    check(dialog.querySelector('[role="status"]').textContent === (i + 1) + ' из 5', 'Номер фотографии');
+    check(image.alt === thumb.alt && dialog.querySelector('.gallery-caption').textContent === thumb.alt, 'Подпись');
+    const inside = [...dialog.querySelectorAll('button, img, .gallery-caption')].every(node => {
+      const r = node.getBoundingClientRect();
+      return r.width > 0 && r.height > 0 && r.left >= -1 && r.top >= -1 && r.right <= width + 1 && r.bottom <= w.innerHeight + 1;
+    });
+    check(inside && w.getComputedStyle(image).objectFit === 'scale-down', 'Фото и управление в пределах окна');
+    const direction = i < links.length - 1 ? '.gallery-next' : '.gallery-prev';
+    dialog.querySelector(direction).click();
+    const target = i + (i < links.length - 1 ? 1 : -1);
+    check(image.src === links[target].href, 'Переключение в просмотре');
+    if (width === 390 && zoom === 100 && i === 0) {
+      const surface = dialog.querySelector('.gallery-stage');
+      const gesture = (dx, dy) => {
+        const touch = {pointerType: 'touch', pointerId: 1, isPrimary: true};
+        surface.dispatchEvent(new w.PointerEvent('pointerdown', {...touch, clientX: 120, clientY: 100}));
+        surface.dispatchEvent(new w.PointerEvent('pointerup', {...touch, clientX: 120 + dx, clientY: 100 + dy}));
+      };
+      gesture(10, 90);
+      check(image.src === links[1].href, 'Вертикальный жест');
+      gesture(-80, 5);
+      check(image.src === links[2].href, 'Горизонтальный свайп');
+    }
+    const closed = new Promise(resolve => dialog.addEventListener('close', resolve, {once: true}));
+    dialog.querySelector('.gallery-close').click();
+    await closed;
+    check(d.activeElement === link && !d.querySelector('dialog[open]'), 'Возврат фокуса');
+  }
+
+  const cta = d.querySelector('[data-source-cta="specs-fit"]');
+  cta.focus();
+  cta.click();
+  check(d.querySelector('#request-dialog:modal'), 'CTA характеристик');
+  links[0].click();
+  check(d.querySelectorAll('dialog[open]').length === 1 && !d.querySelector('.gallery-viewer[open]'), 'Совместимость с формой');
+  d.querySelector('.request-close').click();
+  await painted(w);
+  check(d.activeElement === cta, 'Фокус после формы');
+}
+
+async function checkRequestLinks() {
+  const frame = await loadPage(1366);
+  const d = frame.contentDocument;
+  const w = frame.contentWindow;
+  const links = [...d.querySelectorAll('a[data-request-form]')];
+  check(links.length > 0, 'Ссылки на формы');
+  for (const link of links) {
+    link.click();
+    d.querySelector('#request-contact').value = 'gallery-test@example.com';
+    const draft = w.SF676Requests.getDraft();
+    check(d.querySelector('#request-dialog:modal') && draft?.formId === link.dataset.requestForm &&
+      draft.sourceSection === link.dataset.sourceSection && draft.sourceCta === link.dataset.sourceCta, 'CTA ' + link.dataset.sourceCta);
+    d.querySelector('.request-close').click();
+    await painted(w);
+  }
+  return links.length;
+}
+
+async function checkFallback() {
+  const frame = await loadPage(390, 100, false);
+  const d = frame.contentDocument;
+  const gallery = d.querySelector('#specs [data-sf676-gallery]');
+  const links = [...gallery.querySelectorAll('a')];
+  check(!frame.contentWindow.SF676Requests && gallery.querySelector('.gallery-controls').hidden, 'Режим без JS');
+  for (const [i, link] of links.entries()) {
+    link.scrollIntoView({behavior: 'instant'});
+    await link.querySelector('img').decode();
+    check(link.href.endsWith(expected[i] + '-1600.webp'), 'Обычная ссылка на WebP');
+  }
+  const navigated = new Promise(resolve => frame.addEventListener('load', resolve, {once: true}));
+  const href = links[4].href;
+  links[4].click();
+  await navigated;
+  check(frame.contentDocument.URL === href && frame.contentDocument.contentType === 'image/webp', 'Переход к WebP без JS');
+}
+
+run.onclick = async () => {
+  run.disabled = manual.disabled = true;
+  results.textContent = '';
+  try {
+    for (const width of [320, 390, 768, 1366]) {
+      for (const zoom of [100, 200]) {
+        results.textContent += width + ' px, текст ' + zoom + '% … ';
+        await checkLayout(width, zoom);
+        results.textContent += 'OK\n';
+      }
+    }
+    const count = await checkRequestLinks();
+    results.textContent += 'CTA и источники обращений — ' + count + ' из ' + count + '\n';
+    await checkFallback();
+    results.textContent += 'Без JavaScript — OK';
+  } catch (error) {
+    results.textContent += 'Ошибка: ' + error.message;
+  } finally {
+    run.disabled = manual.disabled = false;
+  }
+};
+
+manual.onclick = async () => {
+  const frame = await loadPage(390);
+  const photo = frame.contentDocument.querySelector('.gallery-photo');
+  photo.focus();
+  photo.scrollIntoView({block: 'center', behavior: 'instant'});
+};
+</script>
+</html>
