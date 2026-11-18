@@ -816,124 +816,6 @@ body{overflow-wrap:anywhere}
 </section>
 
 <!-- 4 -->
-<section class="grey v1 commercial" id="price">
-  <div class="wrap">
-    <h2 class="section-heading">Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
-    <p class="lead">Каждый СФ676 собирается под спецификацию заказчика. Согласуем пять параметров: стол, конус шпинделя, УЦИ, количество отображаемых координат и тип винтовой передачи. Коммерческое предложение с ценой и сроком пришлём на почту в течение одного рабочего дня. Без звонков, если вы их не просили.</p>
-    <div class="payment-flow" id="payment-calculator">
-      <div class="payment-input-block" data-payment-enhanced hidden>
-        <h3>Рассчитайте платежи по стоимости станка</h3>
-        <p>Укажите стоимость оборудования из полученного коммерческого предложения — калькулятор покажет распределение суммы по этапам оплаты.</p>
-        <label for="payment-total">Стоимость станка, ₽</label>
-        <input id="payment-total" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="payment-hint payment-error">
-        <p id="payment-hint" class="payment-hint">Рубли и копейки: запятая или точка, до двух знаков после неё. Допустимы пробелы между тысячами. Максимум — 1 000 000 000 ₽.</p>
-        <p id="payment-error" class="payment-error"></p>
-        <p id="payment-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
-      </div><div class="payment-scale" aria-hidden="true"><span></span><span></span><span></span></div><ol class="payment-plan" aria-label="Этапы оплаты: 50 процентов, 45 процентов, 5 процентов">
-      <li><b class="percentage">50%</b><h3>Предоплата</h3><p class="payment-amount payment-value-empty" data-payment-value="advanceKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p></li>
-      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">45%</b><h3>После готовности станка</h3><p class="payment-amount payment-value-empty" data-payment-value="readinessKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p></li>
-      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">5%</b><h3>Окончательный платёж</h3><p class="payment-amount payment-value-empty" data-payment-value="finalKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p><p><span class="q" data-q="oplata">Условия фиксируются в договоре.</span></p></li>
-    </ol>
-      <div class="payment-result-note" data-payment-enhanced hidden>
-        <p class="payment-total-line">Общая сумма: <strong class="payment-value-empty" data-payment-value="totalKopeks">Сумма появится после ввода стоимости</strong></p>
-        <p>Расчёт выполнен на основании стоимости, указанной вами. Он показывает распределение платежей и не является коммерческим предложением завода.</p>
-        <p>Калькулятор не рассчитывает доставку, разгрузку, страхование груза, командировочные расходы специалистов и стоимость дополнительной комплектации, если она не учтена в введённой сумме. НДС не выделяется и не пересчитывается.</p>
-        <p class="payment-rounding">Первые два платежа округляются до копейки, окончательный платёж — остаток общей суммы. Условия окончательного платежа фиксируются в договоре.</p>
-      </div>
-    </div>
-    <a class="btn red payment-quote" href="#order" data-request-form="price_quote" data-source-section="price" data-source-cta="payment-calculator" data-payment-calculator>Получить официальное КП</a>
-    <dl class="purchase-conditions">
-      <div><dt>Срок изготовления</dt><dd>От 20 рабочих дней с момента предоплаты для любой модификации. Конкретная комплектация, срок изготовления и условия поставки фиксируются в договоре.</dd></div>
-      <div><dt>Доставка</dt><dd>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</dd></div>
-      <div><dt>Упаковка и консервация</dt><dd>Упаковка в деревянный ящик и консервация на 1 год входят в стоимость станка.</dd></div>
-      <div><dt>Льготный лизинг</dt><dd>Станок можно приобрести в льготный лизинг. Условия по запросу.</dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- 5 -->
-<section class="v1 trust-section" id="acceptance">
-  <div class="wrap">
-    <h2 class="section-heading">Каждый станок проверяется перед отгрузкой — вы получаете акт с замерами</h2>
-    <div class="acceptance-intro"><div class="acceptance-metric"><b>28</b><span>параметров геометрической точности на каждом станке</span></div><p>Проверка по заводскому номеру. Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами.</p></div><div class="quality-flow"><div class="quality-factory"><p class="quality-location">На заводе · до отгрузки</p><h3>Заводская приёмка</h3><ol class="quality-stages">
-<li><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#ruler"></use></svg><span>01</span></div><h4>Геометрическая точность</h4><p>Проверка 28 параметров.</p></li>
-<li><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#rotation"></use></svg><span>02</span></div><h4>Обкатка</h4><p>Обкатка на холостом ходу и под нагрузкой перед отгрузкой</p></li>
-<li><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#document"></use></svg><span>03</span></div><h4>Документирование</h4><p>Оформление результатов заводской приёмки.</p></li></ol><ul class="quality-conditions"><li>Приёмка на заводе в Кирове с участием вашего представителя — до отгрузки; входит в стоимость станка</li><li>Консервация на 1 год и упаковка в деревянный ящик для перевозки любым транспортом</li></ul></div><article class="quality-onsite"><p class="quality-location">После доставки · отдельный этап</p><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#start"></use></svg><span>04</span></div><h3>Пусконаладочные работы у заказчика</h3><p>Установка, выверка, обкатка и проверка паспортных данных после доставки.</p><p><b>Пусконаладочные работы у заказчика входят в стоимость станка.</b> Объём проверок при ПНР меньше, чем при заводской приёмке: это отдельный этап, а не повторение всех 28 измерений. Командировочные расходы специалистов оплачиваются отдельно.</p></article></div>
-    <table class="spec-table acceptance-table">
-      <caption>Основные контролируемые показатели исполнения Н</caption>
-      <thead><tr><th scope="col">Контролируемый параметр</th><th scope="col">Значение</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Осевое биение шпинделей, горизонтального / вертикального</th><td>15 / 10 мкм</td></tr>
-        <tr><th scope="row">Радиальное биение конической поверхности шпинделей</th><td>10 / 10 мкм</td></tr>
-        <tr><th scope="row">Плоскостность рабочих поверхностей столов на длине 500 мм</th><td>20 мкм</td></tr>
-        <tr><th scope="row">Взаимная перпендикулярность осей X, Y, Z</th><td>20 мкм</td></tr>
-        <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н — основное исполнение. П — по запросу, допуски по согласованной документации.</td></tr>
-      </tbody>
-    </table>
-    <details class="ux-details acceptance-explanation"><summary>Документы и контроль по заводскому номеру</summary><div class="ux-detail-body"><p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. <span class="q" data-q="acts">Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами.</span> Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p></div></details>
-    <div class="section-cta">
-      <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="acceptance" data-source-cta="acceptance-accuracy">Подобрать класс точности под мою задачу</a>
-    </div>
-  </div>
-</section>
-
-<!-- 6 -->
-<section class="grey v1 trust-section" id="design">
-  <div class="wrap">
-    <h2 class="section-heading">Что в конструкции решает ваши задачи</h2>
-    <div class="construction-grid">
-      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-head-front-640.webp" srcset="assets/images/sf676-head-front-320.webp 320w, assets/images/sf676-head-front-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="960" alt="Вертикальная головка СФ676 с пинолью, инструментом и рукоятками" loading="lazy" decoding="async"></div><figcaption>Вертикальная головка — вид спереди</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#rotation"></use></svg><span>Поворотная вертикальная головка ±90°</span></h3><p class="feature-benefit">Головка поворачивается на ±90° и не теряет жёсткости</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Поворотная вертикальная головка ±90°</span></summary><div class="ux-detail-body"><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></div></details></article>
-      <article class="ui-card construction-card"><figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#spindles"></use></svg><figcaption>Горизонтальное и вертикальное направления обработки — условно</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#directions"></use></svg><span>Горизонтальный и вертикальный шпиндели</span></h3><p class="feature-benefit">Два шпинделя — один станок вместо двух</p><p class="ux-note feature-condition">Для долбления нужна дополнительная головка.</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Горизонтальный и вертикальный шпиндели</span></summary><div class="ux-detail-body"><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></div></details></article>
-      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-bed-640.webp" srcset="assets/images/sf676-bed-320.webp 320w, assets/images/sf676-bed-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="779" alt="Нижняя часть станины СФ676, основание на виброопорах и опорные узлы" loading="lazy" decoding="async"></div><figcaption>Станина и основание СФ676</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#bed"></use></svg><span>Литая станина</span></h3><p class="feature-benefit">Литая станина 1050 кг гасит вибрации</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Литая станина</span></summary><div class="ux-detail-body"><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></div></details></article>
-      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-controls-640.webp" srcset="assets/images/sf676-controls-320.webp 320w, assets/images/sf676-controls-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="853" alt="Рукоятки управления и градуированный диск выбора режимов на СФ676" loading="lazy" decoding="async"></div><figcaption>Рукоятки и диск выбора режимов</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#controls"></use></svg><span>Скорости вращения и рабочие подачи</span></h3><p class="feature-benefit">16 скоростей и 16 подач — режим под любой материал</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Скорости вращения и рабочие подачи</span></summary><div class="ux-detail-body"><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></div></details></article>
-      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Пульт УЦИ СФ676 с тремя строками координат X, Y и Z" loading="lazy" decoding="async"></div><figcaption>Пульт УЦИ с индикацией X, Y и Z</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#dro"></use></svg><span>УЦИ</span></h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: УЦИ</span></summary><div class="ux-detail-body"><p>Линейки на осях показывают фактическое положение стола. Дискретность — 0,001 мм. Основное исполнение Ф3 отображает три координаты. Магнитная УЦИ — обычное исполнение, оптическая — только по специальному заказу. Можно установить позже, УЦИ любого производителя.</p></div></details></article>
-      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-square"><div class="media-frame"><img src="assets/images/sf676-coolant-light-960.webp" srcset="assets/images/sf676-coolant-light-480.webp 480w, assets/images/sf676-coolant-light-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="960" alt="Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676" loading="lazy" decoding="async"></div><figcaption>Трубка СОЖ и местное освещение</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#coolant"></use></svg><span>СОЖ, смазка и освещение</span></h3><p class="feature-benefit">СОЖ, смазка и свет — меньше обслуживания</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: СОЖ, смазка и освещение</span></summary><div class="ux-detail-body"><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></div></details></article>
-    </div>
-    <div class="section-cta">
-      <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="design" data-source-cta="design-price">Узнать цену в нужной комплектации</a>
-    </div>
-  </div>
-</section>
-
-<!-- 7 -->
-<section class="dark v1 commercial" id="compare">
-  <div class="wrap">
-    <h2 class="section-heading">Оставить, восстановить или заменить? Посчитаем все три варианта</h2>
-    <p class="lead">Если у вас уже стоит 676, 676П или ФУ-251 — вы знаете, что это хорошие станки; СФ676 продолжает ту же конструкцию. Вопрос не в том, какой станок лучше. Вопрос — во что обойдутся следующие два-три года: с тем, что есть, с восстановленным или с новым.</p>
-    <div class="compare-options">
-      <article class="ui-card"><h3 class="scenario-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#machine"></use></svg><span>Оставить существующий станок</span></h3><p><strong>Без первоначальных затрат.</strong> Риски простоя, ремонта и поиска запасных частей сохраняются.</p></article>
-      <article class="ui-card"><h3 class="scenario-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#repair"></use></svg><span>Капитально отремонтировать</span></h3><p><strong>Гарантия ВСЗ на капитальный ремонт — 12 месяцев.</strong> Завод фиксирует в предложении цену за согласованный объём работ.</p></article>
-      <article class="ui-card"><h3 class="scenario-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#inspected"></use></svg><span>Купить новый СФ676</span></h3><p><strong>Новый станок по спецификации договора.</strong> Заводская приёмка и гарантия 12 месяцев.</p></article>
-    </div>
-    <details class="compare-details">
-      <summary>Посмотреть подробное сравнение</summary>
-      <div class="comparison-body">
-        <table class="compare-table">
-      <colgroup><col style="width:19%"><col style="width:23%"><col style="width:31%"><col style="width:27%"></colgroup>
-      <thead><tr><th scope="col">Критерий</th><th scope="col">Оставить как есть</th><th scope="col">Капитально отремонтировать свой</th><th scope="col">Купить новый СФ676</th></tr></thead>
-      <tbody>
-      <tr><th scope="row">Затраты сейчас</th><td data-h="Оставить как есть">Нет</td><td data-h="Отремонтировать свой"><span class="q" data-q="repair-price">ВСЗ согласовывает с заказчиком фиксированную цену капитального ремонта для конкретного объёма работ.</span> В него могут входить разборка, шабрение направляющих, ремонт шпиндельного узла, коробок и электрики. При ремонте отдельного узла стоимость зависит от его состояния, необходимых работ и запчастей.</td><td data-h="Новый СФ676">Цена комплектации по КП</td></tr>
-      <tr><th scope="row">Затраты в ближайшие годы</th><td data-h="Оставить как есть">Неизвестны: ремонт по факту поломки, поиск деталей, простой</td><td data-h="Отремонтировать свой">Гарантия ВСЗ на капитально отремонтированный станок — 12 месяцев. При ремонте отдельных узлов гарантия распространяется на согласованный объём выполненных работ. Ресурс узлов, которые не ремонтировали, остаётся прежним.</td><td data-h="Новый СФ676">Плановое обслуживание по РЭ; гарантия 12 месяцев</td></tr>
-      <tr><th scope="row">Время до рабочего станка</th><td data-h="Оставить как есть">Работает — пока работает</td><td data-h="Отремонтировать свой">По предложениям сторонних сервисных компаний капитальный ремонт 676 занимает около 70 дней плюс ожидание узлов.</td><td data-h="Новый СФ676">Изготовление от 20 рабочих дней + доставка + пусконаладка</td></tr>
-      <tr><th scope="row">Что известно о состоянии</th><td data-h="Оставить как есть">Только то, что видно снаружи</td><td data-h="Отремонтировать свой">Известно после разборки и составления дефектной ведомости.</td><td data-h="Новый СФ676">Акт приёмки по заводскому номеру: 28 параметров геометрии</td></tr>
-      <tr><th scope="row">Комплектность</th><td data-h="Оставить как есть">Как есть</td><td data-h="Отремонтировать свой">Недостающие узлы (головка, хобот, серьга) — искать отдельно</td><td data-h="Новый СФ676">Зафиксирована в спецификации договора</td></tr>
-      <tr><th scope="row">Запасные части</th><td data-h="Оставить как есть">Продаются, в том числе крупные узлы, — но цена по запросу, часть позиций б/у, редкие приходится искать или изготавливать</td><td data-h="Отремонтировать свой">То же</td><td data-h="Новый СФ676">Завод-производитель; чертежи быстроизнашивающихся деталей в РЭ</td></tr>
-      <tr><th scope="row">Простой при поломке</th><td data-h="Оставить как есть">Полный, на неопределённый срок</td><td data-h="Отремонтировать свой">Меньше вероятность, но тот же поиск деталей</td><td data-h="Новый СФ676">Гарантия и сервис производителя</td></tr>
-      <tr><th scope="row">Закупка по 44-ФЗ / 223-ФЗ</th><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Для выбранного исполнения запросите реквизиты записи Минпромторга</td></tr>
-    </tbody>
-    </table>
-        <p class="mute comparison-source">В открытых предложениях за сентябрь 2026 года сторонние сервисы указывали выездную диагностику от 25 000 ₽ и ремонт станков соседнего класса за 650–770 тыс. ₽. В тот же период продавцы просили за подержанные рабочие 676П 165–220 тыс. ₽, за ФУ-251 — 280–450 тыс. ₽, за СФ676 1979 года — 200 тыс. ₽.</p>
-      </div>
-    </details>
-    <p class="comparison-context">Если у вас есть полгода, комплектный станок и специалист с опытом ремонта 676, восстановление может оказаться выгодным. Если детали нужны в этом квартале, сопоставьте возможный простой на время ремонта со сроком изготовления, доставки и запуска нового СФ676.</p>
-    <div class="comparison-request">
-      <p><span class="q" data-q="raschet">Для оценки ремонта можно указать данные станка и описать его состояние. Фото шильдика, видео шпинделя и сведения о люфтах можно передать специалисту при дальнейшем общении. Условия подготовки расчёта уточняются.</span></p>
-      <a class="btn red" href="#order" data-request-form="repair_comparison" data-source-section="compare" data-source-cta="compare-request">Посчитать для моего станка</a>
-    </div>
-  </div>
-</section>
-
-<!-- 8 -->
 <section class="v1 commercial" id="config">
   <div class="wrap">
     <h2 class="section-heading">Пять решений, из которых складывается ваш СФ676</h2>
@@ -993,6 +875,124 @@ body{overflow-wrap:anywhere}
     <p class="config-note">Комплектация определяется по техническому заданию заказчика. Состав оборудования и дополнительных принадлежностей фиксируется в коммерческом предложении и договоре. Монтаж и пусконаладка входят в стоимость станка; командировочные расходы специалистов, доставка, разгрузка и страхование оплачиваются отдельно. Условия сопутствующих услуг прописываются в договоре.</p>
     <p class="mute config-accessories">Дополнительная оснастка: глобусный стол — установка детали в трёх плоскостях · универсальная делительная головка — шестерни, фланцы, деление на градусы · круглый поворотный стол · тиски до 125 мм · дополнительное освещение</p>
     <a class="btn red" href="#order" data-request-form="configuration_help" data-source-section="config" data-source-cta="config-request">Подобрать комплектацию с технологом</a>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="grey v1 commercial" id="price">
+  <div class="wrap">
+    <h2 class="section-heading">Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
+    <p class="lead">Каждый СФ676 собирается под спецификацию заказчика. Согласуем пять параметров: стол, конус шпинделя, УЦИ, количество отображаемых координат и тип винтовой передачи. Коммерческое предложение с ценой и сроком пришлём на почту в течение одного рабочего дня. Без звонков, если вы их не просили.</p>
+    <div class="payment-flow" id="payment-calculator">
+      <div class="payment-input-block" data-payment-enhanced hidden>
+        <h3>Рассчитайте платежи по стоимости станка</h3>
+        <p>Укажите стоимость оборудования из полученного коммерческого предложения — калькулятор покажет распределение суммы по этапам оплаты.</p>
+        <label for="payment-total">Стоимость станка, ₽</label>
+        <input id="payment-total" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="payment-hint payment-error">
+        <p id="payment-hint" class="payment-hint">Рубли и копейки: запятая или точка, до двух знаков после неё. Допустимы пробелы между тысячами. Максимум — 1 000 000 000 ₽.</p>
+        <p id="payment-error" class="payment-error"></p>
+        <p id="payment-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div><div class="payment-scale" aria-hidden="true"><span></span><span></span><span></span></div><ol class="payment-plan" aria-label="Этапы оплаты: 50 процентов, 45 процентов, 5 процентов">
+      <li><b class="percentage">50%</b><h3>Предоплата</h3><p class="payment-amount payment-value-empty" data-payment-value="advanceKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p></li>
+      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">45%</b><h3>После готовности станка</h3><p class="payment-amount payment-value-empty" data-payment-value="readinessKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p></li>
+      <li><span class="payment-arrow" aria-hidden="true">→</span><b class="percentage">5%</b><h3>Окончательный платёж</h3><p class="payment-amount payment-value-empty" data-payment-value="finalKopeks" data-payment-enhanced hidden>Сумма появится после ввода стоимости</p><p><span class="q" data-q="oplata">Условия фиксируются в договоре.</span></p></li>
+    </ol>
+      <div class="payment-result-note" data-payment-enhanced hidden>
+        <p class="payment-total-line">Общая сумма: <strong class="payment-value-empty" data-payment-value="totalKopeks">Сумма появится после ввода стоимости</strong></p>
+        <p>Расчёт выполнен на основании стоимости, указанной вами. Он показывает распределение платежей и не является коммерческим предложением завода.</p>
+        <p>Калькулятор не рассчитывает доставку, разгрузку, страхование груза, командировочные расходы специалистов и стоимость дополнительной комплектации, если она не учтена в введённой сумме. НДС не выделяется и не пересчитывается.</p>
+        <p class="payment-rounding">Первые два платежа округляются до копейки, окончательный платёж — остаток общей суммы. Условия окончательного платежа фиксируются в договоре.</p>
+      </div>
+    </div>
+    <a class="btn red payment-quote" href="#order" data-request-form="price_quote" data-source-section="price" data-source-cta="payment-calculator" data-payment-calculator>Получить официальное КП</a>
+    <dl class="purchase-conditions">
+      <div><dt>Срок изготовления</dt><dd>От 20 рабочих дней с момента предоплаты для любой модификации. Конкретная комплектация, срок изготовления и условия поставки фиксируются в договоре.</dd></div>
+      <div><dt>Доставка</dt><dd>По России любым транспортом, от 3 дней. Доставка, разгрузка и страхование груза оплачиваются отдельно.</dd></div>
+      <div><dt>Упаковка и консервация</dt><dd>Упаковка в деревянный ящик и консервация на 1 год входят в стоимость станка.</dd></div>
+      <div><dt>Льготный лизинг</dt><dd>Станок можно приобрести в льготный лизинг. Условия по запросу.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="v1 trust-section" id="acceptance">
+  <div class="wrap">
+    <h2 class="section-heading">Каждый станок проверяется перед отгрузкой — вы получаете акт с замерами</h2>
+    <div class="acceptance-intro"><div class="acceptance-metric"><b>28</b><span>параметров геометрической точности на каждом станке</span></div><p>Проверка по заводскому номеру. Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами.</p></div><div class="quality-flow"><div class="quality-factory"><p class="quality-location">На заводе · до отгрузки</p><h3>Заводская приёмка</h3><ol class="quality-stages">
+<li><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#ruler"></use></svg><span>01</span></div><h4>Геометрическая точность</h4><p>Проверка 28 параметров.</p></li>
+<li><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#rotation"></use></svg><span>02</span></div><h4>Обкатка</h4><p>Обкатка на холостом ходу и под нагрузкой перед отгрузкой</p></li>
+<li><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#document"></use></svg><span>03</span></div><h4>Документирование</h4><p>Оформление результатов заводской приёмки.</p></li></ol><ul class="quality-conditions"><li>Приёмка на заводе в Кирове с участием вашего представителя — до отгрузки; входит в стоимость станка</li><li>Консервация на 1 год и упаковка в деревянный ящик для перевозки любым транспортом</li></ul></div><article class="quality-onsite"><p class="quality-location">После доставки · отдельный этап</p><div class="flow-symbol"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#start"></use></svg><span>04</span></div><h3>Пусконаладочные работы у заказчика</h3><p>Установка, выверка, обкатка и проверка паспортных данных после доставки.</p><p><b>Пусконаладочные работы у заказчика входят в стоимость станка.</b> Объём проверок при ПНР меньше, чем при заводской приёмке: это отдельный этап, а не повторение всех 28 измерений. Командировочные расходы специалистов оплачиваются отдельно.</p></article></div>
+    <table class="spec-table acceptance-table">
+      <caption>Основные контролируемые показатели исполнения Н</caption>
+      <thead><tr><th scope="col">Контролируемый параметр</th><th scope="col">Значение</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Осевое биение шпинделей, горизонтального / вертикального</th><td>15 / 10 мкм</td></tr>
+        <tr><th scope="row">Радиальное биение конической поверхности шпинделей</th><td>10 / 10 мкм</td></tr>
+        <tr><th scope="row">Плоскостность рабочих поверхностей столов на длине 500 мм</th><td>20 мкм</td></tr>
+        <tr><th scope="row">Взаимная перпендикулярность осей X, Y, Z</th><td>20 мкм</td></tr>
+        <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н — основное исполнение. П — по запросу, допуски по согласованной документации.</td></tr>
+      </tbody>
+    </table>
+    <details class="ux-details acceptance-explanation"><summary>Документы и контроль по заводскому номеру</summary><div class="ux-detail-body"><p>28 параметров геометрической точности проверяются на каждом станке по его заводскому номеру. <span class="q" data-q="acts">Акт приёмки входит в комплект поставки вместе с руководством по эксплуатации и чертежами.</span> Это не заявление «станок точный» — это протокол с цифрами, который можно сверить при вводе в эксплуатацию.</p></div></details>
+    <div class="section-cta">
+      <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="acceptance" data-source-cta="acceptance-accuracy">Подобрать класс точности под мою задачу</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="grey v1 trust-section" id="design">
+  <div class="wrap">
+    <h2 class="section-heading">Что в конструкции решает ваши задачи</h2>
+    <div class="construction-grid">
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-head-front-640.webp" srcset="assets/images/sf676-head-front-320.webp 320w, assets/images/sf676-head-front-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="960" alt="Вертикальная головка СФ676 с пинолью, инструментом и рукоятками" loading="lazy" decoding="async"></div><figcaption>Вертикальная головка — вид спереди</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#rotation"></use></svg><span>Поворотная вертикальная головка ±90°</span></h3><p class="feature-benefit">Головка поворачивается на ±90° и не теряет жёсткости</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Поворотная вертикальная головка ±90°</span></summary><div class="ux-detail-body"><p>Конструкция из двух цилиндров сохраняет жёсткость узла в любом положении. Поэтому на вертикальном шпинделе можно вести силовое фрезерование под углом, не разрушая корпус головки и не теряя стабильности обработки.</p></div></details></article>
+      <article class="ui-card construction-card"><figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#spindles"></use></svg><figcaption>Горизонтальное и вертикальное направления обработки — условно</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#directions"></use></svg><span>Горизонтальный и вертикальный шпиндели</span></h3><p class="feature-benefit">Два шпинделя — один станок вместо двух</p><p class="ux-note feature-condition">Для долбления нужна дополнительная головка.</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Горизонтальный и вертикальный шпиндели</span></summary><div class="ux-detail-body"><p>Дисковые, цилиндрические и фасонные фрезы — на горизонтальном шпинделе с хоботом и серьгой; концевые и торцевые — на вертикальном. Деталь не переустанавливается. Долбёжные операции — с дополнительной долбёжной головкой.</p></div></details></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-bed-640.webp" srcset="assets/images/sf676-bed-320.webp 320w, assets/images/sf676-bed-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="779" alt="Нижняя часть станины СФ676, основание на виброопорах и опорные узлы" loading="lazy" decoding="async"></div><figcaption>Станина и основание СФ676</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#bed"></use></svg><span>Литая станина</span></h3><p class="feature-benefit">Литая станина 1050 кг гасит вибрации</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Литая станина</span></summary><div class="ux-detail-body"><p>Направляющие закрыты гофрированным кожухом от стружки и СОЖ. Отсюда чистота поверхности и сохранение геометрии на годы. При этом станок занимает 1,2 × 1,24 м и встаёт практически в любое помещение.</p></div></details></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-tall"><div class="media-frame"><img src="assets/images/sf676-controls-640.webp" srcset="assets/images/sf676-controls-320.webp 320w, assets/images/sf676-controls-640.webp 640w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="640" height="853" alt="Рукоятки управления и градуированный диск выбора режимов на СФ676" loading="lazy" decoding="async"></div><figcaption>Рукоятки и диск выбора режимов</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#controls"></use></svg><span>Скорости вращения и рабочие подачи</span></h3><p class="feature-benefit">16 скоростей и 16 подач — режим под любой материал</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: Скорости вращения и рабочие подачи</span></summary><div class="ux-detail-body"><p>Горизонтальный шпиндель 50–1630 об/мин, вертикальный 63–2040, подачи 13–395 мм/мин, ускоренная — 935. Сталь, чугун, алюминий или латунь — без компромиссов и лишнего вспомогательного времени.</p></div></details></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-dro-960.webp" srcset="assets/images/sf676-dro-480.webp 480w, assets/images/sf676-dro-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Пульт УЦИ СФ676 с тремя строками координат X, Y и Z" loading="lazy" decoding="async"></div><figcaption>Пульт УЦИ с индикацией X, Y и Z</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#dro"></use></svg><span>УЦИ</span></h3><p class="feature-benefit">УЦИ прямого отсчёта — люфт винта не попадает в размер</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: УЦИ</span></summary><div class="ux-detail-body"><p>Линейки на осях показывают фактическое положение стола. Дискретность — 0,001 мм. Основное исполнение Ф3 отображает три координаты. Магнитная УЦИ — обычное исполнение, оптическая — только по специальному заказу. Можно установить позже, УЦИ любого производителя.</p></div></details></article>
+      <article class="ui-card construction-card"><figure class="prototype-media site-photo media-node media-square"><div class="media-frame"><img src="assets/images/sf676-coolant-light-960.webp" srcset="assets/images/sf676-coolant-light-480.webp 480w, assets/images/sf676-coolant-light-960.webp 960w" sizes="(max-width:700px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="960" alt="Модульная трубка подачи СОЖ и местный светильник у вертикального шпинделя СФ676" loading="lazy" decoding="async"></div><figcaption>Трубка СОЖ и местное освещение</figcaption></figure><h3 class="feature-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#coolant"></use></svg><span>СОЖ, смазка и освещение</span></h3><p class="feature-benefit">СОЖ, смазка и свет — меньше обслуживания</p><details class="ux-details"><summary>Технические подробности<span class="sr-only">: СОЖ, смазка и освещение</span></summary><div class="ux-detail-body"><p>Подача СОЖ через модульно-шарнирную трубку прямо в зону резания. Двухконтурная смазка с маслостанцией на 8 дозаторов. Промышленное светодиодное освещение 24 В.</p></div></details></article>
+    </div>
+    <div class="section-cta">
+      <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="design" data-source-cta="design-price">Узнать цену в нужной комплектации</a>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="dark v1 commercial" id="compare">
+  <div class="wrap">
+    <h2 class="section-heading">Оставить, восстановить или заменить? Посчитаем все три варианта</h2>
+    <p class="lead">Если у вас уже стоит 676, 676П или ФУ-251 — вы знаете, что это хорошие станки; СФ676 продолжает ту же конструкцию. Вопрос не в том, какой станок лучше. Вопрос — во что обойдутся следующие два-три года: с тем, что есть, с восстановленным или с новым.</p>
+    <div class="compare-options">
+      <article class="ui-card"><h3 class="scenario-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#machine"></use></svg><span>Оставить существующий станок</span></h3><p><strong>Без первоначальных затрат.</strong> Риски простоя, ремонта и поиска запасных частей сохраняются.</p></article>
+      <article class="ui-card"><h3 class="scenario-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#repair"></use></svg><span>Капитально отремонтировать</span></h3><p><strong>Гарантия ВСЗ на капитальный ремонт — 12 месяцев.</strong> Завод фиксирует в предложении цену за согласованный объём работ.</p></article>
+      <article class="ui-card"><h3 class="scenario-title"><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#inspected"></use></svg><span>Купить новый СФ676</span></h3><p><strong>Новый станок по спецификации договора.</strong> Заводская приёмка и гарантия 12 месяцев.</p></article>
+    </div>
+    <details class="compare-details">
+      <summary>Посмотреть подробное сравнение</summary>
+      <div class="comparison-body">
+        <table class="compare-table">
+      <colgroup><col style="width:19%"><col style="width:23%"><col style="width:31%"><col style="width:27%"></colgroup>
+      <thead><tr><th scope="col">Критерий</th><th scope="col">Оставить как есть</th><th scope="col">Капитально отремонтировать свой</th><th scope="col">Купить новый СФ676</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Затраты сейчас</th><td data-h="Оставить как есть">Нет</td><td data-h="Отремонтировать свой"><span class="q" data-q="repair-price">ВСЗ согласовывает с заказчиком фиксированную цену капитального ремонта для конкретного объёма работ.</span> В него могут входить разборка, шабрение направляющих, ремонт шпиндельного узла, коробок и электрики. При ремонте отдельного узла стоимость зависит от его состояния, необходимых работ и запчастей.</td><td data-h="Новый СФ676">Цена комплектации по КП</td></tr>
+      <tr><th scope="row">Затраты в ближайшие годы</th><td data-h="Оставить как есть">Неизвестны: ремонт по факту поломки, поиск деталей, простой</td><td data-h="Отремонтировать свой">Гарантия ВСЗ на капитально отремонтированный станок — 12 месяцев. При ремонте отдельных узлов гарантия распространяется на согласованный объём выполненных работ. Ресурс узлов, которые не ремонтировали, остаётся прежним.</td><td data-h="Новый СФ676">Плановое обслуживание по РЭ; гарантия 12 месяцев</td></tr>
+      <tr><th scope="row">Время до рабочего станка</th><td data-h="Оставить как есть">Работает — пока работает</td><td data-h="Отремонтировать свой">По предложениям сторонних сервисных компаний капитальный ремонт 676 занимает около 70 дней плюс ожидание узлов.</td><td data-h="Новый СФ676">Изготовление от 20 рабочих дней + доставка + пусконаладка</td></tr>
+      <tr><th scope="row">Что известно о состоянии</th><td data-h="Оставить как есть">Только то, что видно снаружи</td><td data-h="Отремонтировать свой">Известно после разборки и составления дефектной ведомости.</td><td data-h="Новый СФ676">Акт приёмки по заводскому номеру: 28 параметров геометрии</td></tr>
+      <tr><th scope="row">Комплектность</th><td data-h="Оставить как есть">Как есть</td><td data-h="Отремонтировать свой">Недостающие узлы (головка, хобот, серьга) — искать отдельно</td><td data-h="Новый СФ676">Зафиксирована в спецификации договора</td></tr>
+      <tr><th scope="row">Запасные части</th><td data-h="Оставить как есть">Продаются, в том числе крупные узлы, — но цена по запросу, часть позиций б/у, редкие приходится искать или изготавливать</td><td data-h="Отремонтировать свой">То же</td><td data-h="Новый СФ676">Завод-производитель; чертежи быстроизнашивающихся деталей в РЭ</td></tr>
+      <tr><th scope="row">Простой при поломке</th><td data-h="Оставить как есть">Полный, на неопределённый срок</td><td data-h="Отремонтировать свой">Меньше вероятность, но тот же поиск деталей</td><td data-h="Новый СФ676">Гарантия и сервис производителя</td></tr>
+      <tr><th scope="row">Закупка по 44-ФЗ / 223-ФЗ</th><td data-h="Оставить как есть">—</td><td data-h="Отремонтировать свой">Ремонт закупается отдельной процедурой</td><td data-h="Новый СФ676">Для выбранного исполнения запросите реквизиты записи Минпромторга</td></tr>
+    </tbody>
+    </table>
+        <p class="mute comparison-source">В открытых предложениях за сентябрь 2026 года сторонние сервисы указывали выездную диагностику от 25 000 ₽ и ремонт станков соседнего класса за 650–770 тыс. ₽. В тот же период продавцы просили за подержанные рабочие 676П 165–220 тыс. ₽, за ФУ-251 — 280–450 тыс. ₽, за СФ676 1979 года — 200 тыс. ₽.</p>
+      </div>
+    </details>
+    <p class="comparison-context">Если у вас есть полгода, комплектный станок и специалист с опытом ремонта 676, восстановление может оказаться выгодным. Если детали нужны в этом квартале, сопоставьте возможный простой на время ремонта со сроком изготовления, доставки и запуска нового СФ676.</p>
+    <div class="comparison-request">
+      <p><span class="q" data-q="raschet">Для оценки ремонта можно указать данные станка и описать его состояние. Фото шильдика, видео шпинделя и сведения о люфтах можно передать специалисту при дальнейшем общении. Условия подготовки расчёта уточняются.</span></p>
+      <a class="btn red" href="#order" data-request-form="repair_comparison" data-source-section="compare" data-source-cta="compare-request">Посчитать для моего станка</a>
+    </div>
   </div>
 </section>
 
