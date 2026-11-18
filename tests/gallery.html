@@ -93,7 +93,7 @@ async function checkLayout(width, zoom) {
     check(heading.top >= d.querySelector('.sticky').getBoundingClientRect().bottom && heading.top < w.innerHeight, 'Переход к #' + id);
   }
 
-  for (const source of ['specs-fit', 'gallery-price']) {
+  for (const source of ['specs-fit', 'specs-price', 'gallery-price']) {
     const cta = d.querySelector('[data-source-cta="'+source+'"]');
     check(!cta.closest('[data-sf676-gallery]'), 'CTA вне контейнера галереи');
     cta.focus();
@@ -254,7 +254,7 @@ async function checkRequestLinks() {
   const d = frame.contentDocument;
   const w = frame.contentWindow;
   const links = [...d.querySelectorAll('a[data-request-form]')];
-  check(links.length === 16 && new Set(links.map(link => link.dataset.sourceCta)).size === 16, '16 уникальных ссылок на формы');
+  check(links.length === 19 && new Set(links.map(link => link.dataset.sourceCta)).size === 19, '19 уникальных ссылок на формы');
   const scenarios = new Set();
   for (const link of links) {
     const scrollTarget = link.closest('.sticky') ? d.getElementById('price') : link;

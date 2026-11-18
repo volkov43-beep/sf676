@@ -49,7 +49,20 @@ async function regressions(){results=[];try{
  calculation.currency='USD';record('currency-rejected',api.open({formId:'price_quote',context:{calculation}})===false);
  input(w,d,'1000000');record('snapshot-independent',w.SF676Payments.getCalculation().currency==='RUB');
  ({w,d}=await load(390,'nocalc'));record('missing-calculator-script',!w.SF676Payments&&d.querySelector('#payment-total').closest('[hidden]'));d.querySelector('[data-payment-calculator]').click();record('missing-calc-standard-form',d.querySelector('dialog').open&&!d.querySelector('.request-payment'));w.SF676Requests.close();
- ({w,d}=await load(390,'noforms'));input(w,d,'4000000');record('missing-form-script',!w.SF676Requests&&w.SF676Payments.getCalculation().totalKopeks===400000000);d.querySelector('[data-payment-calculator]').click();await tick();record('fallback-order',frame.contentWindow.location.hash==='#order');
+ ({w,d}=await load(390,'noforms'));input(w,d,'4000000');record('missing-form-script',!w.SF676Requests&&w.SF676Payments.getCalculation().totalKopeks===400000000);
+ // The srcdoc fixture's base URL makes #order a real navigation. Wait for load,
+ // not one animation frame, before inspecting the destination document.
+ const fallbackLoaded=new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>reject(Error('Fallback navigation did not finish')),5000);
+  frame.addEventListener('load',()=>{clearTimeout(timer);resolve()},{once:true});
+ });
+ d.querySelector('[data-payment-calculator]').click();await fallbackLoaded;
+ await frame.contentDocument.fonts.ready;
+ // The destination restores its own smooth anchor scrolling; allow it to finish.
+ const deadline=performance.now()+5000;let order;
+ do{await tick();order=frame.contentDocument.getElementById('order').getBoundingClientRect()}
+ while((order.top>=frame.contentWindow.innerHeight||order.bottom<=0)&&performance.now()<deadline);
+ record('fallback-order',frame.contentWindow.location.hash==='#order'&&order.top<frame.contentWindow.innerHeight&&order.bottom>0&&!frame.contentDocument.querySelector('dialog[open]'),{url:frame.contentDocument.URL,top:order.top,bottom:order.bottom,height:frame.contentWindow.innerHeight});
  ({w,d}=await load(390,'review'));record('review',d.querySelector('#ql-oplata a')?.hash==='#q-oplata'&&d.querySelector('[data-q="oplata"]').textContent.includes('Условия фиксируются в договоре'));
  ({w,d}=await load(390,'nojs'));record('nojs',d.querySelector('#payment-total').closest('[hidden]')&&!w.SF676Payments&&d.querySelector('.payment-plan').getBoundingClientRect().height>0&&d.querySelectorAll('#price .purchase-conditions div').length===4&&d.querySelector('[data-payment-calculator]').getAttribute('href')==='#order');
  record('static-regression',d.querySelectorAll('section[id]:not(#qlist)').length===14&&d.querySelectorAll('#faq details').length===9&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');

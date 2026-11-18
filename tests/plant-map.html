@@ -152,6 +152,20 @@ async function checkMap(source, width, text) {
   await until(() => root.querySelector('.delivery-cluster'), 'Кластеры не появились');
   check(root.querySelector('.delivery-directory').hidden && !root.querySelector('.delivery-map-ui').hidden, 'Интерактивный режим');
   checkLayout(d, w);
+  const cta = d.querySelector('[data-source-cta="plant-region"]');
+  check(d.querySelectorAll('[data-source-cta="plant-region"]').length === 1 &&
+    cta.parentElement.previousElementSibling === root.querySelector('.delivery-map-ui') &&
+    !cta.closest('.delivery-map-ui,.delivery-canvas,.delivery-toolbar,.delivery-directory') &&
+    cta.getBoundingClientRect().top >= root.querySelector('.delivery-map-ui').getBoundingClientRect().bottom,
+    'Единственный CTA расположен после карты');
+  cta.focus(); cta.click();
+  check(d.querySelector('#request-dialog:modal'), 'Форма над работающей картой');
+  d.querySelector('#request-contact').value = 'map-test@example.com';
+  const draft = w.SF676Requests.getDraft();
+  check(draft?.formId === 'price_quote' && draft.sourceSection === 'plant' && draft.sourceCta === 'plant-region', 'Источник CTA карты');
+  d.querySelector('.request-close').click();
+  await paint(w);
+  check(d.activeElement === cta && !d.querySelector('dialog[open]'), 'Фокус после формы карты');
   for (const [name, count] of [['all', 90], ['russia', 73], ['export', 17]]) {
     checkFilter(root, state, name, count);
     const cluster = root.querySelector('.delivery-cluster');
@@ -199,6 +213,7 @@ async function checkFallback(source, mode) {
     [...directory.querySelectorAll('.delivery-countries dd')].flatMap(dd => dd.textContent.split(',')).length === 17 &&
     directory.querySelector('li').getBoundingClientRect().height > 0, 'Доступность 90 мест в списке');
   const cta = d.querySelector('[data-source-cta="plant-region"]');
+  check(cta.getClientRects().length && !cta.closest('.delivery-map-ui,.delivery-directory'), 'CTA виден при отказе карты');
   if (mode !== 'no-js') {
     cta.click();
     check(d.querySelector('#request-dialog:modal') && d.querySelector('#request-submit').disabled, 'Открытие демонстрационной формы');
@@ -217,7 +232,7 @@ run.onclick = async () => {
     const response = await fetch(new URL('index.html', site));
     if (!response.ok) throw new Error('Не удалось прочитать лендинг');
     const source = await response.text();
-    for (const width of [320, 390, 768, 1366]) {
+    for (const width of [320, 375, 390, 768, 1024, 1366, 1920]) {
       for (const text of [100, 200]) {
         results.textContent += width + ' px, текст ' + text + '% … ';
         await checkMap(source, width, text);
