@@ -27,8 +27,10 @@ def canonical(page):
 
 parser = ArgumentParser(description=__doc__)
 parser.add_argument('--baseline', type=Path)
+parser.add_argument('--redesign-base', type=Path, help='compare all HTML outside the galleries and viewer with pre-redesign main')
 parser.add_argument('--page', type=Path, default=ROOT / 'index.html')
 history = parser.add_mutually_exclusive_group()
+history.add_argument('--part1', action='store_true', help='verify the technical showcase with the former workshop rail')
 history.add_argument('--pr27', action='store_true', help='verify the two historical horizontal galleries after the plant move')
 history.add_argument('--pr26', action='store_true', help='verify the historical order after the galleries were added')
 args = parser.parse_args()
@@ -43,23 +45,37 @@ fingerprints = set()
 for section, numbers in PHOTOS.items():
     group, = page.xpath(f'//section[@id="{section}"]//*[@data-sf676-gallery]')
     showcase = section == 'specs' and not (args.pr26 or args.pr27)
-    track_class = 'tech-thumbs' if showcase else 'gallery-track'
-    track, = group.xpath(f'.//ul[@class="{track_class}"]')
-    controlled = 'specs-gallery-photo' if showcase else track.get('id')
-    assert group.xpath('.//button/@aria-controls') == [controlled] * 2
-    if showcase:
-        assert group.xpath('.//*[@class="tech-main"][@hidden]//a[@id=$id]', id=controlled)
-        assert len({name.strip() for name in track.xpath('./li/a/span/text()')}) == 5
-    links = track.xpath('./li/a')
+    mosaic = section == 'work-gallery' and not (args.pr26 or args.pr27 or args.part1)
+    if mosaic:
+        cards = group.xpath('.//div[@class="mosaic-grid"]/a[@class="mosaic-photo"]')
+        extra = group.xpath('.//ul[@class="mosaic-more"][not(@hidden)]/li/a')
+        assert len(cards) == 3 and len(extra) == 2
+        assert group.xpath('.//button[@class="btn mosaic-open"][@hidden][@aria-haspopup="dialog"]')
+        assert len({name.strip() for card in cards for name in card.xpath('./span[@class="mosaic-name"]/text()')}) == 3
+        links = cards + extra
+    else:
+        track_class = 'tech-thumbs' if showcase else 'gallery-track'
+        track, = group.xpath(f'.//ul[@class="{track_class}"]')
+        controlled = 'specs-gallery-photo' if showcase else track.get('id')
+        assert group.xpath('.//button/@aria-controls') == [controlled] * 2
+        if showcase:
+            assert group.xpath('.//*[@class="tech-main"][@hidden]//a[@id=$id]', id=controlled)
+            assert len({name.strip() for name in track.xpath('./li/a/span/text()')}) == 5
+        links = track.xpath('./li/a')
     assert len(links) == len(numbers)
-    for number, link in zip(numbers, links):
-        img, = link.xpath('./img')
+    for i, (number, link) in enumerate(zip(numbers, links)):
         base = f'assets/images/galleries/sf676-proz{number}'
         thumb, full = base + '-640.webp', base + '-1600.webp'
-        assert (img.get('src'), link.get('href')) == (thumb, full)
-        assert img.get('srcset') == thumb + ' 640w' and img.get('sizes')
-        assert (img.get('width'), img.get('height'), img.get('loading'), img.get('decoding')) == ('640', '427', 'lazy', 'async')
-        assert img.get('alt', '').strip()
+        assert link.get('href') == full
+        if mosaic and i >= 3:
+            assert link.text_content().strip() and not link.xpath('./img')
+        else:
+            img, = link.xpath('./img')
+            assert img.get('src') == thumb
+            candidates = thumb + ' 640w' + (', ' + full + ' 1600w' if mosaic and i == 0 else '')
+            assert img.get('srcset') == candidates and img.get('sizes')
+            assert (img.get('width'), img.get('height'), img.get('loading'), img.get('decoding')) == ('640', '427', 'lazy', 'async')
+            assert img.get('alt', '').strip()
         for path in (thumb, full):
             data = (ROOT / path).read_bytes()
             assert data[:4] == b'RIFF' and data[8:12] == b'WEBP', path
@@ -70,6 +86,17 @@ for section, numbers in PHOTOS.items():
 for n, section in enumerate(page.xpath('//section[@id!="qlist"]'), 1):
     comment = section.getprevious()
     assert isinstance(comment, etree._Comment) and comment.text.strip() == str(n), section.get('id')
+
+if args.redesign_base:
+    def outside_galleries(path):
+        tree = read_page(path)
+        for query in ('//section[@id="specs"]//*[@data-sf676-gallery]',
+                      '//section[@id="work-gallery"]//*[@data-sf676-gallery]', '//template[@id="gallery-viewer-template"]'):
+            node, = tree.xpath(query)
+            node.getparent().remove(node)
+        return canonical(tree)
+    assert outside_galleries(args.page) == outside_galleries(args.redesign_base), 'HTML changed outside galleries and viewer'
+    print('PASS: pre-redesign HTML outside the two galleries and viewer preserved')
 
 if args.baseline:
     if not args.pr26:

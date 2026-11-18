@@ -18,7 +18,7 @@ function showPhoto(at) {
   const photo = photos[index];
   photo.setAttribute('aria-current', 'true');
   onSelection?.(index);
-  image.alt = photo.querySelector('img').alt;
+  image.alt = photo.querySelector('img')?.alt || photo.textContent.trim();
   image.src = photo.href;
   caption.textContent = image.alt;
   position.textContent = (index + 1) + ' из ' + photos.length;
@@ -191,35 +191,17 @@ for (const gallery of document.querySelectorAll('[data-sf676-gallery]')) {
     initShowcase(gallery, title);
     continue;
   }
-  const track = gallery.querySelector('.gallery-track');
-  const links = Array.from(track.querySelectorAll('.gallery-photo'));
-  const controls = gallery.querySelector('.gallery-controls');
-  const back = controls.querySelector('.gallery-prev');
-  const forward = controls.querySelector('.gallery-next');
-
-  function updateControls() {
-    const limit = track.scrollWidth - track.clientWidth;
-    controls.hidden = limit <= 1;
-    back.setAttribute('aria-disabled', String(track.scrollLeft <= 1));
-    forward.setAttribute('aria-disabled', String(track.scrollLeft >= limit - 1));
-  }
-
-  function scrollOne(direction) {
-    const step = links[1].getBoundingClientRect().left - links[0].getBoundingClientRect().left;
-    track.scrollBy({left: direction * step, behavior: 'instant'});
-  }
-
-  if (links.length > 1) {
-    back.addEventListener('click', () => scrollOne(-1));
-    forward.addEventListener('click', () => scrollOne(1));
-    track.addEventListener('scroll', updateControls, {passive: true});
-    new ResizeObserver(updateControls).observe(track);
-    updateControls();
-  }
-
-  if (typeof viewer.showModal !== 'function') continue;
-  for (const link of links) {
+  if (!gallery.classList.contains('mosaic-gallery') || typeof viewer.showModal !== 'function') continue;
+  const more = gallery.querySelector('.mosaic-more');
+  const visible = [...gallery.querySelectorAll('.mosaic-photo')];
+  const links = [...visible, ...more.querySelectorAll('a')];
+  for (const [at, link] of visible.entries()) {
     link.setAttribute('aria-haspopup', 'dialog');
-    bindLink(link, () => openViewer(links, links.indexOf(link), link, title));
+    link.setAttribute('aria-label', 'Увеличить фото: ' + link.querySelector('.mosaic-name').textContent);
+    bindLink(link, () => openViewer(links, at, link, title));
   }
+  const all = gallery.querySelector('.mosaic-open');
+  all.addEventListener('click', () => openViewer(links, 0, all, title));
+  all.hidden = false;
+  more.hidden = true;
 }

@@ -36,10 +36,15 @@ async function loadPage(width, zoom = 100, js = true) {
   frame.title = 'Проверяемый лендинг';
   frame.width = width;
   if (!js) frame.setAttribute('sandbox', 'allow-same-origin');
-  const loaded = new Promise(resolve => frame.addEventListener('load', resolve, {once: true}));
-  frame.src = '../index.html';
   stage.replaceChildren(frame);
-  await loaded;
+  await new Promise(resolve => {
+    frame.onload = () => {
+      if (frame.contentDocument.URL !== frame.src) return;
+      frame.onload = null;
+      resolve();
+    };
+    frame.src = '../index.html';
+  });
   const d = frame.contentDocument;
   d.documentElement.style.fontSize = zoom + '%';
   d.documentElement.style.scrollBehavior = 'auto';
@@ -52,19 +57,22 @@ async function checkLayout(width, zoom) {
   const frame = await loadPage(width, zoom);
   const d = frame.contentDocument;
   const w = frame.contentWindow;
+  const errors = [];
+  w.addEventListener('error', event => errors.push(event.message));
+  w.addEventListener('unhandledrejection', event => errors.push(String(event.reason)));
   const sections = [...d.querySelectorAll('section[id]')].map(node => node.id);
   check(sections.join(' ') === 'top advantages specs config work-gallery plant price acceptance design compare delivery gov faq order qlist', 'Порядок секций');
   check(d.querySelectorAll('[data-sf676-gallery]').length === 2, 'Число галерей');
   const first = d.querySelector('#specs [data-sf676-gallery]');
   check(first.previousElementSibling.matches('.spec-operations') && first.nextElementSibling.id === 'technical-documents', 'Положение технических фотографий');
   check(d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1, 'Горизонтальная прокрутка страницы');
-  check(!w.performance.getEntriesByType('resource').some(r => /galleries\/.*-1600\.webp/.test(r.name) && !r.name.endsWith('4204-1600.webp')), 'Преждевременная загрузка большого фото');
+  check(!w.performance.getEntriesByType('resource').some(r => /galleries\/.*-1600\.webp/.test(r.name) && !/(4204|4135)-1600\.webp$/.test(r.name)), 'Преждевременная загрузка большого фото');
   for (const [section, numbers] of Object.entries(groups)) {
     await checkGallery(frame, width, zoom, section, numbers);
   }
   const technical = first.querySelector('.tech-photo');
   first.querySelectorAll('.tech-thumb')[1].click();
-  const workshop = d.querySelector('#work-gallery .gallery-photo');
+  const workshop = d.querySelector('#work-gallery .mosaic-photo');
   let sharedDialog;
   for (const [link, counter] of [[technical, '2 из 5'], [workshop, '1 из 5']]) {
     link.click();
@@ -89,11 +97,12 @@ async function checkLayout(width, zoom) {
   cta.focus();
   cta.click();
   check(d.querySelector('#request-dialog:modal'), 'CTA характеристик');
-  d.querySelector('#work-gallery .gallery-photo').click();
+  d.querySelector('#work-gallery .mosaic-photo').click();
   check(d.querySelectorAll('dialog[open]').length === 1 && !d.querySelector('.gallery-viewer[open]'), 'Совместимость с формой');
   d.querySelector('.request-close').click();
   await painted(w);
   check(d.activeElement === cta, 'Фокус после формы');
+  check(!errors.length, 'Ошибка JavaScript: ' + errors.join(', '));
 }
 
 async function checkGallery(frame, width, zoom, section, expected) {
@@ -101,8 +110,8 @@ async function checkGallery(frame, width, zoom, section, expected) {
   const w = frame.contentWindow;
   const gallery = d.getElementById(section).querySelector('[data-sf676-gallery]');
   const showcase = section === 'specs';
-  const track = gallery.querySelector(showcase ? '.tech-thumbs' : '.gallery-track');
-  const links = [...track.querySelectorAll('a')];
+  const track = gallery.querySelector(showcase ? '.tech-thumbs' : '.mosaic-grid');
+  const links = [...gallery.querySelectorAll(showcase ? '.tech-thumbs a' : '.mosaic-photo, .mosaic-more a')];
   check(links.length === expected.length, 'Состав ' + section);
   gallery.scrollIntoView({block: 'center', behavior: 'instant'});
   await painted(w);
@@ -141,29 +150,44 @@ async function checkGallery(frame, width, zoom, section, expected) {
   } else {
     const bounds = track.getBoundingClientRect();
     const header = gallery.querySelector('.gallery-header').getBoundingClientRect();
-    check(header.bottom <= bounds.top + 1 && bounds.left >= 0 && bounds.right <= d.documentElement.clientWidth + 1, 'Кнопки и границы ленты');
-    const cards = links.map(link => link.getBoundingClientRect());
-    const columns = width < 600 ? 1 : width < 1024 ? 2 : 3;
-    check(cards.filter(r => r.left >= bounds.left - 1 && r.right <= bounds.right + 1).length === columns, 'Число видимых кадров');
-    check(cards.every(r => Math.abs(r.width * .75 - r.height) < 1 && Math.abs(r.height - cards[0].height) < 1), 'Размеры 4:3');
-    const forward = gallery.querySelector('.gallery-next');
-    const back = gallery.querySelector('.gallery-prev');
-    for (let i = 0; i < links.length; i++) forward.click();
-    await painted(w);
-    check(forward.getAttribute('aria-disabled') === 'true' && track.scrollLeft > 0, 'Конец ленты');
-    for (let i = 0; i < links.length; i++) back.click();
-    await painted(w);
-    check(back.getAttribute('aria-disabled') === 'true' && track.scrollLeft < 1, 'Начало ленты');
+    check(header.bottom <= bounds.top + 1 && bounds.left >= 0 && bounds.right <= d.documentElement.clientWidth + 1, 'Заголовок и границы мозаики');
+    const cards = links.slice(0, 3).map(link => link.getBoundingClientRect());
+    const [large, top, bottom] = cards;
+    check(links.filter(link => link.getClientRects().length).length === 3, 'Три видимых кадра');
+    check(track.scrollWidth <= track.clientWidth + 1, 'Ширина мозаики');
+    const all = gallery.querySelector('.mosaic-open');
+    check(all.offsetHeight >= 44 && all.getBoundingClientRect().top >= bounds.bottom, 'Кнопка просмотра под фотографиями');
+    if (width <= 640) {
+      check(Math.abs(large.width - bounds.width) < 1 && top.top >= large.bottom &&
+        Math.abs(top.top - bottom.top) < 1 && bottom.left >= top.right &&
+        Math.abs(all.getBoundingClientRect().width - bounds.width) < 1, 'Мобильная мозаика');
+    } else {
+      check(top.left >= large.right && bottom.top >= top.bottom &&
+        Math.abs(top.left - bottom.left) < 1 && Math.abs(large.bottom - bottom.bottom) < 1 &&
+        large.width > top.width * 1.5, 'Асимметричная мозаика');
+    }
+    for (const link of links.slice(0, 3)) {
+      const img = link.querySelector('img').getBoundingClientRect();
+      const label = link.querySelector('.mosaic-name').getBoundingClientRect();
+      const card = link.getBoundingClientRect();
+      check(label.height > 0 && label.top >= card.top && label.bottom <= card.bottom + 1 &&
+        link.scrollWidth <= link.clientWidth + 1, 'Подпись в пределах карточки');
+      check(width <= 640 ? label.top >= img.bottom - 1 && Math.abs(img.width * 2 / 3 - img.height) <= 1 :
+        label.bottom <= img.bottom + 1, 'Положение подписи');
+    }
+
   }
 
   for (const [i, link] of links.entries()) {
     // Select every thumbnail from a different current view, including the initial one on desktop.
     if (showcase && hero.href === link.href) gallery.querySelector('.gallery-next').click();
-    link.scrollIntoView({block: 'center', inline: 'nearest', behavior: 'instant'});
     const thumb = link.querySelector('img');
-    await thumb.decode();
-    check(thumb.currentSrc.endsWith(expected[i] + '-640.webp') && thumb.alt, 'Превью ' + (i + 1));
-    link.focus();
+    if (thumb) {
+      link.scrollIntoView({block: 'center', inline: 'nearest', behavior: 'instant'});
+      await thumb.decode();
+      check(thumb.currentSrc.includes('proz' + expected[i] + '-') && thumb.alt, 'Превью ' + (i + 1));
+      link.focus();
+    }
     if (showcase) {
       link.click();
       check(!d.querySelector('dialog[open]') && hero.href === link.href &&
@@ -174,16 +198,21 @@ async function checkGallery(frame, width, zoom, section, expected) {
       await hero.querySelector('img').decode();
       check(hero.querySelector('img').currentSrc.includes('proz' + expected[i] + '-'), 'Загрузка выбранного ракурса');
     }
-    const trigger = showcase ? hero : link;
+    const trigger = showcase ? hero : thumb ? link : gallery.querySelector('.mosaic-open');
     trigger.focus();
     trigger.click();
     const dialog = d.querySelector('.gallery-viewer:modal');
     check(dialog && dialog.querySelector('.gallery-close') === d.activeElement, 'Начальный фокус');
     const image = dialog.querySelector('img');
+    if (!thumb) {
+      check(image.src === links[0].href && dialog.querySelector('[role="status"]').textContent === '1 из 5', 'Начало полного просмотра');
+      for (let step = 0; step < i; step++) dialog.querySelector('.gallery-next').click();
+    }
     await image.decode();
     check(image.src.endsWith(expected[i] + '-1600.webp') && image.naturalWidth === 1600 && image.naturalHeight === 1066, 'Открытие фото ' + (i + 1));
     check(dialog.querySelector('[role="status"]').textContent === (i + 1) + ' из 5', 'Номер фотографии');
-    check(image.alt === thumb.alt && dialog.querySelector('.gallery-caption').textContent === thumb.alt, 'Подпись');
+    const caption = thumb?.alt || link.textContent.trim();
+    check(image.alt === caption && dialog.querySelector('.gallery-caption').textContent === caption, 'Подпись');
     const inside = [...dialog.querySelectorAll('button, img, .gallery-caption')].every(node => {
       const r = node.getBoundingClientRect();
       return r.width > 0 && r.height > 0 && r.left >= -1 && r.top >= -1 && r.right <= width + 1 && r.bottom <= w.innerHeight + 1;
@@ -249,12 +278,14 @@ async function checkFallback(section, expected) {
   const frame = await loadPage(390, 100, false);
   const d = frame.contentDocument;
   const gallery = d.getElementById(section).querySelector('[data-sf676-gallery]');
-  const links = [...gallery.querySelectorAll('li a[href]')];
+  const links = [...gallery.querySelectorAll('a[href]')];
   check(links.length === 5 && !frame.contentWindow.SF676Requests &&
     [...gallery.querySelectorAll('button')].every(button => !button.getClientRects().length), 'Режим без JS');
   for (const [i, link] of links.entries()) {
     link.scrollIntoView({behavior: 'instant'});
-    await link.querySelector('img').decode();
+    check(link.getClientRects().length > 0, 'Ссылка видна без JS');
+    const img = link.querySelector('img');
+    if (img) await img.decode();
     check(link.href.endsWith(expected[i] + '-1600.webp'), 'Обычная ссылка на WebP');
   }
   const navigated = new Promise(resolve => frame.addEventListener('load', resolve, {once: true}));
@@ -268,7 +299,7 @@ run.onclick = async () => {
   run.disabled = manual.disabled = true;
   results.textContent = '';
   try {
-    for (const width of [320, 390, 640, 768, 1024, 1366]) {
+    for (const width of [320, 375, 390, 640, 768, 1024, 1366]) {
       for (const zoom of [100, 200]) {
         results.textContent += width + ' px, текст ' + zoom + '% … ';
         await checkLayout(width, zoom);
