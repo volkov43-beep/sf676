@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>СФ676 — проверка переноса завода и карты</title>
+<style>
+  body { font: 16px system-ui; }
+  pre { white-space: pre-wrap; }
+  #stage { overflow: auto; }
+  iframe { display: block; height: 740px; border: 0; }
+</style>
+<h1>Проверка блока завода</h1>
+<button id="run">Проверить карту и соседние секции</button>
+<pre id="results" role="status">Готово к проверке.</pre>
+<div id="stage"></div>
+<script type="module">
+const run = document.querySelector('#run');
+const results = document.querySelector('#results');
+const stage = document.querySelector('#stage');
+const site = new URL('../', location.href);
+let checks = 0;
+
+function check(value, message) {
+  if (!value) throw new Error(message);
+  checks++;
+}
+const paint = w => new Promise(resolve => w.requestAnimationFrame(() => w.requestAnimationFrame(resolve)));
+async function until(condition, label) {
+  const deadline = performance.now() + 6000;
+  while (!condition()) {
+    if (performance.now() > deadline) throw new Error(label);
+    await new Promise(resolve => setTimeout(resolve, 30));
+  }
+}
+
+async function openPage(source, width, text, mode = 'ready') {
+  const frame = document.createElement('iframe');
+  frame.width = width;
+  frame.title = 'Лендинг с локальным адаптером карты';
+  if (mode === 'no-js') frame.setAttribute('sandbox', 'allow-same-origin');
+  const pointer = width <= 390 ? 'coarse' : 'fine';
+  // The CSP also prevents any remote SDK, image or registry request if the adapter stops matching.
+  const testHead = '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\' \'unsafe-inline\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data:">' +
+    '<base href="' + site.href + '"><script src="tests/delivery-map-adapter.js" data-mode="' + mode +
+    '" data-pointer="' + pointer + '"><\/script>';
+  const meta = 'name="yandex-maps-key" content=""';
+  check(source.includes(meta), 'Ожидается исходный файл с пустым слотом ключа');
+  frame.srcdoc = source.replace('<head>', '<head>' + testHead).replace(meta,
+    mode === 'no-key' || mode === 'no-js' ? meta : 'name="yandex-maps-key" content="local-fixture"');
+  const loaded = new Promise(resolve => frame.addEventListener('load', resolve, { once: true }));
+  stage.replaceChildren(frame);
+  await loaded;
+  const w = frame.contentWindow;
+  const d = frame.contentDocument;
+  d.documentElement.style.fontSize = text + '%';
+  d.documentElement.style.scrollBehavior = 'auto';
+  await d.fonts.ready;
+  await paint(w);
+  return { w, d, root: d.querySelector('#plant #delivery-geography'), state: w.mapTest };
+}
+
+function checkLayout(d, w) {
+  const sections = ['config', 'work-gallery', 'plant', 'price'].map(id => d.getElementById(id));
+  const backgrounds = sections.map(el => {
+    const color = w.getComputedStyle(el).backgroundColor;
+    return color === 'rgba(0, 0, 0, 0)' ? w.getComputedStyle(d.body).backgroundColor : color;
+  });
+  check(backgrounds.join('|') === ['rgb(255, 255, 255)', 'rgb(15, 36, 64)', 'rgb(255, 255, 255)', 'rgb(242, 245, 249)'].join('|'), 'Фоны секций');
+  for (const [index, section] of sections.entries()) {
+    if (index) check(Math.abs(sections[index - 1].getBoundingClientRect().bottom - section.getBoundingClientRect().top) <= 1, 'Стык ' + section.id);
+  }
+  const bound = d.documentElement.clientWidth;
+  check(d.documentElement.scrollWidth <= bound + 1, 'Горизонтальное переполнение');
+  for (const el of d.querySelectorAll('#plant h2, #plant h3, #plant .delivery-canvas, #plant .delivery-toolbar button:not([hidden]), #plant .plant-media img, #plant .section-cta a')) {
+    const rect = el.getBoundingClientRect();
+    check(rect.width > 0 && rect.height > 0 && rect.left >= -1 && rect.right <= bound + 1, 'Границы ' + el.tagName + ' ' + el.className);
+    if (el.matches('button')) check(rect.height >= 44, 'Высота кнопки карты');
+  }
+}
+
+function checkFilter(root, state, name, count) {
+  const button = root.querySelector('[data-filter="' + name + '"]');
+  button.click();
+  const map = state.map;
+  const features = map.clusterer.features;
+  check(root.querySelectorAll('[data-filter][aria-pressed="true"]').length === 1 && button.getAttribute('aria-pressed') === 'true', 'Выбранный фильтр ' + name);
+  check(root.querySelector('.delivery-status').textContent.includes(': ' + count + '.') &&
+    features.length === count && features.every(f => name === 'all' || f.properties.type === name), 'Состав ' + name);
+  const center = map.projection.toWorldCoordinates(map.center);
+  const scale = 128 * 2 ** map.zoom;
+  check(features.every(feature => {
+    const world = map.projection.toWorldCoordinates(feature.geometry.coordinates);
+    return Math.abs(world.x - center.x) * scale <= map.canvas.clientWidth / 2 - 28 + 1e-6 &&
+      Math.abs(world.y - center.y) * scale <= map.canvas.clientHeight / 2 - 28 + 1e-6;
+  }), 'Охват фильтра ' + name);
+  const members = [...map.canvas.querySelectorAll('.delivery-cluster')].reduce((n, b) => n + Number(b.textContent), 0);
+  check(members + map.canvas.querySelectorAll('.delivery-pin').length === count, 'Число точек на карте ' + name);
+}
+
+function checkControls({ d, w, root, state }, mobile) {
+  const map = state.map;
+  const surface = root.querySelector('.delivery-surface');
+  const hint = root.querySelector('.delivery-tap-hint');
+  function pointer(target, type, x, id = 1) {
+    target.dispatchEvent(new w.PointerEvent(type, {
+      bubbles: true, pointerType: mobile ? 'touch' : 'mouse', clientX: x, clientY: 60, pointerId: id, isPrimary: id === 1
+    }));
+  }
+  const wheel = el => el.dispatchEvent(new w.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -100 }));
+  const zoom = map.zoom;
+  root.querySelector('[data-zoom="1"]').click();
+  check(map.zoom === zoom + 1, 'Кнопка увеличения');
+  root.querySelector('[data-zoom="-1"]').click();
+  check(map.zoom === zoom, 'Кнопка уменьшения');
+  check(wheel(d.querySelector('#plant h2')) && map.zoom === zoom, 'Колесо вне карты свободно');
+  if (mobile) {
+    check(!hint.hidden && surface.classList.contains('touch-locked') && !map.behaviors.length &&
+      w.getComputedStyle(surface).touchAction.includes('pan-y') && w.getComputedStyle(map.canvas).pointerEvents === 'none', 'Свободная прокрутка до активации');
+    pointer(surface, 'pointerdown', 50);
+    pointer(surface, 'pointermove', 75);
+    pointer(surface, 'pointerup', 50);
+    check(!hint.hidden, 'Свайп не активирует карту');
+    pointer(surface, 'pointerdown', 50);
+    pointer(surface, 'pointerup', 50);
+    check(hint.hidden && !surface.classList.contains('touch-locked'), 'Активация касанием');
+    pointer(map.canvas, 'pointerdown', 30);
+    pointer(map.canvas, 'pointerdown', 90, 2);
+    pointer(map.canvas, 'pointermove', 120, 2);
+    pointer(map.canvas, 'pointerup', 120, 2);
+    pointer(map.canvas, 'pointerup', 30);
+    check(map.zoom > zoom, 'Масштаб двумя пальцами в адаптере');
+  } else {
+    check(root.querySelector('.delivery-touch').hidden && !wheel(map.canvas) && map.zoom > zoom, 'Колесо внутри карты');
+  }
+  const lon = map.center[0];
+  pointer(map.canvas, 'pointerdown', 50);
+  pointer(map.canvas, 'pointermove', 70);
+  pointer(map.canvas, 'pointerup', 70);
+  check(map.center[0] !== lon, 'Перемещение карты');
+  if (mobile) {
+    const button = root.querySelector('.delivery-touch');
+    check(button.textContent === 'Вернуть прокрутку страницы', 'Название кнопки возврата');
+    button.click();
+    check(!hint.hidden && !map.behaviors.length && surface.classList.contains('touch-locked'), 'Возврат прокрутки');
+  }
+}
+
+async function checkMap(source, width, text) {
+  const page = await openPage(source, width, text);
+  const { root, state, w, d } = page;
+  check(root.getBoundingClientRect().top > w.innerHeight + 300 && !state.scripts && !state.registries && !state.instances, 'Отложенная загрузка');
+  root.scrollIntoView({ block: 'start', behavior: 'instant' });
+  await until(() => root.querySelector('.delivery-cluster'), 'Кластеры не появились');
+  check(root.querySelector('.delivery-directory').hidden && !root.querySelector('.delivery-map-ui').hidden, 'Интерактивный режим');
+  checkLayout(d, w);
+  for (const [name, count] of [['all', 90], ['russia', 73], ['export', 17]]) {
+    checkFilter(root, state, name, count);
+    const cluster = root.querySelector('.delivery-cluster');
+    if (name === 'all') {
+      const zoom = state.map.zoom;
+      cluster.click();
+      check(state.map.zoom > zoom, 'Приближение группы');
+    }
+    // Zoom in until individual place buttons are available on a narrow canvas.
+    for (let n = 0; !root.querySelector('.delivery-pin') && n < 5; n++) root.querySelector('[data-zoom="1"]').click();
+    const pin = root.querySelector('.delivery-pin');
+    pin.click();
+    const selection = root.querySelector('.delivery-selection');
+    check(!selection.hidden && selection.querySelector('span').textContent === pin.getAttribute('aria-label') &&
+      pin.getAttribute('aria-pressed') === 'true', 'Подпись точки ' + name);
+    selection.querySelector('button').click();
+    check(selection.hidden && d.activeElement === pin, 'Закрытие подписи');
+  }
+  checkControls(page, width <= 390);
+  const photo = d.querySelector('#plant .plant-media img');
+  photo.scrollIntoView({ block: 'center', behavior: 'instant' });
+  await photo.decode();
+  check(photo.naturalWidth > 0 && photo.currentSrc.includes('sf676-production-'), 'Производственная фотография');
+  w.scrollTo({ top: 0, behavior: 'instant' });
+  await paint(w);
+  root.scrollIntoView({ behavior: 'instant' });
+  await paint(w);
+  check(state.scripts === 1 && state.registries === 1 && state.instances === 1, 'Повторная инициализация');
+  check(!state.errors.length, 'Ошибка JS: ' + state.errors.join(', '));
+}
+
+async function checkFallback(source, mode) {
+  const { d, root, state } = await openPage(source, 390, 100, mode);
+  root.scrollIntoView({ behavior: 'instant' });
+  if (mode === 'no-js') check(!state && !d.defaultView.SF676Requests, 'JavaScript отключён');
+  else {
+    await until(() => root.querySelector('.delivery-status').textContent.includes('Карта недоступна'), 'Сообщение о недоступности');
+    check(state.instances === 0 && state.scripts === Number(mode === 'api-error') && !state.errors.length, 'Обработка отказа');
+  }
+  const directory = root.querySelector('.delivery-directory');
+  check(root.querySelector('.delivery-map-ui').hidden && !directory.hidden, 'Резервный список');
+  directory.open = false;
+  directory.querySelector('summary').click();
+  check(directory.open && directory.querySelectorAll('.delivery-regions li').length === 73 &&
+    [...directory.querySelectorAll('.delivery-countries dd')].flatMap(dd => dd.textContent.split(',')).length === 17 &&
+    directory.querySelector('li').getBoundingClientRect().height > 0, 'Доступность 90 мест в списке');
+  const cta = d.querySelector('[data-source-cta="plant-region"]');
+  if (mode !== 'no-js') {
+    cta.click();
+    check(d.querySelector('#request-dialog:modal') && d.querySelector('#request-submit').disabled, 'Открытие демонстрационной формы');
+    d.querySelector('#request-contact').value = 'test@example.com';
+    const draft = d.defaultView.SF676Requests.getDraft();
+    check(draft?.formId === 'price_quote' &&
+      draft.sourceSection === 'plant' && draft.sourceCta === 'plant-region', 'Форма доступна при отказе карты');
+  } else check(cta.hash === '#order' && d.getElementById('order'), 'Контакты без JS');
+}
+
+run.onclick = async () => {
+  run.disabled = true;
+  checks = 0;
+  results.textContent = '';
+  try {
+    const response = await fetch(new URL('index.html', site));
+    if (!response.ok) throw new Error('Не удалось прочитать лендинг');
+    const source = await response.text();
+    for (const width of [320, 390, 768, 1366]) {
+      for (const text of [100, 200]) {
+        results.textContent += width + ' px, текст ' + text + '% … ';
+        await checkMap(source, width, text);
+        results.textContent += 'OK\n';
+      }
+    }
+    for (const mode of ['no-key', 'api-error', 'no-js']) {
+      results.textContent += mode + ' … ';
+      await checkFallback(source, mode);
+      results.textContent += 'OK\n';
+    }
+    results.textContent += 'Пройдено проверок: ' + checks;
+  } catch (error) {
+    results.textContent += 'Ошибка: ' + error.message;
+  } finally {
+    run.disabled = false;
+  }
+};
+</script>
+</html>

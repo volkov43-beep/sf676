@@ -7,7 +7,8 @@ from pathlib import Path
 from lxml import etree, html
 
 ROOT = Path(__file__).resolve().parents[1]
-ORDER = 'top advantages specs config work-gallery price acceptance design compare delivery gov plant faq order qlist'.split()
+PR26_ORDER = 'top advantages specs config work-gallery price acceptance design compare delivery gov plant faq order qlist'.split()
+ORDER = 'top advantages specs config work-gallery plant price acceptance design compare delivery gov faq order qlist'.split()
 PHOTOS = {'specs': [4204, 4209, 4212, 4257, 4335], 'work-gallery': [4135, 4168, 4274, 4276, 4325]}
 
 
@@ -26,9 +27,11 @@ def canonical(page):
 
 parser = ArgumentParser(description=__doc__)
 parser.add_argument('--baseline', type=Path)
+parser.add_argument('--page', type=Path, default=ROOT / 'index.html')
+parser.add_argument('--pr26', action='store_true', help='verify the historical order after the galleries were added')
 args = parser.parse_args()
-page = read_page(ROOT / 'index.html')
-assert page.xpath('//section/@id') == ORDER, 'section order'
+page = read_page(args.page)
+assert page.xpath('//section/@id') == (PR26_ORDER if args.pr26 else ORDER), 'section order'
 ids = Counter(page.xpath('//*[@id]/@id'))
 assert all(count == 1 for count in ids.values()), 'duplicate IDs'
 assert all(link[1:] in ids for link in page.xpath('//a[starts-with(@href, "#")]/@href')), 'missing anchor'
@@ -61,6 +64,12 @@ for n, section in enumerate(page.xpath('//section[@id!="qlist"]'), 1):
     assert isinstance(comment, etree._Comment) and comment.text.strip() == str(n), section.get('id')
 
 if args.baseline:
+    if not args.pr26:
+        # Restore the pre-4A position before comparing against pre-gallery main.
+        plant = page.get_element_by_id('plant')
+        comment = plant.getprevious()
+        page.get_element_by_id('gov').addnext(comment)
+        comment.addnext(plant)
     # Remove only the approved additions, then compare all earlier HTML including forms, terms and assets.
     for xpath in ('//section[@id="work-gallery"]/preceding-sibling::comment()[1]', '//section[@id="work-gallery"]',
                   '//section[@id="specs"]//*[@data-sf676-gallery]', '//template[@id="gallery-viewer-template"]',
