@@ -28,7 +28,9 @@ def canonical(page):
 parser = ArgumentParser(description=__doc__)
 parser.add_argument('--baseline', type=Path)
 parser.add_argument('--page', type=Path, default=ROOT / 'index.html')
-parser.add_argument('--pr26', action='store_true', help='verify the historical order after the galleries were added')
+history = parser.add_mutually_exclusive_group()
+history.add_argument('--pr27', action='store_true', help='verify the two historical horizontal galleries after the plant move')
+history.add_argument('--pr26', action='store_true', help='verify the historical order after the galleries were added')
 args = parser.parse_args()
 page = read_page(args.page)
 assert page.xpath('//section/@id') == (PR26_ORDER if args.pr26 else ORDER), 'section order'
@@ -40,8 +42,14 @@ assert len(page.xpath('//template[@id="gallery-viewer-template"]/dialog')) == 1
 fingerprints = set()
 for section, numbers in PHOTOS.items():
     group, = page.xpath(f'//section[@id="{section}"]//*[@data-sf676-gallery]')
-    track, = group.xpath('.//ul[@class="gallery-track"]')
-    assert group.xpath('.//button/@aria-controls') == [track.get('id')] * 2
+    showcase = section == 'specs' and not (args.pr26 or args.pr27)
+    track_class = 'tech-thumbs' if showcase else 'gallery-track'
+    track, = group.xpath(f'.//ul[@class="{track_class}"]')
+    controlled = 'specs-gallery-photo' if showcase else track.get('id')
+    assert group.xpath('.//button/@aria-controls') == [controlled] * 2
+    if showcase:
+        assert group.xpath('.//*[@class="tech-main"][@hidden]//a[@id=$id]', id=controlled)
+        assert len({name.strip() for name in track.xpath('./li/a/span/text()')}) == 5
     links = track.xpath('./li/a')
     assert len(links) == len(numbers)
     for number, link in zip(numbers, links):
