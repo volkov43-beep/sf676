@@ -53,7 +53,7 @@ async function checkLayout(width, zoom) {
   const d = frame.contentDocument;
   const w = frame.contentWindow;
   const sections = [...d.querySelectorAll('section[id]')].map(node => node.id);
-  check(sections.join(' ') === 'top advantages specs config work-gallery price acceptance design compare delivery gov plant faq order qlist', 'Порядок секций');
+  check(sections.join(' ') === 'top advantages specs config work-gallery plant price acceptance design compare delivery gov faq order qlist', 'Порядок секций');
   check(d.querySelectorAll('[data-sf676-gallery]').length === 2, 'Число галерей');
   const first = d.querySelector('#specs [data-sf676-gallery]');
   check(first.previousElementSibling.matches('.spec-operations') && first.nextElementSibling.id === 'technical-documents', 'Положение технических фотографий');
@@ -76,7 +76,7 @@ async function checkLayout(width, zoom) {
     sharedDialog = dialog;
   }
   check(technical.hasAttribute('aria-current') && workshop.hasAttribute('aria-current'), 'Независимость выбора');
-  for (const id of ['config', 'work-gallery', 'price']) {
+  for (const id of ['config', 'work-gallery', 'plant', 'price']) {
     const screen = d.getElementById(id);
     screen.scrollIntoView({block: 'start', behavior: 'instant'});
     await painted(w);
