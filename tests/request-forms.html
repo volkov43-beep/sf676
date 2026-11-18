@@ -10,6 +10,9 @@
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
 const widths=[320,375,390,768,1024,1366,1920];
 const sectionButtons=[
+ {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу'},
+ {section:'work-gallery',cta:'gallery-price',form:'price_quote',label:'Узнать цену СФ676'},
+ {section:'faq',cta:'faq-consult',form:'configuration_help',label:'Обсудить задачу с технологом'},
  {section:'specs',cta:'specs-fit',form:'configuration_help',label:'Проверить станок под мою деталь'},
  {section:'acceptance',cta:'acceptance-accuracy',form:'configuration_help',label:'Подобрать класс точности под мою задачу'},
  {section:'design',cta:'design-price',form:'price_quote',label:'Узнать цену в нужной комплектации'},
@@ -65,10 +68,17 @@ async function matrix(){records=[];output.textContent='Проверка…';
  total.dispatchEvent(new w.Event('input',{bubbles:true}));
  record(`${width}/${mode}/calculation-ready`,w.SF676Payments.getCalculation()?.totalKopeks===100000000);
  const triggers=[...d.querySelectorAll('[data-request-form]')];
- record(`${width}/${mode}/thirteen-triggers`,triggers.length===13);
+ record(`${width}/${mode}/sixteen-triggers`,triggers.length===16 && new Set(triggers.map(link=>link.dataset.sourceCta)).size===16);
+ record(`${width}/${mode}/cta-placement`,
+   d.querySelector('#advantages .adv-note').nextElementSibling.matches('.section-cta') &&
+   d.querySelectorAll('#advantages .adv-card').length===5 &&
+   !d.querySelector('[data-source-cta="gallery-price"]').closest('[data-sf676-gallery]') &&
+   d.querySelector('#work-gallery > .wrap:last-child').previousElementSibling.matches('[data-sf676-gallery]') &&
+   d.querySelector('#faq .faq-list').nextElementSibling.matches('.section-cta') &&
+   !d.querySelector('[data-source-cta="faq-consult"]').closest('details'));
  for(const {section,cta,label,form} of sectionButtons){
    const matches=triggers.filter(link=>link.dataset.sourceCta===cta);
-   const link=matches[0], wrap=d.getElementById(section).querySelector('.wrap');
+   const link=matches[0], wrap=d.getElementById(section).querySelector(':scope > .wrap:last-child');
    record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===wrap.lastElementChild &&
      link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm===form && !link.hasAttribute('data-payment-calculator'));
    if(link){

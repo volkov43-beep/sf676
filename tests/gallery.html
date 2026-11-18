@@ -93,15 +93,18 @@ async function checkLayout(width, zoom) {
     check(heading.top >= d.querySelector('.sticky').getBoundingClientRect().bottom && heading.top < w.innerHeight, 'Переход к #' + id);
   }
 
-  const cta = d.querySelector('[data-source-cta="specs-fit"]');
-  cta.focus();
-  cta.click();
-  check(d.querySelector('#request-dialog:modal'), 'CTA характеристик');
-  d.querySelector('#work-gallery .mosaic-photo').click();
-  check(d.querySelectorAll('dialog[open]').length === 1 && !d.querySelector('.gallery-viewer[open]'), 'Совместимость с формой');
-  d.querySelector('.request-close').click();
-  await painted(w);
-  check(d.activeElement === cta, 'Фокус после формы');
+  for (const source of ['specs-fit', 'gallery-price']) {
+    const cta = d.querySelector('[data-source-cta="'+source+'"]');
+    check(!cta.closest('[data-sf676-gallery]'), 'CTA вне контейнера галереи');
+    cta.focus();
+    cta.click();
+    check(d.querySelector('#request-dialog:modal') && !d.querySelector('.gallery-viewer[open]'), 'Коммерческий CTA ' + source);
+    d.querySelector('#work-gallery .mosaic-photo').click();
+    check(d.querySelectorAll('dialog[open]').length === 1 && !d.querySelector('.gallery-viewer[open]'), 'Совместимость с формой');
+    d.querySelector('.request-close').click();
+    await painted(w);
+    check(d.activeElement === cta, 'Фокус после формы');
+  }
   check(!errors.length, 'Ошибка JavaScript: ' + errors.join(', '));
 }
 
@@ -251,7 +254,7 @@ async function checkRequestLinks() {
   const d = frame.contentDocument;
   const w = frame.contentWindow;
   const links = [...d.querySelectorAll('a[data-request-form]')];
-  check(links.length === 13, 'Ссылки на формы');
+  check(links.length === 16 && new Set(links.map(link => link.dataset.sourceCta)).size === 16, '16 уникальных ссылок на формы');
   const scenarios = new Set();
   for (const link of links) {
     const scrollTarget = link.closest('.sticky') ? d.getElementById('price') : link;
@@ -299,7 +302,7 @@ run.onclick = async () => {
   run.disabled = manual.disabled = true;
   results.textContent = '';
   try {
-    for (const width of [320, 375, 390, 640, 768, 1024, 1366]) {
+    for (const width of [320, 375, 390, 640, 768, 1024, 1366, 1920]) {
       for (const zoom of [100, 200]) {
         results.textContent += width + ' px, текст ' + zoom + '% … ';
         await checkLayout(width, zoom);
