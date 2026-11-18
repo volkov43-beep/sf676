@@ -669,12 +669,14 @@ body{overflow-wrap:anywhere}
 <link rel="stylesheet" href="assets/css/sf676-selector.css">
 <link rel="stylesheet" href="assets/css/payment-calculator.css">
 <link rel="stylesheet" href="assets/css/delivery-map.css">
+<link rel="stylesheet" href="assets/css/photo-gallery.css">
 <script type="module" src="assets/js/delivery-map.js"></script>
 <script src="assets/js/payment-model.js" defer></script>
 <script src="assets/js/sf676-selector-model.js" defer></script>
 <script src="assets/js/request-forms.js" defer></script>
 <script src="assets/js/sf676-selector.js" defer></script>
 <script src="assets/js/payment-calculator.js" defer></script>
+<script type="module" src="assets/js/photo-gallery.js"></script>
 </head>
 <body>
 
@@ -805,6 +807,57 @@ body{overflow-wrap:anywhere}
       </table>
     </div>
     <p class="spec-operations">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка</p>
+    <div class="photo-gallery" data-sf676-gallery role="region" aria-labelledby="specs-gallery-heading">
+      <div class="gallery-header">
+        <h3 id="specs-gallery-heading">Фотографии станка СФ676</h3>
+        <div class="gallery-controls" hidden>
+          <button type="button" class="gallery-button gallery-prev" aria-label="Предыдущие фотографии" aria-controls="specs-gallery-track"></button>
+          <button type="button" class="gallery-button gallery-next" aria-label="Следующие фотографии" aria-controls="specs-gallery-track"></button>
+        </div>
+      </div>
+      <ul class="gallery-track" id="specs-gallery-track">
+        <li>
+          <a class="gallery-photo" href="assets/images/galleries/sf676-proz4204-1600.webp">
+            <img src="assets/images/galleries/sf676-proz4204-640.webp" srcset="assets/images/galleries/sf676-proz4204-640.webp 640w"
+                 sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+                 width="640" height="427" loading="lazy" decoding="async" style="object-position: 75% center"
+                 alt="Шпиндель, инструмент и заготовка в тисках">
+          </a>
+        </li>
+        <li>
+          <a class="gallery-photo" href="assets/images/galleries/sf676-proz4209-1600.webp">
+            <img src="assets/images/galleries/sf676-proz4209-640.webp" srcset="assets/images/galleries/sf676-proz4209-640.webp 640w"
+                 sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+                 width="640" height="427" loading="lazy" decoding="async" style="object-position: left center"
+                 alt="Вертикальная головка и рабочий стол СФ676 на фоне других станков">
+          </a>
+        </li>
+        <li>
+          <a class="gallery-photo" href="assets/images/galleries/sf676-proz4212-1600.webp">
+            <img src="assets/images/galleries/sf676-proz4212-640.webp" srcset="assets/images/galleries/sf676-proz4212-640.webp 640w"
+                 sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+                 width="640" height="427" loading="lazy" decoding="async" style="object-position: 35% center"
+                 alt="Инструмент над заготовкой в тисках, вид сверху и сбоку">
+          </a>
+        </li>
+        <li>
+          <a class="gallery-photo" href="assets/images/galleries/sf676-proz4257-1600.webp">
+            <img src="assets/images/galleries/sf676-proz4257-640.webp" srcset="assets/images/galleries/sf676-proz4257-640.webp 640w"
+                 sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+                 width="640" height="427" loading="lazy" decoding="async" style="object-fit: contain"
+                 alt="Руки оператора на пульте цифровой индикации">
+          </a>
+        </li>
+        <li>
+          <a class="gallery-photo" href="assets/images/galleries/sf676-proz4335-1600.webp">
+            <img src="assets/images/galleries/sf676-proz4335-640.webp" srcset="assets/images/galleries/sf676-proz4335-640.webp 640w"
+                 sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+                 width="640" height="427" loading="lazy" decoding="async" style="object-position: 80% center"
+                 alt="Инструмент и стружка на заготовке крупным планом">
+          </a>
+        </li>
+      </ul>
+    </div>
     <div class="spec-docs" id="technical-documents">
       <h3><span class="q" data-q="docs" data-location="Характеристики">Техническая документация</span></h3>
       <p>В отделе продаж можно запросить полные характеристики, перечни стандартной и дополнительной комплектации, эскизы столов и шпинделей и руководство по эксплуатации.</p>
@@ -879,6 +932,64 @@ body{overflow-wrap:anywhere}
 </section>
 
 <!-- 5 -->
+<section class="dark v1" id="work-gallery" aria-labelledby="work-gallery-heading">
+  <div class="wrap" data-sf676-gallery>
+    <div class="gallery-header">
+      <div>
+        <h2 id="work-gallery-heading">СФ676 в работе</h2>
+        <p class="lead">Фотографии станка на производственном участке</p>
+      </div>
+      <div class="gallery-controls" hidden>
+        <button type="button" class="gallery-button gallery-prev" aria-label="Предыдущие фотографии" aria-controls="work-gallery-track"></button>
+        <button type="button" class="gallery-button gallery-next" aria-label="Следующие фотографии" aria-controls="work-gallery-track"></button>
+      </div>
+    </div>
+    <ul class="gallery-track" id="work-gallery-track">
+      <li>
+        <a class="gallery-photo" href="assets/images/galleries/sf676-proz4135-1600.webp">
+          <img src="assets/images/galleries/sf676-proz4135-640.webp" srcset="assets/images/galleries/sf676-proz4135-640.webp 640w"
+               sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+               width="640" height="427" loading="lazy" decoding="async" style="object-position: 40% center"
+               alt="Оператор у рабочего стола СФ676 в цехе">
+        </a>
+      </li>
+      <li>
+        <a class="gallery-photo" href="assets/images/galleries/sf676-proz4168-1600.webp">
+          <img src="assets/images/galleries/sf676-proz4168-640.webp" srcset="assets/images/galleries/sf676-proz4168-640.webp 640w"
+               sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+               width="640" height="427" loading="lazy" decoding="async" style="object-position: center"
+               alt="Оператор у головки СФ676 на фоне ряда станков">
+        </a>
+      </li>
+      <li>
+        <a class="gallery-photo" href="assets/images/galleries/sf676-proz4274-1600.webp">
+          <img src="assets/images/galleries/sf676-proz4274-640.webp" srcset="assets/images/galleries/sf676-proz4274-640.webp 640w"
+               sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+               width="640" height="427" loading="lazy" decoding="async" style="object-fit: contain"
+               alt="Оператор у маховика СФ676, вид сбоку">
+        </a>
+      </li>
+      <li>
+        <a class="gallery-photo" href="assets/images/galleries/sf676-proz4276-1600.webp">
+          <img src="assets/images/galleries/sf676-proz4276-640.webp" srcset="assets/images/galleries/sf676-proz4276-640.webp 640w"
+               sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+               width="640" height="427" loading="lazy" decoding="async" style="object-fit: contain"
+               alt="Оператор и органы управления СФ676 крупным планом">
+        </a>
+      </li>
+      <li>
+        <a class="gallery-photo" href="assets/images/galleries/sf676-proz4325-1600.webp">
+          <img src="assets/images/galleries/sf676-proz4325-640.webp" srcset="assets/images/galleries/sf676-proz4325-640.webp 640w"
+               sizes="auto, (min-width: 1200px) 374px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 600px) calc((100vw - 64px) / 2), calc(100vw - 48px)"
+               width="640" height="427" loading="lazy" decoding="async" style="object-position: center"
+               alt="Оператор у рукоятки вертикальной головки СФ676">
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6 -->
 <section class="grey v1 commercial" id="price">
   <div class="wrap">
     <h2 class="section-heading">Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
@@ -914,7 +1025,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 6 -->
+<!-- 7 -->
 <section class="v1 trust-section" id="acceptance">
   <div class="wrap">
     <h2 class="section-heading">Каждый станок проверяется перед отгрузкой — вы получаете акт с замерами</h2>
@@ -940,7 +1051,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 7 -->
+<!-- 8 -->
 <section class="grey v1 trust-section" id="design">
   <div class="wrap">
     <h2 class="section-heading">Что в конструкции решает ваши задачи</h2>
@@ -958,7 +1069,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 8 -->
+<!-- 9 -->
 <section class="dark v1 commercial" id="compare">
   <div class="wrap">
     <h2 class="section-heading">Оставить, восстановить или заменить? Посчитаем все три варианта</h2>
@@ -996,7 +1107,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 9 -->
+<!-- 10 -->
 <section class="grey v1 commercial" id="delivery">
   <div class="wrap">
     <h2 class="section-heading">От заявки до запуска станка: изготовление, доставка, монтаж и пусконаладка</h2>
@@ -1064,7 +1175,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 10 -->
+<!-- 11 -->
 <section class="dark v1 trust-section" id="gov">
   <div class="wrap">
     <h2 class="section-heading">Документы для закупки СФ676 по 44-ФЗ и 223-ФЗ</h2>
@@ -1081,7 +1192,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 11 -->
+<!-- 12 -->
 <section class="v1 trust-section" id="plant">
   <div class="wrap">
     <h2 class="section-heading">Вятский станкостроительный завод</h2>
@@ -1219,7 +1330,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 12 -->
+<!-- 13 -->
 <section class="grey faq v1 trust-section" id="faq">
   <div class="wrap">
     <h2 class="section-heading">Вопросы, которые задают перед покупкой</h2>
@@ -1237,7 +1348,7 @@ body{overflow-wrap:anywhere}
   </div>
 </section>
 
-<!-- 13 -->
+<!-- 14 -->
 <section class="grey v1 trust-section" id="order">
   <div class="wrap">
     <h2 class="section-heading">Получите цену комплектации с доставкой до вашего цеха</h2>
@@ -1303,6 +1414,21 @@ body{overflow-wrap:anywhere}
     </div>
   </div>
 </dialog>
+
+<template id="gallery-viewer-template">
+  <dialog class="gallery-viewer" aria-label="Просмотр фотографий СФ676" aria-describedby="gallery-position">
+    <div class="gallery-toolbar">
+      <span id="gallery-position" role="status" aria-live="polite" aria-atomic="true"></span>
+      <div class="gallery-controls">
+        <button type="button" class="gallery-button gallery-prev" aria-label="Предыдущее фото"></button>
+        <button type="button" class="gallery-button gallery-next" aria-label="Следующее фото"></button>
+        <button type="button" class="gallery-button gallery-close" aria-label="Закрыть просмотр" autofocus></button>
+      </div>
+    </div>
+    <div class="gallery-stage"><img alt="" decoding="async"></div>
+    <p class="gallery-caption"></p>
+  </dialog>
+</template>
 
 <script>
 var QUESTIONS = {

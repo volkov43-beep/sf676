@@ -113,7 +113,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
  record(`${width}/${mode}/no-side-effects`,!w.__testErrors.length&&!w.__testSinks.length,{errors:w.__testErrors,sinks:w.__testSinks});
  }
  const {w,d}=await load(390,'review');record('review-questions',d.body.classList.contains('showq')&&d.querySelector('#ql-rop a')?.hash==='#q-rop');
- const n=await load(390,'nojs');record('nojs-fallback',!n.w.SF676Requests&&n.d.querySelectorAll('section[id]:not(#qlist)').length===13&&Array.from(n.d.querySelectorAll('[data-request-form]')).every(a=>a.getAttribute('href')==='#order')&&n.d.querySelectorAll('#faq details').length===9&&!n.d.querySelector('dialog').open);
+ const n=await load(390,'nojs');record('nojs-fallback',!n.w.SF676Requests&&n.d.querySelectorAll('section[id]:not(#qlist)').length===14&&Array.from(n.d.querySelectorAll('[data-request-form]')).every(a=>a.getAttribute('href')==='#order')&&n.d.querySelectorAll('#faq details').length===9&&!n.d.querySelector('dialog').open);
  for(const {section,cta} of sectionButtons){
    const link=n.d.querySelector('#'+section+' [data-source-cta="'+cta+'"]');
    link.scrollIntoView();link.click();await tick();
