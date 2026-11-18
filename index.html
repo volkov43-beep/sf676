@@ -114,10 +114,6 @@ summary{cursor:pointer;font-weight:600;color:var(--navy)}
 .cfg table td:first-child{font-weight:600;width:22%}
 .levels article{border:1px solid var(--line);border-radius:4px;padding:18px}
 .levels h3{margin-bottom:8px}
-.advantages{grid-template-columns:repeat(5,minmax(0,1fr))}
-.advantages .mark{display:block;color:var(--blue);font-size:2rem;font-weight:600;line-height:1.15;margin-bottom:16px}
-.advantages p{margin-bottom:0}
-@media (min-width:901px) and (max-width:1100px){.advantages{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* steps */
 .steps{list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .steps li{position:relative;padding-left:40px}
@@ -130,7 +126,6 @@ footer a{color:var(--on-dark)}
 @media (max-width:900px){
  .nums{grid-template-columns:1fr 1fr}
  .g2,.g3,.g4,.specs,.cfg{grid-template-columns:1fr}
- .advantages{grid-template-columns:repeat(2,minmax(0,1fr))}
  .steps{grid-template-columns:1fr}
  .calc{grid-template-columns:1fr}
  section{padding:48px 0}
@@ -148,7 +143,6 @@ footer a{color:var(--on-dark)}
  .cmp td:first-child{width:auto;color:var(--on-dark)}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-@media (max-width:540px){.advantages{grid-template-columns:1fr}}
 
 /* Intrinsic wrapping also keeps the existing sections usable with enlarged text. */
 body{overflow-wrap:anywhere}
@@ -176,13 +170,52 @@ body{overflow-wrap:anywhere}
 .v1 .text-link:hover{text-decoration-thickness:2px}
 .v1 .media-placeholder{display:flex;align-items:center;justify-content:center;aspect-ratio:2/1;padding:var(--ui-space-2);border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--surface);color:var(--mute);text-align:center;font-size:var(--ui-small);line-height:1.4}
 .hero-fact b,.acceptance-metric b,.payment-plan .percentage,.travel-values dt,.travel-values dd,.plant-facts dt{font-family:var(--font-heading);font-weight:700}
-/* Five cards: three above and two centred below, then two / one columns. */
-.adv-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--ui-gap)}
-.adv-card{grid-column:span 2}
-.adv-card:nth-child(4){grid-column:2 / span 2}
-.adv-card:nth-child(5){grid-column:4 / span 2}
-.adv-card .media-placeholder{margin-bottom:var(--ui-space-3)}
-.adv-card p{margin:0}
+/* Engineering illustrations and equipment groups in #advantages. */
+#advantages h2{margin:0 0 8px}
+#advantages .adv-intro{margin:0 0 clamp(24px,3vw,40px);color:var(--mute)}
+.adv-group{padding:0}
+.adv-group h3{
+  margin:0 0 16px;color:var(--navy);font-size:clamp(1.375rem,2vw,1.625rem);
+}
+.adv-group--extras{
+  margin-top:clamp(24px,3vw,40px);padding:clamp(14px,2vw,24px);
+  border-radius:8px;background:var(--surface-2);
+}
+.adv-group--extras h3{color:var(--blue)}
+.adv-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.adv-card{
+  min-width:0;padding:clamp(14px,1.6vw,22px);
+  border:1px solid var(--line);border-radius:8px;background:var(--paper);
+}
+.adv-card img{display:block;width:100%;height:clamp(140px,42vw,190px);object-fit:contain}
+.adv-copy{min-width:0;margin-top:16px}
+.adv-copy h4{
+  margin:0 0 6px;font:600 var(--ui-h3)/1.2 var(--font-heading);color:var(--navy);
+}
+.adv-copy p{margin:0;font-size:1rem;line-height:1.5}
+.adv-note{margin:16px 0 0;color:var(--mute);font-size:var(--ui-small)}
+@media (max-width:640px){
+  .adv-group--extras{margin-inline:-14px}
+}
+@media (min-width:641px){
+  .adv-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,1.8vw,24px)}
+  .adv-card img{height:auto;aspect-ratio:640/398}
+}
+@media (min-width:641px) and (max-width:1023px){
+  .adv-group--core .adv-card:last-child{
+    grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:center;gap:var(--ui-gap);
+  }
+  .adv-group--core .adv-card:last-child .adv-copy{margin:0}
+}
+@media (min-width:1024px){
+  .adv-group--core .adv-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .adv-group--extras .adv-card{
+    display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+    align-items:center;gap:var(--ui-space-2);
+  }
+  .adv-group--extras .adv-copy{margin:0}
+}
 /* Full-width grouped specification tables. */
 .specs-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--ui-space-4);margin-bottom:var(--ui-space-4)}
 .specs-heading h2{margin:0}
@@ -198,15 +231,10 @@ body{overflow-wrap:anywhere}
 .spec-operations{margin:var(--ui-space-3) 0 0;color:var(--navy);font-size:var(--ui-body)}
 .spec-docs{margin-top:var(--ui-space-5);padding-top:var(--ui-space-4);border-top:1px solid var(--line)}
 /* Fixed contact header: no layout shift while scrolling. */
-@media (max-width:1100px){
- .adv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
- .adv-card,.adv-card:nth-child(4),.adv-card:nth-child(5){grid-column:auto}
-}
 @media (max-width:900px){
 }
 @media (max-width:600px){
  .v1 .wrap{padding-inline:24px}
- .adv-grid{grid-template-columns:1fr}
  .specs-heading{align-items:flex-start;flex-direction:column;gap:var(--ui-space-3)}
  .v1 .specs-visual{flex:none;width:168px}
  .v1 .spec-table,.v1 .spec-table tbody{display:block}
@@ -390,8 +418,6 @@ body{overflow-wrap:anywhere}
 .site-photo .media-frame{--media-ratio:3/2;--media-fit:contain}
 .site-photo.media-tall .media-frame{--media-ratio:1/1;max-height:280px}
 .site-photo.media-square .media-frame{--media-ratio:1/1}
-.adv-card{align-self:start}
-.adv-card .prototype-media{margin-bottom:var(--ui-space-3)}
 .v1 .specs-visual{flex:0 0 320px;aspect-ratio:auto}
 .v1 .config-photo{max-width:280px;margin-top:var(--ui-space-2)}
 .plant-media{display:block;max-width:920px;margin-inline:auto;margin-bottom:var(--ui-space-3)}
@@ -405,12 +431,9 @@ body{overflow-wrap:anywhere}
 .ux-icon{display:inline-block;width:var(--icon-size);height:var(--icon-size);flex:none;vertical-align:middle;color:var(--diagram-ink)}
 .dark .ux-icon{color:var(--on-dark-mute);--icon-surface:var(--navy)}
 .ux-note{color:var(--mute);font-size:var(--ui-small);line-height:1.5}
-.v1 .diagram-key{margin:-16px 0 24px;max-width:760px}
 .principle-figure{margin:0 0 20px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--diagram-surface)}
 .principle-figure svg{color:var(--diagram-ink);display:block;width:100%;height:126px;margin:auto}
 .principle-figure figcaption{margin-top:8px;color:var(--mute);font-size:var(--ui-small);line-height:1.4}
-.adv-grid{align-items:start}
-.adv-card .option-notice strong{color:var(--blue);font-weight:600}
 .v1 .ux-details{padding:0;margin:16px 0 0;background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;min-width:0}
 .ux-details summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;min-height:48px;font-size:1rem;line-height:1.4;list-style:none}
 .ux-details summary::-webkit-details-marker{display:none}
@@ -419,7 +442,6 @@ body{overflow-wrap:anywhere}
 .ux-details summary:focus-visible{outline:3px solid var(--focus-light);outline-offset:4px}
 .ux-details .ux-detail-body{padding:4px 0 12px}
 .ux-details .ux-detail-body p{margin:0}
-.adv-card .photo-details .prototype-media{margin:0}
 .specs-heading{margin-bottom:24px}
 .specs-overview{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:center;gap:32px;margin-bottom:32px}
 .travel-overview{display:flex;align-items:center;gap:24px;min-width:0;border-left:3px solid var(--blue);padding-left:20px}
@@ -617,8 +639,6 @@ body{overflow-wrap:anywhere}
 .hero-registry{flex-direction:row;align-items:center;justify-content:flex-start;gap:10px}
 .hero-registry img{width:36px;height:auto;flex:none}
 .hero-facts .unit{white-space:nowrap}
-.machine-overview{display:block;width:min(100%,320px);margin:12px auto 0}
-.machine-overview img{display:block;width:100%;height:auto}
 @media (min-width:901px) and (max-width:1100px){
  .hero-copy{width:41%;margin-left:20px}
  .hero-feature{padding:8px}
@@ -731,35 +751,69 @@ body{overflow-wrap:anywhere}
 <!-- 2 -->
 <section class="grey v1" id="advantages">
   <div class="wrap">
-    <h2 class="section-heading">Ключевые преимущества СФ676</h2>
-    <p class="ux-note diagram-key">Условные схемы показывают принцип работы, а не точную конструкцию узлов.</p>
-    <div class="adv-grid">
-      <article class="ui-card adv-card">
-        <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#spindles"></use></svg><figcaption>Условная схема принципа</figcaption></figure>
-        <h3>Два шпинделя</h3><p>Горизонтальный и вертикальный — для разных фрезерных операций.</p>
-        <details class="ux-details photo-details"><summary>СФ676 на производственном участке ВСЗ</summary>
-          <picture class="machine-overview">
-        <source media="(max-width:900px)" srcset="assets/images/sf676-hero-square-480.webp 480w, assets/images/sf676-hero-square-800.webp 800w" sizes="(max-width: 360px) 80vw, 320px" width="800" height="800">
-        <img src="assets/images/sf676-hero-portrait-800.webp" srcset="assets/images/sf676-hero-portrait-480.webp 480w, assets/images/sf676-hero-portrait-800.webp 800w, assets/images/sf676-hero-portrait-1092.webp 1092w" sizes="(max-width: 360px) 80vw, 320px" width="1092" height="1365" alt="СФ676 на переднем плане производственного участка Вятского станкостроительного завода" loading="lazy" decoding="async">
-      </picture>
-        </details>
-      </article>
-      <article class="ui-card adv-card">
-        <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#tables"></use></svg><figcaption>Условная схема принципа</figcaption></figure>
-        <h3>Два рабочих стола</h3><p>Вертикальный и угловой горизонтальный — для разных технологических задач.</p>
-      </article>
-      <article class="ui-card adv-card">
-        <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#tilt-table"></use></svg><figcaption>Условная схема принципа</figcaption></figure>
-        <h3>Глобусный стол</h3><p class="option-notice"><strong>Дополнительная опция:</strong> универсальный угловой стол устанавливается вместо штатного горизонтального.</p>
-      </article>
-      <article class="ui-card adv-card">
-        <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#head-turn"></use></svg><figcaption>Условная схема принципа</figcaption></figure><h3>Поворот головки ±90°</h3><p>Обработка деталей при различных углах положения вертикального шпинделя.</p><details class="ux-details photo-details"><summary>Фото вертикальной головки</summary><div class="ux-detail-body"><figure class="prototype-media site-photo media-node"><div class="media-frame"><img src="assets/images/sf676-head-side-960.webp" srcset="assets/images/sf676-head-side-480.webp 480w, assets/images/sf676-head-side-960.webp 960w" sizes="(max-width:600px) calc(100vw - 98px), (max-width:1100px) calc((100vw - 172px) / 2), (max-width:1200px) calc((100vw - 246px) / 3), 318px" width="960" height="640" alt="Вертикальная головка СФ676: боковой ракурс, шпиндель и узел крепления" loading="lazy" decoding="async"></div><figcaption>Вертикальная головка в рабочем положении</figcaption></figure></div></details>
-      </article>
-      <article class="ui-card adv-card">
-        <figure class="principle-figure"><svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#slotting"></use></svg><figcaption>Условная схема принципа</figcaption></figure>
-        <h3>Долбёжные операции</h3><p class="option-notice">Выполняются с помощью <strong>дополнительной долбёжной головки.</strong></p>
-      </article>
-    </div>
+    <h2>Ключевые преимущества СФ676</h2>
+    <p class="adv-intro">Основные конструктивные возможности и дополнительная оснастка станка</p>
+    <section class="adv-group adv-group--core" aria-labelledby="adv-core-heading">
+      <h3 id="adv-core-heading">Конструктивные возможности</h3>
+      <div class="adv-grid">
+        <article class="adv-card">
+          <img src="assets/images/advantages/sf676-adv-spindles-640.webp"
+               srcset="assets/images/advantages/sf676-adv-spindles-640.webp 640w, assets/images/advantages/sf676-adv-spindles-1280.webp 1280w"
+               sizes="auto, (max-width: 640px) 90vw, (max-width: 1023px) 45vw, 340px"
+               width="640" height="398" alt="Горизонтальный шпиндель с дисковой фрезой и вертикальный шпиндель над заготовкой" loading="lazy" decoding="async">
+          <div class="adv-copy">
+            <h4>Два шпинделя</h4>
+            <p>Горизонтальный и вертикальный — для разных фрезерных операций</p>
+          </div>
+        </article>
+        <article class="adv-card">
+          <img src="assets/images/advantages/sf676-adv-tables-640.webp"
+               srcset="assets/images/advantages/sf676-adv-tables-640.webp 640w, assets/images/advantages/sf676-adv-tables-1280.webp 1280w"
+               sizes="auto, (max-width: 640px) 90vw, (max-width: 1023px) 45vw, 340px"
+               width="640" height="398" alt="Вертикальный стол слева и угловой горизонтальный стол справа" loading="lazy" decoding="async">
+          <div class="adv-copy">
+            <h4>Два рабочих стола</h4>
+            <p>Вертикальный и угловой горизонтальный — для разных технологических задач</p>
+          </div>
+        </article>
+        <article class="adv-card">
+          <img src="assets/images/advantages/sf676-adv-head-rotation-640.webp"
+               srcset="assets/images/advantages/sf676-adv-head-rotation-640.webp 640w, assets/images/advantages/sf676-adv-head-rotation-1280.webp 1280w"
+               sizes="auto, (max-width: 640px) 90vw, (max-width: 1023px) 45vw, 340px"
+               width="640" height="398" alt="Вертикальная головка и два её крайних положения по сторонам" loading="lazy" decoding="async">
+          <div class="adv-copy">
+            <h4>Поворот головки ±90°</h4>
+            <p>Обработка деталей при различных углах положения вертикального шпинделя</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="adv-group adv-group--extras" aria-labelledby="adv-extras-heading">
+      <h3 id="adv-extras-heading">Дополнительная оснастка</h3>
+      <div class="adv-grid">
+        <article class="adv-card">
+          <img src="assets/images/advantages/sf676-adv-universal-table-640.webp"
+               srcset="assets/images/advantages/sf676-adv-universal-table-640.webp 640w, assets/images/advantages/sf676-adv-universal-table-1280.webp 1280w"
+               sizes="auto, (max-width: 640px) 90vw, (max-width: 1023px) 42vw, 200px"
+               width="640" height="398" alt="Стол на поворотном основании со стрелкой наклона" loading="lazy" decoding="async">
+          <div class="adv-copy">
+            <h4>Глобусный стол</h4>
+            <p>Универсальный угловой стол устанавливается вместо штатного горизонтального</p>
+          </div>
+        </article>
+        <article class="adv-card">
+          <img src="assets/images/advantages/sf676-adv-slotting-640.webp"
+               srcset="assets/images/advantages/sf676-adv-slotting-640.webp 640w, assets/images/advantages/sf676-adv-slotting-1280.webp 1280w"
+               sizes="auto, (max-width: 640px) 90vw, (max-width: 1023px) 42vw, 200px"
+               width="640" height="398" alt="Долбёжная головка над заготовкой со стрелкой хода вверх и вниз" loading="lazy" decoding="async">
+          <div class="adv-copy">
+            <h4>Долбёжные операции</h4>
+            <p>Выполняются с помощью дополнительной долбёжной головки</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <p class="adv-note">Иллюстрации условные и показывают принцип работы оборудования</p>
   </div>
 </section>
 
