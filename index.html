@@ -577,8 +577,9 @@ body{overflow-wrap:anywhere}
 
 /* The sticky header stays in normal flow, including before JS measures it. */
 .sticky{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
-.sticky .wrap{max-width:1608px;display:flex;align-items:center;gap:16px;min-height:60px;padding-block:5px}
-.sticky .logo{display:flex;align-items:center;gap:9px;min-width:0;min-height:44px;margin-right:auto;font:600 1rem/1.15 var(--font-body);color:var(--navy);text-decoration:none}
+.sticky .wrap{max-width:1608px;display:flex;flex-wrap:wrap;align-items:center;gap:16px;min-height:60px;padding-block:5px}
+.sticky .logo{display:flex;flex-shrink:0;align-items:center;gap:9px;min-width:0;max-width:100%;min-height:44px;margin-right:auto;font:600 1rem/1.15 var(--font-body);color:var(--navy);text-decoration:none}
+.sticky .brand-name{min-width:0}
 .sticky .logo img{width:40px;height:40px;flex:none}
 .sticky .tel{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-size:1rem;font-weight:600;text-decoration:none;white-space:nowrap}
 .sticky .tel-short{display:none}
@@ -586,7 +587,7 @@ body{overflow-wrap:anywhere}
 .sticky .btn[hidden]{display:none}
 @media (max-width:600px){
  .sticky .wrap{gap:8px;padding-inline:12px}
- .sticky .logo{font-size:var(--ui-small);gap:6px;max-width:26ch}
+ .sticky .logo{font-size:var(--ui-small);gap:6px;max-width:min(26ch,100%)}
  .sticky .logo img{width:34px;height:34px}
  .sticky .tel{font-size:var(--ui-small)}
  .sticky .tel-long{display:none}
@@ -597,7 +598,7 @@ body{overflow-wrap:anywhere}
  .sticky .wrap{min-height:56px;padding-inline:6px;gap:5px}
  .sticky .logo{font-size:.8125rem;gap:4px}
  .sticky .logo img{width:28px;height:28px}
- .sticky .brand-name span{display:block;white-space:nowrap}
+ .sticky .brand-name span{display:block}
  .sticky .brand-name span:first-child::after{content:"-"}
  .sticky .btn{max-width:7.3em;padding-inline:4px}
 }
@@ -1588,7 +1589,14 @@ var QUESTIONS = {
     }
     requestAnimationFrame(function(){
       updateHeaderHeight();
-      requestAnimationFrame(function(){target.scrollIntoView({block:'start'});updateHeaderPrice();});
+      requestAnimationFrame(function(){
+        // Showing the price link can wrap the header onto another row.
+        // Position against its final height in the same frame, without a scroll animation race.
+        target.scrollIntoView({block:'start',behavior:'instant'});
+        updateHeaderPrice();
+        updateHeaderHeight();
+        target.scrollIntoView({block:'start',behavior:'instant'});
+      });
     });
   }
   window.addEventListener('hashchange',revealAnchor);

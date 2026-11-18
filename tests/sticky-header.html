@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>СФ676 — проверка закреплённой шапки</title>
+<style>
+body{font:16px system-ui;margin:12px}nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}select,button{font:inherit;padding:6px}iframe{display:block;height:800px;border:0}#stage{overflow:auto}pre{white-space:pre-wrap;max-height:240px;overflow:auto}
+</style>
+<nav>
+<label>Ширина <select id="width"><option selected>320</option><option>350</option><option>375</option><option>390</option><option>405</option><option>480</option><option>600</option><option>768</option><option>1024</option><option>1366</option></select></label>
+<label>Текст <select id="zoom"><option>100</option><option>150</option><option selected>200</option></select></label>
+<label>Состояние <select id="state"><option value="top">Первый экран</option><option value="scrolled" selected>После прокрутки</option></select></label>
+<label>JavaScript <select id="scripts"><option value="yes">Включён</option><option value="no">Отключён</option></select></label>
+<button id="show">Показать</button><button id="measure">Измерить</button><button id="run">Проверить матрицу</button>
+</nav>
+<pre id="results" role="status">Размер текста меняется через корневой font-size; это не масштабирование transform и не нативный text-only zoom.</pre>
+<div id="stage"><iframe id="page" title="Лендинг СФ676"></iframe></div>
+<script>
+const page=document.querySelector('#page'),output=document.querySelector('#results');
+const source=new URLSearchParams(location.search).get('page')||'../index.html';
+const widths=[320,350,375,390,405,480,600,768,1024,1366],zooms=[100,150,200];
+const expectedCtas=[
+ ['sticky-price','sticky','price_quote'],['hero-price','top','price_quote'],
+ ['advantages-consult','advantages','configuration_help'],['specs-price','specs','price_quote'],
+ ['specs-fit','specs','configuration_help'],['config-request','config','configuration_help'],
+ ['gallery-price','work-gallery','price_quote'],['plant-region','plant','price_quote'],
+ ['payment-calculator','price','price_quote'],['acceptance-accuracy','acceptance','configuration_help'],
+ ['design-consult','design','configuration_help'],['design-price','design','price_quote'],
+ ['compare-request','compare','repair_comparison'],['compare-new-price','compare','price_quote'],
+ ['delivery-quote','delivery','price_quote'],['gov-documents','gov','procurement_documents'],
+ ['gov-nmck','gov','procurement_nmck'],['faq-consult','faq','configuration_help'],['order-price','order','price_quote']
+];
+let records=[];
+const busy=value=>document.querySelectorAll('nav button,nav select').forEach(e=>{e.disabled=value});
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+// Wait for observable browser results: iframe animation frames may be throttled.
+async function until(test,label){
+ const deadline=performance.now()+6000;
+ while(!test()){if(performance.now()>deadline)throw Error('Timed out: '+label);await wait(25)}
+}
+function headerReady(w){
+ const d=w.document,h=d.querySelector('.sticky');
+ if(!w.SF676Requests)return true;
+ return Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-rect(h).height)<=1&&
+ d.querySelector('[data-source-cta="sticky-price"]').hidden===(rect(d.querySelector('[data-source-cta="hero-price"]')).bottom>rect(h).bottom);
+}
+const record=(name,pass,details={})=>records.push({name,pass:!!pass,...details});
+const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
+const overlap=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
+const within=(a,b)=>a.left>=b.left-1&&a.right<=b.right+1&&a.top>=b.top-1&&a.bottom<=b.bottom+1;
+function report(){output.textContent=JSON.stringify({count:records.length,passed:records.filter(r=>r.pass).length,failed:records.filter(r=>!r.pass),records},null,2)}
+async function settle(w){await until(()=>headerReady(w),'header height and CTA state')}
+async function load(js=true){
+ page.style.width=document.querySelector('#width').value+'px';
+ if(js)page.removeAttribute('sandbox');else page.setAttribute('sandbox','allow-same-origin');
+ await new Promise(resolve=>{page.onload=resolve;page.src=source});
+ const w=page.contentWindow,d=w.document;
+ w.headerTestErrors=[];
+ w.addEventListener('error',e=>w.headerTestErrors.push(e.message));
+ w.addEventListener('unhandledrejection',e=>w.headerTestErrors.push(String(e.reason)));
+ d.documentElement.style.scrollBehavior='auto';await d.fonts.ready;await settle(w);
+ return{w,d};
+}
+async function dimensions(w,d,width,zoom){page.style.width=width+'px';d.documentElement.style.fontSize=zoom+'%';await settle(w)}
+async function position(w,d,state){
+ if(!w.SF676Requests){d.getElementById(state==='top'?'top':'specs').scrollIntoView({block:'start'});return;}
+ if(state==='top')d.querySelector('.sticky .logo').click();
+ else w.location.hash='specs';
+ await until(()=>headerReady(w)&&(state==='top'?w.scrollY<=1&&d.querySelector('.sticky .btn').hidden:
+ !d.querySelector('.sticky .btn').hidden&&Math.abs(rect(d.querySelector('#specs')).top-parseFloat(w.getComputedStyle(d.querySelector('#specs')).scrollMarginTop))<=1),'anchor '+state);
+}
+function measure(w,d,prefix,js=true){
+ const header=d.querySelector('.sticky'),wrap=header.querySelector('.wrap'),hr=rect(header),wr=rect(wrap);
+ const nodes=[['image',header.querySelector('.logo img')],['brand',header.querySelector('.brand-name')],['phone',header.querySelector('.tel')],['price',header.querySelector('.btn')],['email',header.querySelector('.header-email')]].filter(([,e])=>e.getClientRects().length);
+ const boxes=Object.fromEntries(nodes.map(([name,e])=>[name,rect(e)]));
+ const intersections=[];
+ for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++)if(overlap(boxes[nodes[i][0]],boxes[nodes[j][0]]))intersections.push(nodes[i][0]+'/'+nodes[j][0]);
+ record(prefix+'/no-overlap',!intersections.length,{intersections,boxes});
+ record(prefix+'/bounds',nodes.every(([,e])=>within(rect(e),wr)&&within(rect(e),hr))&&hr.right<=w.innerWidth+1,{header:hr});
+ record(prefix+'/no-horizontal-overflow',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&header.scrollWidth<=header.clientWidth+1);
+ const logo=header.querySelector('.logo'),brand=header.querySelector('.brand-name');
+ const textRects=[];const walker=d.createTreeWalker(brand,w.NodeFilter.SHOW_TEXT);let node;
+ while(node=walker.nextNode()){const range=d.createRange();range.selectNodeContents(node);textRects.push(...range.getClientRects())}
+ const lr=rect(logo);
+ // Font metrics can extend beyond line-height; verify painted text stays in the header and within the link's horizontal bounds.
+ record(prefix+'/readable-brand',textRects.every(r=>within(r,hr)&&r.left>=lr.left-1&&r.right<=lr.right+1)&&brand.scrollWidth<=brand.clientWidth+1);
+ const links=[...header.querySelectorAll('a')].filter(e=>e.getClientRects().length);
+ record(prefix+'/touch-targets',links.every(e=>rect(e).height>=44));
+ record(prefix+'/sticky',w.getComputedStyle(header).position==='sticky'&&Math.abs(hr.top)<=1);
+ if(js)record(prefix+'/measured-height',Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-hr.height)<=1);
+ record(prefix+'/contacts',header.querySelectorAll('.logo,.tel,.btn,.header-email').length===4&&header.querySelector('.tel').getAttribute('href')==='tel:88007072676'&&header.querySelector('.tel').getAttribute('aria-label')==='Позвонить: 8 (800) 707-26-76'&&header.querySelector('.header-email').getAttribute('href')==='mailto:sale@vsp-kirov.ru');
+ record(prefix+'/phone-label',w.getComputedStyle(header.querySelector(w.innerWidth<=600?'.tel-short':'.tel-long')).display!=='none');
+ return boxes;
+}
+async function stable(w,d,prefix){
+ const samples=[];
+ for(let i=0;i<5;i++){await wait(35);samples.push([rect(d.querySelector('.sticky')).height,d.querySelector('[data-source-cta="sticky-price"]').hidden])}
+ record(prefix+'/stable-height-and-cta',samples.every(s=>Math.abs(s[0]-samples[0][0])<=1&&s[1]===samples[0][1]),{samples});
+}
+function contract(d){
+ const links=[...d.querySelectorAll('a[data-request-form]')];
+ record('19-unchanged-cta',links.length===19&&new Set(links.map(a=>a.dataset.sourceCta)).size===19&&expectedCtas.every(([cta,section,form])=>links.some(a=>a.dataset.sourceCta===cta&&a.dataset.sourceSection===section&&a.dataset.requestForm===form&&a.getAttribute('href')==='#order')));
+ record('sections-and-robots',d.querySelectorAll('section[id]:not(#qlist)').length===14&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
+}
+async function matrix(){
+ records=[];busy(true);output.textContent='Загрузка матрицы…';
+ try{
+ const {w,d}=await load();contract(d);
+ for(const width of widths)for(const zoom of zooms){
+  const key=width+'/'+zoom;output.textContent='Проверка '+key;
+  await dimensions(w,d,width,zoom);await position(w,d,'top');
+  const price=d.querySelector('[data-source-cta="sticky-price"]');
+  record(key+'/top/hidden',price.hidden);measure(w,d,key+'/top');await stable(w,d,key+'/top');
+  // Exercise the real scroll threshold in both directions, including a wrapped header.
+  const hero=d.querySelector('[data-source-cta="hero-price"]');
+  const threshold=w.scrollY+rect(hero).bottom-rect(d.querySelector('.sticky')).bottom;
+  for(const delta of (['320/100','320/200','390/200','768/100','1366/100'].includes(key)?[-4,4,-4,4]:[])){
+   w.scrollTo(0,Math.max(0,threshold+delta));await settle(w);
+   record(key+'/threshold/'+delta,price.hidden===(rect(hero).bottom>rect(d.querySelector('.sticky')).bottom));
+  }
+  await position(w,d,'scrolled');record(key+'/scrolled/visible',!price.hidden);measure(w,d,key+'/scrolled');await stable(w,d,key+'/scrolled');
+  const title=d.querySelector('#specs h2'),header=d.querySelector('.sticky');
+  record(key+'/specs-anchor',rect(title).top>=rect(header).bottom-1&&rect(title).top<w.innerHeight,{headingTop:rect(title).top,headerBottom:rect(header).bottom});
+  price.focus();price.click();await settle(w);
+  record(key+'/price-form',!!d.querySelector('#request-dialog:modal')&&d.querySelector('#request-title').textContent==='Получить цену СФ676 с доставкой'&&!price.hidden);
+  d.querySelector('#request-contact').value='header-test@example.com';
+  const draft=w.SF676Requests.getDraft();record(key+'/form-source',draft?.formId==='price_quote'&&draft.sourceSection==='sticky'&&draft.sourceCta==='sticky-price');
+  d.querySelector('.request-close').click();await settle(w);
+  record(key+'/close-focus',d.activeElement===price&&!price.hidden&&!d.querySelector('dialog[open]')&&!d.querySelector('#request-fields input'));
+  await position(w,d,'top');record(key+'/return-top',price.hidden);measure(w,d,key+'/return-top');
+ }
+ // Also exercise the page's default smooth-scroll CSS, without the fixture override.
+ d.documentElement.style.removeProperty('scroll-behavior');
+ for(const [width,zoom] of [[320,100],[320,200],[390,150],[390,200],[768,100],[1366,100]]){
+  await dimensions(w,d,width,zoom);await position(w,d,'top');await position(w,d,'scrolled');
+  record(width+'/'+zoom+'/native-anchor',rect(d.querySelector('#specs h2')).top>=rect(d.querySelector('.sticky')).bottom-1);
+  await stable(w,d,width+'/'+zoom+'/native-anchor');
+ }
+ d.documentElement.style.scrollBehavior='auto';
+ for(const [width,zoom] of [[320,200],[390,200],[768,100],[1366,100]]){
+  await dimensions(w,d,width,zoom);
+  for(const id of ['advantages','design','faq','order']){
+   w.location.hash=id;
+   const target=d.querySelector('#'+id+' h2');
+   await until(()=>headerReady(w)&&rect(target).top>=rect(d.querySelector('.sticky')).bottom-1&&rect(target).top<w.innerHeight,'anchor '+id);
+   record(width+'/'+zoom+'/anchor-'+id,rect(target).top>=rect(d.querySelector('.sticky')).bottom-1&&rect(target).top<w.innerHeight);
+  }
+ }
+ record('no-js-errors',!w.headerTestErrors.length,{errors:w.headerTestErrors});
+ const fallback=await load(false);contract(fallback.d);
+ for(const width of widths)for(const zoom of zooms){
+  await dimensions(fallback.w,fallback.d,width,zoom);fallback.w.scrollTo(0,0);
+  measure(fallback.w,fallback.d,width+'/'+zoom+'/nojs',false);
+  record(width+'/'+zoom+'/nojs/contacts',!fallback.w.SF676Requests&&fallback.d.querySelector('.sticky .btn').hidden&&fallback.d.querySelector('.sticky .logo').getAttribute('href')==='#top');
+ }
+ }catch(e){record('exception',false,{message:String(e)})}
+ report();busy(false);
+}
+document.querySelector('#show').onclick=async()=>{busy(true);output.textContent='Загрузка…';const js=document.querySelector('#scripts').value==='yes';const {w,d}=await load(js);await dimensions(w,d,+document.querySelector('#width').value,+document.querySelector('#zoom').value);await position(w,d,document.querySelector('#state').value);output.textContent='Показано: '+w.innerWidth+' px / '+document.querySelector('#zoom').value+'% / '+document.querySelector('#state').value;busy(false)};
+document.querySelector('#measure').onclick=()=>{records=[];measure(page.contentWindow,page.contentDocument,'manual',document.querySelector('#scripts').value==='yes');report()};
+document.querySelector('#run').onclick=matrix;
+document.querySelector('#show').click();
+</script>
+</html>
