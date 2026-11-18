@@ -12,11 +12,17 @@
   function icon(id){const ns='http://www.w3.org/2000/svg',s=document.createElementNS(ns,'svg'),u=document.createElementNS(ns,'use');s.setAttribute('class','ux-icon');s.setAttribute('viewBox','0 0 48 48');s.setAttribute('aria-hidden','true');s.setAttribute('focusable','false');u.setAttribute('href','assets/graphics/engineering.svg#'+id);s.appendChild(u);return s}
   function focusQuestion(heading){
     if(!heading)return;
-    // Measure now: a text/viewport resize can precede the shared ResizeObserver callback.
-    const header=document.querySelector('.sticky');
-    const target=heading.tagName==='LEGEND'?stage.querySelector('.selector-progress'):heading;
-    target.style.scrollMarginTop=((header?header.getBoundingClientRect().height:64)+20)+'px';
-    heading.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:'instant'});
+    const header = document.querySelector('.sticky');
+    const target = heading.tagName === 'LEGEND' ? stage.querySelector('.selector-progress') : heading;
+    const clearance = () => (header?.getBoundingClientRect().bottom || 0) + 20;
+
+    heading.focus({preventScroll: true});
+    const align = () => window.scrollBy({top: target.getBoundingClientRect().top - clearance(), behavior: 'instant'});
+    align();
+    // Scrolling past the hero can reveal the header CTA and make the header taller.
+    requestAnimationFrame(() => {
+      if (document.activeElement === heading && target.getBoundingClientRect().top < clearance() - 1) align();
+    });
   }
   function focusHeading(){focusQuestion(stage.querySelector('[tabindex="-1"]'))}
   function step(){return model.modes[mode][states[mode].step]}

@@ -18,7 +18,19 @@ function click(d,action){d.querySelector('[data-selector-action="'+action+'"]').
 function pick(w,d,id){const input=d.querySelector('#selector-'+id);if(!input)throw Error('Missing option '+id);input.checked=true;input.dispatchEvent(new w.Event('change',{bubbles:true}))}
 function enter(w,d,text){const input=d.querySelector('#selector-stage textarea');input.value=text;input.dispatchEvent(new w.Event('input',{bubbles:true}))}
 function shape(w,d,where){const box=d.querySelector(where),r=box.getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&box.scrollWidth<=box.clientWidth+1&&Array.from(box.querySelectorAll('button,input,textarea,legend,dt,dd')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||(b.left>=r.left-1&&b.right<=r.right+1)});}
-async function next(w,d,name){click(d,'next');await tick();record(name+'/layout',shape(w,d,'#sf676-selector'));const h=d.querySelector('#selector-stage [tabindex="-1"]');const marker=d.querySelector('.selector-progress')||h;record(name+'/focus',d.activeElement===h&&marker.getBoundingClientRect().top>=d.querySelector('.sticky').getBoundingClientRect().bottom-2,{focused:d.activeElement===h,top:marker.getBoundingClientRect().top,headerBottom:d.querySelector('.sticky').getBoundingClientRect().bottom});}
+function checkFocus(w,d,name){
+ const heading=d.querySelector('#selector-stage [tabindex="-1"]');
+ const marker=d.querySelector('.selector-progress')||heading;
+ const top=marker.getBoundingClientRect().top,headerBottom=d.querySelector('.sticky').getBoundingClientRect().bottom;
+ const title=heading.getBoundingClientRect(),focused=d.activeElement===heading;
+ record(name+'/focus',focused&&top>=headerBottom&&title.top>=headerBottom&&title.bottom<=w.innerHeight,
+   {focused,top,headerBottom,headingBottom:title.bottom,viewportHeight:w.innerHeight});
+}
+async function next(w,d,name){
+ click(d,'next');await tick();
+ record(name+'/layout',shape(w,d,'#sf676-selector'));
+ checkFocus(w,d,name);
+}
 async function exact(w,d,prefix){
  d.querySelector('[data-selector-mode="exact"]').click();click(d,'next');record(prefix+'/required',!!d.querySelector('#selector-error').textContent&&d.querySelector('legend').textContent.includes('размер'));
  const chosenLabels=[];
@@ -26,6 +38,13 @@ async function exact(w,d,prefix){
   const input=d.getElementById('selector-'+id);
   chosenLabels.push(input.labels[0].querySelector('b').textContent);
   pick(w,d,id);await next(w,d,prefix+'/'+id);
+  if(id==='table-table_300x800'){
+   // The header CTA is revealed by a scroll event in the child frame.
+   await d.fonts.ready;
+   await new Promise(done=>w.requestAnimationFrame(()=>w.requestAnimationFrame(done)));
+   record(prefix+'/expanded-header',!d.querySelector('[data-source-cta="sticky-price"]').hidden);
+   checkFocus(w,d,prefix+'/second-step-after-header-resize');
+  }
  }
  let r=w.SF676Selector.getResult();
  record(prefix+'/actual-result',r.selections.table==='table_300x800'&&r.selections.dro==='dro_optical'&&r.selections.coordinates==='coordinates_f2');
@@ -34,20 +53,47 @@ async function exact(w,d,prefix){
  record(prefix+'/summary',matchesChoices('.selector-summary'));
  const resultCta=d.querySelector('[data-selector-action="request"]');resultCta.click();await tick();
  record(prefix+'/form-summary',d.querySelector('dialog').open&&matchesChoices('.request-selection')&&shape(w,d,'dialog'));
- d.querySelector('#request-contact').value='qa@example.com';let draft=w.SF676Requests.getDraft();record(prefix+'/payload',JSON.stringify(draft.context.selector)===JSON.stringify(r)&&draft.sourceSection==='config'&&draft.sourceCta==='selector-exact-result');w.SF676Requests.close();await tick();record(prefix+'/return-focus',d.activeElement===resultCta);
+ d.querySelector('#request-contact').value='qa@example.com';let draft=w.SF676Requests.getDraft();record(prefix+'/payload',draft.formId==='configuration_help'&&JSON.stringify(draft.context.selector)===JSON.stringify(r)&&draft.sourceSection==='config'&&draft.sourceCta==='selector-exact-result');w.SF676Requests.close();await tick();record(prefix+'/return-focus',d.activeElement===resultCta);
  click(d,'edit');click(d,'next');click(d,'next');pick(w,d,'dro-dro_none');await next(w,d,prefix+'/no-dro');record(prefix+'/not-applicable',!d.querySelector('#selector-stage input')&&d.querySelector('.selector-unavailable').textContent.includes('Не применяется'));await next(w,d,prefix+'/skip-coordinates');await next(w,d,prefix+'/result-without-dro');r=w.SF676Selector.getResult();record(prefix+'/cleared-coordinates',r.selections.coordinates==='not_applicable');
  click(d,'edit');click(d,'next');click(d,'next');pick(w,d,'dro-dro_magnetic');click(d,'next');click(d,'next');record(prefix+'/reselection-required',!!d.querySelector('#selector-error').textContent&&w.SF676Selector.getResult()===null&&!d.querySelector('input:checked'));pick(w,d,'coordinates-consultation');click(d,'next');click(d,'next');
+ click(d,'edit');click(d,'next');click(d,'reference');await tick();
+ const reference=d.getElementById('config-reference');
+ const parameter=reference.querySelectorAll('.config-option h3')[1];
+ const bounds=parameter.getBoundingClientRect();
+ record(prefix+'/reference',reference.open&&d.activeElement===parameter&&bounds.top>=d.querySelector('.sticky').getBoundingClientRect().bottom&&bounds.bottom<=w.innerHeight);
+ reference.open=false;
+ click(d,'back');await tick();
+ record(prefix+'/back-answer',d.querySelector('#selector-table-table_300x800').checked);
+ checkFocus(w,d,prefix+'/back');
+ click(d,'result');
 }
 async function quiz(w,d,prefix){
  d.querySelector('[data-selector-mode="quiz"]').click();pick(w,d,'operations-milling');pick(w,d,'operations-slotting');pick(w,d,'operations-consultation');record(prefix+'/consultation-exclusive',d.querySelectorAll('#selector-stage input:checked').length===1);pick(w,d,'operations-milling');pick(w,d,'operations-slotting');await next(w,d,prefix+'/operations');
  enter(w,d,'Тестовая деталь 100 × 50 мм');pick(w,d,'dimensions-unknown');await next(w,d,prefix+'/parts');pick(w,d,'tooling-tooling_40');await next(w,d,prefix+'/tooling');pick(w,d,'positioning-consultation');await next(w,d,prefix+'/positioning');pick(w,d,'extras-accessories');pick(w,d,'extras-timing');enter(w,d,'Тестовые технические условия');await next(w,d,prefix+'/extras');
  const r=w.SF676Selector.getResult();record(prefix+'/requirements-only',!r.selections&&r.requiresConsultation&&r.requirements.operations.length===2&&r.requirements.parts.description==='Тестовая деталь 100 × 50 мм');
- d.querySelector('[data-selector-action="request"]').click();await tick();record(prefix+'/modal-visible',d.querySelector('.request-selection').textContent.includes('Тестовая деталь')&&!d.querySelector('#request-task')&&shape(w,d,'dialog'));d.querySelector('#request-contact').value='qa@example.com';record(prefix+'/payload',JSON.stringify(w.SF676Requests.getDraft().context.selector)===JSON.stringify(r));w.SF676Requests.close();
+ d.querySelector('[data-selector-action="request"]').click();await tick();record(prefix+'/modal-visible',d.querySelector('.request-selection').textContent.includes('Тестовая деталь')&&!d.querySelector('#request-task')&&shape(w,d,'dialog'));d.querySelector('#request-contact').value='qa@example.com';const draft=w.SF676Requests.getDraft();
+ record(prefix+'/payload',draft.formId==='configuration_help'&&draft.sourceSection==='config'&&draft.sourceCta==='selector-quiz-result'&&JSON.stringify(draft.context.selector)===JSON.stringify(r));w.SF676Requests.close();
  click(d,'edit');click(d,'next');record(prefix+'/back-retains',d.querySelector('textarea').value==='Тестовая деталь 100 × 50 мм');enter(w,d,'Изменённое описание');click(d,'result');record(prefix+'/edited-summary',d.querySelector('.selector-summary').textContent.includes('Изменённое описание'));
  d.querySelector('[data-selector-mode="exact"]').click();record(prefix+'/mode-separation',w.SF676Selector.getResult().selections.coordinates==='consultation');d.querySelector('[data-selector-mode="quiz"]').click();record(prefix+'/quiz-retained',w.SF676Selector.getResult().requirements.parts.description==='Изменённое описание');click(d,'reset');record(prefix+'/reset',!d.querySelector('input:checked')&&w.SF676Selector.getResult()===null);
  pick(w,d,'operations-consultation');click(d,'next');click(d,'next');pick(w,d,'tooling-consultation');click(d,'next');pick(w,d,'positioning-consultation');click(d,'next');click(d,'next');record(prefix+'/optional-skipped',w.SF676Selector.getResult().requirements.parts.description===''&&d.querySelector('.selector-summary').textContent.includes('Не указано'));
 }
-async function run(){results=[];try{for(const mode of ['normal','zoom'])for(const width of [320,390,768,1366]){output.textContent='Проверка '+width+'/'+mode;const {w,d}=await load(width,mode);record('init/'+width+'/'+mode,!!w.SF676Selector&&!d.querySelector('#sf676-selector').hidden);await exact(w,d,width+'/'+mode+'/exact');await quiz(w,d,width+'/'+mode+'/quiz');record(width+'/'+mode+'/clean',!w.__errors.length&&!w.__sinks.length,{errors:w.__errors,sinks:w.__sinks});}}catch(e){record('exception',false,{message:String(e)})}report()}
+async function run(){
+ results=[];
+ try{
+  for(const mode of ['normal','zoom'])for(const width of [320,390,768,1366]){
+   const prefix=width+'/'+mode;
+   output.textContent='Проверка '+prefix;
+   const {w,d}=await load(width,mode);
+   record('init/'+prefix,!!w.SF676Selector&&!d.querySelector('#sf676-selector').hidden);
+   const heading=d.querySelector('#config .section-heading'),cta=d.querySelector('#specs .section-cta');
+   const gap=heading.getBoundingClientRect().top-cta.getBoundingClientRect().bottom;
+   record(prefix+'/section-layout',gap>0&&shape(w,d,'#sf676-selector')&&shape(w,d,'#price'),{gap});
+   await exact(w,d,prefix+'/exact');await quiz(w,d,prefix+'/quiz');
+   record(prefix+'/clean',!w.__errors.length&&!w.__sinks.length,{errors:w.__errors,sinks:w.__sinks});
+  }
+ }catch(e){record('exception',false,{message:String(e)})}
+ report();
+}
 async function regressions(){results=[];try{
  let {w,d}=await load(390);record('fresh-after-reload',w.SF676Selector.getResult()===null&&!d.querySelector('#selector-stage').children.length);const urls=[];
  for(const link of d.querySelectorAll('[data-request-form]')){link.click();record('existing-cta/'+link.dataset.sourceCta,d.querySelector('dialog').open);w.SF676Requests.close()}
