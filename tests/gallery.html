@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="ru">
 <meta charset="utf-8">
-<title>Проверка галереи СФ676</title>
+<title>Проверка галерей СФ676</title>
 <style>
   body { font: 16px system-ui; margin: 12px; }
   pre { white-space: pre-wrap; }
   #stage { max-width: 100%; overflow: auto; }
   iframe { display: block; height: 740px; border: 0; }
 </style>
-<h1>Проверка галереи СФ676</h1>
-<button id="run">Проверить галерею</button>
+<h1>Проверка галерей СФ676</h1>
+<button id="run">Проверить обе галереи</button>
 <button id="manual">Открыть для проверки клавиатуры</button>
 <pre id="results" role="status">Готово к проверке.</pre>
 <div id="stage"></div>
@@ -18,7 +18,10 @@ const stage = document.getElementById('stage');
 const results = document.getElementById('results');
 const run = document.getElementById('run');
 const manual = document.getElementById('manual');
-const expected = [4204, 4209, 4212, 4257, 4335];
+const groups = {
+  specs: [4204, 4209, 4212, 4257, 4335],
+  'work-gallery': [4135, 4168, 4274, 4276, 4325],
+};
 
 function check(condition, message) {
   if (!condition) throw new Error(message);
@@ -49,17 +52,61 @@ async function checkLayout(width, zoom) {
   const frame = await loadPage(width, zoom);
   const d = frame.contentDocument;
   const w = frame.contentWindow;
-  const gallery = d.querySelector('#specs [data-sf676-gallery]');
+  const sections = [...d.querySelectorAll('section[id]')].map(node => node.id);
+  check(sections.join(' ') === 'top advantages specs config work-gallery price acceptance design compare delivery gov plant faq order qlist', 'Порядок секций');
+  check(d.querySelectorAll('[data-sf676-gallery]').length === 2, 'Число галерей');
+  const first = d.querySelector('#specs [data-sf676-gallery]');
+  check(first.previousElementSibling.matches('.spec-operations') && first.nextElementSibling.id === 'technical-documents', 'Положение технических фотографий');
+  check(d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1, 'Горизонтальная прокрутка страницы');
+  check(!w.performance.getEntriesByType('resource').some(r => /galleries\/.*-1600\.webp/.test(r.name)), 'Преждевременная загрузка большого фото');
+  for (const [section, numbers] of Object.entries(groups)) {
+    await checkGallery(frame, width, zoom, section, numbers);
+  }
+  const technical = first.querySelectorAll('a')[1];
+  const workshop = d.querySelector('#work-gallery .gallery-photo');
+  let sharedDialog;
+  for (const [link, counter] of [[technical, '2 из 5'], [workshop, '1 из 5']]) {
+    link.click();
+    const dialog = d.querySelector('.gallery-viewer:modal');
+    check(!sharedDialog || dialog === sharedDialog, 'Единое окно просмотра');
+    check(dialog.querySelector('img').src === link.href && dialog.querySelector('[role="status"]').textContent === counter, 'Смена группы');
+    const closed = new Promise(resolve => dialog.addEventListener('close', resolve, {once: true}));
+    dialog.querySelector('.gallery-close').click();
+    await closed;
+    sharedDialog = dialog;
+  }
+  check(technical.hasAttribute('aria-current') && workshop.hasAttribute('aria-current'), 'Независимость выбора');
+  for (const id of ['config', 'work-gallery', 'price']) {
+    const screen = d.getElementById(id);
+    screen.scrollIntoView({block: 'start', behavior: 'instant'});
+    await painted(w);
+    const heading = screen.querySelector('h2').getBoundingClientRect();
+    check(heading.top >= d.querySelector('.sticky').getBoundingClientRect().bottom && heading.top < w.innerHeight, 'Переход к #' + id);
+  }
+
+  const cta = d.querySelector('[data-source-cta="specs-fit"]');
+  cta.focus();
+  cta.click();
+  check(d.querySelector('#request-dialog:modal'), 'CTA характеристик');
+  d.querySelector('#work-gallery .gallery-photo').click();
+  check(d.querySelectorAll('dialog[open]').length === 1 && !d.querySelector('.gallery-viewer[open]'), 'Совместимость с формой');
+  d.querySelector('.request-close').click();
+  await painted(w);
+  check(d.activeElement === cta, 'Фокус после формы');
+}
+
+async function checkGallery(frame, width, zoom, section, expected) {
+  const d = frame.contentDocument;
+  const w = frame.contentWindow;
+  const gallery = d.getElementById(section).querySelector('[data-sf676-gallery]');
   const track = gallery.querySelector('.gallery-track');
   const links = [...track.querySelectorAll('a')];
+  check(links.length === expected.length, 'Состав ' + section);
   gallery.scrollIntoView({block: 'center', behavior: 'instant'});
   await painted(w);
-  const sections = [...d.querySelectorAll('section[id]')].map(node => node.id);
-  check(sections.join(' ') === 'top advantages specs config price acceptance design compare delivery gov plant faq order qlist', 'Порядок секций');
-  check(d.querySelectorAll('[data-sf676-gallery]').length === 1 && links.length === 5, 'Состав галереи');
-  check(gallery.previousElementSibling.matches('.spec-operations') && gallery.nextElementSibling.id === 'technical-documents', 'Положение галереи');
-  check(d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1, 'Горизонтальная прокрутка страницы');
   const bounds = track.getBoundingClientRect();
+  const header = gallery.querySelector('.gallery-header').getBoundingClientRect();
+  check(header.bottom <= bounds.top + 1 && bounds.left >= 0 && bounds.right <= d.documentElement.clientWidth + 1, 'Кнопки и границы ленты');
   const cards = links.map(link => link.getBoundingClientRect());
   const columns = width < 600 ? 1 : width < 1024 ? 2 : 3;
   check(cards.filter(r => r.left >= bounds.left - 1 && r.right <= bounds.right + 1).length === columns, 'Число видимых кадров');
@@ -72,7 +119,6 @@ async function checkLayout(width, zoom) {
   for (let i = 0; i < links.length; i++) back.click();
   await painted(w);
   check(back.getAttribute('aria-disabled') === 'true' && track.scrollLeft < 1, 'Начало ленты');
-  check(!w.performance.getEntriesByType('resource').some(r => /galleries\/.*-1600\.webp/.test(r.name)), 'Преждевременная загрузка большого фото');
 
   for (const [i, link] of links.entries()) {
     link.scrollIntoView({block: 'center', inline: 'nearest', behavior: 'instant'});
@@ -93,6 +139,11 @@ async function checkLayout(width, zoom) {
       return r.width > 0 && r.height > 0 && r.left >= -1 && r.top >= -1 && r.right <= width + 1 && r.bottom <= w.innerHeight + 1;
     });
     check(inside && w.getComputedStyle(image).objectFit === 'scale-down', 'Фото и управление в пределах окна');
+    if (i === 0 || i === links.length - 1) {
+      const edge = dialog.querySelector(i === 0 ? '.gallery-prev' : '.gallery-next');
+      edge.click();
+      check(edge.getAttribute('aria-disabled') === 'true' && image.src === link.href, 'Граница группы ' + section);
+    }
     const direction = i < links.length - 1 ? '.gallery-next' : '.gallery-prev';
     dialog.querySelector(direction).click();
     const target = i + (i < links.length - 1 ? 1 : -1);
@@ -114,16 +165,6 @@ async function checkLayout(width, zoom) {
     await closed;
     check(d.activeElement === link && !d.querySelector('dialog[open]'), 'Возврат фокуса');
   }
-
-  const cta = d.querySelector('[data-source-cta="specs-fit"]');
-  cta.focus();
-  cta.click();
-  check(d.querySelector('#request-dialog:modal'), 'CTA характеристик');
-  links[0].click();
-  check(d.querySelectorAll('dialog[open]').length === 1 && !d.querySelector('.gallery-viewer[open]'), 'Совместимость с формой');
-  d.querySelector('.request-close').click();
-  await painted(w);
-  check(d.activeElement === cta, 'Фокус после формы');
 }
 
 async function checkRequestLinks() {
@@ -131,23 +172,33 @@ async function checkRequestLinks() {
   const d = frame.contentDocument;
   const w = frame.contentWindow;
   const links = [...d.querySelectorAll('a[data-request-form]')];
-  check(links.length > 0, 'Ссылки на формы');
+  check(links.length === 13, 'Ссылки на формы');
+  const scenarios = new Set();
   for (const link of links) {
+    const scrollTarget = link.closest('.sticky') ? d.getElementById('price') : link;
+    scrollTarget.scrollIntoView({block: 'center', behavior: 'instant'});
+    await painted(w);
+    link.focus({preventScroll: true});
     link.click();
-    d.querySelector('#request-contact').value = 'gallery-test@example.com';
+    const input = d.querySelector('#request-contact');
+    check(input.value === '' && d.querySelector('#request-submit').disabled, 'Чистая демонстрационная форма');
+    input.value = 'gallery-test@example.com';
     const draft = w.SF676Requests.getDraft();
     check(d.querySelector('#request-dialog:modal') && draft?.formId === link.dataset.requestForm &&
       draft.sourceSection === link.dataset.sourceSection && draft.sourceCta === link.dataset.sourceCta, 'CTA ' + link.dataset.sourceCta);
+    scenarios.add(draft.formId);
     d.querySelector('.request-close').click();
     await painted(w);
+    check(d.activeElement === link && !w.SF676Requests.getDraft(), 'Закрытие формы ' + link.dataset.sourceCta);
   }
+  check(scenarios.size === 5, 'Пять сценариев');
   return links.length;
 }
 
-async function checkFallback() {
+async function checkFallback(section, expected) {
   const frame = await loadPage(390, 100, false);
   const d = frame.contentDocument;
-  const gallery = d.querySelector('#specs [data-sf676-gallery]');
+  const gallery = d.getElementById(section).querySelector('[data-sf676-gallery]');
   const links = [...gallery.querySelectorAll('a')];
   check(!frame.contentWindow.SF676Requests && gallery.querySelector('.gallery-controls').hidden, 'Режим без JS');
   for (const [i, link] of links.entries()) {
@@ -166,7 +217,7 @@ run.onclick = async () => {
   run.disabled = manual.disabled = true;
   results.textContent = '';
   try {
-    for (const width of [320, 390, 768, 1366]) {
+    for (const width of [320, 375, 390, 768, 1024, 1366]) {
       for (const zoom of [100, 200]) {
         results.textContent += width + ' px, текст ' + zoom + '% … ';
         await checkLayout(width, zoom);
@@ -175,7 +226,7 @@ run.onclick = async () => {
     }
     const count = await checkRequestLinks();
     results.textContent += 'CTA и источники обращений — ' + count + ' из ' + count + '\n';
-    await checkFallback();
+    for (const [section, numbers] of Object.entries(groups)) await checkFallback(section, numbers);
     results.textContent += 'Без JavaScript — OK';
   } catch (error) {
     results.textContent += 'Ошибка: ' + error.message;

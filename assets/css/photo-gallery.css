@@ -11,6 +11,7 @@
 }
 .gallery-header { margin-bottom: var(--ui-space-2); }
 .gallery-header h3 { margin: 0; }
+.gallery-header h2 { margin: 0 0 var(--ui-space-1); }
 .gallery-controls { display: flex; gap: 8px; }
 .gallery-controls[hidden] { display: none; }
 
@@ -41,6 +42,8 @@
 }
 .gallery-button[aria-disabled="true"] { opacity: .45; cursor: default; }
 .gallery-button:focus-visible { outline: 3px solid var(--focus-light); outline-offset: 2px; }
+
+.dark .gallery-button:focus-visible { outline-color: var(--focus-dark); }
 
 .gallery-track {
   --gallery-card: 100%;

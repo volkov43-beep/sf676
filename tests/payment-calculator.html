@@ -52,7 +52,7 @@ async function regressions(){results=[];try{
  ({w,d}=await load(390,'noforms'));input(w,d,'4000000');record('missing-form-script',!w.SF676Requests&&w.SF676Payments.getCalculation().totalKopeks===400000000);d.querySelector('[data-payment-calculator]').click();await tick();record('fallback-order',frame.contentWindow.location.hash==='#order');
  ({w,d}=await load(390,'review'));record('review',d.querySelector('#ql-oplata a')?.hash==='#q-oplata'&&d.querySelector('[data-q="oplata"]').textContent.includes('Условия фиксируются в договоре'));
  ({w,d}=await load(390,'nojs'));record('nojs',d.querySelector('#payment-total').closest('[hidden]')&&!w.SF676Payments&&d.querySelector('.payment-plan').getBoundingClientRect().height>0&&d.querySelectorAll('#price .purchase-conditions div').length===4&&d.querySelector('[data-payment-calculator]').getAttribute('href')==='#order');
- record('static-regression',d.querySelectorAll('section[id]:not(#qlist)').length===13&&d.querySelectorAll('#faq details').length===9&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
+ record('static-regression',d.querySelectorAll('section[id]:not(#qlist)').length===14&&d.querySelectorAll('#faq details').length===9&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
  }catch(e){record('exception',false,{message:String(e)})}report()}
 document.querySelector('#show').onclick=()=>load(+document.querySelector('#width').value,document.querySelector('#mode').value);document.querySelector('#run').onclick=run;document.querySelector('#regressions').onclick=regressions;
 </script></html>
