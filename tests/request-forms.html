@@ -10,6 +10,9 @@
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
 const widths=[320,375,390,768,1024,1366,1920];
 const sectionButtons=[
+ {section:'specs',cta:'specs-price',form:'price_quote',label:'Запросить стоимость СФ676',container:'.specs-price-cta'},
+ {section:'design',cta:'design-consult',form:'configuration_help',label:'Обсудить комплектацию с технологом',container:'.construction-cta'},
+ {section:'compare',cta:'compare-new-price',form:'price_quote',label:'Получить цену нового СФ676',container:'.comparison-actions',grouped:true},
  {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу'},
  {section:'work-gallery',cta:'gallery-price',form:'price_quote',label:'Узнать цену СФ676'},
  {section:'faq',cta:'faq-consult',form:'configuration_help',label:'Обсудить задачу с технологом'},
@@ -17,11 +20,14 @@ const sectionButtons=[
  {section:'acceptance',cta:'acceptance-accuracy',form:'configuration_help',label:'Подобрать класс точности под мою задачу'},
  {section:'design',cta:'design-price',form:'price_quote',label:'Узнать цену в нужной комплектации'},
  {section:'delivery',cta:'delivery-quote',form:'price_quote',label:'Рассчитать доставку до моего цеха'},
- {section:'plant',cta:'plant-region',form:'price_quote',label:'Узнать цену для моего региона'}
+ {section:'plant',cta:'plant-region',form:'price_quote',label:'Узнать цену для моего региона',container:'#delivery-geography > .section-cta'}
 ];
 const scenarioCopy={
  configuration_help:['Поможем подобрать комплектацию СФ676','Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка'],
- price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail и укажите город доставки.']
+ price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail и укажите город доставки.'],
+ repair_comparison:['Сравнить ремонт и приобретение нового СФ676','Расскажите о существующем оборудовании. Специалист поможет оценить варианты восстановления и приобретения нового станка'],
+ procurement_documents:['Запросить документы для закупки СФ676','Укажите необходимые документы и контактные данные организации'],
+ procurement_nmck:['Получить коммерческое предложение для обоснования НМЦК','Укажите контактные данные организации и требования к поставке СФ676.']
 };
 const expected={
  price_quote:['contact','city','name','company','deliveryAddress','comment'],
@@ -60,6 +66,27 @@ function checkQuoteDetails(w,d,prefix){
  const payment=fields.querySelector('.request-payment');
  if(payment) record(prefix+'/payment-first',payment===fields.firstElementChild && payment.checkVisibility());
 }
+function checkDistribution(w,d,prefix){
+ const specs=d.querySelector('#specs .specs-price-cta');
+ record(prefix+'/specs-price/position',specs.previousElementSibling.matches('.spec-groups') && specs.nextElementSibling.matches('.spec-operations') && !specs.closest('table,[data-sf676-gallery]'));
+ const groups=[...d.querySelectorAll('#design .construction-grid')], cta=d.querySelector('#design .construction-cta');
+ const cards=groups.flatMap(group=>[...group.querySelectorAll(':scope > article')]);
+ const titles=cards.map(card=>card.querySelector('.feature-title span').textContent);
+ record(prefix+'/design-consult/order',groups.length===2 && groups.every(g=>g.children.length===3) && cta.previousElementSibling===groups[0] && cta.nextElementSibling===groups[1] && titles.join('|')==='Поворотная вертикальная головка ±90°|Горизонтальный и вертикальный шпиндели|Литая станина|Скорости вращения и рабочие подачи|УЦИ|СОЖ, смазка и освещение');
+ for(const [i,group] of groups.entries()){
+   const boxes=[...group.children].map(e=>e.getBoundingClientRect()), r=group.getBoundingClientRect(), [a,b,c]=boxes;
+   const width=w.innerWidth;
+   record(prefix+'/design-grid-'+i,group.scrollWidth<=group.clientWidth+1 && boxes.every(box=>box.left>=r.left-1&&box.right<=r.right+1) &&
+     (width>1100 ? Math.abs(a.top-b.top)<1&&Math.abs(b.top-c.top)<1&&b.left>=a.right&&c.left>=b.right :
+      width>700 ? Math.abs(a.top-b.top)<1&&b.left>=a.right&&c.top>=Math.max(a.bottom,b.bottom)&&Math.abs(c.width-r.width)<1 :
+      b.top>=a.bottom&&c.top>=b.bottom&&boxes.every(box=>Math.abs(box.width-r.width)<1)));
+ }
+ const actions=d.querySelector('.comparison-actions'),links=[...actions.children], [a,b]=links.map(e=>e.getBoundingClientRect()), r=actions.getBoundingClientRect();
+ record(prefix+'/compare-new-price/group',links.length===2 && links[0].dataset.sourceCta==='compare-request' && links[1].dataset.sourceCta==='compare-new-price' && actions.scrollWidth<=actions.clientWidth+1 &&
+   (w.innerWidth<=568 ? b.top-a.bottom>=15 && Math.abs(a.width-r.width)<1 && Math.abs(b.width-r.width)<1 : b.left-a.right>=15 || b.top-a.bottom>=15));
+ const plant=d.querySelector('[data-source-cta="plant-region"]');
+ record(prefix+'/plant-region/position',d.querySelectorAll('[data-source-cta="plant-region"]').length===1 && plant.parentElement.previousElementSibling.matches('.delivery-map-ui') && plant.parentElement.nextElementSibling.matches('.delivery-status') && !plant.closest('.delivery-map-ui,.delivery-canvas,.delivery-toolbar,.delivery-directory'));
+}
 async function matrix(){records=[];output.textContent='Проверка…';
  try{
  for(const mode of ['normal','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
@@ -68,7 +95,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
  total.dispatchEvent(new w.Event('input',{bubbles:true}));
  record(`${width}/${mode}/calculation-ready`,w.SF676Payments.getCalculation()?.totalKopeks===100000000);
  const triggers=[...d.querySelectorAll('[data-request-form]')];
- record(`${width}/${mode}/sixteen-triggers`,triggers.length===16 && new Set(triggers.map(link=>link.dataset.sourceCta)).size===16);
+ record(`${width}/${mode}/nineteen-triggers`,triggers.length===19 && new Set(triggers.map(link=>link.dataset.sourceCta)).size===19 && triggers.every(link=>link.dataset.sourceSection===(link.closest('section[id]')?.id||'sticky')));
  record(`${width}/${mode}/cta-placement`,
    d.querySelector('#advantages .adv-note').nextElementSibling.matches('.section-cta') &&
    d.querySelectorAll('#advantages .adv-card').length===5 &&
@@ -76,14 +103,15 @@ async function matrix(){records=[];output.textContent='Проверка…';
    d.querySelector('#work-gallery > .wrap:last-child').previousElementSibling.matches('[data-sf676-gallery]') &&
    d.querySelector('#faq .faq-list').nextElementSibling.matches('.section-cta') &&
    !d.querySelector('[data-source-cta="faq-consult"]').closest('details'));
- for(const {section,cta,label,form} of sectionButtons){
+ checkDistribution(w,d,`${width}/${mode}`);
+ for(const {section,cta,label,form,container,grouped} of sectionButtons){
    const matches=triggers.filter(link=>link.dataset.sourceCta===cta);
    const link=matches[0], wrap=d.getElementById(section).querySelector(':scope > .wrap:last-child');
-   record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===wrap.lastElementChild &&
+   record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===(container?d.querySelector('#'+section+' '+container):wrap.lastElementChild) &&
      link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm===form && !link.hasAttribute('data-payment-calculator'));
    if(link){
      const box=link.getBoundingClientRect(), column=link.parentElement.getBoundingClientRect();
-     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && Math.abs(box.left-column.left)<=1 &&
+     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && (grouped||Math.abs(box.left-column.left)<=1) && box.left>=column.left-1 &&
        box.right<=column.right+1 && (width>568 || Math.abs(box.width-column.width)<=1));
    }
  }
@@ -99,14 +127,16 @@ async function matrix(){records=[];output.textContent='Проверка…';
  if(id==='price_quote') checkQuoteDetails(w,d,`${width}/${mode}/${link.dataset.sourceCta}`);
  else record(`${width}/${mode}/${id}/flat-fields`,!d.querySelector('#request-fields details'));
  const sectionButton=sectionButtons.find(button=>button.cta===link.dataset.sourceCta);
- if(sectionButton){
-   const [title,description]=scenarioCopy[sectionButton.form];
+ {
+   const [title,description]=scenarioCopy[id];
    record(`${width}/${mode}/${link.dataset.sourceCta}/scenario-copy`,
      d.getElementById('request-title').textContent===title &&
      d.getElementById('request-description').textContent===description);
  }
  d.querySelector('#request-check').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true');
- const contact=d.querySelector('#request-contact');contact.value='qa+sf676@example.com';d.querySelector('#request-check').click();
+ const contact=d.querySelector('#request-contact');contact.value='invalid-contact';d.querySelector('#request-check').click();
+ record(`${width}/${mode}/${link.dataset.sourceCta}/invalid-contact`,contact.getAttribute('aria-invalid')==='true' && w.SF676Requests.getDraft()===null);
+ contact.value='qa+sf676@example.com';d.querySelector('#request-check').click();
  const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&d.querySelector('#request-submit').disabled&&d.querySelector('#request-status').textContent.includes('данные не отправлены'));
  if(link.hasAttribute('data-payment-calculator')){
    record(`${width}/${mode}/calculator-quote`,draft?.context.calculation?.totalKopeks===100000000 && !!dialog.querySelector('.request-payment'));
@@ -124,8 +154,9 @@ async function matrix(){records=[];output.textContent='Проверка…';
  }
  const {w,d}=await load(390,'review');record('review-questions',d.body.classList.contains('showq')&&d.querySelector('#ql-rop a')?.hash==='#q-rop');
  const n=await load(390,'nojs');record('nojs-fallback',!n.w.SF676Requests&&n.d.querySelectorAll('section[id]:not(#qlist)').length===14&&Array.from(n.d.querySelectorAll('[data-request-form]')).every(a=>a.getAttribute('href')==='#order')&&n.d.querySelectorAll('#faq details').length===9&&!n.d.querySelector('dialog').open);
- for(const {section,cta} of sectionButtons){
-   const link=n.d.querySelector('#'+section+' [data-source-cta="'+cta+'"]');
+ for(const link of n.d.querySelectorAll('[data-request-form]')){
+   const cta=link.dataset.sourceCta;
+   if(link.hidden){record('nojs/'+cta,link.getAttribute('href')==='#order');continue;}
    link.scrollIntoView();link.click();await tick();
    const target=n.d.getElementById('order').getBoundingClientRect();
    record('nojs/'+cta,n.w.location.hash==='#order' && target.top<n.w.innerHeight && target.bottom>0 && !n.d.querySelector('dialog').open);
