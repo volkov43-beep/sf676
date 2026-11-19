@@ -217,10 +217,19 @@ body{overflow-wrap:anywhere}
   .adv-group--extras .adv-copy{margin:0}
 }
 /* Full-width grouped specification tables. */
-.specs-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--ui-space-4);margin-bottom:var(--ui-space-4)}
-.specs-heading h2{margin:0}
-.v1 .specs-visual{flex:0 0 216px;aspect-ratio:3/2}
-.spec-groups{display:grid;gap:var(--ui-space-4)}
+.specs-heading{text-align:center;margin-bottom:var(--ui-space-4)}
+.specs-heading h2{margin:0 auto}
+.spec-groups{display:grid;gap:var(--ui-space-2)}
+.spec-group{margin:0;padding:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--ui-radius)}
+.spec-group > summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:18px 20px;list-style:none;background:var(--surface);border-radius:var(--ui-radius);font:600 var(--ui-h3)/1.3 var(--font-heading)}
+.spec-group > summary::-webkit-details-marker{display:none}
+.spec-group > summary::after{content:"+";flex:none;width:1em;text-align:center;font:400 1.5rem/1 var(--font-body);color:var(--blue)}
+.spec-group[open] > summary{border-bottom:1px solid var(--line);border-radius:var(--ui-radius) var(--ui-radius) 0 0}
+.spec-group[open] > summary::after{content:"−"}
+.spec-group > summary:hover{background:var(--surface-2)}
+.spec-group > summary:focus-visible{outline:3px solid var(--focus-light);outline-offset:3px}
+.spec-group-body{padding:var(--ui-space-3);min-width:0}
+#specs .specs-price-cta{text-align:center}
 .spec-groups > *,.specs-heading > *,.media-placeholder > span{min-width:0;max-width:100%}
 .v1 .spec-table{font-size:1rem;line-height:1.5;table-layout:fixed;overflow-wrap:anywhere}
 .v1 .spec-table caption{padding:0 0 var(--ui-space-2);text-align:left;font-weight:600;color:var(--navy)}
@@ -235,8 +244,6 @@ body{overflow-wrap:anywhere}
 }
 @media (max-width:600px){
  .v1 .wrap{padding-inline:24px}
- .specs-heading{align-items:flex-start;flex-direction:column;gap:var(--ui-space-3)}
- .v1 .specs-visual{flex:none;width:168px}
  .v1 .spec-table,.v1 .spec-table tbody{display:block}
  .v1 .spec-table thead{display:none}
  .v1 .spec-table caption{display:block}
@@ -245,6 +252,9 @@ body{overflow-wrap:anywhere}
  .v1 .spec-table th[scope="row"],.v1 .spec-table td{display:block;border:0;padding:12px 16px;width:auto}
  .v1 .spec-table th[scope="row"]{padding-bottom:4px;color:var(--mute);font-size:.9375rem}
  .v1 .spec-table td{padding-top:0}
+ #specs .spec-table thead{display:table-header-group;position:absolute;width:1px;height:1px;padding:0;border:0;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+ .spec-group > summary{padding:16px}
+ .spec-group-body{padding:16px}
 }
 
 
@@ -418,11 +428,9 @@ body{overflow-wrap:anywhere}
 .site-photo .media-frame{--media-ratio:3/2;--media-fit:contain}
 .site-photo.media-tall .media-frame{--media-ratio:1/1;max-height:280px}
 .site-photo.media-square .media-frame{--media-ratio:1/1}
-.v1 .specs-visual{flex:0 0 320px;aspect-ratio:auto}
 .v1 .config-photo{max-width:280px;margin-top:var(--ui-space-2)}
 .plant-media{display:block;max-width:920px;margin-inline:auto;margin-bottom:var(--ui-space-3)}
 .order-person{grid-template-columns:1fr}
-@media (max-width:600px){.v1 .specs-visual{flex:none;width:100%;max-width:320px}}
 
 
 /* Iteration 05: semantic engineering graphics; no JS dependency. */
@@ -443,20 +451,17 @@ body{overflow-wrap:anywhere}
 .ux-details .ux-detail-body{padding:4px 0 12px}
 .ux-details .ux-detail-body p{margin:0}
 .specs-heading{margin-bottom:24px}
-.specs-overview{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:center;gap:32px;margin-bottom:32px}
-.travel-overview{display:flex;align-items:center;gap:24px;min-width:0;border-left:3px solid var(--blue);padding-left:20px}
-.travel-overview>div{min-width:0;flex:1}
-.travel-axes{color:var(--diagram-ink);width:180px;height:130px;flex:none}
-.v1 .travel-overview h3{margin:0 0 16px}
-.travel-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0 0 12px}
-.travel-values>div{min-width:0}
+.specs-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:var(--ui-space-4);margin-bottom:var(--ui-space-4)}
+.travel-overview{display:grid;justify-items:center;gap:12px;min-width:0;padding:20px;border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--surface)}
+.travel-axes{display:block;color:var(--diagram-ink);width:176px;max-width:100%;height:120px}
+.v1 .travel-overview h3{margin:0;text-align:center;color:var(--navy)}
+.travel-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,4.5rem),1fr));gap:8px;width:100%;margin:0}
+.travel-values>div{min-width:0;padding:12px 8px;border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--paper);text-align:center}
 .travel-values dt{color:var(--blue);font-size:1rem}
-.travel-values dd{margin:4px 0 0;font-size:1.75rem;line-height:1.25;color:var(--navy)}
-.travel-values dd span{font-family:var(--font-body);font-size:1rem;font-weight:400;white-space:nowrap}
-.travel-overview .ux-note{margin:0}
-.specs-overview .specs-visual{width:100%;max-width:280px;justify-self:end}
-.spec-table caption .ux-icon{--icon-size:28px;margin-right:12px;vertical-align:middle}
-.spec-table caption span{vertical-align:middle}
+.travel-values dd{margin:4px 0 0;font-size:2rem;line-height:1.15;color:var(--navy)}
+.travel-values dd span{display:block;margin-top:4px;font-family:var(--font-body);font-size:1rem;font-weight:400}
+.travel-overview .ux-note{margin:0;text-align:center}
+.specs-overview .specs-visual{width:100%;max-width:none}
 .payment-flow{margin:32px 0;border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--paper)}
 .payment-scale{display:flex;height:12px;border-radius:var(--ui-radius) var(--ui-radius) 0 0;overflow:hidden}
 .payment-scale span:nth-child(1){width:50%;background:var(--navy)}
@@ -525,11 +530,6 @@ body{overflow-wrap:anywhere}
 .v1.faq summary::after{content:"+";font-size:1.5rem;font-weight:400;flex:none;width:1em;text-align:center;color:var(--blue)}
 .v1.faq details[open] summary::after{content:"−"}
 @media (max-width:1100px){
- .specs-overview{grid-template-columns:minmax(0,1fr) 220px;gap:24px}
- .travel-overview{gap:12px;padding-left:16px}
- .travel-axes{width:120px;height:110px}
- .travel-values{gap:12px}
- .travel-values dd{font-size:1.5rem}
  .quality-flow{grid-template-columns:1fr}
  .delivery-groups{grid-template-columns:1fr;gap:20px;position:relative;margin-left:16px;padding-left:24px;border-left:2px solid var(--diagram-border)}
  .delivery-group:not(:last-child)::after{content:"↓";left:-36px;top:auto;bottom:-22px;width:22px;background:var(--surface)}
@@ -537,19 +537,9 @@ body{overflow-wrap:anywhere}
  .delivery-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
  .delivery-steps li{min-width:0}
 }
-@media (max-width:900px){
- .specs-overview{grid-template-columns:1fr 200px}
- .travel-overview{flex-direction:column;align-items:stretch}
- .travel-axes{width:160px;height:110px;align-self:center}
- .travel-values dd{font-size:1.5rem}
-}
 @media (max-width:700px){
- .specs-overview{grid-template-columns:1fr;gap:24px}
- .specs-overview .specs-visual{justify-self:start;width:min(100%,280px)}
- .travel-overview{display:grid;grid-template-columns:1fr;gap:12px}
- .travel-axes{justify-self:center;width:180px;height:126px}
- .travel-values{gap:8px}
- .travel-values dd{font-size:1.5rem}
+ .specs-overview{grid-template-columns:minmax(0,1fr);gap:24px}
+ .travel-overview{padding:16px}
  .payment-flow{margin-block:24px}
  .quality-factory,.quality-onsite{padding:20px}
  .quality-stages{grid-template-columns:1fr;gap:20px}
@@ -568,7 +558,6 @@ body{overflow-wrap:anywhere}
 }
 @media (max-width:380px){
  .ux-details summary{font-size:.9375rem}
- .travel-values dd{font-size:1.375rem}
  .config-option h3{flex-wrap:wrap}
  .procurement-items dt .ux-icon{--icon-size:24px}
 }
@@ -836,48 +825,64 @@ body{overflow-wrap:anywhere}
   <div class="wrap">
     <div class="specs-heading"><h2>Основные характеристики</h2></div>
     <div class="specs-overview">
+      <figure class="prototype-media site-photo specs-visual"><div class="media-frame"><img src="assets/images/sf676-work-area-960.webp" srcset="assets/images/sf676-work-area-480.webp 480w, assets/images/sf676-work-area-960.webp 960w" sizes="(max-width:700px) calc(100vw - 48px), (max-width:1200px) calc((100vw - 80px) / 2), 560px" width="960" height="640" alt="Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих" loading="lazy" decoding="async"></div><figcaption>Рабочая зона СФ676</figcaption></figure>
       <div class="travel-overview">
+        <h3>Перемещения по трём осям</h3>
         <svg class="travel-axes" viewBox="0 0 220 150" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#axes"></use></svg>
-        <div><h3>Перемещения по трём осям</h3><dl class="travel-values"><div><dt>X</dt><dd>450 <span>мм</span></dd></div><div><dt>Y</dt><dd>300 <span>мм</span></dd></div><div><dt>Z</dt><dd>380 <span>мм</span></dd></div></dl><p class="ux-note">Условная система координат — не кинематическая схема станка.</p></div>
-      </div><figure class="prototype-media site-photo specs-visual"><div class="media-frame"><img src="assets/images/sf676-work-area-960.webp" srcset="assets/images/sf676-work-area-480.webp 480w, assets/images/sf676-work-area-960.webp 960w" sizes="(max-width:368px) calc(100vw - 48px), 320px" width="960" height="640" alt="Горизонтальный рабочий стол СФ676 с тисками, вертикальный шпиндель и кожух направляющих" loading="lazy" decoding="async"></div><figcaption>Рабочая зона СФ676</figcaption></figure></div>
+        <dl class="travel-values"><div><dt>X</dt><dd>450 <span>мм</span></dd></div><div><dt>Y</dt><dd>300 <span>мм</span></dd></div><div><dt>Z</dt><dd>380 <span>мм</span></dd></div></dl>
+        <p class="ux-note">Условная система координат — не кинематическая схема станка.</p>
+      </div>
+    </div>
     <div class="spec-groups">
-      <table class="spec-table">
-        <caption><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#table"></use></svg><span>Рабочая зона и конструкция</span></caption>
-        <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Габариты (Д × Ш × В)</th><td>1200 × 1240 × 1780 мм</td></tr>
-          <tr><th scope="row">Масса в стандартной комплектации</th><td>1050 кг</td></tr>
-          <tr><th scope="row">Рабочая поверхность углового горизонтального стола</th><td>250 × 800 мм или 300 × 800 мм</td></tr>
-          <tr><th scope="row">Рабочая поверхность вертикального стола</th><td>250 × 630 мм</td></tr>
-          <tr><th scope="row">Перемещения по осям X / Y / Z</th><td>450 / 300 / 380 мм</td></tr>
-          <tr><th scope="row">Ход пиноли вертикального шпинделя</th><td>80 мм</td></tr>
-        </tbody>
-      </table>
-      <table class="spec-table">
-        <caption><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#directions"></use></svg><span>Шпиндели и обработка</span></caption>
-        <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Конус шпинделей</th><td>7:24 № 40 или Морзе 4</td></tr>
-          <tr><th scope="row">Частота вращения шпинделя горизонтального / вертикального</th><td>50–1630 / 63–2040 об/мин, 16 ступеней</td></tr>
-          <tr><th scope="row">Рабочие подачи / ускоренная</th><td>13–395 / 935 мм/мин, 16 ступеней</td></tr>
-          <tr><th scope="row">Поворот вертикального шпинделя</th><td>±90°</td></tr>
-          <tr><th scope="row">Наибольшее усилие резания</th><td>550 кгс</td></tr>
-        </tbody>
-      </table>
-      <table class="spec-table">
-        <caption><svg class="ux-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="assets/graphics/engineering.svg#energy"></use></svg><span>Электрика и точность</span></caption>
-        <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Мощность главного привода / насоса СОЖ</th><td>3,0 / 0,12 кВт</td></tr>
-          <tr><th scope="row">Питание</th><td>380 В, 3 фазы, 50 Гц</td></tr>
-          <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н — основное исполнение, П — по запросу</td></tr>
-        </tbody>
-      </table>
+      <details class="spec-group" open>
+        <summary><span id="specs-work-heading">Рабочая зона и конструкция</span></summary>
+        <div class="spec-group-body">
+          <table class="spec-table" aria-labelledby="specs-work-heading">
+            <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Габариты (Д × Ш × В)</th><td>1200 × 1240 × 1780 мм</td></tr>
+              <tr><th scope="row">Масса в стандартной комплектации</th><td>1050 кг</td></tr>
+              <tr><th scope="row">Рабочая поверхность углового горизонтального стола</th><td>250 × 800 мм или 300 × 800 мм</td></tr>
+              <tr><th scope="row">Рабочая поверхность вертикального стола</th><td>250 × 630 мм</td></tr>
+              <tr><th scope="row">Перемещения по осям X / Y / Z</th><td>450 / 300 / 380 мм</td></tr>
+              <tr><th scope="row">Ход пиноли вертикального шпинделя</th><td>80 мм</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="spec-group">
+        <summary><span id="specs-spindles-heading">Шпиндели и обработка</span></summary>
+        <div class="spec-group-body">
+          <table class="spec-table" aria-labelledby="specs-spindles-heading">
+            <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Конус шпинделей</th><td>7:24 № 40 или Морзе 4</td></tr>
+              <tr><th scope="row">Частота вращения шпинделя горизонтального / вертикального</th><td>50–1630 / 63–2040 об/мин, 16 ступеней</td></tr>
+              <tr><th scope="row">Рабочие подачи / ускоренная</th><td>13–395 / 935 мм/мин, 16 ступеней</td></tr>
+              <tr><th scope="row">Поворот вертикального шпинделя</th><td>±90°</td></tr>
+              <tr><th scope="row">Наибольшее усилие резания</th><td>550 кгс</td></tr>
+            </tbody>
+          </table>
+          <p class="spec-operations">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка</p>
+        </div>
+      </details>
+      <details class="spec-group">
+        <summary><span id="specs-electrical-heading">Электрика и точность</span></summary>
+        <div class="spec-group-body">
+          <table class="spec-table" aria-labelledby="specs-electrical-heading">
+            <thead><tr><th scope="col">Параметр</th><th scope="col">Значение</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Мощность главного привода / насоса СОЖ</th><td>3,0 / 0,12 кВт</td></tr>
+              <tr><th scope="row">Питание</th><td>380 В, 3 фазы, 50 Гц</td></tr>
+              <tr><th scope="row">Класс точности по ГОСТ 8-82</th><td>Н — основное исполнение, П — по запросу</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </div>
     <div class="section-cta specs-price-cta">
       <a class="btn red" href="#order" data-request-form="price_quote" data-source-section="specs" data-source-cta="specs-price">Запросить стоимость СФ676</a>
     </div>
-    <p class="spec-operations">Фрезерование плоских и фасонных поверхностей · сверление · растачивание · цекование · центрование · резьбонарезание · долбление · разметка</p>
     <div class="photo-gallery tech-gallery" data-sf676-gallery role="region" aria-labelledby="specs-gallery-heading">
       <div class="gallery-header">
         <h3 id="specs-gallery-heading">Фотографии станка СФ676</h3>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<title>СФ676 — проверка характеристик</title>
+<style>
+body{font:16px system-ui;margin:12px}nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}button,select{font:inherit;padding:6px}iframe{display:block;border:0;width:390px;height:850px}#stage{overflow:auto}pre{white-space:pre-wrap;max-height:180px;overflow:auto}
+</style>
+<nav>
+<label>Ширина <select id="width"><option>320</option><option>375</option><option selected>390</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
+<label>Текст <select id="zoom"><option>100</option><option>200</option></select></label>
+<label>JavaScript <select id="scripts"><option value="yes">Включён</option><option value="no">Отключён</option></select></label>
+<button id="show">Показать</button><button id="run">Проверить матрицу</button>
+<button id="anchor">Проверить редакторский якорь</button>
+</nav>
+<pre id="results" role="status">Увеличение текста через корневой font-size; Enter и Space проверяются реальными клавишами отдельно.</pre>
+<div id="stage"><iframe id="page" title="Характеристики СФ676"></iframe></div>
+<script>
+const frame=document.querySelector('#page'),output=document.querySelector('#results');
+const widths=[320,375,390,768,1024,1366,1920],zooms=[100,200];
+const names=['Рабочая зона и конструкция','Шпиндели и обработка','Электрика и точность'];
+const counts=[6,5,3];let records=[];
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function until(test,label){const end=performance.now()+6000;while(!test()){if(performance.now()>end)throw Error(label);await wait(25)}}
+const record=(name,pass,data={})=>records.push({name,pass:!!pass,...data});
+const report=()=>output.textContent=JSON.stringify({count:records.length,passed:records.filter(x=>x.pass).length,failed:records.filter(x=>!x.pass)},null,2);
+const busy=value=>document.querySelectorAll('nav button,nav select').forEach(e=>e.disabled=value);
+const rect=e=>e.getBoundingClientRect();
+const centered=(a,b)=>Math.abs((rect(a).left+rect(a).right)-(rect(b).left+rect(b).right))<=2;
+const visible=e=>e.checkVisibility()&&rect(e).height>0;
+function headerReady(w,d){return !w.SF676Requests||Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-rect(d.querySelector('.sticky')).height)<=1}
+async function load(width,zoom,js){
+ frame.style.width=width+'px';
+ if(js)frame.removeAttribute('sandbox');else frame.setAttribute('sandbox','allow-same-origin');
+ await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(js?'?review=1':'')});
+ const w=frame.contentWindow,d=w.document;d.documentElement.style.fontSize=zoom+'%';d.documentElement.style.scrollBehavior='auto';
+ await d.fonts.ready;await until(()=>headerReady(w,d),'header');
+ d.getElementById('specs').scrollIntoView({block:'start'});
+ const image=d.querySelector('.specs-visual img');await until(()=>image.complete&&image.naturalWidth>0,'photo');
+ await wait(60);return{w,d};
+}
+function geometry(w,d,key){
+ const wrap=d.querySelector('#specs > .wrap'),title=d.querySelector('.specs-heading h2'),photo=d.querySelector('.specs-visual'),travel=d.querySelector('.travel-overview'),cta=d.querySelector('[data-source-cta="specs-price"]');
+ record(key+'/heading-center',centered(title,wrap)&&w.getComputedStyle(title.parentElement).textAlign==='center');
+ record(key+'/cta-center',centered(cta,wrap)&&cta.classList.contains('red')&&rect(cta).height>=48);
+ record(key+'/mobile-cta-width',w.innerWidth>568||Math.abs(rect(cta).width-(rect(wrap).width-48))<=1);
+ record(key+'/photo-left-or-above',w.innerWidth>700?rect(photo).right<=rect(travel).left&&Math.abs(rect(photo).width-rect(travel).width)<=1:rect(photo).bottom<=rect(travel).top);
+ record(key+'/photo-uncropped',w.getComputedStyle(photo.querySelector('img')).objectFit==='contain'&&Math.abs(rect(photo.querySelector('.media-frame')).width/rect(photo.querySelector('.media-frame')).height-1.5)<.01);
+ record(key+'/no-page-overflow',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1);
+ const nodes=[title,photo,travel,cta,...d.querySelectorAll('.travel-values > div,.travel-values dt,.travel-values dd,.spec-group > summary,.spec-group-body,.spec-group tbody th,.spec-group tbody td')].filter(visible);
+ record(key+'/content-bounds',nodes.every(e=>rect(e).left>=-1&&rect(e).right<=w.innerWidth+1&&e.scrollWidth<=e.clientWidth+1),{overflow:nodes.filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent)});
+ const cards=[...d.querySelectorAll('.travel-values > div')];
+ record(key+'/xyz',cards.map(e=>e.textContent.replace(/\s+/g,' ').trim()).join('|')==='X450 мм|Y300 мм|Z380 мм'&&cards.every(e=>parseFloat(w.getComputedStyle(e.querySelector('dd')).fontSize)>parseFloat(w.getComputedStyle(e.querySelector('dt')).fontSize)));
+ record(key+'/card-no-overlap',cards.every((a,i)=>cards.slice(i+1).every(b=>rect(a).right<=rect(b).left+1||rect(b).right<=rect(a).left+1||rect(a).bottom<=rect(b).top+1||rect(b).bottom<=rect(a).top+1)));
+}
+async function accordion(w,d,key){
+ const groups=[...d.querySelectorAll('#specs .spec-group')];
+ record(key+'/three-groups',groups.length===3&&groups.map(g=>g.querySelector('summary').textContent).join('|')===names.join('|'));
+ record(key+'/initial-states',groups.every((g,i)=>g.open===(i===0)&&visible(g.querySelector('tbody'))===(i===0)));
+ for(const [i,g] of groups.entries()){
+  const summary=g.querySelector('summary'),table=g.querySelector('table');
+  record(key+'/'+i+'/table-semantics',table.querySelectorAll('tbody tr').length===counts[i]&&table.querySelectorAll('tbody th[scope="row"]').length===counts[i]&&table.querySelectorAll('thead th[scope="col"]').length===2&&d.getElementById(table.getAttribute('aria-labelledby')).textContent===names[i]);
+  const initial=g.open;summary.click();await wait(25);
+  record(key+'/'+i+'/toggle',g.open!==initial&&visible(table)===!initial);
+  if(!g.open)summary.click();await wait(25);
+  record(key+'/'+i+'/open-visible',visible(table)&&[...table.querySelectorAll('tbody th,tbody td')].every(visible));
+  record(key+'/'+i+'/open-indicator',w.getComputedStyle(summary,'::after').content==='"−"'&&w.getComputedStyle(summary).listStyleType==='none');
+  record(key+'/'+i+'/touch',rect(summary).height>=44);
+ }
+ record(key+'/independent',groups.every(g=>g.open));
+ record(key+'/operations-visible',visible(d.querySelector('.spec-operations'))&&d.querySelectorAll('.spec-operations').length===1&&d.querySelector('.spec-operations').closest('details')===groups[1]);
+ geometry(w,d,key+'/all-open');
+ for(const g of groups){g.querySelector('summary').click();await wait(25);record(key+'/closed-hidden',!g.open&&!visible(g.querySelector('table'))&&w.getComputedStyle(g.querySelector('summary'),'::after').content==='"+"')}
+ record(key+'/operations-hidden',!visible(d.querySelector('.spec-operations')));
+ record(key+'/cta-always-visible',visible(d.querySelector('[data-source-cta="specs-price"]')));
+}
+async function price(w,d,key,js){
+ const cta=d.querySelector('[data-source-cta="specs-price"]');
+ record(key+'/source',cta.dataset.sourceSection==='specs'&&cta.dataset.requestForm==='price_quote'&&cta.getAttribute('href')==='#order');
+ cta.scrollIntoView({block:'center'});await wait(60);cta.focus();cta.click();await wait(60);
+ if(!js){record(key+'/nojs-order',w.location.hash==='#order'&&!d.querySelector('dialog[open]')&&!w.SF676Requests);return}
+ record(key+'/price-open',!!d.querySelector('#request-dialog:modal')&&d.getElementById('request-title').textContent==='Получить цену СФ676 с доставкой');
+ d.querySelector('#request-contact').value='specs-qa@example.com';d.querySelector('#request-submit').click();
+ const draft=w.SF676Requests.getDraft();record(key+'/draft-source',draft.formId==='price_quote'&&draft.sourceSection==='specs'&&draft.sourceCta==='specs-price');
+ d.querySelector('.request-close').click();await wait(60);
+ record(key+'/focus-restored',!d.querySelector('dialog[open]')&&d.activeElement===cta);
+}
+async function reviewAnchor(w,d,key){
+ // Test-only marker: exercises the existing navigation if an editor later flags a table cell.
+ const group=d.querySelectorAll('.spec-group')[2];group.open=false;
+ const marker=d.createElement('span');marker.className='q';marker.id='specs-test-review-marker';marker.textContent='Тестовый вопрос';group.querySelector('td').append(marker);
+ w.location.hash=marker.id;
+ await until(()=>group.open&&rect(marker).top>=rect(d.querySelector('.sticky')).bottom-1&&rect(marker).top<w.innerHeight,'review anchor');
+ record(key+'/review-anchor',d.body.classList.contains('showq')&&group.open&&visible(marker));
+ marker.remove();
+}
+async function matrix(){records=[];busy(true);try{
+ for(const js of [true,false])for(const width of widths)for(const zoom of zooms){
+  const key=width+'/'+zoom+'/'+(js?'js':'nojs');output.textContent='Проверка '+key;
+  const {w,d}=await load(width,zoom,js);const errors=[];w.addEventListener('error',e=>errors.push(e.message));
+  const ctas=[...d.querySelectorAll('a[data-request-form]')];record(key+'/19-cta',ctas.length===19&&new Set(ctas.map(e=>e.dataset.sourceCta)).size===19);
+  record(key+'/preserved-regions',d.querySelectorAll('section[id]:not(#qlist)').length===14&&d.querySelectorAll('[data-sf676-gallery]').length===2&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
+  geometry(w,d,key);await accordion(w,d,key);await price(w,d,key,js);if(js)await reviewAnchor(w,d,key);
+  record(key+'/js-errors',!errors.length,{errors});
+ }
+ }catch(e){record('fatal',false,{error:String(e)})}finally{report();busy(false)}}
+async function show(){busy(true);try{await load(Number(document.querySelector('#width').value),Number(document.querySelector('#zoom').value),document.querySelector('#scripts').value==='yes')}finally{busy(false)}}
+document.querySelector('#show').onclick=show;document.querySelector('#run').onclick=matrix;
+document.querySelector('#anchor').onclick=async()=>{records=[];try{await reviewAnchor(frame.contentWindow,frame.contentDocument,'manual')}catch(e){record('fatal',false,{error:String(e)})}report()};
+show();
+</script>
+</html>

@@ -11,7 +11,7 @@
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
 const widths=[320,350,375,390,480,768,1024,1366,1920];
 const sectionButtons=[
- {section:'specs',cta:'specs-price',form:'price_quote',label:'Запросить стоимость СФ676',container:'.specs-price-cta'},
+ {section:'specs',cta:'specs-price',form:'price_quote',label:'Запросить стоимость СФ676',container:'.specs-price-cta',centered:true},
  {section:'design',cta:'design-consult',form:'configuration_help',label:'Обсудить комплектацию с технологом',container:'.construction-cta'},
  {section:'compare',cta:'compare-new-price',form:'price_quote',label:'Получить цену нового СФ676',container:'.comparison-actions',grouped:true},
  {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу',centered:true},
@@ -87,7 +87,7 @@ function checkQuoteDetails(w,d,prefix){
 }
 function checkDistribution(w,d,prefix){
  const specs=d.querySelector('#specs .specs-price-cta');
- record(prefix+'/specs-price/position',specs.previousElementSibling.matches('.spec-groups') && specs.nextElementSibling.matches('.spec-operations') && !specs.closest('table,[data-sf676-gallery]'));
+ record(prefix+'/specs-price/position',specs.previousElementSibling.matches('.spec-groups') && specs.nextElementSibling.matches('[data-sf676-gallery]') && d.querySelector('.spec-operations').closest('details')===d.querySelectorAll('.spec-group')[1] && !specs.closest('table,[data-sf676-gallery]'));
  const groups=[...d.querySelectorAll('#design .construction-grid')], cta=d.querySelector('#design .construction-cta');
  const cards=groups.flatMap(group=>[...group.querySelectorAll(':scope > article')]);
  const titles=cards.map(card=>card.querySelector('.feature-title span').textContent);
