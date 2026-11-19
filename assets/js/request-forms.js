@@ -38,7 +38,7 @@
     price_quote: {
       title: 'Получить цену СФ676 с доставкой',
       description: 'Оставьте телефон или e-mail и укажите город доставки.',
-      fields: ['contact', 'name', 'company', 'city', 'deliveryAddress', 'comment'], action: 'Отправить запрос цены'
+      fields: ['contact', 'name', 'company', 'city', 'deliveryAddress', 'comment'], action: 'Получить коммерческое предложение'
     },
     configuration_help: {
       title: 'Поможем подобрать комплектацию СФ676',
@@ -48,13 +48,13 @@
     repair_comparison: {
       title: 'Сравнить ремонт и приобретение нового СФ676',
       description: 'Расскажите о существующем оборудовании. Специалист поможет оценить варианты восстановления и приобретения нового станка',
-      fields: ['machineIdentity', 'problem', 'contact', 'name'], action: 'Запросить сравнительный расчёт',
+      fields: ['machineIdentity', 'problem', 'contact', 'name'], action: 'Запросить расчёт',
       note: 'Для точной идентификации станка полезна фотография заводского шильдика. Её можно будет передать специалисту при дальнейшем общении.'
     },
     procurement_documents: {
       title: 'Запросить документы для закупки СФ676',
       description: 'Укажите необходимые документы и контактные данные организации',
-      fields: ['contact', 'organization', 'purchaseType', 'documents'], action: 'Отправить запрос документов',
+      fields: ['contact', 'organization', 'purchaseType', 'documents'], action: 'Запросить документы',
       note: 'Это запрос документов, а не архив для скачивания. Наличие и актуальность конкретных документов нужно уточнить у завода.'
     },
     procurement_nmck: {
@@ -128,7 +128,7 @@
   // Raw contact is never rewritten or truncated. This is syntax checking, not verification.
   function contactError(raw) {
     const value = raw.trim();
-    if (!value) return 'Укажите телефон или e-mail.';
+    if (!value) return 'Укажите телефон или e-mail';
     if (value.includes('@')) {
       const parts = value.split('@');
       const local = parts[0], domain = parts[1] || '';
@@ -171,7 +171,7 @@
       if (!firstCollapsed && input.closest('details:not([open])')) firstCollapsed = input;
     });
     status.dataset.state = first ? 'invalid' : 'valid';
-    status.textContent = first ? 'Проверьте отмеченные поля. Данные не отправлены.' : 'Поля заполнены корректно. Это только проверка: данные не отправлены. Для обращения используйте телефон или e-mail.';
+    status.textContent = first ? 'Проверьте отмеченные поля. Данные не отправлены.' : 'Поля заполнены. Отправка пока не подключена';
     if (firstCollapsed) {
       firstCollapsed.closest('details').open = true;
       firstCollapsed.focus();
@@ -307,7 +307,7 @@
     if (event.shiftKey && (document.activeElement === first || document.activeElement === title)) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
-  document.getElementById('request-check').addEventListener('click', validate);
+  // The shared primary action and implicit Enter submission only validate locally.
   form.addEventListener('submit', event => { event.preventDefault(); validate(); });
   fields.addEventListener('input', event => { status.textContent = ''; delete status.dataset.state; if (event.target.getAttribute('aria-invalid') === 'true') showError(event.target); });
   fields.addEventListener('focusout', event => { if (event.target.name && event.target.type !== 'checkbox' && event.target.value) showError(event.target); });

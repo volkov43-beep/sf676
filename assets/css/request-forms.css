@@ -1,4 +1,4 @@
-/* Shared request dialog: visual redesign 1A, existing action logic retained. */
+/* Shared request dialog: compact layout and one local validation action. */
 .request-dialog{width:min(640px,calc(100% - 24px));max-width:640px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);padding:0;border:1px solid var(--control);border-radius:8px;background:var(--paper);color:var(--ink);overflow:hidden;margin:auto;font-size:var(--ui-body);line-height:1.55;overflow-wrap:anywhere}
 .request-dialog:not([open]){display:none}
 .request-dialog::backdrop{background:var(--backdrop)}
@@ -30,7 +30,7 @@
 .request-choice input,.request-legal input{flex:none;width:20px;height:20px;margin:2px 0 0;accent-color:var(--blue)}
 .request-choices .request-hint{margin:0 0 6px}
 .request-legal{display:flex;gap:10px;align-items:flex-start;margin:20px 0 16px;min-width:0;cursor:default}
-.request-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.request-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
 .request-actions > p{grid-column:1/-1}
 .request-dialog .btn{font-family:inherit;min-height:48px;text-align:center;width:100%}
 .request-dialog .btn:disabled{background:var(--surface-2);color:var(--navy);border-color:var(--line-strong);cursor:not-allowed;opacity:1}

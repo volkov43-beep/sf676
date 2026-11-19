@@ -30,6 +30,13 @@ const scenarioCopy={
  procurement_documents:['Запросить документы для закупки СФ676','Укажите необходимые документы и контактные данные организации'],
  procurement_nmck:['Получить коммерческое предложение для обоснования НМЦК','Укажите контактные данные организации и требования к поставке СФ676.']
 };
+const scenarioActions={
+ price_quote:'Получить коммерческое предложение',
+ configuration_help:'Запросить консультацию',
+ repair_comparison:'Запросить расчёт',
+ procurement_documents:'Запросить документы',
+ procurement_nmck:'Запросить КП для НМЦК'
+};
 const expected={
  price_quote:['contact','city','name','company','deliveryAddress','comment'],
  configuration_help:['contact','name','company','task'],
@@ -143,11 +150,12 @@ async function matrix(){records=[];output.textContent='Проверка…';
      d.getElementById('request-title').textContent===title &&
      d.getElementById('request-description').textContent===description);
  }
- d.querySelector('#request-check').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true');
- const contact=d.querySelector('#request-contact');contact.value='invalid-contact';d.querySelector('#request-check').click();
+ checkPrimaryAction(w,d,id,`${width}/${mode}/${link.dataset.sourceCta}`);
+ d.querySelector('#request-submit').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true' && d.activeElement.id==='request-contact' && d.getElementById('request-contact-error').textContent==='Укажите телефон или e-mail');
+ const contact=d.querySelector('#request-contact');contact.value='invalid-contact';d.querySelector('#request-submit').click();
  record(`${width}/${mode}/${link.dataset.sourceCta}/invalid-contact`,contact.getAttribute('aria-invalid')==='true' && w.SF676Requests.getDraft()===null);
- contact.value='qa+sf676@example.com';d.querySelector('#request-check').click();
- const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&d.querySelector('#request-submit').disabled&&d.querySelector('#request-status').textContent.includes('данные не отправлены'));
+ contact.value='qa+sf676@example.com';d.querySelector('#request-submit').click();
+ const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&dialog.open&&contact.value==='qa+sf676@example.com'&&!contact.hasAttribute('aria-invalid')&&d.querySelector('#request-status').textContent==='Поля заполнены. Отправка пока не подключена');
  if(link.hasAttribute('data-payment-calculator')){
    record(`${width}/${mode}/calculator-quote`,draft?.context.calculation?.totalKopeks===100000000 && !!dialog.querySelector('.request-payment'));
  }
@@ -235,7 +243,63 @@ function checkSalesDrafts(w,d){
  record('repair/clean-reopen',expected.repair_comparison.every(key=>field(key).value==='')&&api.getDraft()===null);
  api.close();
 }
-async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;checkSalesDrafts(w,d);const link=d.querySelector('[data-source-cta="hero-price"]');link.click();
+function checkPrimaryAction(w,d,id,prefix){
+ const form=d.getElementById('request-form'),send=d.getElementById('request-submit');
+ const style=w.getComputedStyle(send),box=send.getBoundingClientRect();
+ record(prefix+'/single-primary-action',form.querySelectorAll('button').length===1 && !d.getElementById('request-check') &&
+  !form.textContent.includes('Проверить заполнение') && !send.disabled && send.type==='submit' && send.form===form &&
+  send.textContent===scenarioActions[id] && form.method==='dialog' && form.noValidate && !form.hasAttribute('action'));
+ record(prefix+'/primary-action-layout',send.classList.contains('red') &&
+  style.backgroundColor===w.getComputedStyle(d.querySelector('[data-source-cta="hero-price"]')).backgroundColor &&
+  box.height>=48 && Math.abs(box.width-send.parentElement.clientWidth)<=1 && send.scrollWidth<=send.clientWidth+1);
+}
+function checkLocalActions(w,d){
+ const api=w.SF676Requests,form=d.getElementById('request-form'),dialog=d.getElementById('request-dialog');
+ const url=w.location.href;
+ for(const id of Object.keys(expected)){
+  const trigger=d.querySelector('[data-request-form="'+id+'"]');trigger.click();
+  checkPrimaryAction(w,d,id,'action/'+id);
+  const send=d.getElementById('request-submit'),contact=d.getElementById('request-contact'),status=d.getElementById('request-status');
+  let submits=0,prevented=true,submitter=true;
+  const observe=e=>{submits++;prevented=prevented&&e.defaultPrevented;submitter=submitter&&e.submitter===send};
+  form.addEventListener('submit',observe);
+  send.click();
+  record(id+'/button-empty',contact.getAttribute('aria-invalid')==='true' && d.activeElement===contact &&
+   d.getElementById('request-contact-error').textContent==='Укажите телефон или e-mail' &&
+   w.getComputedStyle(contact).borderTopWidth==='2px' && status.dataset.state==='invalid');
+  for(const value of ['test@','12345','a'.repeat(255)]){
+   contact.value=value;send.click();
+   record(id+'/button-invalid-'+value.length,contact.getAttribute('aria-invalid')==='true' && contact.value===value && api.getDraft()===null);
+  }
+  contact.value='qa+local@example.com';contact.dispatchEvent(new w.Event('input',{bubbles:true}));
+  record(id+'/correct-error',!contact.hasAttribute('aria-invalid') && !status.textContent);
+  const emptyOptional=JSON.stringify(api.getDraft());send.click();
+  record(id+'/contact-only',dialog.open && JSON.stringify(api.getDraft())===emptyOptional && status.textContent==='Поля заполнены. Отправка пока не подключена');
+  for(const input of form.querySelectorAll('#request-fields input[type="text"],textarea')){
+   if(input===contact)continue;
+   for(const [reason,value] of [['length','x'.repeat(input.maxLength+1)],['markup','<b>тест</b>'],['control','тест\u0001']]){
+    input.value=value;const details=input.closest('details');if(details)details.open=false;
+    send.click();
+    record(id+'/'+input.name+'/button-'+reason,input.value===value && input.getAttribute('aria-invalid')==='true' &&
+     d.activeElement===input && (!details||details.open) && api.getDraft()===null);
+   }
+   input.value='Тестовые данные';send.click();
+   record(id+'/'+input.name+'/button-recover',!input.hasAttribute('aria-invalid') && !!api.getDraft());
+  }
+  const saved=JSON.stringify(api.getDraft());
+  form.requestSubmit(send);
+  record(id+'/submit-safe',submits>=7 && prevented && submitter && dialog.open && w.location.href===url &&
+   saved===JSON.stringify(api.getDraft()) && status.textContent==='Поля заполнены. Отправка пока не подключена' &&
+   !form.querySelector('.request-legal input').checked && !Object.hasOwn(api.getDraft(),'consent') &&
+   Object.keys(api.getDraft()).sort().join(',')==='contact,context,formId,schemaVersion,sourceCta,sourceSection');
+  form.removeEventListener('submit',observe);
+  api.close();trigger.click();
+  record(id+'/action-clean-reopen',!status.textContent && !form.querySelector('[aria-invalid]') && contact.value==='' &&
+   !d.getElementById('request-contact').value && api.getDraft()===null);
+  api.close();
+ }
+}
+async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;checkLocalActions(w,d);checkSalesDrafts(w,d);const link=d.querySelector('[data-source-cta="hero-price"]');link.click();
  const values=[['',false],['test@',false],['test@example..com',false],['test@example.com',true],['qa+tag@sub.example.com',true],['тест@пример.рф',true],['+7 (800) 707-26-76',true],['8 800 707 26 76',true],['8007072676',true],['7999999999',true],['+375 29 123 45 67',true],['12345',false],['+78007072676123456',false],['1111111111',false],['<b>test</b>@example.com',false]];
  for(const[value,valid]of values){const input=d.querySelector('#request-contact');input.value=value;const result=api.validate();record('contact/'+values.findIndex(x=>x[0]===value),result===valid&&input.value===value);}
  d.querySelector('#request-contact').value='qa@example.com';d.querySelector('#request-comment').value='<img src=x onerror=alert(1)>';record('html-rejected',!api.validate()&&api.getDraft()===null);d.querySelector('#request-comment').value='x'.repeat(2001);record('length-rejected',!api.validate());api.close();
@@ -247,12 +311,12 @@ async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Re
  const oldUrl=w.location.href;d.querySelector('form').requestSubmit();record('implicit-submit-safe',d.querySelector('dialog').open&&w.location.href===oldUrl);api.close();
  for(let i=0;i<20;i++){link.click();api.close()}record('single-dialog-repeated',d.querySelectorAll('dialog').length===1&&!d.documentElement.classList.contains('request-lock'));
  record('no-side-effects',!w.__testSinks.length&&!w.__testErrors.length,{errors:w.__testErrors,sinks:w.__testSinks});report();}
-// Visual contract for redesign 1A. Keep the full existing CTA/API matrix above.
-function checkVisualStructure(w,d,prefix){
+// Visual contract for redesign 1A/1B. Keep the full existing CTA/API matrix above.
+function checkVisualStructure(w,d,id,prefix){
  const dialog=d.getElementById('request-dialog'),fields=d.getElementById('request-fields');
  const content=dialog.querySelector('.request-content'),close=dialog.querySelector('.request-close');
  const consent=dialog.querySelector('.request-legal input');
- const note=d.getElementById('request-send-note'),check=d.getElementById('request-check'),send=d.getElementById('request-submit');
+ const note=d.getElementById('request-send-note'),send=d.getElementById('request-submit');
  record(prefix+'/compact-shell',dialog.querySelector('.request-header').children.length===1 && close.parentElement.matches('.request-header') &&
   !dialog.querySelector('.request-eyebrow,.request-demo,.request-alternatives,a[href^="tel:"],a[href^="mailto:"]') &&
   [...content.children].map(e=>e.tagName).join(',')==='H2,P,FORM' && !/Обязательно только поле|Юридические документы|Используйте тестовые данные/.test(dialog.textContent));
@@ -276,8 +340,7 @@ function checkVisualStructure(w,d,prefix){
  const collision=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
  record(prefix+'/field-layout',boxes.every((a,i)=>boxes.slice(i+1).every(b=>!collision(a,b))) &&
   (w.innerWidth>600 || boxes.every(a=>Math.abs(a.left-fields.getBoundingClientRect().left)<=1 && Math.abs(a.width-fields.clientWidth)<=1)));
- record(prefix+'/existing-actions',!check.disabled && check.type==='button' && send.disabled && send.type==='button' && d.getElementById('request-form').method==='dialog' &&
-  !collision(check.getBoundingClientRect(),send.getBoundingClientRect()));
+ checkPrimaryAction(w,d,id,prefix);
  content.scrollTop=content.scrollHeight;
  const n=note.getBoundingClientRect();
  record(prefix+'/reachable-bottom',geometry(w,d) && n.top>=r.top-1 && n.bottom<=r.bottom+1 && content.scrollWidth<=content.clientWidth+1);
@@ -289,7 +352,7 @@ async function layout(){records=[];output.textContent='Проверка стру
   const {w,d}=await load(width,mode);
   for(const id of Object.keys(expected)){
    const trigger=d.querySelector('[data-request-form="'+id+'"]');
-   trigger.click();await tick();checkVisualStructure(w,d,width+'/'+mode+'/'+id);
+   trigger.click();await tick();checkVisualStructure(w,d,id,width+'/'+mode+'/'+id);
    d.querySelector('.request-close').click();await tick();
   }
   record(width+'/'+mode+'/no-side-effects',!w.__testErrors.length&&!w.__testSinks.length,{errors:w.__testErrors,sinks:w.__testSinks});

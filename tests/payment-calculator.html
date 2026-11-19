@@ -44,6 +44,11 @@ async function run(){results=[];try{
   const result=w.SF676Payments.getCalculation();cta.scrollIntoView();cta.focus();await tick();await settleHeader(w,d);const y=w.scrollY,headerBefore={height:d.querySelector('.sticky').getBoundingClientRect().height,hidden:d.querySelector('.sticky .btn').hidden,fonts:d.fonts.status};cta.click();await tick();
   record(name+'/summary',d.querySelector('dialog').open&&geometry(d,'dialog')&&d.querySelector('.request-payment').textContent.includes('не подтверждена заводом'));
   d.querySelector('#request-contact').value='qa@example.com';const draft=w.SF676Requests.getDraft();record(name+'/context',JSON.stringify(draft.context.calculation)===JSON.stringify(result)&&draft.formId==='price_quote'&&draft.sourceSection==='price'&&draft.sourceCta==='payment-calculator'&&draft.context.calculation.source==='user_input');
+  const summary=d.querySelector('.request-payment').textContent;
+  d.querySelector('#request-submit').click();
+  record(name+'/local-action-preserves-calculation',d.querySelector('#request-dialog').open &&
+    d.querySelector('#request-status').textContent==='Поля заполнены. Отправка пока не подключена' &&
+    JSON.stringify(w.SF676Requests.getDraft())===JSON.stringify(draft) && d.querySelector('.request-payment').textContent===summary);
   w.SF676Requests.close();await tick();await settleHeader(w,d);record(name+'/return-focus',d.activeElement===cta&&Math.abs(w.scrollY-y)<2&&field.value==='1 000 000 000'&&w.SF676Requests.getDraft()===null,{yBefore:y,yAfter:w.scrollY,focused:d.activeElement===cta,headerBefore,headerAfter:{height:d.querySelector('.sticky').getBoundingClientRect().height,hidden:d.querySelector('.sticky .btn').hidden,fonts:d.fonts.status}});
   input(w,d,'1');input(w,d,'0');input(w,d,'1000000.50');record(name+'/rapid-change',read(d)[3]==='1 000 000,50 ₽'&&!d.querySelector('#payment-error').textContent);
   input(w,d,'');field.dispatchEvent(new w.Event('blur'));record(name+'/clear',w.SF676Payments.getCalculation()===null&&!d.querySelector('#payment-error').textContent&&read(d).every(t=>t==='Сумма появится после ввода стоимости')&&d.querySelector('#payment-live').textContent==='Укажите стоимость для расчёта платежей.');
