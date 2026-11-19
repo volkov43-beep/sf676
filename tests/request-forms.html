@@ -2,18 +2,19 @@
 <style>body{font:16px Arial;margin:16px;background:#eee}label,button{margin:6px}button,select{font:inherit;padding:8px}iframe{display:block;height:800px;border:0;background:#fff;transform-origin:top left}pre{white-space:pre-wrap}#stage{overflow:auto;max-width:100%}#result{max-height:260px;overflow:auto}</style>
 <h1>СФ676: локальная проверка интерфейса</h1>
 <p>Только синтетические данные. Матрица использует реальный DOM в iframe; реальные клавиши и указатель проверяются отдельно.</p>
-<label>Ширина <select id="width"><option>320</option><option>375</option><option selected>390</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
-<label>Режим <select id="mode"><option value="normal">Обычный</option><option value="review">Review</option><option value="zoom">Текст 200%</option><option value="nojs">Без JavaScript</option><option value="short">Высота 400px</option></select></label>
+<label>Ширина <select id="width"><option>320</option><option>350</option><option>375</option><option selected>390</option><option>480</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
+<label>Режим <select id="mode"><option value="normal">Обычный</option><option value="review">Review</option><option value="zoom150">Текст 150%</option><option value="zoom">Текст 200%</option><option value="nojs">Без JavaScript</option><option value="medium">Высота 600px</option><option value="mediumzoom150">600px / текст 150%</option><option value="mediumzoom">600px / текст 200%</option><option value="short">Высота 400px</option><option value="shortzoom150">400px / текст 150%</option><option value="shortzoom">400px / текст 200%</option></select></label>
 <button id="show">Открыть</button><button id="matrix">Проверить матрицу</button><button id="cases">Проверить валидацию / API</button>
+<button id="layout">Проверить структуру и низкий экран</button>
 <pre id="result">Готов к проверке.</pre><div id="stage"><iframe id="page" title="Проверяемая страница"></iframe></div>
 <script>
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
-const widths=[320,375,390,768,1024,1366,1920];
+const widths=[320,350,375,390,480,768,1024,1366,1920];
 const sectionButtons=[
  {section:'specs',cta:'specs-price',form:'price_quote',label:'Запросить стоимость СФ676',container:'.specs-price-cta'},
  {section:'design',cta:'design-consult',form:'configuration_help',label:'Обсудить комплектацию с технологом',container:'.construction-cta'},
  {section:'compare',cta:'compare-new-price',form:'price_quote',label:'Получить цену нового СФ676',container:'.comparison-actions',grouped:true},
- {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу'},
+ {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу',centered:true},
  {section:'work-gallery',cta:'gallery-price',form:'price_quote',label:'Узнать цену СФ676'},
  {section:'faq',cta:'faq-consult',form:'configuration_help',label:'Обсудить задачу с технологом'},
  {section:'specs',cta:'specs-fit',form:'configuration_help',label:'Проверить станок под мою деталь'},
@@ -23,11 +24,18 @@ const sectionButtons=[
  {section:'plant',cta:'plant-region',form:'price_quote',label:'Узнать цену для моего региона',container:'#delivery-geography > .section-cta'}
 ];
 const scenarioCopy={
- configuration_help:['Поможем подобрать комплектацию СФ676','Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка'],
+ configuration_help:['Поможем подобрать комплектацию СФ676','Инженер и технолог ВСЗ помогут подобрать подходящее исполнение станка под вашу производственную задачу'],
  price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail и укажите город доставки.'],
  repair_comparison:['Сравнить ремонт и приобретение нового СФ676','Расскажите о существующем оборудовании. Специалист поможет оценить варианты восстановления и приобретения нового станка'],
  procurement_documents:['Запросить документы для закупки СФ676','Укажите необходимые документы и контактные данные организации'],
  procurement_nmck:['Получить коммерческое предложение для обоснования НМЦК','Укажите контактные данные организации и требования к поставке СФ676.']
+};
+const scenarioActions={
+ price_quote:'Получить коммерческое предложение',
+ configuration_help:'Запросить консультацию',
+ repair_comparison:'Запросить расчёт',
+ procurement_documents:'Запросить документы',
+ procurement_nmck:'Запросить КП для НМЦК'
 };
 const expected={
  price_quote:['contact','city','name','company','deliveryAddress','comment'],
@@ -38,10 +46,19 @@ const expected={
 };
 const tick=()=>new Promise(r=>{requestAnimationFrame(()=>requestAnimationFrame(r));setTimeout(r,60)});
 async function until(test){for(let i=0;i<100;i++){if(test())return;await new Promise(r=>setTimeout(r,20))}throw Error('Timed out waiting for visible sticky header')}
+async function settleHeader(w,d){
+ // Scroll queues a header animation frame. Do not snapshot scrollY before its
+ // CTA visibility and ResizeObserver height have caught up with the page.
+ await until(()=>{
+  const header=d.querySelector('.sticky').getBoundingClientRect();
+  return Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-header.height)<=1 &&
+   d.querySelector('[data-source-cta="sticky-price"]').hidden===(d.querySelector('[data-source-cta="hero-price"]').getBoundingClientRect().bottom>header.bottom);
+ });
+}
 function report(){output.textContent=JSON.stringify({cases:records.length,failed:records.filter(r=>!r.pass),records},null,2)}
 function record(name,pass,extra={}){records.push({name,pass,...extra})}
 async function load(width,mode='normal'){
- frame.style.width=width+'px';frame.style.height=(mode==='short'?400:800)+'px';
+ frame.style.width=width+'px';frame.style.height=(mode.startsWith('short')?400:mode.startsWith('medium')?600:800)+'px';
  if(mode==='nojs')frame.setAttribute('sandbox','allow-same-origin');else frame.removeAttribute('sandbox');
  await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(mode==='review'?'?review=1':'');});
  const w=frame.contentWindow,d=w.document; w.__testErrors=[];w.__testSinks=[];
@@ -50,7 +67,7 @@ async function load(width,mode='normal'){
  for(const key of ['fetch','XMLHttpRequest','WebSocket']) w[key]=function(){w.__testSinks.push(key);throw Error('Unexpected transport: '+key)};
  w.navigator.sendBeacon=()=>{w.__testSinks.push('beacon');return false};
  w.Storage.prototype.setItem=function(){w.__testSinks.push('storage');throw Error('Unexpected storage')};
- if(mode==='zoom') d.documentElement.style.fontSize='200%';
+ if(mode.includes('zoom')) d.documentElement.style.fontSize=mode.includes('150')?'150%':'200%';
  d.documentElement.style.scrollBehavior='auto';await d.fonts.ready;await tick();return{w,d};
 }
 function geometry(w,d){const dialog=d.querySelector('dialog'),r=dialog.getBoundingClientRect(),c=d.querySelector('.request-close').getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1 && dialog.scrollWidth<=dialog.clientWidth+1 && r.left>=0&&r.right<=w.innerWidth+1&&r.top>=0&&r.bottom<=w.innerHeight+1&&c.top>=r.top&&c.bottom<=r.bottom&&Array.from(dialog.querySelectorAll('input,select,textarea,button,h2,fieldset,label')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||(b.left>=r.left&&b.right<=r.right+1)});}
@@ -63,6 +80,8 @@ function checkQuoteDetails(w,d,prefix){
  record(prefix+'/expanded',details.open && visible()===expected.price_quote.join(',') && geometry(w,d));
  summary.click();
  record(prefix+'/collapsed',!details.open && visible()==='contact,city' && geometry(w,d));
+ const gap=d.querySelector('.request-legal').getBoundingClientRect().top-details.getBoundingClientRect().bottom;
+ record(prefix+'/compact-consent-spacing',Math.abs(gap-parseFloat(w.getComputedStyle(d.querySelector('.request-legal')).marginTop))<=1,{gap});
  const payment=fields.querySelector('.request-payment');
  if(payment) record(prefix+'/payment-first',payment===fields.firstElementChild && payment.checkVisibility());
 }
@@ -89,7 +108,7 @@ function checkDistribution(w,d,prefix){
 }
 async function matrix(){records=[];output.textContent='Проверка…';
  try{
- for(const mode of ['normal','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
+ for(const mode of ['normal','zoom150','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
  const total=d.getElementById('payment-total');
  total.value='1000000';
  total.dispatchEvent(new w.Event('input',{bubbles:true}));
@@ -104,15 +123,17 @@ async function matrix(){records=[];output.textContent='Проверка…';
    d.querySelector('#faq .faq-list').nextElementSibling.matches('.section-cta') &&
    !d.querySelector('[data-source-cta="faq-consult"]').closest('details'));
  checkDistribution(w,d,`${width}/${mode}`);
- for(const {section,cta,label,form,container,grouped} of sectionButtons){
+ for(const {section,cta,label,form,container,grouped,centered} of sectionButtons){
    const matches=triggers.filter(link=>link.dataset.sourceCta===cta);
    const link=matches[0], wrap=d.getElementById(section).querySelector(':scope > .wrap:last-child');
    record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===(container?d.querySelector('#'+section+' '+container):wrap.lastElementChild) &&
      link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm===form && !link.hasAttribute('data-payment-calculator'));
    if(link){
      const box=link.getBoundingClientRect(), column=link.parentElement.getBoundingClientRect();
-     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && (grouped||Math.abs(box.left-column.left)<=1) && box.left>=column.left-1 &&
+     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && (centered?Math.abs(box.left+box.width/2-column.left-column.width/2)<=1:grouped||Math.abs(box.left-column.left)<=1) && box.left>=column.left-1 &&
        box.right<=column.right+1 && (width>568 || Math.abs(box.width-column.width)<=1));
+     if(centered)record(`${width}/${mode}/${cta}/red-style`,link.classList.contains('red')&&!link.classList.contains('out')&&
+       w.getComputedStyle(link).backgroundColor===w.getComputedStyle(d.querySelector('[data-source-cta="hero-price"]')).backgroundColor);
    }
  }
  for(const link of triggers){
@@ -121,7 +142,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
    d.querySelector('#price').scrollIntoView();
    await until(()=>link.getClientRects().length>0);
  }else link.scrollIntoView();
- link.focus({preventScroll:true});await tick();const y=w.scrollY;link.click();await tick();
+ link.focus({preventScroll:true});await tick();await settleHeader(w,d);const y=w.scrollY;link.click();await tick();
  const dialog=d.querySelector('dialog'), names=[...new Set(Array.from(d.querySelectorAll('#request-fields [name]')).map(e=>e.name))];
  record(`${width}/${mode}/${link.dataset.sourceCta}/open`,dialog.open&&JSON.stringify(names)===JSON.stringify(expected[id])&&geometry(w,d)&&w.getComputedStyle(d.body).position==='fixed'&&d.activeElement.id==='request-title');
  if(id==='price_quote') checkQuoteDetails(w,d,`${width}/${mode}/${link.dataset.sourceCta}`);
@@ -133,11 +154,12 @@ async function matrix(){records=[];output.textContent='Проверка…';
      d.getElementById('request-title').textContent===title &&
      d.getElementById('request-description').textContent===description);
  }
- d.querySelector('#request-check').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true');
- const contact=d.querySelector('#request-contact');contact.value='invalid-contact';d.querySelector('#request-check').click();
+ checkPrimaryAction(w,d,id,`${width}/${mode}/${link.dataset.sourceCta}`);
+ d.querySelector('#request-submit').click();record(`${width}/${mode}/${id}/required`,d.querySelector('#request-contact').getAttribute('aria-invalid')==='true' && d.activeElement.id==='request-contact' && d.getElementById('request-contact-error').textContent==='Укажите телефон или e-mail');
+ const contact=d.querySelector('#request-contact');contact.value='invalid-contact';d.querySelector('#request-submit').click();
  record(`${width}/${mode}/${link.dataset.sourceCta}/invalid-contact`,contact.getAttribute('aria-invalid')==='true' && w.SF676Requests.getDraft()===null);
- contact.value='qa+sf676@example.com';d.querySelector('#request-check').click();
- const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&d.querySelector('#request-submit').disabled&&d.querySelector('#request-status').textContent.includes('данные не отправлены'));
+ contact.value='qa+sf676@example.com';d.querySelector('#request-submit').click();
+ const draft=w.SF676Requests.getDraft();record(`${width}/${mode}/${link.dataset.sourceCta}/valid-context`,!!draft&&draft.formId===id&&draft.sourceCta===link.dataset.sourceCta&&draft.sourceSection===link.dataset.sourceSection&&draft.contact.value==='qa+sf676@example.com'&&dialog.open&&contact.value==='qa+sf676@example.com'&&!contact.hasAttribute('aria-invalid')&&d.querySelector('#request-status').textContent==='Поля заполнены. Отправка пока не подключена');
  if(link.hasAttribute('data-payment-calculator')){
    record(`${width}/${mode}/calculator-quote`,draft?.context.calculation?.totalKopeks===100000000 && !!dialog.querySelector('.request-payment'));
  }
@@ -146,7 +168,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
      !('calculation' in draft.context) && !dialog.querySelector('.request-payment'));
  }
  d.querySelector('.request-content').scrollTop=1e6;record(`${width}/${mode}/${id}/scroll`,geometry(w,d));
- d.querySelector('.request-close').click();await tick();
+ d.querySelector('.request-close').click();await tick();await settleHeader(w,d);
  record(`${width}/${mode}/${link.dataset.sourceCta}/close`,!dialog.open&&d.activeElement===link&&Math.abs(w.scrollY-y)<=2&&w.SF676Requests.getDraft()===null&&d.querySelectorAll('#request-fields input').length===0&&w.getComputedStyle(d.body).position!=='fixed',{yBefore:y,yAfter:w.scrollY,focus:d.activeElement.dataset.sourceCta||d.activeElement.id});
  link.click();record(`${width}/${mode}/${id}/clean-reopen`,d.querySelector('#request-contact').value==='');w.SF676Requests.close();await tick();
  }
@@ -225,7 +247,70 @@ function checkSalesDrafts(w,d){
  record('repair/clean-reopen',expected.repair_comparison.every(key=>field(key).value==='')&&api.getDraft()===null);
  api.close();
 }
-async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;checkSalesDrafts(w,d);const link=d.querySelector('[data-source-cta="hero-price"]');link.click();
+function checkPrimaryAction(w,d,id,prefix){
+ const form=d.getElementById('request-form'),send=d.getElementById('request-submit');
+ const style=w.getComputedStyle(send),box=send.getBoundingClientRect();
+ record(prefix+'/single-primary-action',form.querySelectorAll('button').length===1 && !d.getElementById('request-check') &&
+  !form.textContent.includes('Проверить заполнение') && !send.disabled && send.type==='submit' && send.form===form &&
+  send.textContent===scenarioActions[id] && form.method==='dialog' && form.noValidate && !form.hasAttribute('action'));
+ record(prefix+'/primary-action-layout',send.classList.contains('red') &&
+  style.backgroundColor===w.getComputedStyle(d.querySelector('[data-source-cta="hero-price"]')).backgroundColor &&
+  box.height>=48 && Math.abs(box.width-send.parentElement.clientWidth)<=1 && send.scrollWidth<=send.clientWidth+1);
+}
+function checkLocalActions(w,d){
+ const api=w.SF676Requests,form=d.getElementById('request-form'),dialog=d.getElementById('request-dialog');
+ const url=w.location.href;
+ for(const id of Object.keys(expected)){
+  const trigger=d.querySelector('[data-request-form="'+id+'"]');trigger.click();
+  checkPrimaryAction(w,d,id,'action/'+id);
+  const send=d.getElementById('request-submit'),contact=d.getElementById('request-contact'),status=d.getElementById('request-status');
+  let submits=0,prevented=true,submitter=true;
+  const observe=e=>{submits++;prevented=prevented&&e.defaultPrevented;submitter=submitter&&e.submitter===send};
+  form.addEventListener('submit',observe);
+  send.click();
+  record(id+'/button-empty',contact.getAttribute('aria-invalid')==='true' && d.activeElement===contact &&
+   d.getElementById('request-contact-error').textContent==='Укажите телефон или e-mail' &&
+   w.getComputedStyle(contact).borderTopWidth==='2px' && status.dataset.state==='invalid');
+  for(const value of ['test@','12345','a'.repeat(255)]){
+   contact.value=value;send.click();
+   record(id+'/button-invalid-'+value.length,contact.getAttribute('aria-invalid')==='true' && contact.value===value && api.getDraft()===null);
+  }
+  if(id==='price_quote'){
+   const company=d.getElementById('request-company'),details=company.closest('details');
+   contact.value='';company.value='<тест>';details.open=false;send.click();
+   record('quote/first-error-before-collapsed',details.open && company.getAttribute('aria-invalid')==='true' &&
+    contact.getAttribute('aria-invalid')==='true' && d.activeElement===contact && contact.value==='' && company.value==='<тест>');
+   company.value='';company.dispatchEvent(new w.Event('input',{bubbles:true}));
+  }
+  contact.value='qa+local@example.com';contact.dispatchEvent(new w.Event('input',{bubbles:true}));
+  record(id+'/correct-error',!contact.hasAttribute('aria-invalid') && !status.textContent);
+  const emptyOptional=JSON.stringify(api.getDraft());send.click();
+  record(id+'/contact-only',dialog.open && JSON.stringify(api.getDraft())===emptyOptional && status.textContent==='Поля заполнены. Отправка пока не подключена');
+  for(const input of form.querySelectorAll('#request-fields input[type="text"],textarea')){
+   if(input===contact)continue;
+   for(const [reason,value] of [['length','x'.repeat(input.maxLength+1)],['markup','<b>тест</b>'],['control','тест\u0001']]){
+    input.value=value;const details=input.closest('details');if(details)details.open=false;
+    send.click();
+    record(id+'/'+input.name+'/button-'+reason,input.value===value && input.getAttribute('aria-invalid')==='true' &&
+     d.activeElement===input && (!details||details.open) && api.getDraft()===null);
+   }
+   input.value='Тестовые данные';send.click();
+   record(id+'/'+input.name+'/button-recover',!input.hasAttribute('aria-invalid') && !!api.getDraft());
+  }
+  const saved=JSON.stringify(api.getDraft());
+  form.requestSubmit(send);
+  record(id+'/submit-safe',submits>=7 && prevented && submitter && dialog.open && w.location.href===url &&
+   saved===JSON.stringify(api.getDraft()) && status.textContent==='Поля заполнены. Отправка пока не подключена' &&
+   !form.querySelector('.request-legal input').checked && !Object.hasOwn(api.getDraft(),'consent') &&
+   Object.keys(api.getDraft()).sort().join(',')==='contact,context,formId,schemaVersion,sourceCta,sourceSection');
+  form.removeEventListener('submit',observe);
+  api.close();trigger.click();
+  record(id+'/action-clean-reopen',!status.textContent && !form.querySelector('[aria-invalid]') && contact.value==='' &&
+   !d.getElementById('request-contact').value && api.getDraft()===null);
+  api.close();
+ }
+}
+async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Requests;checkLocalActions(w,d);checkSalesDrafts(w,d);const link=d.querySelector('[data-source-cta="hero-price"]');link.click();
  const values=[['',false],['test@',false],['test@example..com',false],['test@example.com',true],['qa+tag@sub.example.com',true],['тест@пример.рф',true],['+7 (800) 707-26-76',true],['8 800 707 26 76',true],['8007072676',true],['7999999999',true],['+375 29 123 45 67',true],['12345',false],['+78007072676123456',false],['1111111111',false],['<b>test</b>@example.com',false]];
  for(const[value,valid]of values){const input=d.querySelector('#request-contact');input.value=value;const result=api.validate();record('contact/'+values.findIndex(x=>x[0]===value),result===valid&&input.value===value);}
  d.querySelector('#request-contact').value='qa@example.com';d.querySelector('#request-comment').value='<img src=x onerror=alert(1)>';record('html-rejected',!api.validate()&&api.getDraft()===null);d.querySelector('#request-comment').value='x'.repeat(2001);record('length-rejected',!api.validate());api.close();
@@ -237,6 +322,89 @@ async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Re
  const oldUrl=w.location.href;d.querySelector('form').requestSubmit();record('implicit-submit-safe',d.querySelector('dialog').open&&w.location.href===oldUrl);api.close();
  for(let i=0;i<20;i++){link.click();api.close()}record('single-dialog-repeated',d.querySelectorAll('dialog').length===1&&!d.documentElement.classList.contains('request-lock'));
  record('no-side-effects',!w.__testSinks.length&&!w.__testErrors.length,{errors:w.__testErrors,sinks:w.__testSinks});report();}
+// Final visual contract, including error states, text enlargement and short screens.
+function checkVisualStructure(w,d,id,prefix){
+ const dialog=d.getElementById('request-dialog'),fields=d.getElementById('request-fields');
+ const content=dialog.querySelector('.request-content'),close=dialog.querySelector('.request-close');
+ const consent=dialog.querySelector('.request-legal input');
+ const note=d.getElementById('request-send-note'),send=d.getElementById('request-submit');
+ record(prefix+'/compact-shell',dialog.querySelector('.request-header').children.length===1 && close.parentElement.matches('.request-header') &&
+  !dialog.querySelector('.request-eyebrow,.request-demo,.request-alternatives,a[href^="tel:"],a[href^="mailto:"]') &&
+  [...content.children].map(e=>e.tagName).join(',')==='H2,P,FORM' && !/Обязательно только поле|Юридические документы|Используйте тестовые данные/.test(dialog.textContent));
+ record(prefix+'/single-send-note',note.textContent==='Отправка заявок пока не подключена' && dialog.querySelectorAll('#request-send-note').length===1 && note.parentElement===send.parentElement &&
+  dialog.getAttribute('aria-describedby').split(' ').includes(note.id) && send.getAttribute('aria-describedby')===note.id);
+ record(prefix+'/inactive-consent',consent?.disabled && !consent.checked && !consent.required && !consent.name &&
+  consent.labels[0].textContent==='Я согласен на обработку персональных данных' && !consent.closest('fieldset') && !consent.labels[0].querySelector('a') &&
+  consent.labels[0].nextElementSibling.matches('.request-actions'));
+ const controls=[...fields.querySelectorAll('input:not([type="checkbox"]),select,textarea')];
+ const contact=d.getElementById('request-contact');
+ record(prefix+'/labels-and-required',controls.filter(e=>e.required).map(e=>e.name).join(',')==='contact' &&
+  controls.every(e=>e.labels.length===1 && e.labels[0].htmlFor===e.id && !/— обязательно|— необязательно/.test(e.labels[0].textContent)) &&
+  contact.labels[0].textContent==='Телефон или e-mail *' && fields.querySelectorAll('.request-required').length===1 &&
+  contact.labels[0].querySelector('.request-required').getAttribute('aria-hidden')==='true');
+ record(prefix+'/aria-references',[...dialog.querySelectorAll('[aria-describedby],[aria-labelledby]')].every(e=>
+  [e.getAttribute('aria-describedby'),e.getAttribute('aria-labelledby')].filter(Boolean).join(' ').split(/\s+/).every(id=>d.getElementById(id))));
+ const c=close.getBoundingClientRect(),r=content.getBoundingClientRect();
+ record(prefix+'/close-and-title',c.width>=44 && c.height>=44 && close.getAttribute('aria-label')==='Закрыть форму' &&
+  d.getElementById('request-title').getBoundingClientRect().top>=r.top-1 && geometry(w,d));
+ const boxes=[...fields.querySelectorAll(':scope > .request-field')].filter(e=>e.checkVisibility()).map(e=>e.getBoundingClientRect());
+ const collision=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
+ record(prefix+'/field-layout',boxes.every((a,i)=>boxes.slice(i+1).every(b=>!collision(a,b))) &&
+  (w.innerWidth>600 || boxes.every(a=>Math.abs(a.left-fields.getBoundingClientRect().left)<=1 && Math.abs(a.width-fields.clientWidth)<=1)));
+ const shortFields=[...fields.querySelectorAll(':scope > .request-field:not(.request-field-wide)')];
+ record(prefix+'/no-single-half-column',shortFields.length!==1 || Math.abs(shortFields[0].getBoundingClientRect().width-fields.clientWidth)<=1);
+ checkPrimaryAction(w,d,id,prefix);
+ content.scrollTop=content.scrollHeight;
+ const n=note.getBoundingClientRect();
+ record(prefix+'/reachable-bottom',geometry(w,d) && n.top>=r.top-1 && n.bottom<=r.bottom+1 && content.scrollWidth<=content.clientWidth+1);
+}
+function checkValidationLayout(w,d,prefix){
+ const dialog=d.getElementById('request-dialog'),content=dialog.querySelector('.request-content');
+ const send=d.getElementById('request-submit'),contact=d.getElementById('request-contact'),error=d.getElementById('request-contact-error');
+ const status=d.getElementById('request-status');
+ const insideWidth=node=>{const r=node.getBoundingClientRect(),c=content.getBoundingClientRect();return r.left>=c.left-1&&r.right<=c.right+1&&node.scrollWidth<=node.clientWidth+1};
+ // Check both ends separately: enlarged paragraphs may be taller than a short viewport.
+ const reachable=node=>{
+  let r=node.getBoundingClientRect(),c=content.getBoundingClientRect();content.scrollTop+=r.top-c.top;
+  r=node.getBoundingClientRect();const start=r.top>=c.top-1&&r.top<c.bottom;
+  content.scrollTop+=r.bottom-c.bottom;r=node.getBoundingClientRect();
+  return start&&r.bottom<=c.bottom+1&&r.bottom>c.top;
+ };
+ for(const value of ['', 'invalid-contact']){
+  contact.value=value;send.click();
+  record(prefix+'/error-'+(value?'format':'required'),contact.getAttribute('aria-invalid')==='true' && d.activeElement===contact &&
+   contact.value===value && error.textContent.length>0 && w.getComputedStyle(contact).borderTopWidth==='2px' &&
+   w.getComputedStyle(error).color===w.getComputedStyle(contact).borderTopColor &&
+   parseFloat(w.getComputedStyle(error).fontSize)<parseFloat(w.getComputedStyle(send).fontSize) && geometry(w,d));
+  record(prefix+'/error-readable-'+(value?'format':'required'),insideWidth(error)&&reachable(error)&&insideWidth(status)&&reachable(status)&&reachable(send));
+ }
+ contact.value='qa+polish@example.com';contact.dispatchEvent(new w.Event('input',{bubbles:true}));
+ const before=JSON.stringify(w.SF676Requests.getDraft());send.click();
+ record(prefix+'/corrected-retained',dialog.open && before===JSON.stringify(w.SF676Requests.getDraft()) &&
+  !contact.hasAttribute('aria-invalid') && !error.textContent && status.textContent==='Поля заполнены. Отправка пока не подключена');
+ record(prefix+'/all-content-reachable',[d.getElementById('request-title'),d.getElementById('request-description'),
+  ...dialog.querySelectorAll('#request-fields > .request-field'),dialog.querySelector('.request-legal'),send,d.getElementById('request-send-note'),status]
+  .every(node=>insideWidth(node)&&reachable(node))&&geometry(w,d));
+ const close=dialog.querySelector('.request-close').getBoundingClientRect(),box=dialog.getBoundingClientRect();
+ record(prefix+'/close-stays-visible',close.top>=box.top&&close.bottom<=box.bottom&&close.width>=44&&close.height>=44);
+}
+async function layout(){records=[];output.textContent='Проверка структуры…';
+ try{
+ for(const mode of ['normal','zoom150','zoom','medium','mediumzoom150','mediumzoom','short','shortzoom150','shortzoom'])for(const width of widths){
+  output.textContent='Структура: '+width+' / '+mode;
+  const {w,d}=await load(width,mode);
+  for(const id of Object.keys(expected)){
+   const trigger=d.querySelector('[data-request-form="'+id+'"]');
+   const prefix=width+'/'+mode+'/'+id;
+   trigger.click();await tick();checkVisualStructure(w,d,id,prefix);
+   checkValidationLayout(w,d,prefix);
+   d.querySelector('.request-close').click();await tick();
+  }
+  record(width+'/'+mode+'/no-side-effects',!w.__testErrors.length&&!w.__testSinks.length,{errors:w.__testErrors,sinks:w.__testSinks});
+ }
+ }catch(e){record('exception',false,{message:String(e)})}report();
+}
+document.getElementById('layout').onclick=layout;
 document.getElementById('show').onclick=()=>load(+document.getElementById('width').value,document.getElementById('mode').value);
 document.getElementById('matrix').onclick=matrix;document.getElementById('cases').onclick=cases;load(390);
 </script></html>

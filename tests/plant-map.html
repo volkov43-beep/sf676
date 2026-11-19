@@ -216,7 +216,11 @@ async function checkFallback(source, mode) {
   check(cta.getClientRects().length && !cta.closest('.delivery-map-ui,.delivery-directory'), 'CTA виден при отказе карты');
   if (mode !== 'no-js') {
     cta.click();
-    check(d.querySelector('#request-dialog:modal') && d.querySelector('#request-submit').disabled, 'Открытие демонстрационной формы');
+    const action = d.querySelector('#request-submit');
+    check(d.querySelector('#request-dialog:modal') && !action.disabled && action.type === 'submit' &&
+      action.textContent === 'Получить коммерческое предложение' && d.querySelectorAll('#request-form button').length === 1, 'Открытие формы с одним локальным действием');
+    action.click();
+    check(d.querySelector('#request-dialog:modal') && d.querySelector('#request-contact').getAttribute('aria-invalid') === 'true', 'Локальная проверка контакта');
     d.querySelector('#request-contact').value = 'test@example.com';
     const draft = d.defaultView.SF676Requests.getDraft();
     check(draft?.formId === 'price_quote' &&

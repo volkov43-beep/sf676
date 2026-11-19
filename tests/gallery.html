@@ -263,7 +263,11 @@ async function checkRequestLinks() {
     link.focus({preventScroll: true});
     link.click();
     const input = d.querySelector('#request-contact');
-    check(input.value === '' && d.querySelector('#request-submit').disabled, 'Чистая демонстрационная форма');
+    const action = d.querySelector('#request-submit');
+    check(input.value === '' && !action.disabled && action.type === 'submit' &&
+      d.querySelectorAll('#request-form button').length === 1 && !d.querySelector('#request-check'), 'Чистая форма с одним локальным действием');
+    action.click();
+    check(d.querySelector('#request-dialog:modal') && input.getAttribute('aria-invalid') === 'true' && d.activeElement === input, 'Основная кнопка проверяет контакт');
     input.value = 'gallery-test@example.com';
     const draft = w.SF676Requests.getDraft();
     check(d.querySelector('#request-dialog:modal') && draft?.formId === link.dataset.requestForm &&

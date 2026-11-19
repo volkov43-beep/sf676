@@ -673,6 +673,7 @@ body{overflow-wrap:anywhere}
 }
 
 .section-cta{margin-top:var(--ui-space-4);text-align:left}
+#advantages .section-cta{text-align:center}
 @media (max-width:568px){.section-cta .btn{width:100%;min-height:48px;white-space:normal}}
 .sticky .header-email{display:none}
 @media (min-width:1024px){
@@ -825,7 +826,7 @@ body{overflow-wrap:anywhere}
     </section>
     <p class="adv-note">Иллюстрации условные и показывают принцип работы оборудования</p>
     <div class="section-cta">
-      <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="advantages" data-source-cta="advantages-consult">Подобрать станок под мою задачу</a>
+      <a class="btn red" href="#order" data-request-form="configuration_help" data-source-section="advantages" data-source-cta="advantages-consult">Подобрать станок под мою задачу</a>
     </div>
   </div>
 </section>
@@ -1459,36 +1460,23 @@ body{overflow-wrap:anywhere}
 </footer>
 
 <!-- One progressively enhanced request dialog; method=dialog is a no-network fallback. -->
-<dialog class="request-dialog" id="request-dialog" aria-labelledby="request-title" aria-describedby="request-description request-demo">
+<dialog class="request-dialog" id="request-dialog" aria-labelledby="request-title" aria-describedby="request-description request-send-note">
   <div class="request-shell">
     <header class="request-header">
-      <span class="request-eyebrow">СФ676 · Отдел продаж</span>
       <button class="request-close" type="button" aria-label="Закрыть форму">×</button>
     </header>
     <div class="request-content">
       <h2 id="request-title" tabindex="-1"></h2>
       <p id="request-description"></p>
-      <p class="request-demo" id="request-demo"><b>Демонстрационная версия. Отправка заявки пока не подключена.</b> Используйте тестовые данные. При закрытии окна введённые значения очищаются.</p>
       <form id="request-form" method="dialog" autocomplete="off" novalidate>
-        <p class="request-hint">Обязательно только поле «Телефон или e-mail». Остальные поля можно пропустить.</p>
         <div class="request-fields" id="request-fields"></div>
-        <fieldset class="request-legal" disabled>
-          <legend>Согласие на обработку данных</legend>
-          <label><input type="checkbox" disabled><span>Место для согласия на обработку персональных данных.</span></label>
-          <p>Юридические документы ещё готовятся. Согласие в демонстрационной версии не запрашивается.</p>
-        </fieldset>
+        <label class="request-legal"><input type="checkbox" disabled aria-describedby="request-send-note"><span>Я согласен на обработку персональных данных</span></label>
         <div class="request-actions">
-          <button class="btn out" id="request-check" type="button">Проверить заполнение</button>
+          <button class="btn red" id="request-submit" type="submit" aria-describedby="request-send-note">Получить коммерческое предложение</button>
+          <p class="request-hint" id="request-send-note">Отправка заявок пока не подключена</p>
           <p class="request-status" id="request-status" role="status" aria-live="polite" aria-atomic="true"></p>
-          <button class="btn red" id="request-submit" type="button" disabled aria-describedby="request-send-note">Отправить запрос</button>
-          <p class="request-hint" id="request-send-note">Демонстрационная версия. Отправка заявки пока не подключена.</p>
         </div>
       </form>
-      <div class="request-alternatives">
-        <p>Связаться с отделом продаж:</p>
-        <a href="tel:+78007072676">8 (800) 707-26-76</a>
-        <a href="mailto:sale@vsp-kirov.ru">sale@vsp-kirov.ru</a>
-      </div>
     </div>
   </div>
 </dialog>
