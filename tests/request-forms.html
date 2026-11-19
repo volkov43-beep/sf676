@@ -2,19 +2,19 @@
 <style>body{font:16px Arial;margin:16px;background:#eee}label,button{margin:6px}button,select{font:inherit;padding:8px}iframe{display:block;height:800px;border:0;background:#fff;transform-origin:top left}pre{white-space:pre-wrap}#stage{overflow:auto;max-width:100%}#result{max-height:260px;overflow:auto}</style>
 <h1>СФ676: локальная проверка интерфейса</h1>
 <p>Только синтетические данные. Матрица использует реальный DOM в iframe; реальные клавиши и указатель проверяются отдельно.</p>
-<label>Ширина <select id="width"><option>320</option><option>375</option><option selected>390</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
-<label>Режим <select id="mode"><option value="normal">Обычный</option><option value="review">Review</option><option value="zoom">Текст 200%</option><option value="nojs">Без JavaScript</option><option value="short">Высота 400px</option><option value="shortzoom">400px / текст 200%</option></select></label>
+<label>Ширина <select id="width"><option>320</option><option>350</option><option>375</option><option selected>390</option><option>480</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
+<label>Режим <select id="mode"><option value="normal">Обычный</option><option value="review">Review</option><option value="zoom150">Текст 150%</option><option value="zoom">Текст 200%</option><option value="nojs">Без JavaScript</option><option value="medium">Высота 600px</option><option value="mediumzoom150">600px / текст 150%</option><option value="mediumzoom">600px / текст 200%</option><option value="short">Высота 400px</option><option value="shortzoom150">400px / текст 150%</option><option value="shortzoom">400px / текст 200%</option></select></label>
 <button id="show">Открыть</button><button id="matrix">Проверить матрицу</button><button id="cases">Проверить валидацию / API</button>
 <button id="layout">Проверить структуру и низкий экран</button>
 <pre id="result">Готов к проверке.</pre><div id="stage"><iframe id="page" title="Проверяемая страница"></iframe></div>
 <script>
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
-const widths=[320,375,390,768,1024,1366,1920];
+const widths=[320,350,375,390,480,768,1024,1366,1920];
 const sectionButtons=[
  {section:'specs',cta:'specs-price',form:'price_quote',label:'Запросить стоимость СФ676',container:'.specs-price-cta'},
  {section:'design',cta:'design-consult',form:'configuration_help',label:'Обсудить комплектацию с технологом',container:'.construction-cta'},
  {section:'compare',cta:'compare-new-price',form:'price_quote',label:'Получить цену нового СФ676',container:'.comparison-actions',grouped:true},
- {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу'},
+ {section:'advantages',cta:'advantages-consult',form:'configuration_help',label:'Подобрать станок под мою задачу',centered:true},
  {section:'work-gallery',cta:'gallery-price',form:'price_quote',label:'Узнать цену СФ676'},
  {section:'faq',cta:'faq-consult',form:'configuration_help',label:'Обсудить задачу с технологом'},
  {section:'specs',cta:'specs-fit',form:'configuration_help',label:'Проверить станок под мою деталь'},
@@ -58,7 +58,7 @@ async function settleHeader(w,d){
 function report(){output.textContent=JSON.stringify({cases:records.length,failed:records.filter(r=>!r.pass),records},null,2)}
 function record(name,pass,extra={}){records.push({name,pass,...extra})}
 async function load(width,mode='normal'){
- frame.style.width=width+'px';frame.style.height=(mode.startsWith('short')?400:800)+'px';
+ frame.style.width=width+'px';frame.style.height=(mode.startsWith('short')?400:mode.startsWith('medium')?600:800)+'px';
  if(mode==='nojs')frame.setAttribute('sandbox','allow-same-origin');else frame.removeAttribute('sandbox');
  await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(mode==='review'?'?review=1':'');});
  const w=frame.contentWindow,d=w.document; w.__testErrors=[];w.__testSinks=[];
@@ -67,7 +67,7 @@ async function load(width,mode='normal'){
  for(const key of ['fetch','XMLHttpRequest','WebSocket']) w[key]=function(){w.__testSinks.push(key);throw Error('Unexpected transport: '+key)};
  w.navigator.sendBeacon=()=>{w.__testSinks.push('beacon');return false};
  w.Storage.prototype.setItem=function(){w.__testSinks.push('storage');throw Error('Unexpected storage')};
- if(mode.includes('zoom')) d.documentElement.style.fontSize='200%';
+ if(mode.includes('zoom')) d.documentElement.style.fontSize=mode.includes('150')?'150%':'200%';
  d.documentElement.style.scrollBehavior='auto';await d.fonts.ready;await tick();return{w,d};
 }
 function geometry(w,d){const dialog=d.querySelector('dialog'),r=dialog.getBoundingClientRect(),c=d.querySelector('.request-close').getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1 && dialog.scrollWidth<=dialog.clientWidth+1 && r.left>=0&&r.right<=w.innerWidth+1&&r.top>=0&&r.bottom<=w.innerHeight+1&&c.top>=r.top&&c.bottom<=r.bottom&&Array.from(dialog.querySelectorAll('input,select,textarea,button,h2,fieldset,label')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||(b.left>=r.left&&b.right<=r.right+1)});}
@@ -80,6 +80,8 @@ function checkQuoteDetails(w,d,prefix){
  record(prefix+'/expanded',details.open && visible()===expected.price_quote.join(',') && geometry(w,d));
  summary.click();
  record(prefix+'/collapsed',!details.open && visible()==='contact,city' && geometry(w,d));
+ const gap=d.querySelector('.request-legal').getBoundingClientRect().top-details.getBoundingClientRect().bottom;
+ record(prefix+'/compact-consent-spacing',Math.abs(gap-parseFloat(w.getComputedStyle(d.querySelector('.request-legal')).marginTop))<=1,{gap});
  const payment=fields.querySelector('.request-payment');
  if(payment) record(prefix+'/payment-first',payment===fields.firstElementChild && payment.checkVisibility());
 }
@@ -106,7 +108,7 @@ function checkDistribution(w,d,prefix){
 }
 async function matrix(){records=[];output.textContent='Проверка…';
  try{
- for(const mode of ['normal','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
+ for(const mode of ['normal','zoom150','zoom'])for(const width of widths){output.textContent='Проверка: '+width+' / '+mode;const {w,d}=await load(width,mode);record(`${width}/${mode}/initialized`,!!w.SF676Requests);
  const total=d.getElementById('payment-total');
  total.value='1000000';
  total.dispatchEvent(new w.Event('input',{bubbles:true}));
@@ -121,15 +123,17 @@ async function matrix(){records=[];output.textContent='Проверка…';
    d.querySelector('#faq .faq-list').nextElementSibling.matches('.section-cta') &&
    !d.querySelector('[data-source-cta="faq-consult"]').closest('details'));
  checkDistribution(w,d,`${width}/${mode}`);
- for(const {section,cta,label,form,container,grouped} of sectionButtons){
+ for(const {section,cta,label,form,container,grouped,centered} of sectionButtons){
    const matches=triggers.filter(link=>link.dataset.sourceCta===cta);
    const link=matches[0], wrap=d.getElementById(section).querySelector(':scope > .wrap:last-child');
    record(`${width}/${mode}/${cta}/contract`,matches.length===1 && link.parentElement===(container?d.querySelector('#'+section+' '+container):wrap.lastElementChild) &&
      link.textContent===label && link.dataset.sourceSection===section && link.dataset.requestForm===form && !link.hasAttribute('data-payment-calculator'));
    if(link){
      const box=link.getBoundingClientRect(), column=link.parentElement.getBoundingClientRect();
-     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && (grouped||Math.abs(box.left-column.left)<=1) && box.left>=column.left-1 &&
+     record(`${width}/${mode}/${cta}/layout`,box.height>=48 && (centered?Math.abs(box.left+box.width/2-column.left-column.width/2)<=1:grouped||Math.abs(box.left-column.left)<=1) && box.left>=column.left-1 &&
        box.right<=column.right+1 && (width>568 || Math.abs(box.width-column.width)<=1));
+     if(centered)record(`${width}/${mode}/${cta}/red-style`,link.classList.contains('red')&&!link.classList.contains('out')&&
+       w.getComputedStyle(link).backgroundColor===w.getComputedStyle(d.querySelector('[data-source-cta="hero-price"]')).backgroundColor);
    }
  }
  for(const link of triggers){
@@ -271,6 +275,13 @@ function checkLocalActions(w,d){
    contact.value=value;send.click();
    record(id+'/button-invalid-'+value.length,contact.getAttribute('aria-invalid')==='true' && contact.value===value && api.getDraft()===null);
   }
+  if(id==='price_quote'){
+   const company=d.getElementById('request-company'),details=company.closest('details');
+   contact.value='';company.value='<тест>';details.open=false;send.click();
+   record('quote/first-error-before-collapsed',details.open && company.getAttribute('aria-invalid')==='true' &&
+    contact.getAttribute('aria-invalid')==='true' && d.activeElement===contact && contact.value==='' && company.value==='<тест>');
+   company.value='';company.dispatchEvent(new w.Event('input',{bubbles:true}));
+  }
   contact.value='qa+local@example.com';contact.dispatchEvent(new w.Event('input',{bubbles:true}));
   record(id+'/correct-error',!contact.hasAttribute('aria-invalid') && !status.textContent);
   const emptyOptional=JSON.stringify(api.getDraft());send.click();
@@ -311,7 +322,7 @@ async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Re
  const oldUrl=w.location.href;d.querySelector('form').requestSubmit();record('implicit-submit-safe',d.querySelector('dialog').open&&w.location.href===oldUrl);api.close();
  for(let i=0;i<20;i++){link.click();api.close()}record('single-dialog-repeated',d.querySelectorAll('dialog').length===1&&!d.documentElement.classList.contains('request-lock'));
  record('no-side-effects',!w.__testSinks.length&&!w.__testErrors.length,{errors:w.__testErrors,sinks:w.__testSinks});report();}
-// Visual contract for redesign 1A/1B. Keep the full existing CTA/API matrix above.
+// Final visual contract, including error states, text enlargement and short screens.
 function checkVisualStructure(w,d,id,prefix){
  const dialog=d.getElementById('request-dialog'),fields=d.getElementById('request-fields');
  const content=dialog.querySelector('.request-content'),close=dialog.querySelector('.request-close');
@@ -340,19 +351,53 @@ function checkVisualStructure(w,d,id,prefix){
  const collision=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
  record(prefix+'/field-layout',boxes.every((a,i)=>boxes.slice(i+1).every(b=>!collision(a,b))) &&
   (w.innerWidth>600 || boxes.every(a=>Math.abs(a.left-fields.getBoundingClientRect().left)<=1 && Math.abs(a.width-fields.clientWidth)<=1)));
+ const shortFields=[...fields.querySelectorAll(':scope > .request-field:not(.request-field-wide)')];
+ record(prefix+'/no-single-half-column',shortFields.length!==1 || Math.abs(shortFields[0].getBoundingClientRect().width-fields.clientWidth)<=1);
  checkPrimaryAction(w,d,id,prefix);
  content.scrollTop=content.scrollHeight;
  const n=note.getBoundingClientRect();
  record(prefix+'/reachable-bottom',geometry(w,d) && n.top>=r.top-1 && n.bottom<=r.bottom+1 && content.scrollWidth<=content.clientWidth+1);
 }
+function checkValidationLayout(w,d,prefix){
+ const dialog=d.getElementById('request-dialog'),content=dialog.querySelector('.request-content');
+ const send=d.getElementById('request-submit'),contact=d.getElementById('request-contact'),error=d.getElementById('request-contact-error');
+ const status=d.getElementById('request-status');
+ const insideWidth=node=>{const r=node.getBoundingClientRect(),c=content.getBoundingClientRect();return r.left>=c.left-1&&r.right<=c.right+1&&node.scrollWidth<=node.clientWidth+1};
+ // Check both ends separately: enlarged paragraphs may be taller than a short viewport.
+ const reachable=node=>{
+  let r=node.getBoundingClientRect(),c=content.getBoundingClientRect();content.scrollTop+=r.top-c.top;
+  r=node.getBoundingClientRect();const start=r.top>=c.top-1&&r.top<c.bottom;
+  content.scrollTop+=r.bottom-c.bottom;r=node.getBoundingClientRect();
+  return start&&r.bottom<=c.bottom+1&&r.bottom>c.top;
+ };
+ for(const value of ['', 'invalid-contact']){
+  contact.value=value;send.click();
+  record(prefix+'/error-'+(value?'format':'required'),contact.getAttribute('aria-invalid')==='true' && d.activeElement===contact &&
+   contact.value===value && error.textContent.length>0 && w.getComputedStyle(contact).borderTopWidth==='2px' &&
+   w.getComputedStyle(error).color===w.getComputedStyle(contact).borderTopColor &&
+   parseFloat(w.getComputedStyle(error).fontSize)<parseFloat(w.getComputedStyle(send).fontSize) && geometry(w,d));
+  record(prefix+'/error-readable-'+(value?'format':'required'),insideWidth(error)&&reachable(error)&&insideWidth(status)&&reachable(status)&&reachable(send));
+ }
+ contact.value='qa+polish@example.com';contact.dispatchEvent(new w.Event('input',{bubbles:true}));
+ const before=JSON.stringify(w.SF676Requests.getDraft());send.click();
+ record(prefix+'/corrected-retained',dialog.open && before===JSON.stringify(w.SF676Requests.getDraft()) &&
+  !contact.hasAttribute('aria-invalid') && !error.textContent && status.textContent==='Поля заполнены. Отправка пока не подключена');
+ record(prefix+'/all-content-reachable',[d.getElementById('request-title'),d.getElementById('request-description'),
+  ...dialog.querySelectorAll('#request-fields > .request-field'),dialog.querySelector('.request-legal'),send,d.getElementById('request-send-note'),status]
+  .every(node=>insideWidth(node)&&reachable(node))&&geometry(w,d));
+ const close=dialog.querySelector('.request-close').getBoundingClientRect(),box=dialog.getBoundingClientRect();
+ record(prefix+'/close-stays-visible',close.top>=box.top&&close.bottom<=box.bottom&&close.width>=44&&close.height>=44);
+}
 async function layout(){records=[];output.textContent='Проверка структуры…';
  try{
- for(const mode of ['normal','zoom','short','shortzoom'])for(const width of widths){
+ for(const mode of ['normal','zoom150','zoom','medium','mediumzoom150','mediumzoom','short','shortzoom150','shortzoom'])for(const width of widths){
   output.textContent='Структура: '+width+' / '+mode;
   const {w,d}=await load(width,mode);
   for(const id of Object.keys(expected)){
    const trigger=d.querySelector('[data-request-form="'+id+'"]');
-   trigger.click();await tick();checkVisualStructure(w,d,id,width+'/'+mode+'/'+id);
+   const prefix=width+'/'+mode+'/'+id;
+   trigger.click();await tick();checkVisualStructure(w,d,id,prefix);
+   checkValidationLayout(w,d,prefix);
    d.querySelector('.request-close').click();await tick();
   }
   record(width+'/'+mode+'/no-side-effects',!w.__testErrors.length&&!w.__testSinks.length,{errors:w.__testErrors,sinks:w.__testSinks});

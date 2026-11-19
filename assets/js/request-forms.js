@@ -172,10 +172,8 @@
     });
     status.dataset.state = first ? 'invalid' : 'valid';
     status.textContent = first ? 'Проверьте отмеченные поля. Данные не отправлены.' : 'Поля заполнены. Отправка пока не подключена';
-    if (firstCollapsed) {
-      firstCollapsed.closest('details').open = true;
-      firstCollapsed.focus();
-    } else if (first) first.focus();
+    if (firstCollapsed) firstCollapsed.closest('details').open = true;
+    if (first) first.focus();
     return !first;
   }
   // Only bounded, plain technical context is accepted; never a DOM fragment or HTML.
