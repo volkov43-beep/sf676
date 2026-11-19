@@ -238,3 +238,16 @@ html:has(.gallery-viewer[open]) { overflow: hidden; }
   .mosaic-photo:not(:first-child) .mosaic-expand { display: none; }
   .mosaic-footer { flex-direction: column; align-items: stretch; }
 }
+
+/* The technical gallery is a full-width zone within #specs; the workshop stays unchanged. */
+#specs .specs-gallery-band {
+  margin-top: var(--ui-space-5);
+  padding-block: var(--ui-space-5);
+  background: var(--surface);
+}
+#specs .tech-gallery { margin-top: 0; }
+#specs .tech-gallery .gallery-header {
+  text-align: center;
+  margin-bottom: var(--ui-space-3);
+}
+#specs .tech-gallery .tech-thumb { background: var(--paper); }
