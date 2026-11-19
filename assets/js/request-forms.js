@@ -42,7 +42,7 @@
     },
     configuration_help: {
       title: 'Поможем подобрать комплектацию СФ676',
-      description: 'Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка',
+      description: 'Инженер и технолог ВСЗ помогут подобрать подходящее исполнение станка под вашу производственную задачу',
       fields: ['contact', 'name', 'company', 'task'], action: 'Запросить консультацию'
     },
     repair_comparison: {
@@ -75,7 +75,11 @@
     const spec = definitions[key];
     const group = el(spec.type === 'checkboxes' ? 'fieldset' : 'div', 'request-field' + (spec.wide ? ' request-field-wide' : '') + (spec.type === 'checkboxes' ? ' request-choices' : ''));
     const label = el(spec.type === 'checkboxes' ? 'legend' : 'label', '', spec.label);
-    label.appendChild(el('small', '', spec.required ? ' — обязательно' : ' — необязательно'));
+    if (spec.required) {
+      const marker = el('span', 'request-required', ' *');
+      marker.setAttribute('aria-hidden', 'true');
+      label.appendChild(marker);
+    }
     group.appendChild(label);
     const id = 'request-' + key;
     if (spec.type === 'checkboxes') {
@@ -262,7 +266,6 @@
     sendButton.textContent = scenario.action;
     const fieldKeys = scenario.fields.filter(key => !(context.selector?.mode === 'quiz' && key === 'task'));
     if (context.selector) {
-      description.textContent = 'Ваша сводка добавлена ниже. Укажите контакт для обсуждения с технологом. Это демонстрационная форма без отправки.';
       renderSelection(context.selector);
     }
     if (context.calculation) renderPayment(context.calculation);

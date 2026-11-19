@@ -3,8 +3,9 @@
 <h1>СФ676: локальная проверка интерфейса</h1>
 <p>Только синтетические данные. Матрица использует реальный DOM в iframe; реальные клавиши и указатель проверяются отдельно.</p>
 <label>Ширина <select id="width"><option>320</option><option>375</option><option selected>390</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
-<label>Режим <select id="mode"><option value="normal">Обычный</option><option value="review">Review</option><option value="zoom">Текст 200%</option><option value="nojs">Без JavaScript</option><option value="short">Высота 400px</option></select></label>
+<label>Режим <select id="mode"><option value="normal">Обычный</option><option value="review">Review</option><option value="zoom">Текст 200%</option><option value="nojs">Без JavaScript</option><option value="short">Высота 400px</option><option value="shortzoom">400px / текст 200%</option></select></label>
 <button id="show">Открыть</button><button id="matrix">Проверить матрицу</button><button id="cases">Проверить валидацию / API</button>
+<button id="layout">Проверить структуру и низкий экран</button>
 <pre id="result">Готов к проверке.</pre><div id="stage"><iframe id="page" title="Проверяемая страница"></iframe></div>
 <script>
 const frame=document.getElementById('page'), output=document.getElementById('result');let records=[];
@@ -23,7 +24,7 @@ const sectionButtons=[
  {section:'plant',cta:'plant-region',form:'price_quote',label:'Узнать цену для моего региона',container:'#delivery-geography > .section-cta'}
 ];
 const scenarioCopy={
- configuration_help:['Поможем подобрать комплектацию СФ676','Опишите производственную задачу. Технолог поможет определить подходящее исполнение станка'],
+ configuration_help:['Поможем подобрать комплектацию СФ676','Инженер и технолог ВСЗ помогут подобрать подходящее исполнение станка под вашу производственную задачу'],
  price_quote:['Получить цену СФ676 с доставкой','Оставьте телефон или e-mail и укажите город доставки.'],
  repair_comparison:['Сравнить ремонт и приобретение нового СФ676','Расскажите о существующем оборудовании. Специалист поможет оценить варианты восстановления и приобретения нового станка'],
  procurement_documents:['Запросить документы для закупки СФ676','Укажите необходимые документы и контактные данные организации'],
@@ -38,10 +39,19 @@ const expected={
 };
 const tick=()=>new Promise(r=>{requestAnimationFrame(()=>requestAnimationFrame(r));setTimeout(r,60)});
 async function until(test){for(let i=0;i<100;i++){if(test())return;await new Promise(r=>setTimeout(r,20))}throw Error('Timed out waiting for visible sticky header')}
+async function settleHeader(w,d){
+ // Scroll queues a header animation frame. Do not snapshot scrollY before its
+ // CTA visibility and ResizeObserver height have caught up with the page.
+ await until(()=>{
+  const header=d.querySelector('.sticky').getBoundingClientRect();
+  return Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-header.height)<=1 &&
+   d.querySelector('[data-source-cta="sticky-price"]').hidden===(d.querySelector('[data-source-cta="hero-price"]').getBoundingClientRect().bottom>header.bottom);
+ });
+}
 function report(){output.textContent=JSON.stringify({cases:records.length,failed:records.filter(r=>!r.pass),records},null,2)}
 function record(name,pass,extra={}){records.push({name,pass,...extra})}
 async function load(width,mode='normal'){
- frame.style.width=width+'px';frame.style.height=(mode==='short'?400:800)+'px';
+ frame.style.width=width+'px';frame.style.height=(mode.startsWith('short')?400:800)+'px';
  if(mode==='nojs')frame.setAttribute('sandbox','allow-same-origin');else frame.removeAttribute('sandbox');
  await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(mode==='review'?'?review=1':'');});
  const w=frame.contentWindow,d=w.document; w.__testErrors=[];w.__testSinks=[];
@@ -50,7 +60,7 @@ async function load(width,mode='normal'){
  for(const key of ['fetch','XMLHttpRequest','WebSocket']) w[key]=function(){w.__testSinks.push(key);throw Error('Unexpected transport: '+key)};
  w.navigator.sendBeacon=()=>{w.__testSinks.push('beacon');return false};
  w.Storage.prototype.setItem=function(){w.__testSinks.push('storage');throw Error('Unexpected storage')};
- if(mode==='zoom') d.documentElement.style.fontSize='200%';
+ if(mode.includes('zoom')) d.documentElement.style.fontSize='200%';
  d.documentElement.style.scrollBehavior='auto';await d.fonts.ready;await tick();return{w,d};
 }
 function geometry(w,d){const dialog=d.querySelector('dialog'),r=dialog.getBoundingClientRect(),c=d.querySelector('.request-close').getBoundingClientRect();return d.documentElement.scrollWidth<=d.documentElement.clientWidth+1 && dialog.scrollWidth<=dialog.clientWidth+1 && r.left>=0&&r.right<=w.innerWidth+1&&r.top>=0&&r.bottom<=w.innerHeight+1&&c.top>=r.top&&c.bottom<=r.bottom&&Array.from(dialog.querySelectorAll('input,select,textarea,button,h2,fieldset,label')).every(e=>{const b=e.getBoundingClientRect();return b.width===0||(b.left>=r.left&&b.right<=r.right+1)});}
@@ -121,7 +131,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
    d.querySelector('#price').scrollIntoView();
    await until(()=>link.getClientRects().length>0);
  }else link.scrollIntoView();
- link.focus({preventScroll:true});await tick();const y=w.scrollY;link.click();await tick();
+ link.focus({preventScroll:true});await tick();await settleHeader(w,d);const y=w.scrollY;link.click();await tick();
  const dialog=d.querySelector('dialog'), names=[...new Set(Array.from(d.querySelectorAll('#request-fields [name]')).map(e=>e.name))];
  record(`${width}/${mode}/${link.dataset.sourceCta}/open`,dialog.open&&JSON.stringify(names)===JSON.stringify(expected[id])&&geometry(w,d)&&w.getComputedStyle(d.body).position==='fixed'&&d.activeElement.id==='request-title');
  if(id==='price_quote') checkQuoteDetails(w,d,`${width}/${mode}/${link.dataset.sourceCta}`);
@@ -146,7 +156,7 @@ async function matrix(){records=[];output.textContent='Проверка…';
      !('calculation' in draft.context) && !dialog.querySelector('.request-payment'));
  }
  d.querySelector('.request-content').scrollTop=1e6;record(`${width}/${mode}/${id}/scroll`,geometry(w,d));
- d.querySelector('.request-close').click();await tick();
+ d.querySelector('.request-close').click();await tick();await settleHeader(w,d);
  record(`${width}/${mode}/${link.dataset.sourceCta}/close`,!dialog.open&&d.activeElement===link&&Math.abs(w.scrollY-y)<=2&&w.SF676Requests.getDraft()===null&&d.querySelectorAll('#request-fields input').length===0&&w.getComputedStyle(d.body).position!=='fixed',{yBefore:y,yAfter:w.scrollY,focus:d.activeElement.dataset.sourceCta||d.activeElement.id});
  link.click();record(`${width}/${mode}/${id}/clean-reopen`,d.querySelector('#request-contact').value==='');w.SF676Requests.close();await tick();
  }
@@ -237,6 +247,56 @@ async function cases(){records=[];const{w,d}=await load(390);const api=w.SF676Re
  const oldUrl=w.location.href;d.querySelector('form').requestSubmit();record('implicit-submit-safe',d.querySelector('dialog').open&&w.location.href===oldUrl);api.close();
  for(let i=0;i<20;i++){link.click();api.close()}record('single-dialog-repeated',d.querySelectorAll('dialog').length===1&&!d.documentElement.classList.contains('request-lock'));
  record('no-side-effects',!w.__testSinks.length&&!w.__testErrors.length,{errors:w.__testErrors,sinks:w.__testSinks});report();}
+// Visual contract for redesign 1A. Keep the full existing CTA/API matrix above.
+function checkVisualStructure(w,d,prefix){
+ const dialog=d.getElementById('request-dialog'),fields=d.getElementById('request-fields');
+ const content=dialog.querySelector('.request-content'),close=dialog.querySelector('.request-close');
+ const consent=dialog.querySelector('.request-legal input');
+ const note=d.getElementById('request-send-note'),check=d.getElementById('request-check'),send=d.getElementById('request-submit');
+ record(prefix+'/compact-shell',dialog.querySelector('.request-header').children.length===1 && close.parentElement.matches('.request-header') &&
+  !dialog.querySelector('.request-eyebrow,.request-demo,.request-alternatives,a[href^="tel:"],a[href^="mailto:"]') &&
+  [...content.children].map(e=>e.tagName).join(',')==='H2,P,FORM' && !/Обязательно только поле|Юридические документы|Используйте тестовые данные/.test(dialog.textContent));
+ record(prefix+'/single-send-note',note.textContent==='Отправка заявок пока не подключена' && dialog.querySelectorAll('#request-send-note').length===1 && note.parentElement===send.parentElement &&
+  dialog.getAttribute('aria-describedby').split(' ').includes(note.id) && send.getAttribute('aria-describedby')===note.id);
+ record(prefix+'/inactive-consent',consent?.disabled && !consent.checked && !consent.required && !consent.name &&
+  consent.labels[0].textContent==='Я согласен на обработку персональных данных' && !consent.closest('fieldset') && !consent.labels[0].querySelector('a') &&
+  consent.labels[0].nextElementSibling.matches('.request-actions'));
+ const controls=[...fields.querySelectorAll('input:not([type="checkbox"]),select,textarea')];
+ const contact=d.getElementById('request-contact');
+ record(prefix+'/labels-and-required',controls.filter(e=>e.required).map(e=>e.name).join(',')==='contact' &&
+  controls.every(e=>e.labels.length===1 && e.labels[0].htmlFor===e.id && !/— обязательно|— необязательно/.test(e.labels[0].textContent)) &&
+  contact.labels[0].textContent==='Телефон или e-mail *' && fields.querySelectorAll('.request-required').length===1 &&
+  contact.labels[0].querySelector('.request-required').getAttribute('aria-hidden')==='true');
+ record(prefix+'/aria-references',[...dialog.querySelectorAll('[aria-describedby],[aria-labelledby]')].every(e=>
+  [e.getAttribute('aria-describedby'),e.getAttribute('aria-labelledby')].filter(Boolean).join(' ').split(/\s+/).every(id=>d.getElementById(id))));
+ const c=close.getBoundingClientRect(),r=content.getBoundingClientRect();
+ record(prefix+'/close-and-title',c.width>=44 && c.height>=44 && close.getAttribute('aria-label')==='Закрыть форму' &&
+  d.getElementById('request-title').getBoundingClientRect().top>=r.top-1 && geometry(w,d));
+ const boxes=[...fields.querySelectorAll(':scope > .request-field')].filter(e=>e.checkVisibility()).map(e=>e.getBoundingClientRect());
+ const collision=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
+ record(prefix+'/field-layout',boxes.every((a,i)=>boxes.slice(i+1).every(b=>!collision(a,b))) &&
+  (w.innerWidth>600 || boxes.every(a=>Math.abs(a.left-fields.getBoundingClientRect().left)<=1 && Math.abs(a.width-fields.clientWidth)<=1)));
+ record(prefix+'/existing-actions',!check.disabled && check.type==='button' && send.disabled && send.type==='button' && d.getElementById('request-form').method==='dialog' &&
+  !collision(check.getBoundingClientRect(),send.getBoundingClientRect()));
+ content.scrollTop=content.scrollHeight;
+ const n=note.getBoundingClientRect();
+ record(prefix+'/reachable-bottom',geometry(w,d) && n.top>=r.top-1 && n.bottom<=r.bottom+1 && content.scrollWidth<=content.clientWidth+1);
+}
+async function layout(){records=[];output.textContent='Проверка структуры…';
+ try{
+ for(const mode of ['normal','zoom','short','shortzoom'])for(const width of widths){
+  output.textContent='Структура: '+width+' / '+mode;
+  const {w,d}=await load(width,mode);
+  for(const id of Object.keys(expected)){
+   const trigger=d.querySelector('[data-request-form="'+id+'"]');
+   trigger.click();await tick();checkVisualStructure(w,d,width+'/'+mode+'/'+id);
+   d.querySelector('.request-close').click();await tick();
+  }
+  record(width+'/'+mode+'/no-side-effects',!w.__testErrors.length&&!w.__testSinks.length,{errors:w.__testErrors,sinks:w.__testSinks});
+ }
+ }catch(e){record('exception',false,{message:String(e)})}report();
+}
+document.getElementById('layout').onclick=layout;
 document.getElementById('show').onclick=()=>load(+document.getElementById('width').value,document.getElementById('mode').value);
 document.getElementById('matrix').onclick=matrix;document.getElementById('cases').onclick=cases;load(390);
 </script></html>
