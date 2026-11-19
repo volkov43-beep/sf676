@@ -6,8 +6,8 @@
 body{font:16px system-ui;margin:12px}nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}button,select{font:inherit;padding:6px}iframe{display:block;border:0;width:390px;height:850px}#stage{overflow:auto}pre{white-space:pre-wrap;max-height:180px;overflow:auto}
 </style>
 <nav>
-<label>Ширина <select id="width"><option>320</option><option>375</option><option selected>390</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
-<label>Текст <select id="zoom"><option>100</option><option>200</option></select></label>
+<label>Ширина <select id="width"><option>320</option><option>350</option><option>375</option><option selected>390</option><option>480</option><option>600</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
+<label>Текст <select id="zoom"><option>100</option><option>150</option><option>200</option></select></label>
 <label>JavaScript <select id="scripts"><option value="yes">Включён</option><option value="no">Отключён</option></select></label>
 <button id="show">Показать</button><button id="run">Проверить матрицу</button>
 <button id="anchor">Проверить редакторский якорь</button>
@@ -16,7 +16,7 @@ body{font:16px system-ui;margin:12px}nav{display:flex;flex-wrap:wrap;gap:8px;ali
 <div id="stage"><iframe id="page" title="Характеристики СФ676"></iframe></div>
 <script>
 const frame=document.querySelector('#page'),output=document.querySelector('#results');
-const widths=[320,375,390,768,1024,1366,1920],zooms=[100,200];
+const widths=[320,350,375,390,480,600,768,1024,1366,1920],zooms=[100,150,200];
 const names=['Рабочая зона и конструкция','Шпиндели и обработка','Электрика и точность'];
 const counts=[6,5,3];let records=[];
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -73,16 +73,60 @@ async function accordion(w,d,key){
  record(key+'/operations-hidden',!visible(d.querySelector('.spec-operations')));
  record(key+'/cta-always-visible',visible(d.querySelector('[data-source-cta="specs-price"]')));
 }
-async function price(w,d,key,js){
- const cta=d.querySelector('[data-source-cta="specs-price"]');
- record(key+'/source',cta.dataset.sourceSection==='specs'&&cta.dataset.requestForm==='price_quote'&&cta.getAttribute('href')==='#order');
- cta.scrollIntoView({block:'center'});await wait(60);cta.focus();cta.click();await wait(60);
- if(!js){record(key+'/nojs-order',w.location.hash==='#order'&&!d.querySelector('dialog[open]')&&!w.SF676Requests);return}
- record(key+'/price-open',!!d.querySelector('#request-dialog:modal')&&d.getElementById('request-title').textContent==='Получить цену СФ676 с доставкой');
- d.querySelector('#request-contact').value='specs-qa@example.com';d.querySelector('#request-submit').click();
- const draft=w.SF676Requests.getDraft();record(key+'/draft-source',draft.formId==='price_quote'&&draft.sourceSection==='specs'&&draft.sourceCta==='specs-price');
- d.querySelector('.request-close').click();await wait(60);
- record(key+'/focus-restored',!d.querySelector('dialog[open]')&&d.activeElement===cta);
+async function commercial(w,d,key,js){
+ for(const [source,form,title] of [['specs-price','price_quote','Получить цену СФ676 с доставкой'],['specs-fit','configuration_help','Поможем подобрать комплектацию СФ676']]){
+  const prefix=key+'/'+source,cta=d.querySelector('[data-source-cta="'+source+'"]');
+  record(prefix+'/source',cta.dataset.sourceSection==='specs'&&cta.dataset.requestForm===form&&cta.getAttribute('href')==='#order');
+  cta.scrollIntoView({block:'center'});await wait(60);cta.focus();cta.click();await wait(60);
+  if(!js){record(prefix+'/nojs-order',w.location.hash==='#order'&&!d.querySelector('dialog[open]')&&!w.SF676Requests);continue}
+  record(prefix+'/open',!!d.querySelector('#request-dialog:modal')&&d.getElementById('request-title').textContent===title);
+  d.querySelector('#request-contact').value='specs-qa@example.com';d.querySelector('#request-submit').click();
+  const draft=w.SF676Requests.getDraft();record(prefix+'/draft-source',draft.formId===form&&draft.sourceSection==='specs'&&draft.sourceCta===source);
+  const closed=new Promise(resolve=>d.querySelector('#request-dialog').addEventListener('close',resolve,{once:true}));
+  d.querySelector('.request-close').click();await closed;
+  record(prefix+'/focus-restored',!d.querySelector('dialog[open]')&&d.activeElement===cta);
+ }
+}
+async function technicalGallery(w,d,key,js){
+ const band=d.querySelector('.specs-gallery-band'),gallery=band.querySelector('[data-sf676-gallery]'),header=gallery.querySelector('.gallery-header'),docs=d.getElementById('technical-documents'),cta=d.querySelector('[data-source-cta="specs-fit"]');
+ gallery.scrollIntoView({block:'start'});await wait(50);
+ const wrappers=[d.querySelector('#specs > .wrap'),band.querySelector('.wrap'),docs.parentElement];
+ record(key+'/gallery/full-width-surface',Math.abs(rect(band).left)<=1&&Math.abs(rect(band).right-d.documentElement.clientWidth)<=1&&w.getComputedStyle(band).backgroundColor===w.getComputedStyle(d.getElementById('price')).backgroundColor);
+ record(key+'/gallery/aligned-containers',wrappers.every(e=>Math.abs(rect(e).left-rect(wrappers[0]).left)<=1&&Math.abs(rect(e).width-rect(wrappers[0]).width)<=1));
+ record(key+'/gallery/centered-copy',header.querySelector('h3').textContent==='Фотографии станка СФ676'&&header.querySelector('p').textContent==='Рабочая зона, инструмент и элементы управления'&&[...header.children].every(e=>w.getComputedStyle(e).textAlign==='center'&&centered(e,header)));
+ record(key+'/gallery/docs-separated',docs.parentElement===band.nextElementSibling&&docs.parentElement.classList.contains('wrap')&&!docs.closest('[data-sf676-gallery]')&&!cta.closest('[data-sf676-gallery]')&&rect(docs).top>=rect(band).bottom+24);
+ record(key+'/gallery/docs-marker',docs.querySelector('[data-q="docs"]').textContent.startsWith('Техническая документация'));
+ const thumbs=[...gallery.querySelectorAll('.tech-thumb')],track=gallery.querySelector('.tech-thumbs'),photo=gallery.querySelector('.tech-photo');
+ record(key+'/gallery/five-photos',thumbs.length===5&&thumbs.every(e=>e.querySelector('img').alt&&e.getAttribute('href').endsWith('-1600.webp')));
+ if(js){
+  record(key+'/gallery/desktop-or-mobile',w.innerWidth>=1024?rect(track).left>=rect(photo).right&&Math.abs(rect(track).top-rect(photo).top)<=1:rect(track).top>=rect(photo).bottom&&w.getComputedStyle(track).overflowX==='auto');
+  record(key+'/gallery/photo-ratio',Math.abs(rect(photo).width/rect(photo).height-1.5)<.01);
+  for(let i=0;i<thumbs.length;i++){
+   if(i)thumbs[i].click();await wait(25);
+   record(key+'/gallery/select-'+i,photo.href===thumbs[i].href&&photo.querySelector('img').alt===thumbs[i].querySelector('img').alt&&gallery.querySelector('.tech-name').textContent===thumbs[i].querySelector('span').textContent);
+  }
+  gallery.querySelector('.gallery-next').click();record(key+'/gallery/next-wrap',photo.href===thumbs[0].href);
+  gallery.querySelector('.gallery-prev').click();record(key+'/gallery/prev-wrap',photo.href===thumbs[4].href);
+  const controls=[...gallery.querySelectorAll('button')].filter(visible);
+  record(key+'/gallery/touch-controls',controls.length===2&&controls.every(e=>rect(e).height>=44&&rect(e).width>=44));
+  const bounded=[header,...header.children,photo,gallery.querySelector('.tech-meta'),gallery.querySelector('.tech-name'),gallery.querySelector('.tech-navigation'),...controls];
+  record(key+'/gallery/no-overflow',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&bounded.every(e=>rect(e).left>=-1&&rect(e).right<=d.documentElement.clientWidth+1&&e.scrollWidth<=e.clientWidth+1));
+  const buttons=controls.map(rect);record(key+'/gallery/no-control-overlap',buttons[0].right<=buttons[1].left+1||buttons[1].right<=buttons[0].left+1);
+  photo.focus();photo.click();await wait(50);
+  const viewer=d.querySelector('.gallery-viewer:modal');
+  record(key+'/gallery/zoom-open',!!viewer&&viewer.querySelector('img').src===photo.href&&viewer.querySelector('.gallery-caption').textContent===photo.querySelector('img').alt&&!d.querySelector('#request-dialog[open]'));
+  viewer.querySelector('.gallery-next').click();record(key+'/gallery/zoom-end',viewer.querySelector('img').src===thumbs[4].href&&viewer.querySelector('.gallery-next').getAttribute('aria-disabled')==='true');
+  viewer.querySelector('.gallery-prev').click();record(key+'/gallery/zoom-previous',viewer.querySelector('img').src===thumbs[3].href);
+  viewer.querySelector('.gallery-next').click();record(key+'/gallery/zoom-next',viewer.querySelector('img').src===thumbs[4].href);
+  const closed=new Promise(resolve=>viewer.addEventListener('close',resolve,{once:true}));
+  viewer.querySelector('.gallery-close').click();await closed;
+  await until(()=>!viewer.isConnected&&d.activeElement===photo,'gallery close focus');
+  record(key+'/gallery/close-focus',!d.querySelector('dialog[open]')&&d.activeElement===photo);
+ }else{
+  record(key+'/gallery/nojs-fallback',!visible(photo)&&thumbs.every(visible)&&gallery.querySelector('.tech-main').hidden&&d.documentElement.scrollWidth<=d.documentElement.clientWidth+1);
+  record(key+'/gallery/nojs-local-rail',track.scrollWidth>=track.clientWidth&&w.getComputedStyle(track).overflowX==='auto');
+ }
+ record(key+'/gallery/docs-readable',docs.scrollWidth<=docs.clientWidth+1&&cta.scrollWidth<=cta.clientWidth+1&&rect(cta).height>=48);
 }
 async function reviewAnchor(w,d,key){
  // Test-only marker: exercises the existing navigation if an editor later flags a table cell.
@@ -99,7 +143,7 @@ async function matrix(){records=[];busy(true);try{
   const {w,d}=await load(width,zoom,js);const errors=[];w.addEventListener('error',e=>errors.push(e.message));
   const ctas=[...d.querySelectorAll('a[data-request-form]')];record(key+'/19-cta',ctas.length===19&&new Set(ctas.map(e=>e.dataset.sourceCta)).size===19);
   record(key+'/preserved-regions',d.querySelectorAll('section[id]:not(#qlist)').length===14&&d.querySelectorAll('[data-sf676-gallery]').length===2&&d.querySelector('meta[name="robots"]').content==='noindex, nofollow');
-  geometry(w,d,key);await accordion(w,d,key);await price(w,d,key,js);if(js)await reviewAnchor(w,d,key);
+  geometry(w,d,key);await accordion(w,d,key);await technicalGallery(w,d,key,js);await commercial(w,d,key,js);if(js)await reviewAnchor(w,d,key);
   record(key+'/js-errors',!errors.length,{errors});
  }
  }catch(e){record('fatal',false,{error:String(e)})}finally{report();busy(false)}}

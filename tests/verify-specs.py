@@ -53,6 +53,14 @@ photo_old = one(old, '//*[@id="specs"]//figure')
 photo_new = deepcopy(one(new, '//*[@id="specs"]//figure'))
 one(photo_new, './/img').set('sizes', one(photo_old, './/img').get('sizes'))
 assert canonical(photo_old) == canonical(photo_new), 'Only responsive sizes may change on photo'
+band = one(new, '//*[@id="specs"]/div[@class="specs-gallery-band"]')
+assert band.getprevious().xpath('./div[@class="section-cta specs-price-cta"]')
+assert one(band, './div[@class="wrap"]/*[@data-sf676-gallery]') is one(new, '//*[@id="specs"]//*[@data-sf676-gallery]')
+closing = band.getnext()
+assert closing.get('class') == 'wrap specs-closing'
+assert one(closing, './div[@id="technical-documents"]') is closing[0]
+assert one(closing, './div/a[@data-source-cta="specs-fit"]') is closing[-1][0]
+assert not closing.xpath('.//*[@data-sf676-gallery]')
 # Apart from the scoped stylesheet and #specs, the complete document stays identical.
 for tree in (old, new):
     for selector in ('//style', '//*[@id="specs"]'):

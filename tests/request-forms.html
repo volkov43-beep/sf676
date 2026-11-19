@@ -87,7 +87,7 @@ function checkQuoteDetails(w,d,prefix){
 }
 function checkDistribution(w,d,prefix){
  const specs=d.querySelector('#specs .specs-price-cta');
- record(prefix+'/specs-price/position',specs.previousElementSibling.matches('.spec-groups') && specs.nextElementSibling.matches('[data-sf676-gallery]') && d.querySelector('.spec-operations').closest('details')===d.querySelectorAll('.spec-group')[1] && !specs.closest('table,[data-sf676-gallery]'));
+ record(prefix+'/specs-price/position',specs.previousElementSibling.matches('.spec-groups') && !specs.nextElementSibling && specs.parentElement.nextElementSibling.matches('.specs-gallery-band') && d.querySelector('.spec-operations').closest('details')===d.querySelectorAll('.spec-group')[1] && !specs.closest('table,[data-sf676-gallery]'));
  const groups=[...d.querySelectorAll('#design .construction-grid')], cta=d.querySelector('#design .construction-cta');
  const cards=groups.flatMap(group=>[...group.querySelectorAll(':scope > article')]);
  const titles=cards.map(card=>card.querySelector('.feature-title span').textContent);

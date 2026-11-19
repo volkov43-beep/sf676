@@ -66,7 +66,8 @@ async function checkLayout(width, zoom) {
   check(sections.join(' ') === 'top advantages specs config work-gallery plant price acceptance design compare delivery gov faq order qlist', 'Порядок секций');
   check(d.querySelectorAll('[data-sf676-gallery]').length === 2, 'Число галерей');
   const first = d.querySelector('#specs [data-sf676-gallery]');
-  check(first.previousElementSibling.matches('.specs-price-cta') && d.querySelector('.spec-operations').closest('details')===d.querySelectorAll('.spec-group')[1] && first.nextElementSibling.id === 'technical-documents', 'Положение технических фотографий');
+  const band=first.closest('.specs-gallery-band');
+  check(band?.parentElement.id==='specs' && band.previousElementSibling.lastElementChild.matches('.specs-price-cta') && d.querySelector('.spec-operations').closest('details')===d.querySelectorAll('.spec-group')[1] && band.nextElementSibling.firstElementChild.id==='technical-documents' && !d.querySelector('[data-source-cta="specs-fit"]').closest('[data-sf676-gallery]'), 'Положение технических фотографий');
   check(d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1, 'Горизонтальная прокрутка страницы');
   check(!w.performance.getEntriesByType('resource').some(r => /galleries\/.*-1600\.webp/.test(r.name) && !/(4204|4135)-1600\.webp$/.test(r.name)), 'Преждевременная загрузка большого фото');
   for (const [section, numbers] of Object.entries(groups)) {
