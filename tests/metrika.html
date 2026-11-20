@@ -1,0 +1,94 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<title>СФ676 — проверка Метрики</title>
+<style>body{font:16px system-ui;margin:12px}nav{display:flex;gap:8px;flex-wrap:wrap}button,select{font:inherit;padding:8px}pre{white-space:pre-wrap;max-height:260px;overflow:auto}#stage{overflow:auto}iframe{display:block;border:0;height:800px}</style>
+<h1>СФ676 — счётчик 24910997</h1>
+<p>Автотест блокирует внешние запросы через CSP. Реальный режим отправляет обычные тестовые посещения в указанный счётчик. Используйте только синтетические данные.</p>
+<nav><button id="run">Проверить блокировку и геометрию</button><label>Ширина <select id="width"><option>390</option><option>1366</option></select></label><label><input id="debug" type="checkbox" checked> _ym_debug=2</label><button id="live">Открыть реальный счётчик</button><button id="nojs">Открыть без JavaScript</button><button id="inspect">Снять сетевую диагностику</button><button id="actions">Проверить действия без перезагрузки</button></nav>
+<pre id="results" role="status">Готово.</pre><div id="stage"><iframe id="page" title="Проверяемый лендинг"></iframe></div>
+<script>
+const frame=document.querySelector('#page'),out=document.querySelector('#results'),sdk='https://mc.yandex.ru/metrika/tag.js';
+const wait=ms=>new Promise(r=>setTimeout(r,ms));let records=[];
+const check=(name,pass,extra={})=>records.push({name,pass:!!pass,...extra});
+const report=extra=>out.textContent=JSON.stringify({count:records.length,failed:records.filter(r=>!r.pass),...extra},null,2);
+async function until(fn){const end=Date.now()+8000;while(!fn()){if(Date.now()>end)throw Error('Page readiness timeout');await wait(30)}}
+async function settle(w,d){await until(()=>{const h=d.querySelector('.sticky').getBoundingClientRect();return Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-h.height)<=1&&d.querySelector('[data-source-cta="sticky-price"]').hidden===(d.querySelector('[data-source-cta="hero-price"]').getBoundingClientRect().bottom>h.bottom)})}
+function observe(){
+ window.metrikaTest={errors:[],blocked:[],scriptErrors:[]};
+ addEventListener('error',e=>{if(e.target?.tagName==='SCRIPT')window.metrikaTest.scriptErrors.push(e.target.src);else if(e.message)window.metrikaTest.errors.push(e.message)},true);
+ addEventListener('unhandledrejection',e=>window.metrikaTest.errors.push(String(e.reason)));
+ addEventListener('securitypolicyviolation',e=>window.metrikaTest.blocked.push(e.blockedURI));
+}
+const strip=source=>source.replace(/<!-- Yandex\.Metrika counter -->[\s\S]*?<!-- \/Yandex\.Metrika counter -->\n/,'').replace(/<!-- Yandex\.Metrika noscript fallback -->[\s\S]*?<!-- \/Yandex\.Metrika noscript fallback -->\n/,'').replaceAll(' ym-hide-content','');
+async function load(source,width,zoom=100,nojs=false){
+ frame.width=width;if(nojs)frame.setAttribute('sandbox','allow-same-origin');else frame.removeAttribute('sandbox');
+ const head='<base href="'+new URL('../',location.href).href+'"><meta http-equiv="Content-Security-Policy" content="script-src \'self\' \'unsafe-inline\'; connect-src \'self\'; img-src \'self\' data:"><script>('+observe.toString()+')()<\/script>';
+ const loaded=new Promise(r=>frame.onload=r);frame.srcdoc=source.replace('<head>','<head>'+head);await loaded;
+ const w=frame.contentWindow,d=w.document;d.documentElement.style.fontSize=zoom+'%';d.documentElement.style.scrollBehavior='auto';
+ await d.fonts.ready;if(!nojs)await until(()=>w.SF676Requests&&w.SF676Payments&&d.querySelector('#sf676-selector').hidden===false);
+ await wait(100);return{w,d};
+}
+function geometry(w,d){
+ return [...d.querySelectorAll('.sticky,section[id]:not(#qlist),#top h1,#top .btn,#specs .specs-overview,#payment-calculator')].map(e=>{
+  const r=e.getBoundingClientRect();return [e.id||e.className,r.x,r.y+w.scrollY,r.width,r.height];
+ });
+}
+async function closeForm(d){const dialog=d.getElementById('request-dialog'),closed=new Promise(r=>dialog.addEventListener('close',r,{once:true}));d.querySelector('.request-close').click();await closed}
+async function interactions(w,d,prefix,anchors=false,masked=true){
+ const titles={price_quote:'Получить цену СФ676 с доставкой',configuration_help:'Поможем подобрать комплектацию СФ676',repair_comparison:'Сравнить ремонт и приобретение нового СФ676',procurement_documents:'Запросить документы для закупки СФ676',procurement_nmck:'Получить коммерческое предложение для обоснования НМЦК'};
+ const links=[...d.querySelectorAll('a[data-request-form]')];check(prefix+'/19-unique-cta',links.length===19&&new Set(links.map(e=>e.dataset.sourceCta)).size===19);
+ for(const a of links){
+  if(a.dataset.sourceCta==='sticky-price')d.getElementById('specs').scrollIntoView();else a.scrollIntoView({block:'center'});
+  await settle(w,d);a.focus({preventScroll:true});a.click();
+  const dialog=d.getElementById('request-dialog');check(prefix+'/'+a.dataset.sourceCta+'/open',dialog.open&&d.getElementById('request-title').textContent===titles[a.dataset.requestForm]);
+  d.getElementById('request-submit').click();check(prefix+'/'+a.dataset.sourceCta+'/validation',d.getElementById('request-contact').getAttribute('aria-invalid')==='true');
+  d.getElementById('request-contact').value='metrika-qa@example.com';d.getElementById('request-submit').click();
+  const draft=w.SF676Requests.getDraft();check(prefix+'/'+a.dataset.sourceCta+'/source',draft.formId===a.dataset.requestForm&&draft.sourceSection===a.dataset.sourceSection&&draft.sourceCta===a.dataset.sourceCta);
+  check(prefix+'/'+a.dataset.sourceCta+'/mask',!!d.getElementById('request-contact').closest('.ym-hide-content')===masked);
+  await closeForm(d);await settle(w,d);check(prefix+'/'+a.dataset.sourceCta+'/close',!dialog.open&&w.SF676Requests.getDraft()===null&&d.activeElement===a);
+ }
+ for(const gallery of d.querySelectorAll('[data-sf676-gallery]')){
+  const photo=gallery.querySelector('.tech-photo,.mosaic-photo');photo.focus();photo.click();
+  const dialog=d.querySelector('.gallery-viewer:modal');check(prefix+'/gallery-open',!!dialog);
+  const original=dialog.querySelector('img').src;dialog.querySelector('.gallery-next').click();check(prefix+'/gallery-next',dialog.querySelector('img').src!==original);
+  const closed=new Promise(r=>dialog.addEventListener('close',r,{once:true}));dialog.querySelector('.gallery-close').click();await closed;
+  check(prefix+'/gallery-close',d.activeElement===photo&&!d.querySelector('dialog[open]'));
+ }
+ const amount=d.getElementById('payment-total');amount.value='4000000';amount.dispatchEvent(new w.Event('input',{bubbles:true}));
+ const c=w.SF676Payments.getCalculation();check(prefix+'/50-45-5',c.totalKopeks===400000000&&c.advanceKopeks===200000000&&c.readinessKopeks===180000000&&c.finalKopeks===20000000);
+ check(prefix+'/calculator-mask',!!amount.closest('.ym-hide-content')===masked);
+ d.querySelector('[data-selector-mode="quiz"]').click();check(prefix+'/quiz',!!d.querySelector('#selector-stage input')&&d.getElementById('sf676-selector').classList.contains('ym-hide-content')===masked);
+ d.querySelector('[data-selector-mode="exact"]').click();check(prefix+'/configurator',!!d.querySelector('#selector-stage input'));
+ if(anchors)for(let i=0;i<3;i++){d.querySelector('.sticky .logo').click();await wait(150);check(prefix+'/anchor-top-'+i,w.location.hash==='#top')}
+}
+async function run(){records=[];const baselineWarnings=[],integrationWarnings=[];try{
+ const source=await(await fetch('../index.html')).text();
+ for(const [width,zoom] of [[390,100],[1366,100],[320,200]]){
+  const key=width+'/'+zoom;out.textContent='Проверка '+key;
+  let page=await load(strip(source),width,zoom);const before=geometry(page.w,page.d);
+  await interactions(page.w,page.d,key+'/baseline',false,false);baselineWarnings.push(...page.w.metrikaTest.errors.map(message=>({key,message})));
+  page=await load(source,width,zoom);const {w,d}=page;
+  check(key+'/identical-layout',JSON.stringify(before)===JSON.stringify(geometry(w,d)));
+  check(key+'/no-overflow',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1);
+  check(key+'/sdk-blocked',w.metrikaTest.blocked.includes(sdk)&&w.metrikaTest.scriptErrors.includes(sdk));
+  check(key+'/one-init',w.ym.a.length===1&&w.ym.a[0][0]===24910997&&w.ym.a[0][1]==='init');
+  await interactions(w,d,key);
+  check(key+'/still-one-init',w.ym.a.length===1&&d.querySelectorAll('script[src="'+sdk+'"]').length===1);
+  integrationWarnings.push(...w.metrikaTest.errors.map(message=>({key,message})));
+ }
+ check('no-new-runtime-errors',integrationWarnings.every(e=>baselineWarnings.some(b=>b.message===e.message)),{baselineWarnings,integrationWarnings});
+ const {d,w}=await load(source,390,100,true);check('nojs/pixel-in-body',d.body.querySelectorAll('noscript img[src="https://mc.yandex.ru/watch/24910997"]').length===1);
+ check('nojs/layout',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&d.querySelector('.sticky .tel').checkVisibility());
+ check('nojs/fallback',!w.SF676Requests&&[...d.querySelectorAll('a[data-request-form]')].every(a=>a.getAttribute('href')==='#order'));
+ }catch(e){check('exception',false,{message:String(e)})}report({baselineWarnings,integrationWarnings})}
+function inspect(){
+ const w=frame.contentWindow,d=w.document;
+ const grouped=new Map();for(const r of w.performance.getEntriesByType('resource').filter(r=>/mc\.yandex|webvisor|metrika/.test(r.name))){const item={url:r.name.split('?')[0],type:r.initiatorType,status:r.responseStatus??null};const key=JSON.stringify(item);if(grouped.has(key))grouped.get(key).count++;else grouped.set(key,{...item,count:1})}
+ const pixel=d.querySelector('noscript img[src="https://mc.yandex.ru/watch/24910997"]');
+ report({url:w.location.href,sdkElements:d.querySelectorAll('script[src="'+sdk+'"]').length,queuedInit:w.ym?.a?.filter(args=>args[1]==='init').length??null,pixel:pixel?{loaded:pixel.complete&&pixel.naturalWidth>0,width:pixel.naturalWidth}:null,resources:[...grouped.values()]});
+}
+document.getElementById('run').onclick=run;
+async function live(nojs=false){records=[];frame.width=document.getElementById('width').value;if(nojs)frame.setAttribute('sandbox','allow-same-origin');else frame.removeAttribute('sandbox');frame.removeAttribute('srcdoc');const loaded=new Promise(r=>frame.onload=r);frame.src='../index.html?_ym_debug='+(document.getElementById('debug').checked&&!nojs?'2':'0');await loaded;inspect()}
+document.getElementById('live').onclick=()=>live();document.getElementById('nojs').onclick=()=>live(true);
+document.getElementById('inspect').onclick=inspect;
+document.getElementById('actions').onclick=async()=>{records=[];try{await interactions(frame.contentWindow,frame.contentDocument,'live',true)}catch(e){check('exception',false,{message:String(e)})}inspect()};
+</script></html>
