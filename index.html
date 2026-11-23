@@ -3,6 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === r) { return; }
+        }
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+        k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script',
+       'https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+    ym(24910997, 'init', {
+        webvisor:true,
+        clickmap:true,
+        ecommerce:"dataLayer",
+        referrer: document.referrer,
+        url: location.href,
+        accurateTrackBounce:true,
+        trackLinks:true
+    });
+</script>
+<!-- /Yandex.Metrika counter -->
 <meta name="yandex-maps-key" content="">
 <meta name="robots" content="noindex, nofollow">
 <title>СФ676 — прототип посадочной страницы (черновик)</title>
@@ -721,6 +745,14 @@ body{overflow-wrap:anywhere}
 <script type="module" src="assets/js/photo-gallery.js"></script>
 </head>
 <body>
+<!-- Yandex.Metrika noscript fallback -->
+<noscript>
+    <div>
+        <img src="https://mc.yandex.ru/watch/24910997"
+             style="position:absolute; left:-9999px;" alt="" />
+    </div>
+</noscript>
+<!-- /Yandex.Metrika noscript fallback -->
 
 <header class="sticky" aria-label="Быстрые контакты">
   <div class="wrap">
@@ -986,7 +1018,7 @@ body{overflow-wrap:anywhere}
 <section class="v1 commercial" id="config">
   <div class="wrap">
     <h2 class="section-heading">Пять решений, из которых складывается ваш СФ676</h2>
-    <div id="sf676-selector" class="selector" hidden aria-labelledby="selector-title">
+    <div id="sf676-selector" class="selector ym-hide-content" hidden aria-labelledby="selector-title">
       <h3 id="selector-title">Подберите комплектацию СФ676</h3>
       <p>Выберите параметры самостоятельно или расскажите о производственной задаче — поможем подготовить требования к станку.</p>
       <div class="selector-modes" role="group" aria-label="Способ подбора">
@@ -1242,7 +1274,7 @@ body{overflow-wrap:anywhere}
   <div class="wrap">
     <h2 class="section-heading">Цена комплектации — за пять шагов. Срок — в договоре. Комплект — в спецификации</h2>
     <p class="lead">Каждый СФ676 собирается под спецификацию заказчика. Согласуем пять параметров: стол, конус шпинделя, УЦИ, количество отображаемых координат и тип винтовой передачи. Коммерческое предложение с ценой и сроком пришлём на почту в течение одного рабочего дня. Без звонков, если вы их не просили.</p>
-    <div class="payment-flow" id="payment-calculator">
+    <div class="payment-flow ym-hide-content" id="payment-calculator">
       <div class="payment-input-block" data-payment-enhanced hidden>
         <h3>Рассчитайте платежи по стоимости станка</h3>
         <p>Укажите стоимость оборудования из полученного коммерческого предложения — калькулятор покажет распределение суммы по этапам оплаты.</p>
@@ -1503,7 +1535,7 @@ body{overflow-wrap:anywhere}
 </footer>
 
 <!-- One progressively enhanced request dialog; method=dialog is a no-network fallback. -->
-<dialog class="request-dialog" id="request-dialog" aria-labelledby="request-title" aria-describedby="request-description request-send-note">
+<dialog class="request-dialog ym-hide-content" id="request-dialog" aria-labelledby="request-title" aria-describedby="request-description request-send-note">
   <div class="request-shell">
     <header class="request-header">
       <button class="request-close" type="button" aria-label="Закрыть форму">×</button>
