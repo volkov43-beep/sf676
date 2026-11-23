@@ -42,13 +42,44 @@ for original, group, count in zip(before, groups, [6, 5, 3]):
 ops = one(new, '//*[@class="spec-operations"]')
 assert ops.getparent().getparent() is groups[1]
 assert canonical(ops) == canonical(one(old, '//*[@class="spec-operations"]'))
-for selector in ['//a[@data-request-form]', '//section/@id']:
-    a, b = old.xpath(selector), new.xpath(selector)
-    assert [canonical(x) if not isinstance(x, str) else x for x in a] == [canonical(x) if not isinstance(x, str) else x for x in b]
+assert old.xpath('//section/@id') == new.xpath('//section/@id')
+old_links, links = old.xpath('//a[@data-request-form]'), new.xpath('//a[@data-request-form]')
+assert len(old_links) == len(links)
+for original, current in zip(old_links, links):
+    if original.get('data-source-cta') == 'specs-fit':
+        # DOCS-02 changes only this CTA's presentation; its complete contract
+        # and accessible text must still match, including any future attributes.
+        assert dict(current.attrib) == {**original.attrib, 'class': 'btn red'}
+        assert ' '.join(current.itertext()).split() == ' '.join(original.itertext()).split()
+    else:
+        assert canonical(original) == canonical(current), 'Unrelated CTA changed'
 links = new.xpath('//a[@data-request-form]')
 assert len(links) == len({a.get('data-source-cta') for a in links}) == 19
-for selector in ['//*[@data-sf676-gallery]', '//*[@id="technical-documents"]', '//*[@class="travel-axes"]', '//*[@class="travel-values"]']:
+for selector in ['//*[@data-sf676-gallery]', '//*[@class="travel-axes"]', '//*[@class="travel-values"]']:
     assert [canonical(e) for e in old.xpath(selector)] == [canonical(e) for e in new.xpath(selector)], selector
+# DOCS-01 may regroup the documentation card, but must preserve its copy,
+# review marker and existing CTA (all CTA contracts are compared above).
+docs_old = one(old, '//*[@id="technical-documents"]')
+docs = one(new, '//*[@id="technical-documents"]')
+for tag in ('h3', 'p'):
+    assert canonical(one(docs_old, './/' + tag)) == canonical(one(docs, './/' + tag))
+docs_cta = one(docs, './/a')
+assert docs_cta.get('data-source-cta') == 'specs-fit'
+assert docs_cta.getparent().get('class') == 'section-cta'
+icon = one(docs_cta, './svg')
+assert icon.get('aria-hidden') == 'true' and icon.get('focusable') == 'false'
+assert icon.get('width') == icon.get('height') == '22'
+assert icon.get('viewbox') == '0 0 24 24' and icon.get('stroke') == 'currentColor'
+assert icon.xpath('./path') and not icon.xpath('.//title|.//text|.//image|.//use')
+assert len(docs_cta) == 2 and one(docs_cta, './span').text == 'Проверить станок под мою деталь'
+image = one(docs, './img')
+assert image.get('alt') == 'Руководство по эксплуатации станка СФ676 и технические чертежи'
+assert image.get('width') == '640' and image.get('height') == '704'
+assert image.get('loading') == 'lazy' and image.get('decoding') == 'async'
+assert image.get('srcset') == 'assets/images/docs/sf676-manual-320.webp 320w, assets/images/docs/sf676-manual-640.webp 640w'
+assert image.get('sizes')
+for asset in image.get('srcset').split(', '):
+    assert (ROOT / asset.split()[0]).is_file()
 photo_old = one(old, '//*[@id="specs"]//figure')
 photo_new = deepcopy(one(new, '//*[@id="specs"]//figure'))
 one(photo_new, './/img').set('sizes', one(photo_old, './/img').get('sizes'))
@@ -59,7 +90,7 @@ assert one(band, './div[@class="wrap"]/*[@data-sf676-gallery]') is one(new, '//*
 closing = band.getnext()
 assert closing.get('class') == 'wrap specs-closing'
 assert one(closing, './div[@id="technical-documents"]') is closing[0]
-assert one(closing, './div/a[@data-source-cta="specs-fit"]') is closing[-1][0]
+assert len(closing) == 1 and one(closing, './/a[@data-source-cta="specs-fit"]') is docs_cta
 assert not closing.xpath('.//*[@data-sf676-gallery]')
 # Apart from the scoped stylesheet and #specs, the complete document stays identical.
 for tree in (old, new):
