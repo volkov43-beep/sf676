@@ -243,6 +243,7 @@ html:has(.gallery-viewer[open]) { overflow: hidden; }
 #specs .specs-gallery-band {
   margin-top: var(--ui-space-5);
   padding-block: var(--ui-space-5);
+  padding-bottom: var(--ui-space-1);
   background: var(--surface);
 }
 #specs .tech-gallery { margin-top: 0; }

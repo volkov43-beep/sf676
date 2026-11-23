@@ -42,9 +42,17 @@ for original, group, count in zip(before, groups, [6, 5, 3]):
 ops = one(new, '//*[@class="spec-operations"]')
 assert ops.getparent().getparent() is groups[1]
 assert canonical(ops) == canonical(one(old, '//*[@class="spec-operations"]'))
-for selector in ['//a[@data-request-form]', '//section/@id']:
-    a, b = old.xpath(selector), new.xpath(selector)
-    assert [canonical(x) if not isinstance(x, str) else x for x in a] == [canonical(x) if not isinstance(x, str) else x for x in b]
+assert old.xpath('//section/@id') == new.xpath('//section/@id')
+old_links, links = old.xpath('//a[@data-request-form]'), new.xpath('//a[@data-request-form]')
+assert len(old_links) == len(links)
+for original, current in zip(old_links, links):
+    if original.get('data-source-cta') == 'specs-fit':
+        # DOCS-02 changes only this CTA's presentation; its complete contract
+        # and accessible text must still match, including any future attributes.
+        assert dict(current.attrib) == {**original.attrib, 'class': 'btn red'}
+        assert ' '.join(current.itertext()).split() == ' '.join(original.itertext()).split()
+    else:
+        assert canonical(original) == canonical(current), 'Unrelated CTA changed'
 links = new.xpath('//a[@data-request-form]')
 assert len(links) == len({a.get('data-source-cta') for a in links}) == 19
 for selector in ['//*[@data-sf676-gallery]', '//*[@class="travel-axes"]', '//*[@class="travel-values"]']:
@@ -58,6 +66,12 @@ for tag in ('h3', 'p'):
 docs_cta = one(docs, './/a')
 assert docs_cta.get('data-source-cta') == 'specs-fit'
 assert docs_cta.getparent().get('class') == 'section-cta'
+icon = one(docs_cta, './svg')
+assert icon.get('aria-hidden') == 'true' and icon.get('focusable') == 'false'
+assert icon.get('width') == icon.get('height') == '22'
+assert icon.get('viewbox') == '0 0 24 24' and icon.get('stroke') == 'currentColor'
+assert icon.xpath('./path') and not icon.xpath('.//title|.//text|.//image|.//use')
+assert len(docs_cta) == 2 and one(docs_cta, './span').text == 'Проверить станок под мою деталь'
 image = one(docs, './img')
 assert image.get('alt') == 'Руководство по эксплуатации станка СФ676 и технические чертежи'
 assert image.get('width') == '640' and image.get('height') == '704'

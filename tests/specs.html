@@ -11,10 +11,12 @@ body{font:16px system-ui;margin:12px}nav{display:flex;flex-wrap:wrap;gap:8px;ali
 <label>JavaScript <select id="scripts"><option value="yes">Включён</option><option value="no">Отключён</option></select></label>
 <button id="show">Показать</button><button id="run">Проверить матрицу</button>
 <button id="docs-show">Показать документацию</button><button id="docs-run">Проверить документацию</button>
+<button id="docs-context">Показать переходы</button>
 <button id="anchor">Проверить редакторский якорь</button>
 </nav>
 <pre id="results" role="status">Увеличение текста через корневой font-size; Enter и Space проверяются реальными клавишами отдельно.</pre>
 <div id="stage"><iframe id="page" title="Характеристики СФ676"></iframe></div>
+<pre id="cta-states" role="status"></pre>
 <script>
 const frame=document.querySelector('#page'),output=document.querySelector('#results');
 const widths=[320,350,375,390,480,600,768,1024,1366,1920],zooms=[100,150,200];
@@ -30,6 +32,7 @@ const centered=(a,b)=>Math.abs((rect(a).left+rect(a).right)-(rect(b).left+rect(b
 const visible=e=>e.checkVisibility()&&rect(e).height>0;
 function headerReady(w,d){return !w.SF676Requests||Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-rect(d.querySelector('.sticky')).height)<=1}
 async function load(width,zoom,js,review=true){
+ document.querySelector('#stage').style.zoom='1';
  frame.style.width=width+'px';
  if(js)frame.removeAttribute('sandbox');else frame.setAttribute('sandbox','allow-same-origin');
  await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(js&&review?'?review=1':'')});
@@ -95,7 +98,7 @@ async function technicalGallery(w,d,key,js){
  record(key+'/gallery/full-width-surface',Math.abs(rect(band).left)<=1&&Math.abs(rect(band).right-d.documentElement.clientWidth)<=1&&w.getComputedStyle(band).backgroundColor===w.getComputedStyle(d.getElementById('price')).backgroundColor);
  record(key+'/gallery/aligned-containers',wrappers.every(e=>Math.abs(rect(e).left-rect(wrappers[0]).left)<=1&&Math.abs(rect(e).width-rect(wrappers[0]).width)<=1));
  record(key+'/gallery/centered-copy',header.querySelector('h3').textContent==='Фотографии станка СФ676'&&header.querySelector('p').textContent==='Рабочая зона, инструмент и элементы управления'&&[...header.children].every(e=>w.getComputedStyle(e).textAlign==='center'&&centered(e,header)));
- record(key+'/gallery/docs-separated',docs.parentElement===band.nextElementSibling&&docs.parentElement.classList.contains('wrap')&&!docs.closest('[data-sf676-gallery]')&&!cta.closest('[data-sf676-gallery]')&&rect(docs).top>=rect(band).bottom+24);
+ record(key+'/gallery/docs-separated',docs.parentElement===band.nextElementSibling&&docs.parentElement.classList.contains('wrap')&&!docs.closest('[data-sf676-gallery]')&&!cta.closest('[data-sf676-gallery]')&&rect(docs).top>=rect(band).bottom-1&&rect(docs).top<=rect(band).bottom+12);
  record(key+'/gallery/docs-marker',docs.querySelector('[data-q="docs"]').textContent.startsWith('Техническая документация'));
  const thumbs=[...gallery.querySelectorAll('.tech-thumb')],track=gallery.querySelector('.tech-thumbs'),photo=gallery.querySelector('.tech-photo');
  record(key+'/gallery/five-photos',thumbs.length===5&&thumbs.every(e=>e.querySelector('img').alt&&e.getAttribute('href').endsWith('-1600.webp')));
@@ -132,15 +135,20 @@ async function technicalGallery(w,d,key,js){
 async function documentation(w,d,key){
  const card=d.getElementById('technical-documents'),img=card.querySelector('img'),copy=card.querySelector('.spec-docs-copy'),cta=card.querySelector('a[data-request-form]');
  card.scrollIntoView({block:'center'});await until(()=>img.complete&&img.naturalWidth>0,'documentation image');await until(()=>headerReady(w,d),'header');
- const nodes=[card,img,copy,...copy.querySelectorAll('h3,p,a')],r=rect(card),ir=rect(img),cr=rect(copy);
+ const nodes=[card,img,copy,...copy.querySelectorAll('h3,p,a,svg,a span')],r=rect(card),ir=rect(img),cr=rect(copy);
  record(key+'/docs/bounds',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&nodes.every(e=>rect(e).left>=r.left-1&&rect(e).right<=r.right+1&&e.scrollWidth<=e.clientWidth+1));
  record(key+'/docs/image-ratio',Math.abs(ir.width/ir.height-640/704)<.005&&ir.top>=r.top&&ir.bottom<=r.bottom);
  record(key+'/docs/responsive-composition',w.innerWidth<=600?ir.bottom<=cr.top&&Math.abs(cr.width-(r.width-34))<=1:ir.right<=cr.left&&ir.top<cr.bottom&&cr.top<ir.bottom);
  record(key+'/docs/compact-image',ir.width<=(w.innerWidth<=600?144:224)+1&&ir.height<250);
  record(key+'/docs/touch',rect(cta).height>=48&&(w.innerWidth>600||Math.abs(rect(cta).width-cr.width)<=1));
  record(key+'/docs/no-download',card.querySelectorAll('a[data-request-form]').length===1&&!cta.hasAttribute('download')&&cta.getAttribute('href')==='#order');
- const band=d.querySelector('.specs-gallery-band'),next=d.getElementById('config');
- record(key+'/docs/spacing',r.top>=rect(band).bottom+47&&r.bottom<=rect(next).top);
+ const band=d.querySelector('.specs-gallery-band'),next=d.getElementById('config'),galleryGap=r.top-rect(band.querySelector('.tech-gallery')).bottom,nextGap=rect(next.querySelector('h2')).top-r.bottom;
+ record(key+'/docs/spacing',r.top>=rect(band).bottom-1&&galleryGap>=0&&galleryGap<=12&&Math.abs(nextGap-(w.innerWidth<=600?32:48))<=1,{galleryGap,nextGap});
+ record(key+'/docs/white-surface',w.getComputedStyle(card).backgroundColor==='rgb(255, 255, 255)'&&w.getComputedStyle(band).backgroundColor==='rgb(242, 245, 249)');
+ record(key+'/docs/red-cta',cta.classList.contains('red')&&!cta.classList.contains('out')&&w.getComputedStyle(cta).backgroundColor==='rgb(201, 40, 29)'&&w.getComputedStyle(cta).color==='rgb(255, 255, 255)');
+ const icon=cta.querySelector('svg'),label=cta.querySelector('span'),iconRect=rect(icon),labelRect=rect(label);
+ record(key+'/docs/icon-accessibility',icon.getAttribute('aria-hidden')==='true'&&icon.getAttribute('focusable')==='false'&&!icon.querySelector('title,text')&&label.textContent==='Проверить станок под мою деталь');
+ record(key+'/docs/icon-layout',Math.abs(iconRect.width-22)<=1&&Math.abs(iconRect.height-22)<=1&&Math.abs(labelRect.left-iconRect.right-8)<=1&&Math.abs(iconRect.top+iconRect.height/2-labelRect.top-labelRect.height/2)<=1&&iconRect.left>=rect(cta).left&&labelRect.right<=rect(cta).right&&w.getComputedStyle(cta).flexWrap==='nowrap');
  record(key+'/docs/review-marker',card.querySelector('[data-q="docs"][data-location="Характеристики"]').textContent.startsWith('Техническая документация'));
 }
 async function docsMatrix(){records=[];busy(true);try{
@@ -172,8 +180,23 @@ async function matrix(){records=[];busy(true);try{
  }
  }catch(e){record('fatal',false,{error:String(e)})}finally{report();busy(false)}}
 async function show(){busy(true);try{await load(Number(document.querySelector('#width').value),Number(document.querySelector('#zoom').value),document.querySelector('#scripts').value==='yes')}finally{busy(false)}}
+async function showDocumentation(context=false){busy(true);try{
+ frame.style.height='850px';
+ const {w,d}=await load(Number(document.querySelector('#width').value),Number(document.querySelector('#zoom').value),document.querySelector('#scripts').value==='yes',false);
+ const card=d.getElementById('technical-documents'),cta=card.querySelector('a[data-request-form]'),start=context?d.querySelector('.tech-gallery'):card;
+ card.scrollIntoView({block:'start'});await until(()=>headerReady(w,d),'header');await until(()=>card.querySelector('img').complete,'documentation image');
+ if(context)frame.style.height=Math.ceil(rect(d.querySelector('#config h2')).bottom-rect(start).top+rect(d.querySelector('.sticky')).height+48)+'px';
+ w.scrollBy(0,rect(start).top-rect(d.querySelector('.sticky')).height-24);
+ // Fit the context preview on screen; the iframe keeps its selected CSS viewport.
+ if(context)document.querySelector('#stage').style.zoom=String(Math.min(1,720/parseFloat(frame.style.height)));
+ // Native pointer/key events are inspected separately from the scripted matrix.
+ const states={},stateOutput=document.querySelector('#cta-states');stateOutput.textContent='';
+ const capture=event=>w.requestAnimationFrame(()=>{const s=w.getComputedStyle(cta);states[event]={background:s.backgroundColor,color:s.color,hover:cta.matches(':hover'),active:cta.matches(':active'),focusVisible:cta.matches(':focus-visible'),outline:s.outline};stateOutput.textContent=JSON.stringify(states,null,2)});
+ for(const event of ['pointerenter','pointerdown','focus'])cta.addEventListener(event,()=>capture(event));
+ }finally{busy(false)}}
 document.querySelector('#docs-run').onclick=docsMatrix;
-document.querySelector('#docs-show').onclick=async()=>{busy(true);try{await load(Number(document.querySelector('#width').value),Number(document.querySelector('#zoom').value),document.querySelector('#scripts').value==='yes',false);const d=frame.contentDocument,w=frame.contentWindow;d.getElementById('technical-documents').scrollIntoView({block:'start'});await until(()=>headerReady(w,d),'header');w.scrollBy(0,-rect(d.querySelector('.sticky')).height-24);await until(()=>d.querySelector('.spec-docs-image').complete,'documentation image')}finally{busy(false)}};
+document.querySelector('#docs-show').onclick=()=>showDocumentation();
+document.querySelector('#docs-context').onclick=()=>showDocumentation(true);
 document.querySelector('#show').onclick=show;document.querySelector('#run').onclick=matrix;
 document.querySelector('#anchor').onclick=async()=>{records=[];try{await reviewAnchor(frame.contentWindow,frame.contentDocument,'manual')}catch(e){record('fatal',false,{error:String(e)})}report()};
 show();
