@@ -6,10 +6,11 @@
 body{font:16px system-ui;margin:12px}nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}button,select{font:inherit;padding:6px}iframe{display:block;border:0;width:390px;height:850px}#stage{overflow:auto}pre{white-space:pre-wrap;max-height:180px;overflow:auto}
 </style>
 <nav>
-<label>Ширина <select id="width"><option>320</option><option>350</option><option>375</option><option selected>390</option><option>480</option><option>600</option><option>768</option><option>1024</option><option>1366</option><option>1920</option></select></label>
+<label>Ширина <select id="width"><option>320</option><option>350</option><option>375</option><option selected>390</option><option>480</option><option>600</option><option>768</option><option>1024</option><option>1366</option><option>1440</option><option>1920</option></select></label>
 <label>Текст <select id="zoom"><option>100</option><option>150</option><option>200</option></select></label>
 <label>JavaScript <select id="scripts"><option value="yes">Включён</option><option value="no">Отключён</option></select></label>
 <button id="show">Показать</button><button id="run">Проверить матрицу</button>
+<button id="docs-show">Показать документацию</button><button id="docs-run">Проверить документацию</button>
 <button id="anchor">Проверить редакторский якорь</button>
 </nav>
 <pre id="results" role="status">Увеличение текста через корневой font-size; Enter и Space проверяются реальными клавишами отдельно.</pre>
@@ -28,10 +29,10 @@ const rect=e=>e.getBoundingClientRect();
 const centered=(a,b)=>Math.abs((rect(a).left+rect(a).right)-(rect(b).left+rect(b).right))<=2;
 const visible=e=>e.checkVisibility()&&rect(e).height>0;
 function headerReady(w,d){return !w.SF676Requests||Math.abs(parseFloat(w.getComputedStyle(d.documentElement).getPropertyValue('--sticky-height'))-rect(d.querySelector('.sticky')).height)<=1}
-async function load(width,zoom,js){
+async function load(width,zoom,js,review=true){
  frame.style.width=width+'px';
  if(js)frame.removeAttribute('sandbox');else frame.setAttribute('sandbox','allow-same-origin');
- await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(js?'?review=1':'')});
+ await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html'+(js&&review?'?review=1':'')});
  const w=frame.contentWindow,d=w.document;d.documentElement.style.fontSize=zoom+'%';d.documentElement.style.scrollBehavior='auto';
  await d.fonts.ready;await until(()=>headerReady(w,d),'header');
  d.getElementById('specs').scrollIntoView({block:'start'});
@@ -128,6 +129,29 @@ async function technicalGallery(w,d,key,js){
  }
  record(key+'/gallery/docs-readable',docs.scrollWidth<=docs.clientWidth+1&&cta.scrollWidth<=cta.clientWidth+1&&rect(cta).height>=48);
 }
+async function documentation(w,d,key){
+ const card=d.getElementById('technical-documents'),img=card.querySelector('img'),copy=card.querySelector('.spec-docs-copy'),cta=card.querySelector('a[data-request-form]');
+ card.scrollIntoView({block:'center'});await until(()=>img.complete&&img.naturalWidth>0,'documentation image');await until(()=>headerReady(w,d),'header');
+ const nodes=[card,img,copy,...copy.querySelectorAll('h3,p,a')],r=rect(card),ir=rect(img),cr=rect(copy);
+ record(key+'/docs/bounds',d.documentElement.scrollWidth<=d.documentElement.clientWidth+1&&nodes.every(e=>rect(e).left>=r.left-1&&rect(e).right<=r.right+1&&e.scrollWidth<=e.clientWidth+1));
+ record(key+'/docs/image-ratio',Math.abs(ir.width/ir.height-640/704)<.005&&ir.top>=r.top&&ir.bottom<=r.bottom);
+ record(key+'/docs/responsive-composition',w.innerWidth<=600?ir.bottom<=cr.top&&Math.abs(cr.width-(r.width-34))<=1:ir.right<=cr.left&&ir.top<cr.bottom&&cr.top<ir.bottom);
+ record(key+'/docs/compact-image',ir.width<=(w.innerWidth<=600?144:224)+1&&ir.height<250);
+ record(key+'/docs/touch',rect(cta).height>=48&&(w.innerWidth>600||Math.abs(rect(cta).width-cr.width)<=1));
+ record(key+'/docs/no-download',card.querySelectorAll('a[data-request-form]').length===1&&!cta.hasAttribute('download')&&cta.getAttribute('href')==='#order');
+ const band=d.querySelector('.specs-gallery-band'),next=d.getElementById('config');
+ record(key+'/docs/spacing',r.top>=rect(band).bottom+47&&r.bottom<=rect(next).top);
+ record(key+'/docs/review-marker',card.querySelector('[data-q="docs"][data-location="Характеристики"]').textContent.startsWith('Техническая документация'));
+}
+async function docsMatrix(){records=[];busy(true);try{
+ for(const js of [true,false])for(const width of [320,390,768,1024,1440])for(const zoom of [100,200]){
+  const key=width+'/'+zoom+'/'+(js?'js':'nojs');output.textContent='Документация '+key;
+  const {w,d}=await load(width,zoom,js),errors=[];w.addEventListener('error',e=>errors.push(e.message));
+  await documentation(w,d,key);await technicalGallery(w,d,key,js);await commercial(w,d,key,js);
+  record(key+'/docs/19-cta',d.querySelectorAll('a[data-request-form]').length===19);
+  record(key+'/docs/js-errors',!errors.length,{errors});
+ }
+ }catch(e){record('fatal',false,{error:String(e)})}finally{report();busy(false)}}
 async function reviewAnchor(w,d,key){
  // Test-only marker: exercises the existing navigation if an editor later flags a table cell.
  const group=d.querySelectorAll('.spec-group')[2];group.open=false;
@@ -148,6 +172,8 @@ async function matrix(){records=[];busy(true);try{
  }
  }catch(e){record('fatal',false,{error:String(e)})}finally{report();busy(false)}}
 async function show(){busy(true);try{await load(Number(document.querySelector('#width').value),Number(document.querySelector('#zoom').value),document.querySelector('#scripts').value==='yes')}finally{busy(false)}}
+document.querySelector('#docs-run').onclick=docsMatrix;
+document.querySelector('#docs-show').onclick=async()=>{busy(true);try{await load(Number(document.querySelector('#width').value),Number(document.querySelector('#zoom').value),document.querySelector('#scripts').value==='yes',false);const d=frame.contentDocument,w=frame.contentWindow;d.getElementById('technical-documents').scrollIntoView({block:'start'});await until(()=>headerReady(w,d),'header');w.scrollBy(0,-rect(d.querySelector('.sticky')).height-24);await until(()=>d.querySelector('.spec-docs-image').complete,'documentation image')}finally{busy(false)}};
 document.querySelector('#show').onclick=show;document.querySelector('#run').onclick=matrix;
 document.querySelector('#anchor').onclick=async()=>{records=[];try{await reviewAnchor(frame.contentWindow,frame.contentDocument,'manual')}catch(e){record('fatal',false,{error:String(e)})}report()};
 show();

@@ -238,9 +238,21 @@ body{overflow-wrap:anywhere}
 .v1 .spec-table th[scope="row"]{background:var(--paper);font-weight:600;color:var(--ink)}
 .v1 .spec-table td{font-weight:600;color:var(--ink)}
 .spec-operations{margin:var(--ui-space-3) 0 0;color:var(--navy);font-size:var(--ui-body)}
-.spec-docs{margin-top:var(--ui-space-5);padding-top:var(--ui-space-4);border-top:1px solid var(--line)}
 #specs .specs-closing{padding-top:var(--ui-space-5)}
-#specs .specs-closing .spec-docs{margin-top:0;padding-top:0;border-top:0}
+#specs .spec-docs{display:grid;grid-template-columns:224px minmax(0,1fr);align-items:center;gap:var(--ui-space-4);padding:var(--ui-space-4);border:1px solid var(--line);border-radius:var(--ui-radius);background:var(--surface)}
+#specs .spec-docs-image{display:block;width:100%;height:auto}
+#specs .spec-docs-copy{min-width:0}
+#specs .spec-docs h3{margin:0 0 var(--ui-space-2);color:var(--navy)}
+#specs .spec-docs p{margin:0}
+#specs .spec-docs .section-cta{margin-top:var(--ui-space-3)}
+@media (max-width:900px){
+ #specs .spec-docs{grid-template-columns:168px minmax(0,1fr);gap:var(--ui-space-3);padding:var(--ui-space-3)}
+}
+@media (max-width:600px){
+ #specs .spec-docs{grid-template-columns:minmax(0,1fr);gap:var(--ui-space-2);padding:var(--ui-space-2)}
+ #specs .spec-docs-image{width:144px;max-width:100%;justify-self:center}
+ #specs .spec-docs .btn{width:100%}
+}
 /* Fixed contact header: no layout shift while scrolling. */
 @media (max-width:900px){
 }
@@ -943,11 +955,18 @@ body{overflow-wrap:anywhere}
   </div>
   <div class="wrap specs-closing">
     <div class="spec-docs" id="technical-documents">
-      <h3><span class="q" data-q="docs" data-location="Характеристики">Техническая документация</span></h3>
-      <p>В отделе продаж можно запросить полные характеристики, перечни стандартной и дополнительной комплектации, эскизы столов и шпинделей и руководство по эксплуатации.</p>
-    </div>
-    <div class="section-cta">
-      <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="specs" data-source-cta="specs-fit">Проверить станок под мою деталь</a>
+      <img class="spec-docs-image" src="assets/images/docs/sf676-manual-320.webp"
+           srcset="assets/images/docs/sf676-manual-320.webp 320w, assets/images/docs/sf676-manual-640.webp 640w"
+           sizes="(max-width: 600px) 144px, (max-width: 900px) 168px, 224px"
+           width="640" height="704" loading="lazy" decoding="async"
+           alt="Руководство по эксплуатации станка СФ676 и технические чертежи">
+      <div class="spec-docs-copy">
+        <h3><span class="q" data-q="docs" data-location="Характеристики">Техническая документация</span></h3>
+        <p>В отделе продаж можно запросить полные характеристики, перечни стандартной и дополнительной комплектации, эскизы столов и шпинделей и руководство по эксплуатации.</p>
+        <div class="section-cta">
+          <a class="btn out" href="#order" data-request-form="configuration_help" data-source-section="specs" data-source-cta="specs-fit">Проверить станок под мою деталь</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -47,8 +47,25 @@ for selector in ['//a[@data-request-form]', '//section/@id']:
     assert [canonical(x) if not isinstance(x, str) else x for x in a] == [canonical(x) if not isinstance(x, str) else x for x in b]
 links = new.xpath('//a[@data-request-form]')
 assert len(links) == len({a.get('data-source-cta') for a in links}) == 19
-for selector in ['//*[@data-sf676-gallery]', '//*[@id="technical-documents"]', '//*[@class="travel-axes"]', '//*[@class="travel-values"]']:
+for selector in ['//*[@data-sf676-gallery]', '//*[@class="travel-axes"]', '//*[@class="travel-values"]']:
     assert [canonical(e) for e in old.xpath(selector)] == [canonical(e) for e in new.xpath(selector)], selector
+# DOCS-01 may regroup the documentation card, but must preserve its copy,
+# review marker and existing CTA (all CTA contracts are compared above).
+docs_old = one(old, '//*[@id="technical-documents"]')
+docs = one(new, '//*[@id="technical-documents"]')
+for tag in ('h3', 'p'):
+    assert canonical(one(docs_old, './/' + tag)) == canonical(one(docs, './/' + tag))
+docs_cta = one(docs, './/a')
+assert docs_cta.get('data-source-cta') == 'specs-fit'
+assert docs_cta.getparent().get('class') == 'section-cta'
+image = one(docs, './img')
+assert image.get('alt') == 'Руководство по эксплуатации станка СФ676 и технические чертежи'
+assert image.get('width') == '640' and image.get('height') == '704'
+assert image.get('loading') == 'lazy' and image.get('decoding') == 'async'
+assert image.get('srcset') == 'assets/images/docs/sf676-manual-320.webp 320w, assets/images/docs/sf676-manual-640.webp 640w'
+assert image.get('sizes')
+for asset in image.get('srcset').split(', '):
+    assert (ROOT / asset.split()[0]).is_file()
 photo_old = one(old, '//*[@id="specs"]//figure')
 photo_new = deepcopy(one(new, '//*[@id="specs"]//figure'))
 one(photo_new, './/img').set('sizes', one(photo_old, './/img').get('sizes'))
@@ -59,7 +76,7 @@ assert one(band, './div[@class="wrap"]/*[@data-sf676-gallery]') is one(new, '//*
 closing = band.getnext()
 assert closing.get('class') == 'wrap specs-closing'
 assert one(closing, './div[@id="technical-documents"]') is closing[0]
-assert one(closing, './div/a[@data-source-cta="specs-fit"]') is closing[-1][0]
+assert len(closing) == 1 and one(closing, './/a[@data-source-cta="specs-fit"]') is docs_cta
 assert not closing.xpath('.//*[@data-sf676-gallery]')
 # Apart from the scoped stylesheet and #specs, the complete document stays identical.
 for tree in (old, new):
